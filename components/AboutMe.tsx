@@ -3,18 +3,24 @@
 import { motion } from 'framer-motion';
 
 const techStack = [
-  { name: 'React', icon: '⚛️' },
-  { name: 'Next.js', icon: '▲' },
-  { name: 'TypeScript', icon: '📘' },
-  { name: 'Node.js', icon: '🟢' },
   { name: 'Python', icon: '🐍' },
-  { name: 'Tailwind CSS', icon: '🎨' },
+  { name: 'PyTorch', icon: '🔥' },
+  { name: 'Scikit-learn', icon: '🤖' },
+  { name: 'LangChain', icon: '🔗' },
+  { name: 'HuggingFace', icon: '🤗' },
+  { name: 'React', icon: '⚛️' },
+  { name: 'Node.js', icon: '🟢' },
+  { name: 'TypeScript', icon: '📘' },
+  { name: 'Django', icon: '🎯' },
+  { name: 'FastAPI', icon: '⚡' },
+  { name: 'Express', icon: '🚀' },
   { name: 'MongoDB', icon: '🍃' },
-  { name: 'PostgreSQL', icon: '🐘' },
-  { name: 'Docker', icon: '🐳' },
-  { name: 'AWS', icon: '☁️' },
-  { name: 'GraphQL', icon: '🔷' },
-  { name: 'Redis', icon: '🔴' },
+  { name: 'MySQL', icon: '🗄️' },
+  { name: 'Streamlit', icon: '📊' },
+  { name: 'JWT', icon: '🔐' },
+  { name: 'libp2p', icon: '🌐' },
+  { name: 'Solidity', icon: '⛓️' },
+  { name: 'Ethereum', icon: '💎' },
 ];
 
 const containerVariants = {
@@ -66,17 +72,18 @@ export default function AboutMe() {
               Who I Am
             </h3>
             <p className="text-slate-300 leading-relaxed">
-              I'm a passionate full-stack developer with a love for creating
-              beautiful, functional, and user-friendly web applications. With
-              years of experience in modern web technologies, I specialize in
-              building scalable solutions that deliver exceptional user
-              experiences.
+              I'm a full-stack developer and ML engineer passionate about building
+              intelligent systems and scalable web applications. My expertise spans
+              machine learning, deep learning, blockchain technology, and modern web
+              development. I specialize in creating end-to-end solutions from data
+              pipelines to production-ready applications.
             </p>
             <p className="text-slate-300 leading-relaxed">
-              When I'm not coding, you can find me exploring new technologies,
-              contributing to open-source projects, or sharing knowledge with
-              the developer community. I believe in writing clean, maintainable
-              code and following best practices.
+              From building real-time ML prediction systems and AI-powered tools to
+              developing decentralized applications and full-stack web platforms, I
+              enjoy tackling complex challenges across multiple domains. I'm
+              constantly exploring cutting-edge technologies and applying them to
+              solve real-world problems.
             </p>
           </motion.div>
 
