@@ -61,10 +61,18 @@ export const content = {
   ],
 
   contact: {
-    email:    '[PLACEHOLDER] hello@example.com',
+    email:    'chauhanrohan223@gmail.com',
     github:   '[PLACEHOLDER] https://github.com/example',
     linkedin: '[PLACEHOLDER] https://linkedin.com/in/example',
   },
 
   resume: '/public/resume.pdf',
+
+  /* UI section titles for the HTML overlay panels (camera stop → content section). */
+  sections: {
+    monitor: { title: 'About' },
+    shelf:   { title: 'Skills' },
+    board:   { title: 'Projects' },
+    phone:   { title: 'Contact' },
+  },
 };

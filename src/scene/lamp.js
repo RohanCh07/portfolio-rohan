@@ -63,7 +63,9 @@ export function createLamp() {
   group.add(bulb);
 
   // --- Warm point light (casts soft shadows) ---
-  const light = new THREE.PointLight(colors.lamp, 2.5, 8, 1.5);
+  // Bright enough to light the desk top and throw a soft warm pool on
+  // the floor below; slower decay gives it a wider reach.
+  const light = new THREE.PointLight(colors.lamp, 5.0, 12, 1.2);
   light.position.set(0.15, 0.73, 0);
   light.castShadow = true;
   light.shadow.mapSize.set(1024, 1024);

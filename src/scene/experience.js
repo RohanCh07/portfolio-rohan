@@ -51,7 +51,7 @@ export function init(container) {
   renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.0;
+  renderer.toneMappingExposure = 1.15;   // lift mid-tones ACES otherwise crushes
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   container.appendChild(renderer.domElement);
@@ -62,7 +62,7 @@ export function init(container) {
 
   // ─── Camera ───
   camera = new THREE.PerspectiveCamera(
-    42,
+    38,                            // narrower than 42 → objects fill more of the frame
     container.clientWidth / container.clientHeight,
     0.1,
     100,
@@ -72,17 +72,18 @@ export function init(container) {
 
   // ─── Lighting ───
 
-  // Very low ambient so nothing is pitch black
-  const ambient = new THREE.AmbientLight(0xffffff, 0.08);
+  // Low ambient so unlit surfaces are dark charcoal, never pure black
+  const ambient = new THREE.AmbientLight(0xffffff, 0.18);
   scene.add(ambient);
 
-  // Cool violet fill (simulates monitor bounce light)
-  const violetFill = new THREE.DirectionalLight(colors.monitor, 0.25);
-  violetFill.position.set(-2, 3, 2);
+  // Cool violet fill (simulates monitor bounce light) — wide reach,
+  // so shelf/board geometry reads even where nothing is emissive
+  const violetFill = new THREE.DirectionalLight(colors.monitor, 0.7);
+  violetFill.position.set(-3, 2.5, 1.5);   // rakes the shelf + board fronts
   scene.add(violetFill);
 
   // Subtle warm hemisphere for sky/ground tint
-  const hemi = new THREE.HemisphereLight(0x1a1726, 0x0a0810, 0.15);
+  const hemi = new THREE.HemisphereLight(0x1a1726, 0x0a0810, 0.25);
   scene.add(hemi);
 
   // ─── Scene objects ───

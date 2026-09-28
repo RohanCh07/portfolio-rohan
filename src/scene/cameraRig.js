@@ -16,8 +16,8 @@ import { getState, setState } from '../store.js';
    ────────────────────────────────────────────── */
 export const CAMERA_STOPS = {
   overview: {
-    pos:    { x: 0,    y: 2.6, z: 5.5 },
-    lookAt: { x: 0,    y: 1.2, z: -1.5 },
+    pos:    { x: 0,    y: 2.4, z: 4.8 },   // pulled in so objects fill more of the frame
+    lookAt: { x: 0,    y: 1.25, z: -1.5 },
     group:  null,              // whole scene
   },
   monitor: {

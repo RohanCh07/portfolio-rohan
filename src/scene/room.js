@@ -10,9 +10,10 @@ export function createRoom() {
   const group = new THREE.Group();
   group.name = 'room';
 
-  // Slightly lighter than bg so geometry reads against the void
-  const floorColor = 0x1a1726;
-  const wallColor  = 0x161322;
+  // Dark charcoal (clearly above bg, never pure black) so the floor and
+  // wall catch the lamp glow and the violet fill.
+  const floorColor = 0x221f31;
+  const wallColor  = 0x1c182a;
 
   // --- Floor ---
   const floorGeo = new THREE.PlaneGeometry(14, 10);

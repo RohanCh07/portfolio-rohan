@@ -6,6 +6,7 @@
 import { init, camera, scene } from './scene/experience.js';
 import { setupInteraction } from './scene/interaction.js';
 import { mountBackButton } from './ui/backButton.js';
+import { mountOverlay } from './ui/overlay.js';
 
 // Kick off the renderer inside the container div
 const container = document.getElementById('canvas-container');
@@ -16,3 +17,6 @@ init(container);
 // already starts at the overview stop via initCameraRig inside experience.js)
 setupInteraction(camera, scene, container);
 mountBackButton();
+
+// Phase 4: HTML content overlays (subscribe to activeSection)
+mountOverlay();
