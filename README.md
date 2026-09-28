@@ -1,6 +1,6 @@
 # 3D Portfolio: Cozy Night Desk
 
-A full-3D portfolio for recruiters and clients, with a second **Dev Mode** (IDE-style) for developers. Built with React Three Fiber, no Blender required.
+A full-3D portfolio for recruiters and clients, with a second **Dev Mode** (IDE-style) for developers. Built with plain HTML, CSS and JavaScript plus three.js. No React, no build step, no Blender required.
 
 > **Status:** Planning → Phase 0
 > **Rule #1:** Ship an ugly working version first. Polish comes last.
@@ -64,22 +64,49 @@ A full-3D portfolio for recruiters and clients, with a second **Dev Mode** (IDE-
 
 ---
 
-## 3. Tech Stack
+## 3. Tech Stack (Vanilla JS)
+
+**No React, no npm, no build step.** Plain ES modules loaded by the browser through an import map. Run it with VS Code's Live Server extension (a local server is required for modules).
 
 | Purpose | Tool |
 |---|---|
-| Build | Vite + React |
-| 3D | three.js via `@react-three/fiber` |
-| 3D helpers | `@react-three/drei` |
-| Post-processing | `@react-three/postprocessing` (bloom, vignette) |
-| UI animation | Framer Motion |
-| Camera animation | drei `CameraControls` or GSAP |
-| State | Zustand (active section, mode, light on/off) |
-| Styling | Plain CSS or Tailwind (pick one, stay consistent) |
-| Hosting | Vercel or Netlify |
+| Structure | `index.html`, `style.css`, ES modules in `src/` |
+| 3D | three.js (pinned version, loaded via import map from jsDelivr) |
+| 3D helpers | `three/addons`: `GLTFLoader`, `DRACOLoader`, `EffectComposer`, `UnrealBloomPass`, `RoomEnvironment` |
+| Camera animation | GSAP (CDN script) for eased fly-to tweens |
+| UI overlays | Real DOM elements layered over the canvas (CSS transitions) |
+| State | Tiny pub/sub store in `src/store.js` (no library) |
+| Hosting | Vercel, Netlify or GitHub Pages (static files) |
 | Version control | Git + GitHub |
 
 **Assets:** primitives for main pieces (desk, monitor, lamp, shelf), free CC0 GLB models for props (Poly Pizza, Quaternius, Kenney). Always check the license.
+
+**Import map (in `index.html`):**
+
+```html
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script type="module" src="/src/main.js"></script>
+```
+
+**Concept mapping (README phases were written with React terms in mind; use these vanilla equivalents):**
+
+| Phase text says | Vanilla equivalent |
+|---|---|
+| Component / `Desk.jsx` | Module `desk.js` exporting `createDesk()` that returns a `THREE.Group` |
+| Zustand store | `store.js` with `getState()`, `setState()`, `subscribe()` |
+| drei `<Html>` overlays | DOM panels in `src/ui/overlay.js` |
+| `ContactShadows` | Soft shadow map on the lamp light, or a radial-gradient blob plane under objects |
+| `useGLTF` | `GLTFLoader` (+ `DRACOLoader`) with a `LoadingManager` for the loader bar |
+| Postprocessing bloom | `EffectComposer` + `UnrealBloomPass` |
+| Framer Motion | CSS transitions / GSAP |
 
 ---
 
@@ -87,40 +114,41 @@ A full-3D portfolio for recruiters and clients, with a second **Dev Mode** (IDE-
 
 ```
 portfolio/
+├── index.html
+├── style.css
 ├── public/
 │   ├── models/              # optimized .glb props
+│   ├── projects/            # project screenshots
 │   ├── resume.pdf
 │   └── og-image.png
 ├── src/
-│   ├── main.jsx
-│   ├── App.jsx              # mode switch (3D / Dev / Quick View)
+│   ├── main.js              # entry: boots scene, UI, mode switching
 │   ├── theme.js             # colors, fonts, motion timings
 │   ├── content.js           # ALL site content (single source of truth)
-│   ├── store.js             # Zustand state
+│   ├── store.js             # tiny pub/sub state
 │   ├── scene/
-│   │   ├── Experience.jsx   # Canvas, lights, camera, postprocessing
-│   │   ├── CameraRig.jsx    # fly-to logic + stops
-│   │   ├── Room.jsx         # floor, walls
-│   │   ├── Desk.jsx
-│   │   ├── Monitor.jsx
-│   │   ├── Lamp.jsx
-│   │   ├── Bookshelf.jsx
-│   │   ├── ProjectBoard.jsx
-│   │   ├── Props.jsx        # mug, plant, headphones, phone (GLB)
-│   │   └── Particles.jsx    # floating dust
+│   │   ├── experience.js    # renderer, scene, lights, render loop, resize
+│   │   ├── cameraRig.js     # camera stops + fly-to (GSAP) + parallax
+│   │   ├── interaction.js   # raycaster: hover + click on hotspots
+│   │   ├── room.js
+│   │   ├── desk.js
+│   │   ├── monitor.js
+│   │   ├── lamp.js
+│   │   ├── bookshelf.js
+│   │   ├── projectBoard.js
+│   │   ├── props.js         # mug, plant, headphones, phone (GLB)
+│   │   └── particles.js     # floating dust
 │   ├── ui/
-│   │   ├── Overlay.jsx      # HTML panels per section
-│   │   ├── BackButton.jsx
-│   │   ├── ModeToggle.jsx
-│   │   ├── Loader.jsx
-│   │   └── QuickView.jsx
+│   │   ├── overlay.js       # HTML panels per section
+│   │   ├── backButton.js
+│   │   ├── modeToggle.js
+│   │   ├── loader.js
+│   │   └── quickView.js
 │   ├── dev-mode/
-│   │   ├── DevMode.jsx      # IDE layout
-│   │   ├── Explorer.jsx
-│   │   ├── Editor.jsx
-│   │   └── Terminal.jsx
-│   └── hooks/
-│       └── useDeviceTier.js # detects low-end / mobile
+│   │   ├── devMode.js       # IDE layout
+│   │   └── terminal.js
+│   └── utils/
+│       └── deviceTier.js    # detects low-end / mobile
 └── README.md
 ```
 
@@ -181,10 +209,10 @@ Each phase ends with a **working, committable** state. Do not start the next pha
 **Done when:** content is written, and the sketch exists.
 
 ### Phase 1: Project Setup (½ day)
-- [ ] Scaffold with Vite + React
-- [ ] Install `three`, `@react-three/fiber`, `@react-three/drei`, `@react-three/postprocessing`, `framer-motion`, `zustand`
+- [ ] Create `index.html`, `style.css`, `src/main.js` with the import map from section 3
+- [ ] Load three.js and GSAP from CDN (no npm)
 - [ ] Create `theme.js`, `content.js`, `store.js`
-- [ ] Render an empty Canvas with the background color
+- [ ] Render an empty three.js canvas with the background color
 - [ ] Deploy the empty site to Vercel (so deployment is never a surprise)
 
 **Done when:** a live URL shows a dark canvas.
@@ -313,10 +341,7 @@ A usable version (through Phase 4) can exist in about a week.
 6. **Keep `theme.js` and `content.js` as the only place for colors and text.**
 
 ### Starter prompts
-- *Phase 1:* "Set up a Vite + React project with R3F, drei, postprocessing, framer-motion, and zustand. Create `theme.js`, `content.js`, and `store.js` from the README."
-- *Phase 2:* "Create the base scene: floor, wall, desk, monitor, and lamp from primitives, warm lamp light, violet fill, ContactShadows."
-- *Phase 3:* "Add a camera rig with stops defined in one config, click-to-fly with easing, and a back button using Zustand."
-- *Phase 4:* "Build the HTML overlay panels for About, Skills, Projects, Contact, reading from `content.js`."
+See the chat for phase-by-phase Copilot prompts written for this vanilla stack.
 
 ---
 
