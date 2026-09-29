@@ -61,7 +61,7 @@ export function mountOverlay() {
         if (k !== key) hidePanel(el);
       }
       const title = panels[key].querySelector('h2');
-      if (title) title.focus();         // a11y: focus the dialog heading on open
+      if (title) title.focus({ preventScroll: true }); // a11y: focus the dialog heading on open
       return;
     }
 
@@ -177,17 +177,22 @@ export function mountOverlay() {
     const cards = (content.projects || []).map((p) => {
       const tech = (p.tech || []).map((t) => `<span class="chip">${esc(t)}</span>`).join('');
       const links = [];
-      if (p.links?.live) links.push(`<a class="card-link" href="${esc(p.links.live)}" target="_blank" rel="noopener">Live</a>`);
-      if (p.links?.repo) links.push(`<a class="card-link" href="${esc(p.links.repo)}" target="_blank" rel="noopener">Repo</a>`);
+      if (p.links?.live) {
+        links.push(`<a class="card-link" href="${esc(p.links.live)}" target="_blank" rel="noopener">Live ↗</a>`);
+      }
+      if (p.links?.repo) {
+        links.push(`<a class="card-link" href="${esc(p.links.repo)}" target="_blank" rel="noopener">Repo ↗</a>`);
+      }
       return `
         <details class="project-card">
           <summary>
-            <span class="card-head">
+            <div class="card-head">
               <span class="card-title">${esc(p.title || p.id)}</span>
               ${p.date ? `<span class="card-date">${esc(p.date)}</span>` : ''}
-            </span>
-            ${p.summary ? `<span class="card-summary">${esc(p.summary)}</span>` : ''}
-            ${tech ? `<span class="card-tech">${tech}</span>` : ''}
+              <span class="card-toggle" aria-hidden="true">▾</span>
+            </div>
+            ${p.summary ? `<p class="card-summary">${esc(p.summary)}</p>` : ''}
+            ${tech ? `<div class="card-tech">${tech}</div>` : ''}
           </summary>
           <div class="card-body">
             ${p.description ? `<p class="card-description">${esc(p.description)}</p>` : ''}
@@ -200,15 +205,38 @@ export function mountOverlay() {
 
   function contactHtml() {
     const c = content.contact || {};
-    const link = (href) => href
-      ? `<a class="contact-link" href="${esc(href)}" rel="noopener">${esc(href)}</a>`
-      : '';
-    return `
-      <div class="contact-list">
-        ${link(c.email ? `mailto:${c.email}` : '')}
-        ${link(c.github || '')}
-        ${link(c.linkedin || '')}
-      </div>`;
+    const items = [];
+
+    if (c.email) {
+      const email = c.email.replace(/^\[PLACEHOLDER\]\s*/i, '').trim();
+      items.push(`
+        <a class="contact-link" href="mailto:${esc(email)}">
+          <span class="contact-label">Email</span>
+          <span class="contact-val">${esc(email)}</span>
+        </a>`);
+    }
+
+    if (c.github) {
+      const rawUrl = c.github.replace(/^\[PLACEHOLDER\]\s*/i, '').trim();
+      const display = rawUrl.replace(/^https?:\/\/(www\.)?/, '');
+      items.push(`
+        <a class="contact-link" href="${esc(rawUrl)}" target="_blank" rel="noopener">
+          <span class="contact-label">GitHub</span>
+          <span class="contact-val">${esc(display)} ↗</span>
+        </a>`);
+    }
+
+    if (c.linkedin) {
+      const rawUrl = c.linkedin.replace(/^\[PLACEHOLDER\]\s*/i, '').trim();
+      const display = rawUrl.replace(/^https?:\/\/(www\.)?/, '');
+      items.push(`
+        <a class="contact-link" href="${esc(rawUrl)}" target="_blank" rel="noopener">
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-val">${esc(display)} ↗</span>
+        </a>`);
+    }
+
+    return `<div class="contact-list">${items.join('')}</div>`;
   }
 
   /* ── resume ── */

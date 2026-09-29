@@ -13,6 +13,7 @@
 
   --font-heading: 'Space Grotesk', sans-serif;
   --font-body:    'Inter', sans-serif;
+  --font-mono:    'JetBrains Mono', monospace;
 }
 
 /* Reset */
@@ -55,6 +56,60 @@ html, body {
 /* Children that need clicks opt back in */
 #ui > * {
   pointer-events: auto;
+}
+
+/* Back button — top-left control */
+#back {
+  z-index: 10;
+}
+
+#back:focus-visible {
+  outline: 2px solid var(--monitor);
+  outline-offset: 2px;
+}
+
+/* Persistent mode toggle button — top-right */
+.mode-toggle {
+  position: fixed;
+  top: 14px;
+  right: 16px;
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  background: rgba(20, 18, 31, 0.85);
+  border: 1px solid rgba(124, 108, 240, 0.4);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+
+.mode-toggle:hover {
+  background: rgba(124, 108, 240, 0.2);
+  border-color: var(--monitor);
+  transform: translateY(-1px);
+}
+
+.mode-toggle:focus-visible {
+  outline: 2px solid var(--monitor);
+  outline-offset: 2px;
+}
+
+.mode-toggle-icon {
+  color: var(--monitor);
+  font-weight: 700;
+}
+
+.mode-toggle.dev-active .mode-toggle-icon {
+  color: var(--lamp);
 }
 
 /* ======================================================
@@ -107,12 +162,26 @@ html, body {
 }
 
 /* Slim scrollbar */
-#ui .overlay-panel::-webkit-scrollbar { width: 8px; }
-#ui .overlay-panel::-webkit-scrollbar-thumb {
+#ui .overlay-panel::-webkit-scrollbar,
+.ide-editor-container::-webkit-scrollbar,
+.ide-sidebar::-webkit-scrollbar,
+.terminal-body::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+#ui .overlay-panel::-webkit-scrollbar-thumb,
+.ide-editor-container::-webkit-scrollbar-thumb,
+.ide-sidebar::-webkit-scrollbar-thumb,
+.terminal-body::-webkit-scrollbar-thumb {
   background: rgba(154, 148, 168, 0.35);
   border-radius: 4px;
 }
-#ui .overlay-panel::-webkit-scrollbar-track { background: transparent; }
+#ui .overlay-panel::-webkit-scrollbar-track,
+.ide-editor-container::-webkit-scrollbar-track,
+.ide-sidebar::-webkit-scrollbar-track,
+.terminal-body::-webkit-scrollbar-track {
+  background: transparent;
+}
 
 /* ── About ── */
 .about-name {
@@ -203,8 +272,15 @@ html, body {
   border: 1px solid rgba(154, 148, 168, 0.18);
   border-radius: 10px;
   padding: 12px 14px;
+  transition: border-color 0.2s ease, background 0.2s ease;
 }
-.project-card[open] { border-color: rgba(124, 108, 240, 0.55); }
+.project-card:hover {
+  background: rgba(154, 148, 168, 0.12);
+}
+.project-card[open] {
+  border-color: rgba(124, 108, 240, 0.55);
+  background: rgba(154, 148, 168, 0.1);
+}
 .project-card summary {
   cursor: pointer;
   list-style: none;
@@ -213,10 +289,14 @@ html, body {
   gap: 6px;
 }
 .project-card summary::-webkit-details-marker { display: none; }
+.project-card summary:focus-visible {
+  outline: 2px solid var(--monitor);
+  outline-offset: 4px;
+  border-radius: 6px;
+}
 .card-head {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   gap: 8px;
 }
 .card-title {
@@ -224,11 +304,25 @@ html, body {
   font-size: 15px;
   font-weight: 500;
   color: var(--text);
+  transition: color 0.2s ease;
+}
+.project-card summary:hover .card-title {
+  color: var(--lamp);
 }
 .card-date {
   font-size: 12px;
   color: var(--muted);
   white-space: nowrap;
+}
+.card-toggle {
+  margin-left: auto;
+  font-size: 14px;
+  color: var(--muted);
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.project-card[open] .card-toggle {
+  transform: rotate(180deg);
+  color: var(--monitor);
 }
 .card-summary {
   font-size: 13px;
@@ -256,7 +350,7 @@ html, body {
   font-size: 13px;
   line-height: 1.6;
   color: var(--muted);
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 .card-links {
   display: flex;
@@ -264,16 +358,21 @@ html, body {
 }
 .card-link {
   font-size: 12px;
-  padding: 4px 12px;
+  padding: 6px 14px;
   border-radius: 6px;
   background: rgba(124, 108, 240, 0.15);
-  border: 1px solid transparent;
+  border: 1px solid rgba(124, 108, 240, 0.35);
   color: var(--text);
   text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease;
 }
 .card-link:hover {
   background: rgba(124, 108, 240, 0.3);
-  border-color: rgba(124, 108, 240, 0.5);
+  border-color: rgba(124, 108, 240, 0.6);
+}
+.card-link:focus-visible {
+  outline: 2px solid var(--monitor);
+  outline-offset: 2px;
 }
 
 /* ── Contact ── */
@@ -283,8 +382,10 @@ html, body {
   gap: 10px;
 }
 .contact-link {
-  display: block;
-  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
   border-radius: 8px;
   background: rgba(154, 148, 168, 0.08);
   border: 1px solid rgba(154, 148, 168, 0.18);
@@ -292,13 +393,29 @@ html, body {
   text-decoration: none;
   font-size: 14px;
   overflow-wrap: anywhere;
+  transition: border-color 0.2s ease, background 0.2s ease;
 }
 .contact-link:hover {
   border-color: var(--monitor);
   background: rgba(124, 108, 240, 0.12);
 }
+.contact-link:focus-visible {
+  outline: 2px solid var(--monitor);
+  outline-offset: 2px;
+}
+.contact-label {
+  font-weight: 500;
+  color: var(--text);
+}
+.contact-val {
+  color: var(--muted);
+  font-size: 13px;
+}
+.contact-link:hover .contact-val {
+  color: var(--monitor);
+}
 
-/* ── Responsive (down to 360px) ── */
+/* ── Responsive Overlays (down to 360px) ── */
 @media (max-width: 480px) {
   #ui .overlay-panel {
     top: auto;
@@ -309,7 +426,589 @@ html, body {
     max-height: 74vh;
     border-radius: 14px 14px 0 0;
     padding: 22px 20px 26px;
-    transform: translateY(24px);     /* closed: slid below the viewport */
+    transform: translateY(24px);
   }
   #ui .overlay-panel.is-open { transform: translateY(0); }
+}
+
+/* ======================================================
+   Phase 5 — Dev Mode IDE
+   Full-screen developer workspace with editor, explorer,
+   tabs, terminal, and status bar.
+   ====================================================== */
+
+#dev-mode {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+}
+
+#dev-mode[hidden] {
+  display: none !important;
+}
+
+.ide-layout {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #14121F;
+}
+
+/* ── Title Bar ── */
+.ide-titlebar {
+  height: 38px;
+  background: #0f0d1a;
+  border-bottom: 1px solid rgba(154, 148, 168, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  user-select: none;
+  font-size: 12px;
+}
+
+.ide-titlebar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.ide-window-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.ide-window-dots .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.ide-window-dots .dot.close { background: #E06C75; }
+.ide-window-dots .dot.min   { background: #E5C07B; }
+.ide-window-dots .dot.max   { background: #98C379; }
+
+.ide-app-name {
+  font-weight: 600;
+  color: var(--monitor);
+  letter-spacing: 0.02em;
+}
+
+.ide-file-breadcrumb {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.ide-titlebar-center {
+  flex: 1;
+  max-width: 380px;
+  margin: 0 20px;
+}
+
+.ide-search-box {
+  display: block;
+  width: 100%;
+  text-align: center;
+  background: rgba(154, 148, 168, 0.08);
+  border: 1px solid rgba(154, 148, 168, 0.15);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.ide-titlebar-right {
+  width: 120px; /* leaves room for the persistent mode toggle button */
+}
+
+/* ── Workbench (Sidebar + Main) ── */
+.ide-workbench {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* ── Sidebar Explorer ── */
+.ide-sidebar {
+  width: 220px;
+  min-width: 180px;
+  background: #0f0d1b;
+  border-right: 1px solid rgba(154, 148, 168, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  user-select: none;
+}
+
+.sidebar-section-header {
+  padding: 10px 14px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.sidebar-folder-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--lamp);
+  letter-spacing: 0.04em;
+}
+
+.sidebar-file-list {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0;
+}
+
+.tree-file-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 5px 14px;
+  background: transparent;
+  border: none;
+  border-left: 2px solid transparent;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tree-file-item:hover {
+  background: rgba(124, 108, 240, 0.08);
+  color: var(--text);
+}
+
+.tree-file-item.active {
+  background: rgba(124, 108, 240, 0.15);
+  border-left-color: var(--monitor);
+  color: var(--text);
+  font-weight: 500;
+}
+
+.tree-file-item.nested {
+  padding-left: 28px;
+}
+
+.tree-folder-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ── Main Area ── */
+.ide-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #14121F;
+}
+
+/* ── Tab Bar ── */
+.ide-tab-bar {
+  height: 36px;
+  background: #0d0b17;
+  border-bottom: 1px solid rgba(154, 148, 168, 0.15);
+  display: flex;
+  align-items: flex-end;
+  overflow-x: auto;
+  user-select: none;
+}
+
+.ide-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 35px;
+  padding: 0 14px;
+  background: #100e1b;
+  border-right: 1px solid rgba(154, 148, 168, 0.12);
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.ide-tab:hover {
+  background: rgba(124, 108, 240, 0.08);
+  color: var(--text);
+}
+
+.ide-tab.active {
+  background: #14121F;
+  border-bottom-color: var(--monitor);
+  color: var(--text);
+  font-weight: 500;
+}
+
+.tab-close {
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1;
+  padding: 1px 4px;
+  cursor: pointer;
+}
+
+.tab-close:hover {
+  background: rgba(154, 148, 168, 0.2);
+  color: var(--lamp);
+}
+
+/* ── Editor Container ── */
+.ide-editor-container {
+  flex: 1;
+  display: flex;
+  overflow: auto;
+  background: #14121F;
+}
+
+.editor-view {
+  display: flex;
+  min-height: 100%;
+  width: 100%;
+}
+
+.editor-gutter {
+  padding: 14px 10px 14px 14px;
+  background: #100e1b;
+  border-right: 1px solid rgba(154, 148, 168, 0.12);
+  color: #554f68;
+  font-size: 12.5px;
+  line-height: 1.6;
+  text-align: right;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.editor-code {
+  flex: 1;
+  margin: 0;
+  padding: 14px 20px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text);
+  overflow-x: auto;
+  background: transparent;
+}
+
+.editor-code code {
+  font-family: inherit;
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.editor-empty-state {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  gap: 10px;
+  text-align: center;
+  padding: 20px;
+}
+
+.empty-icon {
+  font-size: 40px;
+  opacity: 0.8;
+}
+
+.empty-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.empty-hint {
+  font-size: 13px;
+  max-width: 320px;
+  line-height: 1.5;
+}
+
+/* ── Terminal Panel ── */
+.ide-terminal-panel {
+  height: 160px;
+  background: #0b0914;
+  border-top: 1px solid rgba(154, 148, 168, 0.2);
+  display: flex;
+  flex-direction: column;
+  transition: height 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+  overflow: hidden;
+}
+
+.ide-terminal-panel.is-collapsed {
+  height: 28px;
+}
+
+.terminal-bar {
+  height: 28px;
+  min-height: 28px;
+  background: #0f0d1b;
+  border-bottom: 1px solid rgba(154, 148, 168, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  font-size: 11px;
+  user-select: none;
+}
+
+.terminal-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.term-title {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.term-badge {
+  background: rgba(124, 108, 240, 0.18);
+  color: var(--monitor);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+}
+
+.term-btn {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+.term-btn:hover {
+  background: rgba(154, 148, 168, 0.15);
+  color: var(--text);
+}
+
+.terminal-body {
+  flex: 1;
+  padding: 10px 14px;
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-y: auto;
+  color: var(--muted);
+}
+
+.term-welcome {
+  color: var(--monitor);
+  font-weight: 500;
+}
+
+.term-hint {
+  color: var(--muted);
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+
+.term-prompt-row {
+  display: flex;
+  align-items: center;
+  color: var(--text);
+}
+
+.term-user {
+  color: #98C379;
+}
+
+.term-path {
+  color: var(--monitor);
+}
+
+.term-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 14px;
+  background: var(--monitor);
+  animation: cursor-blink 1s steps(2, start) infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ── Status Bar ── */
+.ide-statusbar {
+  height: 24px;
+  min-height: 24px;
+  background: #090812;
+  border-top: 1px solid rgba(154, 148, 168, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  font-size: 11px;
+  color: var(--muted);
+  user-select: none;
+}
+
+.statusbar-left,
+.statusbar-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.status-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #98C379;
+}
+
+.branch-icon {
+  color: var(--monitor);
+}
+
+.avail-tag {
+  color: var(--lamp);
+}
+
+.mode-pill {
+  background: rgba(124, 108, 240, 0.2);
+  color: var(--monitor);
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+}
+
+/* ── Palette-Aligned Syntax Highlighting Overrides ── */
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-built_in {
+  color: var(--monitor) !important;
+  font-weight: 500;
+}
+
+.hljs-string,
+.hljs-attr {
+  color: var(--lamp) !important;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-name {
+  color: #E5C07B !important;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: var(--muted) !important;
+  font-style: italic;
+}
+
+.hljs-number,
+.hljs-literal {
+  color: #56B6C2 !important;
+}
+
+/* ── Mobile Dev Mode ── */
+
+@media (max-width: 680px) {
+  .ide-sidebar {
+    width: 140px;
+    min-width: 120px;
+  }
+  .ide-titlebar-center {
+    display: none;
+  }
+  .location-tag {
+    display: none;
+  }
+}
+
+/* ======================================================
+   Phase 7 — Loading screen
+   Full-screen cover with a real progress bar fed by the
+   three.js LoadingManager (see src/ui/loader.js).
+   ====================================================== */
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 200;                 /* above canvas (0), #ui (1) and dev mode (50) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  transition: opacity 0.4s ease;
+}
+
+.loader.is-done {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader__panel {
+  width: min(320px, 72vw);
+  text-align: center;
+}
+
+.loader__label {
+  margin-bottom: 14px;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.loader__track {
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(154, 148, 168, 0.18);   /* --muted, low alpha */
+  overflow: hidden;
+}
+
+.loader__fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--monitor), var(--lamp));
+  transition: width 0.25s ease;
+}
+
+.loader__pct {
+  margin-top: 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
 }

@@ -5,6 +5,7 @@
  *   getState()          → returns current state object
  *   setState(patch)     → shallow-merges patch into state, notifies subscribers
  *   subscribe(fn)       → fn(state) called on every change; returns unsubscribe
+ *   setMode(mode)       → sets mode to '3d' | 'dev' | 'quick'
  */
 
 /** @type {Set<(state: object) => void>} */
@@ -35,4 +36,13 @@ export function setState(patch) {
 export function subscribe(fn) {
   listeners.add(fn);
   return () => listeners.delete(fn);
+}
+
+/**
+ * Switch presentation mode ('3d' | 'dev' | 'quick').
+ * @param {'3d' | 'dev' | 'quick'} mode
+ */
+export function setMode(mode) {
+  if (state.mode === mode) return;
+  setState({ mode });
 }
