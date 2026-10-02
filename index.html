@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rohan Chauhan | AI/ML & Software Engineer</title>
+  <meta name="description" content="Rohan Chauhan — Software engineer building AI-powered products, GenAI apps and Python backends." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%23111'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial Black' font-size='22' fill='%23EBE9E4'%3ER%3C/text%3E%3C/svg%3E" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Custom cursor (desktop only) -->
+  <div class="cursor" aria-hidden="true"><span class="cursor-label"></span></div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header">
+    <a href="#top" class="logo" aria-label="Home">
+      <svg viewBox="0 0 44 44" aria-hidden="true">
+        <rect x="0" y="0" width="20" height="44" rx="3"/>
+        <path d="M24 0h6a14 14 0 0 1 0 28h-6z"/>
+        <path d="M24 31h7l13 13H24z"/>
+      </svg>
+    </a>
+
+    <!-- Centre navigation (desktop) -->
+    <nav class="center-nav" aria-label="Main">
+      <div class="nav-group">
+        <a href="#services" class="btn btn-outline roll">What I do</a>
+        <button class="btn btn-outline nav-caret" aria-expanded="false" aria-label="Show services">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="dropdown">
+          <a href="#svc-ai">AI &amp; GenAI</a>
+          <a href="#svc-backend">Backend Development</a>
+          <a href="#svc-data">Data &amp; Machine Learning</a>
+        </div>
+      </div>
+      <a href="#projects" class="btn btn-outline roll">Projects</a>
+      <a href="#about" class="btn btn-outline roll">About me</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="#contact" class="btn btn-dark btn-contact roll-wrap">
+        <span class="avatar"><img src="assets/avatar.jpg" alt="" onerror="this.remove()"><span>RC</span></span>
+        <span class="roll">Contact</span>
+      </a>
+      <button class="btn btn-outline menu-toggle" aria-expanded="false" aria-controls="menu">
+        <span class="menu-label">Menu</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ============ FULLSCREEN MENU (mobile) ============ -->
+  <nav class="menu" id="menu" aria-hidden="true">
+    <ul class="menu-links">
+      <li><a href="#top"><span class="mono">01</span>Home</a></li>
+      <li><a href="#services"><span class="mono">02</span>What I do</a></li>
+      <li><a href="#projects"><span class="mono">03</span>Projects</a></li>
+      <li><a href="#about"><span class="mono">04</span>About me</a></li>
+      <li><a href="#experience"><span class="mono">05</span>Experience</a></li>
+      <li><a href="#contact"><span class="mono">06</span>Contact</a></li>
+    </ul>
+    <div class="menu-foot">
+      <a href="mailto:chauhanrohan223@gmail.com">chauhanrohan223@gmail.com</a>
+      <div class="socials">
+        <a href="https://github.com/Rohan708" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/rohan-chauhan-0604732b2" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="top">
+    <!-- ============ HERO (sticky — the next section slides over it) ============ -->
+    <section class="hero" id="hero">
+      <div class="container hero-inner">
+        <h1 class="display hero-title">
+          <span class="line"><span>I build AI-powered</span></span>
+          <span class="line"><span>software that solves</span></span>
+          <span class="line"><span>real problems</span></span>
+        </h1>
+
+        <div class="hero-bottom split">
+          <div class="hero-side reveal">
+            <p>Software engineer &amp; final-year CSE student. Currently building GenAI applications as an <strong>SDE Intern at Moglix</strong>.</p>
+            <div class="hero-ctas">
+              <a href="#contact" class="btn btn-dark roll-wrap">
+                <span class="avatar"><img src="assets/avatar.jpg" alt="" onerror="this.remove()"><span>RC</span></span>
+                <span class="roll">Get in touch</span>
+              </a>
+              <a href="#projects" class="btn btn-outline roll">See projects</a>
+            </div>
+          </div>
+
+          <div class="hero-showcase reveal">
+            <div class="showcase-frame">
+              <div class="showcase-track" id="showcaseTrack"><!-- filled by script.js --></div>
+              <div class="showcase-arrows">
+                <button class="sc-prev" aria-label="Previous project">←</button>
+                <button class="sc-next" aria-label="Next project">→</button>
+              </div>
+            </div>
+            <div class="byline">
+              <span class="display-sm">By Rohan Chauhan</span>
+              <span class="rule"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-shade" aria-hidden="true"></div>
+    </section>
+
+    <!-- ============ SERVICES / WHAT I DO ============ -->
+    <section class="dark-card services-section" id="services">
+      <div class="container">
+        <h2 class="display section-title reveal">What I can do</h2>
+
+        <div class="split intro-split">
+          <div></div>
+          <div class="intro-row reveal">
+            <span class="tag">Skills</span>
+            <div class="intro-text">
+              <p>Looking for someone who can take an idea from a notebook to a working product?</p>
+              <p>I combine machine learning, LLMs and solid backend engineering to build tools people actually use.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="services">
+          <article class="service" id="svc-ai" style="--i:0">
+            <div class="split">
+              <span class="display-lg num">01.</span>
+              <div>
+                <header class="service-head">
+                  <h3 class="display-lg">AI &amp; GenAI</h3>
+                  <span class="arrow">↙</span>
+                </header>
+                <div class="service-body">
+                  <p class="service-desc">From RAG pipelines to agentic chatbots, I design LLM systems that are grounded, useful and production-ready.</p>
+                  <ul class="sublist">
+                    <li><span class="mono">01</span>LangGraph &amp; LangChain Agents</li>
+                    <li><span class="mono">02</span>RAG &amp; Vector Databases</li>
+                    <li><span class="mono">03</span>PyTorch &amp; Model Tuning</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="service" id="svc-backend" style="--i:1">
+            <div class="split">
+              <span class="display-lg num">02.</span>
+              <div>
+                <header class="service-head">
+                  <h3 class="display-lg">Backend Development</h3>
+                  <span class="arrow">↙</span>
+                </header>
+                <div class="service-body">
+                  <p class="service-desc">Clean, secure APIs and well-designed databases. I build the backbone that keeps apps fast and reliable.</p>
+                  <ul class="sublist">
+                    <li><span class="mono">01</span>Django &amp; Django REST Framework</li>
+                    <li><span class="mono">02</span>FastAPI Services</li>
+                    <li><span class="mono">03</span>SQL &amp; Schema Design</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="service" id="svc-data" style="--i:2">
+            <div class="split">
+              <span class="display-lg num">03.</span>
+              <div>
+                <header class="service-head">
+                  <h3 class="display-lg">Data &amp; Machine Learning</h3>
+                  <span class="arrow">↙</span>
+                </header>
+                <div class="service-body">
+                  <p class="service-desc">Turning raw data into decisions — through exploration, statistical modelling and predictive ML.</p>
+                  <ul class="sublist">
+                    <li><span class="mono">01</span>EDA with Pandas &amp; NumPy</li>
+                    <li><span class="mono">02</span>Scikit-learn &amp; Optuna</li>
+                    <li><span class="mono">03</span>Dashboards &amp; Visualisation</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section class="projects" id="projects">
+      <div class="container">
+        <div class="split projects-top">
+          <h2 class="display section-title reveal">Projects</h2>
+          <div class="intro-row reveal">
+            <span class="tag tag-soft">Portfolio</span>
+            <div class="intro-text">
+              <p>A few things I've built — from AI developer tools to ML dashboards and production-style APIs.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-list">
+          <!-- PROJECT 1 -->
+          <a class="project" href="https://github.com/Rohan708" target="_blank" rel="noopener" data-cursor="View project">
+            <span class="mono meta">2025, AI Dev Tool</span>
+            <div class="project-main">
+              <!-- To use a real screenshot: replace the .mock div with <img src="assets/project-1.jpg" alt=""> -->
+              <div class="project-media">
+                <div class="mock mock-code">
+                  <div class="m-bar"><i></i><i></i><i></i><span>debugger.py — AI Assist</span></div>
+                  <div class="m-body">
+                    <div class="m-side"><b></b><b></b><b></b><b></b><b></b></div>
+                    <div class="m-editor">
+                      <p><em>1</em><k>def</k> fetch_user(id):</p>
+                      <p><em>2</em>&nbsp;&nbsp;data = db.get(id)</p>
+                      <p class="err"><em>3</em>&nbsp;&nbsp;<k>return</k> data[<s>"name"</s>]</p>
+                      <p><em>4</em></p>
+                      <p><em>5</em><k>def</k> main():</p>
+                      <p><em>6</em>&nbsp;&nbsp;user = fetch_user(<n>42</n>)</p>
+                      <p class="err"><em>7</em>&nbsp;&nbsp;print(usr)</p>
+                    </div>
+                    <div class="m-ai">
+                      <div class="m-toggle"><span class="on">Debugger</span><span>Tutor</span></div>
+                      <div class="m-msg"><b>KeyError</b> on line 3 — <i>data</i> can be <i>None</i>.</div>
+                      <div class="m-msg fix">Suggested fix:<br><code>return data.get("name") if data else None</code></div>
+                      <div class="m-msg"><b>NameError</b> line 7 — did you mean <i>user</i>?</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h3 class="display project-name">Bug Detection &amp; Fix Tool</h3>
+            </div>
+            <span class="ext" aria-hidden="true">↗</span>
+            <p class="project-desc">A VS Code extension that captures lint errors and runtime exceptions, then uses LLM-based RAG to explain them (Tutor) or fix them (Debugger). <span class="mono">TypeScript · FastAPI · RAG</span></p>
+          </a>
+
+          <!-- PROJECT 2 -->
+          <a class="project" href="https://github.com/Rohan708" target="_blank" rel="noopener" data-cursor="View project">
+            <span class="mono meta">2025, Machine Learning</span>
+            <div class="project-main">
+              <div class="project-media">
+                <div class="mock mock-dash">
+                  <div class="m-bar"><i></i><i></i><i></i><span>flight-delay.streamlit.app</span></div>
+                  <div class="m-body">
+                    <div class="m-nav"><b>✈ DelayCast</b><span>DEL</span><span>BOM</span><span>BLR</span><span>HYD</span></div>
+                    <div class="m-main">
+                      <div class="m-kpis">
+                        <div><small>Flights tracked</small><strong>1,284</strong></div>
+                        <div><small>Predicted delays</small><strong class="acc">23%</strong></div>
+                        <div><small>Model accuracy</small><strong>87.4%</strong></div>
+                      </div>
+                      <div class="m-chart">
+                        <span style="--h:40%"></span><span style="--h:62%"></span><span style="--h:35%"></span><span style="--h:78%"></span><span style="--h:55%"></span><span style="--h:90%" class="hi"></span><span style="--h:48%"></span><span style="--h:66%"></span><span style="--h:30%"></span><span style="--h:58%"></span><span style="--h:72%"></span><span style="--h:44%"></span>
+                      </div>
+                      <div class="m-table">
+                        <p><b>6E 2134</b><span>DEL → BOM</span><em class="ok">On time</em></p>
+                        <p><b>AI 865</b><span>BLR → DEL</span><em class="late">+42 min</em></p>
+                        <p><b>UK 951</b><span>HYD → CCU</span><em class="ok">On time</em></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h3 class="display project-name">Flight Delay Predictor</h3>
+            </div>
+            <span class="ext" aria-hidden="true">↗</span>
+            <p class="project-desc">Real-time flight delay forecasts for major Indian airports, combining live flight and weather data in a Streamlit dashboard. <span class="mono">Scikit-learn · Streamlit · APIs</span></p>
+          </a>
+
+          <!-- PROJECT 3 -->
+          <a class="project" href="https://github.com/Rohan708" target="_blank" rel="noopener" data-cursor="View project">
+            <span class="mono meta">2024, Backend</span>
+            <div class="project-main">
+              <div class="project-media">
+                <div class="mock mock-shop">
+                  <div class="m-bar"><i></i><i></i><i></i><span>api/v1/products</span></div>
+                  <div class="m-body">
+                    <div class="m-store">
+                      <div class="m-store-head"><b>STORE.</b><span>Cart (3)</span></div>
+                      <div class="m-grid">
+                        <div><i style="--c:#d9c7b0"></i><small>Sneakers</small><b>₹3,499</b></div>
+                        <div><i style="--c:#b7c4c9"></i><small>Backpack</small><b>₹1,899</b></div>
+                        <div><i style="--c:#c9b7c4"></i><small>Watch</small><b>₹5,250</b></div>
+                        <div><i style="--c:#c4c9b7"></i><small>Headphones</small><b>₹2,799</b></div>
+                      </div>
+                    </div>
+                    <div class="m-json">
+<pre><k>GET</k> /api/v1/orders/218
+<n>200 OK</n>
+{
+  <s>"id"</s>: 218,
+  <s>"status"</s>: <s>"shipped"</s>,
+  <s>"items"</s>: 3,
+  <s>"total"</s>: 12648,
+  <s>"role"</s>: <s>"customer"</s>
+}</pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h3 class="display project-name">E-commerce API</h3>
+            </div>
+            <span class="ext" aria-hidden="true">↗</span>
+            <p class="project-desc">REST APIs for products, carts and orders with role-based access, validation and a normalised MySQL schema. <span class="mono">Django REST · MySQL</span></p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT (grows from a small card to full screen) ============ -->
+    <section class="about" id="about">
+      <div class="about-stage">
+        <div class="about-panel" id="aboutPanel">
+          <div class="about-intro container">
+            <div class="about-head">
+              <div class="about-photo">
+                <!-- Add your photo as assets/me.jpg -->
+                <img src="assets/me.jpg" alt="Rohan Chauhan" onerror="this.remove()">
+                <span class="photo-fallback display">RC</span>
+              </div>
+              <h2 class="display about-title">Hey — I'm<br>Rohan</h2>
+            </div>
+            <div class="intro-row about-text">
+              <span class="tag">About me</span>
+              <div class="intro-text">
+                <p>Final-year B.Tech CSE student at GNIOT, Greater Noida, with hands-on experience in machine learning, data analysis and AI-driven systems. I love turning messy, real-world problems into software that's simple to use.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-values">
+        <div class="container">
+          <ul class="values" id="values">
+            <li><b>Curious.</b><span class="icon">◎</span><p>I learn fast and I'm always digging into how things work under the hood.</p></li>
+            <li><b>Builder.</b><span class="icon">⌘</span><p>I ship end-to-end — from data pipeline to API to interface.</p></li>
+            <li><b>Consistent.</b><span class="icon">▲</span><p>Top 15 academic rank in my department across multiple semesters.</p></li>
+            <li><b>Communicator.</b><span class="icon">✦</span><p>Awarded "Eloquent Speaker" — I explain complex ideas clearly.</p></li>
+            <li><b>Analytical.</b><span class="icon">◇</span><p>Statistics and data first, opinions second.</p></li>
+            <li><b>Problem solver.</b><span class="icon">⚙</span><p>Bugs, bottlenecks, broken flows — I enjoy fixing them.</p></li>
+            <li><b>Team player.</b><span class="icon">❖</span><p>Collaborated in teams across three internships.</p></li>
+            <li><b>Always growing.</b><span class="icon">→</span><p>Intel Unnati AI/ML, Cisco Cybersecurity, Deloitte Data Analytics, AWS.</p></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section class="container experience" id="experience">
+      <h2 class="display section-title reveal">Experience</h2>
+      <div class="accordion reveal">
+        <details class="acc" open>
+          <summary data-cursor="Close"><span class="mono">(01)</span><span class="acc-title">SDE Intern — Moglix <em class="mono acc-date">Mar 2026 – Present</em></span><span class="plus"></span></summary>
+          <div class="acc-body">
+            <ul>
+              <li>Developed and work on Cerebra, a chatbot used to create PRs and RFQs in Credlex.</li>
+              <li>Building GenAI applications and analysis software.</li>
+            </ul>
+          </div>
+        </details>
+        <details class="acc">
+          <summary data-cursor="Open"><span class="mono">(02)</span><span class="acc-title">AI Research Intern — Coding Jr <em class="mono acc-date">Jun 2025 – Dec 2025</em></span><span class="plus"></span></summary>
+          <div class="acc-body">
+            <ul>
+              <li>Researched Planto AI's architecture, features and market positioning.</li>
+              <li>Proposed improvements to user flow, model performance and personalisation.</li>
+            </ul>
+          </div>
+        </details>
+        <details class="acc">
+          <summary data-cursor="Open"><span class="mono">(03)</span><span class="acc-title">Full-Stack Intern — Wayspire <em class="mono acc-date">Apr 2024 – Jun 2024</em></span><span class="plus"></span></summary>
+          <div class="acc-body">
+            <ul>
+              <li>Completed a three-month full-stack web development internship.</li>
+              <li>Collaborated with a team to build and debug full-stack modules, improving performance and UI.</li>
+            </ul>
+          </div>
+        </details>
+        <details class="acc">
+          <summary data-cursor="Open"><span class="mono">(04)</span><span class="acc-title">B.Tech CSE — GNIOT, Greater Noida <em class="mono acc-date">2022 – 2026</em></span><span class="plus"></span></summary>
+          <div class="acc-body">
+            <ul>
+              <li>CGPA 7.7 · Top 15 department rank across multiple semesters.</li>
+              <li>Class XII &amp; X — St. Mary's School, Kashipur (78%).</li>
+            </ul>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="container faq" id="faq">
+      <h2 class="display section-title reveal">Frequently asked questions</h2>
+      <div class="accordion reveal">
+        <details class="acc">
+          <summary data-cursor="Open"><span class="mono">(01)</span><span class="acc-title">Are you open to full-time roles?</span><span class="plus"></span></summary>
+          <div class="acc-body"><p>Yes. I'm looking for SDE and AI/ML roles starting after my graduation in 2026.</p></div>
+        </details>
+        <details class="acc">
+          <summary data-cursor="Open"><span class="mono">(02)</span><span class="acc-title">What's your main tech stack?</span><span class="plus"></span></summary>
+          <div class="acc-body"><p>Python first — Django / FastAPI on the backend, PyTorch, Scikit-learn, LangChain and LangGraph for AI, and SQL for data. I also work with Java and TypeScript.</p></div>
+        </details>
+        <details class="acc">
+          <summary data-cursor="Open"><span class="mono">(03)</span><span class="acc-title">What are you working on right now?</span><span class="plus"></span></summary>
+          <div class="acc-body"><p>At Moglix I'm building Cerebra, a GenAI chatbot that helps create purchase requests and RFQs, along with other analysis tools.</p></div>
+        </details>
+        <details class="acc">
+          <summary data-cursor="Open"><span class="mono">(04)</span><span class="acc-title">Where are you based?</span><span class="plus"></span></summary>
+          <div class="acc-body"><p>Greater Noida / Delhi NCR, India — and happy to work remotely or relocate.</p></div>
+        </details>
+        <details class="acc">
+          <summary data-cursor="Open"><span class="mono">(05)</span><span class="acc-title">Do you freelance or take on side projects?</span><span class="plus"></span></summary>
+          <div class="acc-body"><p>For the right idea, yes — especially anything involving AI agents, data or backend APIs. Drop me an email.</p></div>
+        </details>
+        <details class="acc">
+          <summary data-cursor="Open"><span class="mono">(06)</span><span class="acc-title">Can I see your resume?</span><span class="plus"></span></summary>
+          <div class="acc-body"><p>Of course — <a href="assets/Rohan-Chauhan-Resume.pdf" target="_blank" class="u">download it here</a>.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="cta-wrap container" id="contact">
+      <div class="cta">
+        <p class="cta-kicker reveal">Let's talk!</p>
+        <h2 class="display cta-title reveal">Ready to build<br>something together?</h2>
+        <a href="mailto:chauhanrohan223@gmail.com" class="btn btn-light roll-wrap reveal">
+          <span class="avatar"><img src="assets/avatar.jpg" alt="" onerror="this.remove()"><span>RC</span></span>
+          <span class="roll">Say hello</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#top" class="logo" aria-label="Home">
+          <svg viewBox="0 0 44 44" aria-hidden="true">
+            <rect x="0" y="0" width="20" height="44" rx="3"/>
+            <path d="M24 0h6a14 14 0 0 1 0 28h-6z"/>
+            <path d="M24 31h7l13 13H24z"/>
+          </svg>
+        </a>
+        <span class="badge">● Open to SDE / AI-ML roles</span>
+      </div>
+      <ul>
+        <li><a href="#top">Home</a></li>
+        <li><a href="#services">What I do</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#about">About me</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <ul>
+        <li><a href="https://github.com/Rohan708" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/rohan-chauhan-0604732b2" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="mailto:chauhanrohan223@gmail.com">Email</a></li>
+        <li><a href="assets/Rohan-Chauhan-Resume.pdf" target="_blank">Resume</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom mono">
+      <span>© <span id="year"></span> Rohan Chauhan</span>
+      <span>Built with HTML, CSS &amp; JS</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
