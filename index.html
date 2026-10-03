@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark" data-accent="purple">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,6 +10,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="theme.css" />
+  <script>
+    // Apply the saved theme before the page paints (avoids a flash)
+    try {
+      var t = localStorage.getItem("rc-theme");
+      if (t) { var p = t.split(":"); document.documentElement.dataset.theme = p[0]; document.documentElement.dataset.accent = p[1]; }
+    } catch (e) {}
+  </script>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%23111'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial Black' font-size='22' fill='%23EBE9E4'%3ER%3C/text%3E%3C/svg%3E" />
 </head>
 <body>
@@ -78,12 +86,22 @@
   <main id="top">
     <!-- ============ HERO (sticky — the next section slides over it) ============ -->
     <section class="hero" id="hero">
+      <canvas class="net" id="net" aria-hidden="true"></canvas>
       <div class="container hero-inner">
+        <div>
+        <div class="status" aria-label="Status">
+          <span><span class="dot"></span>Open to SDE / AI-ML roles</span>
+          <span class="sep">/</span>
+          <span>IST <span id="clock">--:--:--</span></span>
+          <span class="sep">/</span>
+          <span>28.47°N 77.50°E — Greater Noida</span>
+        </div>
         <h1 class="display hero-title">
-          <span class="line"><span>I build AI-powered</span></span>
+          <span class="line"><span>I build <span class="hl">AI-powered</span></span></span>
           <span class="line"><span>software that solves</span></span>
           <span class="line"><span>real problems</span></span>
         </h1>
+        </div>
 
         <div class="hero-bottom split">
           <div class="hero-side reveal">
@@ -118,7 +136,8 @@
     <!-- ============ SERVICES / WHAT I DO ============ -->
     <section class="dark-card services-section" id="services">
       <div class="container">
-        <h2 class="display section-title reveal">What I can do</h2>
+        <span class="kicker reveal"><b>[01]</b> — capabilities.py</span>
+        <h2 class="display section-title reveal decode">What I can do</h2>
 
         <div class="split intro-split">
           <div></div>
@@ -199,7 +218,10 @@
     <section class="projects" id="projects">
       <div class="container">
         <div class="split projects-top">
-          <h2 class="display section-title reveal">Projects</h2>
+          <div>
+            <span class="kicker reveal"><b>[02]</b> — ls ./projects</span>
+            <h2 class="display section-title reveal decode">Projects</h2>
+          </div>
           <div class="intro-row reveal">
             <span class="tag tag-soft">Portfolio</span>
             <div class="intro-text">
@@ -211,7 +233,7 @@
         <div class="project-list">
           <!-- PROJECT 1 -->
           <a class="project" href="https://github.com/Rohan708" target="_blank" rel="noopener" data-cursor="View project">
-            <span class="mono meta">2025, AI Dev Tool</span>
+            <span class="meta-wrap"><span class="mono meta">2025, AI Dev Tool</span><span class="chips"><i>TypeScript</i><i>FastAPI</i><i>LLM</i><i>RAG</i><i>Vector DB</i></span></span>
             <div class="project-main">
               <!-- To use a real screenshot: replace the .mock div with <img src="assets/project-1.jpg" alt=""> -->
               <div class="project-media">
@@ -245,7 +267,7 @@
 
           <!-- PROJECT 2 -->
           <a class="project" href="https://github.com/Rohan708" target="_blank" rel="noopener" data-cursor="View project">
-            <span class="mono meta">2025, Machine Learning</span>
+            <span class="meta-wrap"><span class="mono meta">2025, Machine Learning</span><span class="chips"><i>Python</i><i>Scikit-learn</i><i>Streamlit</i><i>Pandas</i></span></span>
             <div class="project-main">
               <div class="project-media">
                 <div class="mock mock-dash">
@@ -278,7 +300,7 @@
 
           <!-- PROJECT 3 -->
           <a class="project" href="https://github.com/Rohan708" target="_blank" rel="noopener" data-cursor="View project">
-            <span class="mono meta">2024, Backend</span>
+            <span class="meta-wrap"><span class="mono meta">2024, Backend</span><span class="chips"><i>Django REST</i><i>MySQL</i><i>Auth / RBAC</i><i>Postman</i></span></span>
             <div class="project-main">
               <div class="project-media">
                 <div class="mock mock-shop">
@@ -327,7 +349,10 @@
                 <img src="assets/me.jpg" alt="Rohan Chauhan" onerror="this.remove()">
                 <span class="photo-fallback display">RC</span>
               </div>
-              <h2 class="display about-title">Hey — I'm<br>Rohan</h2>
+              <div>
+                <span class="kicker"><b>[03]</b> — whoami</span>
+                <h2 class="display about-title">Hey — I'm<br>Rohan</h2>
+              </div>
             </div>
             <div class="intro-row about-text">
               <span class="tag">About me</span>
@@ -357,7 +382,8 @@
 
     <!-- ============ EXPERIENCE ============ -->
     <section class="container experience" id="experience">
-      <h2 class="display section-title reveal">Experience</h2>
+      <span class="kicker reveal"><b>[04]</b> — git log --career</span>
+      <h2 class="display section-title reveal decode">Experience</h2>
       <div class="accordion reveal">
         <details class="acc" open>
           <summary data-cursor="Close"><span class="mono">(01)</span><span class="acc-title">SDE Intern — Moglix <em class="mono acc-date">Mar 2026 – Present</em></span><span class="plus"></span></summary>
@@ -400,7 +426,8 @@
 
     <!-- ============ FAQ ============ -->
     <section class="container faq" id="faq">
-      <h2 class="display section-title reveal">Frequently asked questions</h2>
+      <span class="kicker reveal"><b>[05]</b> — cat faq.md</span>
+      <h2 class="display section-title reveal decode">Frequently asked questions</h2>
       <div class="accordion reveal">
         <details class="acc">
           <summary data-cursor="Open"><span class="mono">(01)</span><span class="acc-title">Are you open to full-time roles?</span><span class="plus"></span></summary>
@@ -432,8 +459,8 @@
     <!-- ============ CTA ============ -->
     <section class="cta-wrap container" id="contact">
       <div class="cta">
-        <p class="cta-kicker reveal">Let's talk!</p>
-        <h2 class="display cta-title reveal">Ready to build<br>something together?</h2>
+        <p class="cta-kicker mono reveal caret">&gt; lets_talk()</p>
+        <h2 class="display cta-title reveal decode">Ready to build<br>something together?</h2>
         <a href="mailto:chauhanrohan223@gmail.com" class="btn btn-light roll-wrap reveal">
           <span class="avatar"><img src="assets/avatar.jpg" alt="" onerror="this.remove()"><span>RC</span></span>
           <span class="roll">Say hello</span>
@@ -475,6 +502,16 @@
     </div>
   </footer>
 
+  <!-- Theme preview switcher — delete this block once you've picked a theme -->
+  <div class="theme-switch" role="group" aria-label="Theme">
+    <span>Theme</span>
+    <button data-set="dark:purple" style="--sw:#b266ff" aria-label="Dark, neon purple"></button>
+    <button data-set="dark:lime" style="--sw:#c8ff3d" aria-label="Dark, lime"></button>
+    <button data-set="dark:cyan" style="--sw:#33e1ff" aria-label="Dark, cyan"></button>
+    <button data-set="light:orange" style="--sw:linear-gradient(135deg,#ebe9e4 50%,#ff4c24 50%)" aria-label="Original light"></button>
+  </div>
+
+  <script src="assets/lenis.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
