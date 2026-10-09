@@ -1,0 +1,424 @@
+/* =========================================================
+   "Flow" themes — Black & White / White & Black
+   One continuous page: a single particle network runs behind
+   everything, and sections sit on it instead of being separate
+   coloured blocks. Same scroll animations as the other themes.
+   Active when <html data-flow="1">. Loaded after theme.css.
+   ========================================================= */
+
+/* ---------- Palettes ----------
+   --hi / --hi-fg = the highlight colour (buttons, active states, hover rows) */
+html[data-flow][data-accent="white"] {         /* Black & White — pitch black + pure white */
+  --bg: #000000;
+  --ink: #ffffff;
+  --ink-2: #d9d9d9;
+  --mute: #9a9a9a;
+  --mute-2: #5c5c5c;
+  --line: rgba(255, 255, 255, 0.16);
+  --line-dark: rgba(255, 255, 255, 0.16);
+  --card: #000000;
+  --card-2: #0b0b0b;
+  --accent: #ffffff;
+  --accent-fg: #000000;
+  --accent-soft: rgba(255, 255, 255, 0.1);
+  --hi: #ffffff;
+  --hi-fg: #000000;
+  --dots: none;
+  --glass: rgba(0, 0, 0, 0.88);
+  --net-rgb: 255, 255, 255;
+  --net-alpha: 1.7;
+}
+html[data-flow][data-accent="black"] {         /* White & Black */
+  --bg: #fafafa;
+  --ink: #0a0a0a;
+  --ink-2: #2e2e2e;
+  --mute: #6b6b6b;
+  --mute-2: #a3a3a3;
+  --line: rgba(10, 10, 10, 0.13);
+  --line-dark: rgba(10, 10, 10, 0.13);
+  --accent: #0a0a0a;
+  --accent-fg: #fafafa;
+  --accent-soft: rgba(10, 10, 10, 0.06);
+  --hi: #0a0a0a;
+  --hi-fg: #fafafa;
+  --glass: rgba(250, 250, 250, 0.74);
+  --net-rgb: 10, 10, 10;
+  --net-alpha: 1;
+}
+html[data-flow][data-accent="purple"] {        /* Purple flow (page-wide network) */
+  --bg: #050507;
+  --ink: #ededf2;
+  --ink-2: #b5b5c3;
+  --mute: #8a8a99;
+  --mute-2: #5c5c6b;
+  --line: rgba(237, 237, 242, 0.12);
+  --line-dark: rgba(237, 237, 242, 0.12);
+  --card: #050507;
+  --card-2: #121218;
+  --accent: #b266ff;
+  --accent-fg: #0b0b0f;
+  --accent-soft: rgba(178, 102, 255, 0.14);
+  --hi: #b266ff;
+  --hi-fg: #0b0b0f;
+  --dots: none;
+  --glass: rgba(5, 5, 7, 0.82);
+  --net-rgb: 178, 102, 255;
+  --net-alpha: 1.3;
+}
+
+/* ---------- One continuous background ---------- */
+html[data-flow] body { background: var(--bg); }
+.bgnet { display: none; }
+html[data-flow] .bgnet {
+  display: block; position: fixed; inset: 0; width: 100%; height: 100%;
+  z-index: 0; pointer-events: none; opacity: 0.8;
+}
+html[data-flow][data-accent="white"] .bgnet { opacity: 1; }
+html[data-flow][data-accent="black"] .bgnet { opacity: 0.6; }
+html[data-flow] .net { display: none; }          /* the page-wide network replaces the hero one */
+html[data-flow] .grain { opacity: 0.04; }
+html[data-flow][data-accent="white"] .grain { display: none; }   /* no grey haze on pitch black */
+
+/* every section becomes transparent so the network shows through */
+html[data-flow] .projects,
+html[data-flow] .about,
+html[data-flow] .experience,
+html[data-flow] .faq,
+html[data-flow] .cta-wrap,
+html[data-flow] .footer {
+  background: transparent !important;
+}
+
+/* ---------- Panels → hairline frames on glass ---------- */
+html[data-flow] .dark-card {
+  background: transparent !important; color: var(--ink);
+  box-shadow: none !important; border-radius: 0; margin-inline: 0;
+  border-top: 1px solid var(--line);
+}
+html[data-flow] .dark-card .intro-text p,
+html[data-flow] .service-desc,
+html[data-flow] .about-text .intro-text p { color: var(--ink-2); }
+html[data-flow] .dark-card .kicker { color: var(--mute); }
+
+/* stacking skill cards: fully see-through (the network stays visible);
+   script.js fades a card's text out as the next one slides over it */
+html[data-flow] .service {
+  background: transparent !important;
+  border-top: 1px solid var(--line);
+}
+html[data-flow] .service .num { color: var(--hi); }
+html[data-flow] .sublist li { color: var(--ink-2); border-color: var(--line); }
+html[data-flow] .sublist li:hover { color: var(--hi); }
+html[data-flow] .sublist .mono { color: var(--mute-2); }
+html[data-flow] .service-head .arrow { color: var(--mute); }
+html[data-flow] .service:hover .arrow { color: var(--hi); }
+
+/* about: the growing card is just an outline — the network shows through it */
+html[data-flow] .about-panel {
+  background: transparent !important; color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--line) !important;
+}
+html[data-flow] .about-values {
+  background: transparent !important; color: var(--ink);
+  border-radius: 0;
+}
+html[data-flow] .values p { color: var(--ink); }
+html[data-flow] .values li { border-color: var(--line); }
+html[data-flow] .about-photo { background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--line); }
+html[data-flow] .photo-fallback { color: var(--mute-2); }
+
+/* CTA: big type on the network, framed by a hairline */
+html[data-flow] .cta {
+  background: transparent !important; color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--line) !important;
+}
+html[data-flow] .cta-kicker { color: var(--mute); }
+
+/* ---------- Highlights ---------- */
+/* White & Black: "AI-POWERED" in outlined type */
+html[data-flow] .hero-title .hl {
+  color: transparent; text-shadow: none;
+  -webkit-text-stroke: 1.5px var(--ink);
+}
+/* Black & White: solid pure-white marker with black type */
+html[data-flow][data-accent="white"] .hero-title .hl {
+  color: #000; background: #fff; -webkit-text-stroke: 0; padding: 0 0.06em; margin-right: 0.04em;
+}
+/* Purple flow: glowing purple type */
+html[data-flow][data-accent="purple"] .hero-title .hl {
+  color: var(--accent); -webkit-text-stroke: 0;
+  text-shadow: 0 0 40px rgba(178, 102, 255, 0.45);
+}
+/* buttons: solid ink, no coloured glow */
+html[data-flow] .btn-dark,
+html[data-flow] .btn-light,
+html[data-flow] .cta .btn-light {
+  background: var(--hi); color: var(--hi-fg); box-shadow: none;
+}
+html[data-flow][data-accent="purple"] .btn-dark,
+html[data-flow][data-accent="purple"] .btn-light { box-shadow: 0 0 28px -6px var(--accent); }
+html[data-flow] .btn-outline { border-color: var(--line); color: var(--ink); background: transparent; }
+html[data-flow] .btn-outline:hover { background: var(--hi); color: var(--hi-fg); border-color: var(--hi); }
+html[data-flow] .avatar { background: var(--bg); color: var(--ink); box-shadow: inset 0 0 0 1px var(--line); }
+html[data-flow] .center-nav .btn { background: var(--glass); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+html[data-flow] .center-nav .btn-outline:hover,
+html[data-flow] .nav-group.open .nav-caret { background: var(--hi); color: var(--hi-fg); }
+html[data-flow] .dropdown { background: var(--glass); border-color: var(--line); color: var(--ink); }
+html[data-flow] .tag, html[data-flow] .tag-soft {
+  background: transparent; color: var(--ink); border: 1px solid var(--line);
+  font-family: var(--f-mono); text-transform: lowercase; font-size: 12px; letter-spacing: 0;
+}
+html[data-flow] .kicker b { color: var(--hi); }
+html[data-flow] .status .dot { background: var(--hi); animation: none; box-shadow: 0 0 0 3px var(--accent-soft); }
+html[data-flow] .badge { background: var(--hi); color: var(--hi-fg); border: 0; }
+html[data-flow] .menu { background: var(--bg); color: var(--ink); }
+
+/* cursor: plain inverted square, label pill in ink */
+html[data-flow] .cursor { background: #fff; mix-blend-mode: difference; box-shadow: none; border: 0; }
+html[data-flow] .cursor.hover { background: #fff; }
+html[data-flow] .cursor.label { background: var(--hi); mix-blend-mode: normal; }
+html[data-flow] .cursor-label { color: var(--hi-fg); }
+html[data-flow][data-accent="purple"] .cursor { background: var(--accent); mix-blend-mode: normal; }
+
+/* hero showcase frame */
+html[data-flow] .showcase-frame { background: var(--ink); box-shadow: none; }
+html[data-flow] .showcase-arrows { background: var(--bg); }
+html[data-flow] .showcase-arrows button { color: var(--ink); }
+html[data-flow] .showcase-arrows button:hover { background: var(--hi); color: var(--hi-fg); }
+html[data-flow] .byline .rule { background: var(--line); }
+
+/* project rows invert on hover: white row on black / black row on white */
+@media (hover: hover) and (min-width: 1000px) {
+  html[data-flow] .project:hover {
+    background: var(--hi) !important; color: var(--hi-fg) !important; box-shadow: none !important;
+  }
+  html[data-flow] .project:hover .project-name { color: var(--hi-fg) !important; }
+  html[data-flow] .project:hover .meta { color: var(--hi-fg) !important; opacity: 0.6; }
+  html[data-flow] .project-list:hover .project:not(:hover) { color: var(--mute-2) !important; }
+}
+html[data-flow] .chips i { color: inherit !important; background: transparent !important; border-color: currentColor !important; opacity: 0.7; }
+html[data-flow] .project-media { background: var(--card-2, #111); }
+
+/* accordions */
+html[data-flow] .acc[open] summary > .mono,
+html[data-flow] .acc summary:hover > .mono { color: var(--hi); }
+html[data-flow] .acc-body { color: var(--ink-2); }
+html[data-flow] .values li.active .icon { color: var(--hi); text-shadow: none; }
+
+/* theme switcher: hairline ring on the flow swatches, ">_" mark on the tech-font ones */
+.theme-switch button[data-set*=":flow"], .theme-switch button[data-set*=":cards"] { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45); }
+.theme-switch button[data-set$=":tech"] { position: relative; }
+.theme-switch button[data-set$=":tech"]::after {
+  content: ">_"; position: absolute; inset: 0; display: grid; place-items: center;
+  font: 700 8px/1 var(--f-mono); color: #fff; letter-spacing: -0.5px;
+}
+
+/* =========================================================
+   Tech font set (data-font="tech")
+   Chakra Petch (display) · Space Grotesk (body) · JetBrains Mono (labels)
+   ========================================================= */
+html[data-font="tech"] {
+  --f-display: "Chakra Petch", "Rajdhani", "Arial Narrow", sans-serif;
+  --f-body: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+html[data-font="tech"] .display,
+html[data-font="tech"] .display-lg,
+html[data-font="tech"] .display-md,
+html[data-font="tech"] .display-sm { font-weight: 700; letter-spacing: -0.01em; line-height: 0.98; }
+html[data-font="tech"] .btn,
+html[data-font="tech"] .sublist li,
+html[data-font="tech"] .dropdown a,
+html[data-font="tech"] .menu-links a,
+html[data-font="tech"] .cursor-label { font-weight: 600; }
+html[data-font="tech"] .hero-title { font-size: clamp(28px, 6.6vw, 120px); }
+html[data-font="tech"] .section-title { font-size: clamp(40px, 6.6vw, 108px); }
+html[data-font="tech"] .about-title { font-size: clamp(44px, 6.2vw, 104px); }
+html[data-font="tech"] .cta-title { font-size: clamp(38px, 7vw, 120px); }
+html[data-font="tech"] .project-name { font-size: clamp(26px, 3.1vw, 48px); }
+html[data-font="tech"] .display-lg { font-size: clamp(26px, 3.2vw, 48px); }
+html[data-font="tech"] .btn { font-size: 15px; letter-spacing: 0.02em; }
+html[data-font="tech"] .hero-side p { font-weight: 400; }
+@media (max-width: 700px) { html[data-font="tech"] .hero-title { font-size: 7.4vw; } }
+
+/* purple flow: dark showcase frame instead of a light one */
+html[data-flow][data-accent="purple"] .showcase-frame { background: var(--card-2); box-shadow: 0 0 0 1px var(--line), 0 30px 80px -30px rgba(178, 102, 255, 0.5); }
+
+/* =========================================================
+   "Framed" variant (Purple · tech font): same page-wide network,
+   but sections keep a faint purple-tinted frame — still see-through
+   ========================================================= */
+html[data-flow="cards"] .dark-card {
+  background: linear-gradient(180deg, rgba(178, 102, 255, 0.07), rgba(178, 102, 255, 0.015) 40%) !important;
+  border: 1px solid rgba(178, 102, 255, 0.22); border-radius: 14px;
+  margin-inline: var(--card-inset);
+}
+html[data-flow="cards"] .about-panel { background: rgba(178, 102, 255, 0.05) !important; box-shadow: inset 0 0 0 1px rgba(178, 102, 255, 0.28) !important; }
+html[data-flow="cards"] .about-values { border: 1px solid rgba(178, 102, 255, 0.22); border-top: 0; border-radius: 0 0 14px 14px; margin-inline: 0; }
+html[data-flow="cards"] .cta {
+  background: radial-gradient(700px 360px at 50% 110%, rgba(178, 102, 255, 0.18), transparent 70%) !important;
+  box-shadow: inset 0 0 0 1px rgba(178, 102, 255, 0.28) !important;
+}
+html[data-flow="cards"] .service { border-top-color: rgba(178, 102, 255, 0.2); }
+html[data-flow="cards"] .bgnet { opacity: 0.7; }
+
+/* =========================================================
+   Two "smart network" themes (data-flow="smart")
+   The page-wide network reshapes per section (see script.js).
+   ========================================================= */
+
+/* ---------- Amber Terminal: warm black + phosphor amber ---------- */
+html[data-flow][data-accent="amber"] {
+  --bg: #0b0a08;
+  --ink: #f3ece0;
+  --ink-2: #c9bfae;
+  --mute: #8f8576;
+  --mute-2: #5a5247;
+  --line: rgba(243, 236, 224, 0.12);
+  --line-dark: rgba(243, 236, 224, 0.12);
+  --card: #0b0a08;
+  --card-2: #15130f;
+  --accent: #ffb224;
+  --accent-fg: #120d02;
+  --accent-soft: rgba(255, 178, 36, 0.12);
+  --hi: #ffb224;
+  --hi-fg: #120d02;
+  --dots: none;
+  --glass: rgba(11, 10, 8, 0.82);
+  --net-rgb: 255, 178, 36;
+  --net-alpha: 1.25;
+  --f-body: "Space Grotesk", "Inter", system-ui, sans-serif;
+}
+/* faint CRT scanlines + edge vignette */
+html[data-accent="amber"] body::after {
+  content: ""; position: fixed; inset: 0; z-index: 240; pointer-events: none;
+  background:
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.18) 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+  opacity: 0.55;
+}
+html[data-accent="amber"] .grain { display: none; }
+html[data-flow][data-accent="amber"] .hero-title .hl {
+  color: var(--accent); -webkit-text-stroke: 0;
+  text-shadow: 0 0 18px rgba(255, 178, 36, 0.45), 0 0 60px rgba(255, 140, 0, 0.25);
+}
+html[data-flow][data-accent="amber"] .btn-dark,
+html[data-flow][data-accent="amber"] .btn-light { box-shadow: 0 0 26px -8px rgba(255, 178, 36, 0.8); }
+html[data-flow][data-accent="amber"] .cursor { background: var(--accent); mix-blend-mode: normal; box-shadow: 0 0 14px rgba(255, 178, 36, 0.6); }
+html[data-flow][data-accent="amber"] .kicker,
+html[data-flow][data-accent="amber"] .status { color: #a8976f; }
+html[data-flow][data-accent="amber"] .showcase-frame { background: var(--card-2); box-shadow: 0 0 0 1px var(--line), 0 30px 80px -30px rgba(255, 178, 36, 0.45); }
+
+/* ---------- Blueprint: paper white + cobalt ink on graph paper ---------- */
+html[data-flow][data-accent="cobalt"] {
+  --bg: #f3f1ea;
+  --ink: #111318;
+  --ink-2: #3a3d46;
+  --mute: #6d707a;
+  --mute-2: #a6a8ae;
+  --line: rgba(17, 19, 24, 0.13);
+  --line-dark: rgba(17, 19, 24, 0.13);
+  --card-2: #e9e6dc;
+  --accent: #2546ff;
+  --accent-fg: #ffffff;
+  --accent-soft: rgba(37, 70, 255, 0.08);
+  --hi: #2546ff;
+  --hi-fg: #ffffff;
+  --glass: rgba(243, 241, 234, 0.8);
+  --net-rgb: 37, 70, 255;
+  --net-alpha: 1.15;
+}
+/* graph-paper grid behind everything */
+html[data-flow][data-accent="cobalt"] body {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(37, 70, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 70, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(rgba(37, 70, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 70, 255, 0.035) 1px, transparent 1px);
+  background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px;
+  background-attachment: fixed;
+}
+html[data-flow][data-accent="cobalt"] .bgnet { opacity: 0.75; }
+html[data-flow][data-accent="cobalt"] .grain { opacity: 0.035; }
+/* highlighter-marker under the key words */
+html[data-flow][data-accent="cobalt"] .hero-title .hl {
+  color: var(--accent); -webkit-text-stroke: 0; text-shadow: none;
+  background: linear-gradient(transparent 70%, rgba(37, 70, 255, 0.16) 70%);
+}
+html[data-flow][data-accent="cobalt"] .cursor { background: var(--accent); mix-blend-mode: normal; }
+html[data-flow][data-accent="cobalt"] .showcase-frame { background: var(--ink); }
+html[data-flow][data-accent="cobalt"] .about-photo { background: #fff; }
+html[data-flow][data-accent="cobalt"] .kicker b { color: var(--accent); }
+
+/* switcher marks for the two new themes */
+.theme-switch button[data-set*=":smart"] { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5), 0 0 0 2px rgba(255, 255, 255, 0.15); }
+.theme-switch .sw-sep { width: 1px; height: 16px; background: rgba(255, 255, 255, 0.25); margin: 0 3px; }
+
+/* =========================================================
+   LIGHT MODE — the light twin of Amber Terminal
+   Original cream + orange, with the same smart network, fonts and effects
+   ========================================================= */
+html[data-flow][data-accent="orange"] {
+  --bg: #ebe9e4;
+  --ink: #111111;
+  --ink-2: #34322e;
+  --mute: #6a665f;
+  --mute-2: #a29d94;
+  --line: rgba(17, 17, 17, 0.14);
+  --line-dark: rgba(17, 17, 17, 0.14);
+  --card-2: #e2dfd8;
+  --accent: #ff4c24;
+  --accent-fg: #111111;
+  --accent-soft: rgba(255, 76, 36, 0.1);
+  --hi: #ff4c24;
+  --hi-fg: #111111;
+  --glass: rgba(235, 233, 228, 0.8);
+  --net-rgb: 255, 76, 36;
+  --net-alpha: 1.15;
+  --f-body: "Space Grotesk", "Inter", system-ui, sans-serif;
+}
+html[data-flow][data-accent="orange"] .bgnet { opacity: 0.8; }
+html[data-flow][data-accent="orange"] .grain { opacity: 0.07; }
+/* same scanline texture as dark mode, much softer on paper (no dark vignette) */
+html[data-accent="orange"][data-flow] body::after {
+  content: ""; position: fixed; inset: 0; z-index: 240; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(17, 17, 17, 0.07) 0 1px, transparent 1px 3px);
+  opacity: 0.35;
+}
+html[data-flow][data-accent="orange"] .hero-title .hl {
+  color: var(--accent); -webkit-text-stroke: 0;
+  text-shadow: 0 0 34px rgba(255, 76, 36, 0.28);
+}
+html[data-flow][data-accent="orange"] .btn-dark,
+html[data-flow][data-accent="orange"] .btn-light { box-shadow: 0 10px 26px -12px rgba(255, 76, 36, 0.8); }
+html[data-flow][data-accent="orange"] .cursor { background: var(--accent); mix-blend-mode: normal; }
+html[data-flow][data-accent="orange"] .kicker,
+html[data-flow][data-accent="orange"] .status { color: #8a8378; }
+html[data-flow][data-accent="orange"] .showcase-frame { background: var(--ink); box-shadow: 0 30px 80px -34px rgba(255, 76, 36, 0.5); }
+html[data-flow][data-accent="orange"] .about-photo { background: #f4f2ed; }
+
+/* =========================================================
+   Dark / light toggle button (header)
+   ========================================================= */
+.mode-toggle {
+  width: 44px; height: 44px; border-radius: 6px; flex-shrink: 0;
+  display: grid; place-items: center;
+  color: var(--ink); background: var(--glass, transparent);
+  border: 1.5px solid var(--line);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.5s cubic-bezier(0.3, 1.4, 0.4, 1);
+}
+.mode-toggle:hover { background: var(--hi); color: var(--hi-fg); border-color: var(--hi); }
+.mode-toggle:active { transform: scale(0.92); }
+.mode-toggle svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: transform 0.6s cubic-bezier(0.3, 1.4, 0.4, 1); }
+.mode-toggle:hover svg { transform: rotate(-25deg); }
+.mode-toggle .i-moon { display: none; }
+html[data-theme="light"] .mode-toggle .i-sun { display: none; }
+html[data-theme="light"] .mode-toggle .i-moon { display: block; }
+@media (max-width: 560px) { .mode-toggle { width: 42px; height: 42px; } }
+
+/* smooth colour cross-fade when switching modes */
+html.mode-anim, html.mode-anim *, html.mode-anim *::before, html.mode-anim *::after {
+  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, fill 0.5s ease !important;
+}

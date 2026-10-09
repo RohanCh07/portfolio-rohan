@@ -1,27 +1,74 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" data-accent="purple">
+<html lang="en" data-theme="dark" data-accent="amber" data-flow="smart">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rohan Chauhan | AI/ML & Software Engineer</title>
-  <meta name="description" content="Rohan Chauhan — Software engineer building AI-powered products, GenAI apps and Python backends." />
+  <meta name="description" content="Rohan Chauhan — software engineer building AI-powered products, GenAI applications and Python backends. SDE Intern at Moglix, open to SDE and AI/ML roles." />
+  <meta name="author" content="Rohan Chauhan" />
+  <meta name="theme-color" content="#0b0a08" />
+  <meta name="color-scheme" content="dark light" />
+  <!-- SITE URL: replace https://rohan-chauhan.vercel.app everywhere in this file, robots.txt and sitemap.xml once your real address is live -->
+  <link rel="canonical" href="https://rohan-chauhan.vercel.app/" />
+
+  <!-- Link previews (LinkedIn, WhatsApp, X, Slack…) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Rohan Chauhan" />
+  <meta property="og:title" content="Rohan Chauhan | AI/ML & Software Engineer" />
+  <meta property="og:description" content="I build AI-powered software that solves real problems — GenAI apps, ML systems and Python backends." />
+  <meta property="og:url" content="https://rohan-chauhan.vercel.app/" />
+  <meta property="og:image" content="https://rohan-chauhan.vercel.app/assets/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Rohan Chauhan — I build AI-powered software that solves real problems" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Rohan Chauhan | AI/ML & Software Engineer" />
+  <meta name="twitter:description" content="I build AI-powered software that solves real problems — GenAI apps, ML systems and Python backends." />
+  <meta name="twitter:image" content="https://rohan-chauhan.vercel.app/assets/og-image.jpg" />
+
+  <!-- Helps Google show your name, role and profiles -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Rohan Chauhan",
+    "url": "https://rohan-chauhan.vercel.app/",
+    "image": "https://rohan-chauhan.vercel.app/assets/og-image.jpg",
+    "jobTitle": "Software Engineer (AI/ML)",
+    "worksFor": { "@type": "Organization", "name": "Moglix" },
+    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Greater Noida Institute of Technology (GNIOT)" },
+    "email": "mailto:chauhanrohan223@gmail.com",
+    "sameAs": [
+      "https://github.com/Rohan708",
+      "https://www.linkedin.com/in/rohan-chauhan-0604732b2"
+    ],
+    "knowsAbout": ["Machine Learning", "Generative AI", "LangChain", "LangGraph", "RAG", "Python", "Django", "FastAPI", "SQL"]
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="theme.css" />
+  <link rel="stylesheet" href="flow.css" />
+  <link rel="stylesheet" href="mobile.css" />
   <script>
-    // Apply the saved theme before the page paints (avoids a flash)
+    // Dark / light mode: apply the saved choice before the page paints (avoids a flash)
     try {
-      var t = localStorage.getItem("rc-theme");
-      if (t) { var p = t.split(":"); document.documentElement.dataset.theme = p[0]; document.documentElement.dataset.accent = p[1]; }
+      if (localStorage.getItem("rc-mode") === "light") {
+        var d = document.documentElement.dataset; d.theme = "light"; d.accent = "orange";
+      }
     } catch (e) {}
   </script>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%23111'/%3E%3Ctext x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Arial Black' font-size='22' fill='%23EBE9E4'%3ER%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
+  <!-- Page-wide particle network -->
+  <canvas class="bgnet" id="bgnet" aria-hidden="true"></canvas>
 
   <!-- Custom cursor (desktop only) -->
   <div class="cursor" aria-hidden="true"><span class="cursor-label"></span></div>
@@ -58,6 +105,12 @@
         <span class="avatar"><img src="assets/avatar.jpg" alt="" onerror="this.remove()"><span>RC</span></span>
         <span class="roll">Contact</span>
       </a>
+      <button class="mode-toggle" type="button" aria-label="Switch to light mode" title="Switch light / dark">
+        <!-- sun (shown in dark mode) -->
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>
+        <!-- moon (shown in light mode) -->
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg>
+      </button>
       <button class="btn btn-outline menu-toggle" aria-expanded="false" aria-controls="menu">
         <span class="menu-label">Menu</span>
       </button>
@@ -502,16 +555,8 @@
     </div>
   </footer>
 
-  <!-- Theme preview switcher — delete this block once you've picked a theme -->
-  <div class="theme-switch" role="group" aria-label="Theme">
-    <span>Theme</span>
-    <button data-set="dark:purple" style="--sw:#b266ff" aria-label="Dark, neon purple"></button>
-    <button data-set="dark:lime" style="--sw:#c8ff3d" aria-label="Dark, lime"></button>
-    <button data-set="dark:cyan" style="--sw:#33e1ff" aria-label="Dark, cyan"></button>
-    <button data-set="light:orange" style="--sw:linear-gradient(135deg,#ebe9e4 50%,#ff4c24 50%)" aria-label="Original light"></button>
-  </div>
 
-  <script src="assets/lenis.min.js"></script>
-  <script src="script.js"></script>
+  <script src="assets/lenis.min.js" defer></script>
+  <script src="script.js" defer></script>
 </body>
 </html>

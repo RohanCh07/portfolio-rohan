@@ -1,0 +1,18 @@
+# Render "Blueprint" for this static site.
+# Render: New + → Blueprint → pick this repo. (Or New + → Static Site, publish directory "." — same result.)
+services:
+  - type: web
+    name: rohan-portfolio
+    runtime: static
+    buildCommand: echo "No build step - plain HTML/CSS/JS"
+    staticPublishPath: .
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin

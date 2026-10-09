@@ -1,0 +1,7 @@
+# Local-only files — kept on your computer, never pushed or deployed
+backup-all-themes/
+Claude outputs/
+sections.css
+.DS_Store
+Thumbs.db
+.vercel
