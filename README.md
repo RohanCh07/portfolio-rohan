@@ -24,7 +24,7 @@ sitemap.xml         list of pages for search engines
 - [ ] **Photos:** add `assets/avatar.jpg` (small square headshot) and `assets/me.jpg` (bigger photo). They replace the "RC" placeholders automatically.
 - [ ] **Project links:** each project in `index.html` links to `https://github.com/Rohan708`. Point each one to its own repo or live demo.
 - [ ] **Resume:** replace `assets/Rohan-Chauhan-Resume.pdf` with your latest version, using the same file name.
-- [ ] **Site address:** after the first deploy, find-and-replace `https://rohan-chauhan.vercel.app` with your real address in
+- [ ] **Site address:** after the first deploy, find-and-replace the site address with your real address in
   `index.html`, `robots.txt` and `sitemap.xml`. Then push again.
 - [ ] **FAQ answers:** re-read them in `index.html` and make sure they're accurate.
 

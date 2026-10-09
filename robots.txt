@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://rohan-chauhan.vercel.app/sitemap.xml
+Sitemap: https://chauhanrohan.vercel.app/sitemap.xml
