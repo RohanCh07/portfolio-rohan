@@ -422,3 +422,27 @@ html[data-theme="light"] .mode-toggle .i-moon { display: block; }
 html.mode-anim, html.mode-anim *, html.mode-anim *::before, html.mode-anim *::after {
   transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease, fill 0.5s ease !important;
 }
+
+/* =========================================================
+   Type scale v2 — calmer, more readable headings
+   (the `html` prefix makes these win over the older sizes in style.css)
+   ========================================================= */
+html .hero-title    { font-size: clamp(34px, 6.4vw, 108px); }
+html .section-title { font-size: clamp(34px, 4.8vw, 76px); }
+html .about-title   { font-size: clamp(36px, 5vw, 80px); }
+html .cta-title     { font-size: clamp(36px, 5.6vw, 92px); }
+html .project-name  { font-size: clamp(24px, 2.6vw, 40px); }
+html .display-lg    { font-size: clamp(24px, 2.6vw, 40px); }
+html .hero-side p   { font-size: clamp(17px, 1.4vw, 21px); max-width: 30ch; }
+html .values b,
+html .values p      { font-size: clamp(16px, 1.3vw, 20px); }
+html .sublist li    { font-size: clamp(16px, 1.3vw, 20px); padding-block: 12px; }
+html .service-head  { min-height: 56px; }
+
+/* =========================================================
+   Brighter particle network (both modes)
+   ========================================================= */
+html[data-flow][data-accent="amber"]  { --net-alpha: 2.1; --net-glow: 10; }
+html[data-flow][data-accent="orange"] { --net-alpha: 1.8; --net-glow: 6; }
+html[data-flow][data-accent="amber"] .bgnet,
+html[data-flow][data-accent="orange"] .bgnet { opacity: 1; }

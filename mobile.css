@@ -43,7 +43,7 @@
   html .about-panel.full .about-intro { opacity: 1; }
   html .about-head { flex-direction: row; align-items: center; gap: 16px; margin-bottom: 26px; }
   html .about-photo { width: clamp(84px, 24vw, 140px); }
-  html .about-title { font-size: clamp(40px, 12vw, 76px); }
+  html .about-title { font-size: clamp(34px, 9.5vw, 60px); }
   html .about-values { margin-inline: 0; }
 
   /* ---------- Projects: show the tech-stack chips (desktop shows them on hover) ---------- */

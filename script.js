@@ -151,6 +151,7 @@
       const cs = getComputedStyle(root);
       const rgb = cs.getPropertyValue("--net-rgb").trim() || "245,245,245";
       const k = parseFloat(cs.getPropertyValue("--net-alpha")) || 1; // per-theme line strength
+      const glow = parseFloat(cs.getPropertyValue("--net-glow")) || 0; // soft halo around the dots
       energy *= 0.94;
       bctx.clearRect(0, 0, BW, BH);
       const smart = root.dataset.flow === "smart";
@@ -183,7 +184,7 @@
           const d = Math.hypot(a.x - b.x, a.y - b.y);
           if (d < link) {
             bctx.strokeStyle = `rgba(${rgb},${Math.min(1, (1 - d / link) * 0.32 * k * Math.min(a.z, b.z) * (1 + energy * 0.6))})`;
-            bctx.lineWidth = 1;
+            bctx.lineWidth = 0.6 + Math.min(a.z, b.z) * 0.8;
             bctx.beginPath(); bctx.moveTo(a.x, a.y); bctx.lineTo(b.x, b.y); bctx.stroke();
           }
         }
@@ -193,7 +194,9 @@
           bctx.beginPath(); bctx.moveTo(a.x, a.y); bctx.lineTo(bmouse.x, bmouse.y); bctx.stroke();
         }
         bctx.fillStyle = `rgba(${rgb},${Math.min(1, (0.25 + a.z * 0.55) * Math.min(k, 1.3))})`;
-        bctx.beginPath(); bctx.arc(a.x, a.y, 0.6 + a.z * 1.4, 0, Math.PI * 2); bctx.fill();
+        if (glow) { bctx.shadowBlur = glow * a.z; bctx.shadowColor = `rgba(${rgb},0.9)`; }
+        bctx.beginPath(); bctx.arc(a.x, a.y, 0.8 + a.z * 1.7, 0, Math.PI * 2); bctx.fill();
+        if (glow) bctx.shadowBlur = 0;
       }
     };
     requestAnimationFrame(bdraw);
