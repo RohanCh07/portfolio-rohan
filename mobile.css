@@ -21,7 +21,7 @@
   html .service {
     position: sticky;
     top: calc(74px + var(--i) * 58px);
-    min-height: calc(70svh - var(--i) * 58px);
+    min-height: calc(58svh - var(--i) * 58px);
     padding-top: 14px;
   }
   html .service .num,
@@ -50,6 +50,7 @@
   html .project .meta-wrap { grid-area: meta; margin-top: 16px; }
   html .project .meta { margin-top: 0; }
   html .chips { display: flex !important; max-height: none; opacity: 1; margin-top: 2px; }
+  html .projects-top .intro-row { margin-bottom: 28px; }
 
   /* values list: a little easier to read while scrolling */
   html .values li { opacity: 0.45; }

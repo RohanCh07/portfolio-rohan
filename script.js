@@ -108,7 +108,7 @@
       const dy = window.scrollY - lastScroll;
       lastScroll = window.scrollY;
       if (root.dataset.flow !== "smart") for (const n of bnodes) n.y -= dy * 0.22 * n.z; // parallax drift
-      energy = Math.min(1, energy + Math.abs(dy) / 60);
+      if (MORPH) energy = Math.min(1, energy + Math.abs(dy) / 60); // no scroll "pulse" while the layout is fixed
       pickShape();
     }, { passive: true });
 
@@ -133,7 +133,11 @@
       [".about-values", "sides"], ["#experience", "left"], ["#faq", "left"], ["#contact", "core"], [".footer", "core"],
     ].map(([sel, shape]) => [$(sel), shape]).filter(([el]) => el);
     let shape = "full", curLink = 130;
+    // Set to false to bring back the per-section shapes (left column, ring, core…).
+    // For now the network keeps the same full-screen layout as the first screen everywhere.
+    const MORPH = false;
     function pickShape() {
+      if (!MORPH) { shape = "full"; return; }
       const mid = window.innerHeight * 0.5;
       for (const [el, s] of zones) {
         const r = el.getBoundingClientRect();

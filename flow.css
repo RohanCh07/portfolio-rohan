@@ -446,3 +446,20 @@ html[data-flow][data-accent="amber"]  { --net-alpha: 2.1; --net-glow: 10; }
 html[data-flow][data-accent="orange"] { --net-alpha: 1.8; --net-glow: 6; }
 html[data-flow][data-accent="amber"] .bgnet,
 html[data-flow][data-accent="orange"] .bgnet { opacity: 1; }
+
+/* =========================================================
+   Spacing v2 — tighter rhythm between sections
+   (headings got smaller, so the gaps around them shrink too)
+   ========================================================= */
+html .section-title { margin-bottom: clamp(24px, 3vw, 48px); }
+html .services-section { padding-block: clamp(56px, 6vw, 96px) clamp(32px, 4vw, 56px); }
+html .intro-split { margin-bottom: clamp(40px, 5vw, 72px); }
+html .service { min-height: calc(540px - var(--i) * 96px); }
+html .service-body { padding-bottom: 40px; }
+html .projects { padding-block: clamp(56px, 6vw, 96px) clamp(32px, 4vw, 56px); }
+html .projects-top .intro-row { margin-bottom: 0; }
+html .about-values { padding-block: clamp(32px, 4vw, 56px) clamp(40px, 5vw, 72px); }
+html .experience { padding-top: clamp(56px, 6vw, 96px); }
+html .faq { padding-top: clamp(56px, 6vw, 96px); padding-bottom: clamp(40px, 5vw, 64px); }
+html .cta { min-height: clamp(340px, 38vw, 540px); }
+html .hero-inner { padding-bottom: clamp(28px, 3vw, 48px); }
