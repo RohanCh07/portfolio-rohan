@@ -646,3 +646,25 @@ html[data-flow] .service-body { opacity: 1 !important; }
 }
 /* light mode: the code background can stay a little stronger behind the reading sections */
 html[data-theme="light"] .codebg.is-dim { opacity: 0.6; }
+
+/* =========================================================
+   Project rows: Experience-card hover
+   Instead of filling the row with solid amber, the hovered row becomes a raised card
+   with an amber outline and a soft glow, like the Experience cards.
+   ========================================================= */
+@media (hover: hover) and (min-width: 1000px) {
+  html[data-flow] .project:hover {
+    background: color-mix(in srgb, var(--bg) 90%, rgb(var(--net-rgb)) 3%) !important;
+    color: var(--ink) !important;
+    box-shadow: inset 0 0 0 1px rgba(var(--net-rgb), 0.5), 0 0 44px -18px rgba(var(--net-rgb), 0.6) !important;
+  }
+  html[data-flow] .project:hover .project-name { color: var(--ink) !important; }
+  html[data-flow] .project:hover .meta { color: var(--hi) !important; opacity: 1; }
+  html[data-flow] .project:hover .ext { color: var(--hi); }
+  html[data-flow] .project:hover .chips i { color: var(--mute) !important; border-color: var(--line) !important; opacity: 1; }
+  html[data-flow] .project:hover .project-media { border: 1px solid rgba(var(--net-rgb), 0.35); }
+}
+/* phones: each card sticks exactly one heading-height below the previous one */
+@media (max-width: 900px) {
+  html[data-flow] .service { top: calc(70px + var(--i) * 56px); }
+}
