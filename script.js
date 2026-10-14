@@ -397,18 +397,13 @@
       root.style.setProperty("--hy", (y * 0.2).toFixed(1));
       root.style.setProperty("--hp", hp.toFixed(3));
 
-      // About: once the stage reaches the top, the card grows 50% -> 100% over 3/4 of a screen,
-      // then its content fades in
-      const r = aboutStage.getBoundingClientRect();
-      const p = clamp(-r.top / (vh * 0.75));
-      aboutPanel.style.setProperty("--s", (0.5 + 0.5 * p).toFixed(4));
-      aboutPanel.style.setProperty("--r", "8px");
-      aboutPanel.classList.toggle("full", p >= 0.999);
+      // About: the card is static now (no grow-in), so its content is always visible
+      aboutPanel.classList.add("full");
     }
 
     // Network themes: skill cards are see-through, so instead of being covered,
     // a card's text fades out as the next card slides up over it
-    const fadeCards = !!root.dataset.flow;
+    const fadeCards = false; // skill cards are a normal list now (no stacking), so nothing to clip
     services.forEach((s, i) => {
       const body = $(".service-body", s);
       const inner = s; // whole card, including its top border line

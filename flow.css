@@ -509,3 +509,28 @@ html:not([data-bg="network"]) .bgnet { display: none !important; }
 }
 .codebg.is-dim { opacity: 0.45; }
 @media (prefers-reduced-motion: reduce) { .codebg { transition: none; } }
+
+/* =========================================================
+   Static sections (no stacking cards, no About pop-up)
+   Skill cards sit in a normal list and the About card is simply there at full size.
+   ========================================================= */
+/* What I can do: tighter spacing */
+html[data-flow] .intro-split { margin-bottom: clamp(36px, 4.5vw, 64px); }
+html[data-flow] .service {
+  position: relative; top: auto; min-height: 0;
+  padding-top: 16px; clip-path: none !important; opacity: 1 !important;
+}
+html[data-flow] .service-body { padding-top: clamp(14px, 1.8vw, 24px); padding-bottom: clamp(28px, 3vw, 44px); opacity: 1 !important; }
+html[data-flow] .service-desc { margin-bottom: 22px; }
+
+/* About: static card, content visible straight away */
+html[data-flow] .about-stage { height: auto; }
+html[data-flow] .about-panel {
+  position: relative; top: auto; height: auto;
+  transform: none !important; border-radius: 14px;
+  padding-block: clamp(56px, 7vw, 112px);
+}
+html[data-flow] .about-intro { opacity: 1; transition: none; }
+@media (max-width: 900px) {
+  html[data-flow] .about-panel { height: auto; padding-block: 48px; margin-inline: var(--card-inset, 12px); }
+}
