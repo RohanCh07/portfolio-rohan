@@ -463,3 +463,49 @@ html .experience { padding-top: clamp(56px, 6vw, 96px); }
 html .faq { padding-top: clamp(56px, 6vw, 96px); padding-bottom: clamp(40px, 5vw, 64px); }
 html .cta { min-height: clamp(340px, 38vw, 540px); }
 html .hero-inner { padding-bottom: clamp(28px, 3vw, 48px); }
+
+/* =========================================================
+   Amber accent lines (orange in light mode)
+   Divider lines fade from a bright accent at the left into a faint tint,
+   and the main section lines start with a small glowing node — like the
+   particle network.
+   ========================================================= */
+html[data-flow="smart"] {
+  --line-grad: linear-gradient(90deg,
+    rgba(var(--net-rgb), 0.9) 0,
+    rgba(var(--net-rgb), 0.45) 72px,
+    rgba(var(--net-rgb), 0.18) 32%,
+    rgba(var(--net-rgb), 0.07) 100%);
+}
+html[data-flow="smart"] :is(.service, .dark-card, .sublist li, .project, .project-list, .accordion, .acc,
+  .values, .values li, .footer-grid > *, .menu-links li) {
+  border-image: var(--line-grad) 1;
+}
+/* project rows turn into a solid highlight on hover: no line there */
+@media (hover: hover) and (min-width: 1000px) {
+  html[data-flow="smart"] .project:hover { border-image: none; border-color: transparent; }
+}
+html[data-flow="smart"] .byline .rule { background: var(--line-grad); }
+
+/* glowing node at the start of the main section lines */
+html[data-flow="smart"] :is(.project-list, .accordion, .values) { position: relative; }
+html[data-flow="smart"] :is(.service, .project-list, .accordion, .values)::before {
+  content: ""; position: absolute; left: -2px; top: -3px; z-index: 1;
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgb(var(--net-rgb));
+  box-shadow: 0 0 10px 2px rgba(var(--net-rgb), 0.7);
+  pointer-events: none;
+}
+
+/* =========================================================
+   Source-code background (codebg.js)
+   Static code on the right of the screen; dims behind the reading sections.
+   ========================================================= */
+html:not([data-bg="network"]) .bgnet { display: none !important; }
+.codebg {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  z-index: 0; pointer-events: none;
+  opacity: 1; transition: opacity 0.6s ease;
+}
+.codebg.is-dim { opacity: 0.45; }
+@media (prefers-reduced-motion: reduce) { .codebg { transition: none; } }

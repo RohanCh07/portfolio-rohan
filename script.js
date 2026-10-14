@@ -82,7 +82,9 @@
      One fixed canvas behind the whole page. Particles sit at different depths, so when you
      scroll they drift past at different speeds (parallax) and briefly link up more —
      the sections feel like they are part of the same space instead of separate blocks. */
-  const bg = $("#bgnet");
+  // The particle network is switched off (the source-code background in codebg.js replaced it).
+  // To bring it back, add data-bg="network" to the <html> tag.
+  const bg = root.dataset.bg === "network" ? $("#bgnet") : null;
   if (bg) {
     const bctx = bg.getContext("2d");
     let BW = 0, BH = 0, bdpr = 1, bnodes = [], lastScroll = window.scrollY, energy = 0;
@@ -409,18 +411,29 @@
     const fadeCards = !!root.dataset.flow;
     services.forEach((s, i) => {
       const body = $(".service-body", s);
+      const inner = s; // whole card, including its top border line
       const next = services[i + 1];
-      if (!fadeCards || !next) { body.style.opacity = ""; body.style.clipPath = ""; return; }
-      // clip away whatever part of this card the next card has slid over (like being covered),
-      // and fade the rest out as the next card reaches this card's heading
-      const headBottom = $(".service-head", s).getBoundingClientRect().bottom;
-      const br = body.getBoundingClientRect();
+      if (!fadeCards || !next) {
+        body.style.opacity = ""; body.style.clipPath = ""; inner.style.clipPath = ""; inner.style.opacity = "";
+        return;
+      }
+      // The cards are see-through, so "covering" is faked: whatever part of this card the next
+      // card has slid over is clipped away (heading included), and the body fades out as the
+      // next card reaches this card's heading.
+      const ir = inner.getBoundingClientRect();
       const nr = next.getBoundingClientRect();
-      const hidden = Math.max(0, br.bottom - (nr.top - 12));
-      body.style.clipPath = hidden > 0 ? `inset(0 0 ${Math.min(hidden, br.height)}px 0)` : "";
+      const headBottom = $(".service-head", s).getBoundingClientRect().bottom;
+      const hidden = Math.max(0, ir.bottom - (nr.top - 6));
+      inner.style.clipPath = hidden > 0 ? `inset(0 0 ${Math.min(hidden, ir.height)}px 0)` : "";
+      // once the next card reaches this card's heading, fade the heading out instead of
+      // leaving a sliced sliver of text visible
+      const hr = $(".service-head", s).getBoundingClientRect();
+      inner.style.opacity = nr.top < hr.bottom + 4
+        ? clamp((nr.top - hr.top - 10) / Math.max(hr.height * 0.45, 1)).toFixed(3)
+        : "";
+      body.style.clipPath = "";
       body.style.opacity = clamp((nr.top - headBottom) / 160).toFixed(3);
     });
-
 
     // Values: highlight the item closest to the centre of the screen
     let best = null, bestDist = Infinity;
