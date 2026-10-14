@@ -534,3 +534,115 @@ html[data-flow] .about-intro { opacity: 1; transition: none; }
 @media (max-width: 900px) {
   html[data-flow] .about-panel { height: auto; padding-block: 48px; margin-inline: var(--card-inset, 12px); }
 }
+
+/* =========================================================
+   Experience timeline + resume buttons
+   A git-log style timeline: one amber line down the middle, a node per role,
+   cards alternating left and right (one column with the line on the left on phones).
+   ========================================================= */
+.xp-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+.xp-head .section-title { margin-bottom: 0; }
+.resume-btn { gap: 10px; }
+.resume-btn .dl { font-family: "JetBrains Mono", monospace; font-size: 15px; transition: transform 0.3s; }
+.resume-btn:hover .dl { transform: translateY(2px); }
+html[data-flow] .resume-btn { border-color: var(--hi); color: var(--hi); }
+html[data-flow] .resume-btn:hover { background: var(--hi); color: var(--hi-fg); }
+
+.xp-line {
+  --gap: clamp(48px, 6vw, 96px);
+  list-style: none; margin: clamp(36px, 4vw, 56px) 0 0; padding: 0;
+  position: relative; display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--gap);
+}
+/* the line itself: bright at the top (now), fading into the past */
+.xp-line::before {
+  content: ""; position: absolute; left: 50%; top: 6px; bottom: 0; width: 1px; transform: translateX(-0.5px);
+  background: linear-gradient(to bottom, rgba(var(--net-rgb), 0.9), rgba(var(--net-rgb), 0.35) 60%, rgba(var(--net-rgb), 0.08));
+}
+/* staggered: each card starts halfway down the previous one */
+.xp-item { position: relative; grid-row: var(--row) / span 2; padding-bottom: 28px; }
+.xp-item:nth-child(1) { --row: 1; grid-column: 1; }
+.xp-item:nth-child(2) { --row: 2; grid-column: 2; }
+.xp-item:nth-child(3) { --row: 3; grid-column: 1; }
+.xp-item:nth-child(4) { --row: 4; grid-column: 2; }
+.xp-item:nth-child(5) { --row: 5; grid-column: 1; }
+.xp-item:nth-child(6) { --row: 6; grid-column: 2; }
+
+.xp-node {
+  position: absolute; top: 26px; width: 13px; height: 13px; border-radius: 50%;
+  border: 1.5px solid var(--hi); background: var(--bg); z-index: 1;
+}
+.xp-item:nth-child(odd)  .xp-node { right: calc(var(--gap) / -2 - 6.5px); }
+.xp-item:nth-child(even) .xp-node { left:  calc(var(--gap) / -2 - 6.5px); }
+.xp-item.is-now .xp-node { background: var(--hi); box-shadow: 0 0 0 5px rgba(var(--net-rgb), 0.16), 0 0 18px rgba(var(--net-rgb), 0.7); }
+.xp-item.is-edu .xp-node { border-radius: 2px; transform: rotate(45deg); }
+/* commit label on the other side of the line */
+.xp-hash { position: absolute; top: 24px; font-size: 11px; letter-spacing: 0.04em; color: var(--mute); white-space: nowrap; }
+.xp-item:nth-child(odd)  .xp-hash { left: calc(100% + var(--gap) / 2 + 16px); }
+.xp-item:nth-child(even) .xp-hash { right: calc(100% + var(--gap) / 2 + 16px); }
+.xp-item.is-now .xp-hash { color: var(--hi); }
+
+.xp-card {
+  position: relative; padding: clamp(20px, 2vw, 28px); border-radius: 12px;
+  border: 1px solid var(--line);
+  /* solid enough that the code background never runs through the text */
+  background: color-mix(in srgb, var(--bg) 90%, rgb(var(--net-rgb)) 3%);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  transition: border-color 0.3s;
+}
+.xp-card:hover { border-color: rgba(var(--net-rgb), 0.55); }
+.xp-item.is-now .xp-card { border-color: rgba(var(--net-rgb), 0.45); box-shadow: 0 0 40px -18px rgba(var(--net-rgb), 0.55); }
+.xp-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+.xp-logo {
+  width: 44px; height: 44px; display: grid; place-items: center; border-radius: 8px;
+  border: 1px solid rgba(var(--net-rgb), 0.5); color: var(--hi); font-size: 14px; font-weight: 700; letter-spacing: 0.04em;
+  background: rgba(var(--net-rgb), 0.06);
+}
+.xp-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--hi); border: 1px solid rgba(var(--net-rgb), 0.45); border-radius: 999px; padding: 5px 10px; }
+.xp-badge i { width: 6px; height: 6px; border-radius: 50%; background: var(--hi); box-shadow: 0 0 8px var(--hi); }
+.xp-badge.is-edu { color: var(--mute); border-color: var(--line); }
+.xp-company { font-family: "Anton", Impact, sans-serif; font-weight: 400; text-transform: uppercase; font-size: clamp(24px, 2.2vw, 34px); line-height: 1; letter-spacing: 0.01em; margin: 0 0 10px; }
+.xp-role { font-weight: 600; margin: 0 0 4px; }
+.xp-date { font-size: 12.5px; color: var(--mute); margin: 0 0 16px; }
+.xp-dur { color: var(--hi); }
+.xp-points { list-style: none; margin: 0; padding: 0; color: var(--ink); opacity: 0.85; line-height: 1.55; }
+.xp-points li { position: relative; padding-left: 18px; margin: 0; }
+.xp-points li::before { content: "›"; position: absolute; left: 0; top: 0; color: var(--hi); font-family: "JetBrains Mono", monospace; }
+.xp-points li + li { margin-top: 6px; }
+.xp-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.xp-tags span { font-size: 11px; padding: 4px 9px; border-radius: 4px; border: 1px solid var(--line); color: var(--mute); }
+
+/* contact: resume next to "Say hello" */
+.cta-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: inherit; }
+.menu-resume { display: inline-block; margin-bottom: 10px; color: var(--hi) !important; }
+
+@media (max-width: 760px) {
+  .xp-line { grid-template-columns: 1fr; --gap: 0px; padding-left: 28px; }
+  .xp-line::before { left: 6px; }
+  .xp-item, .xp-item:nth-child(n) { grid-column: 1; grid-row: auto; padding-bottom: 18px; }
+  .xp-item:nth-child(n) .xp-node { left: -28px; right: auto; top: 24px; }
+  .xp-hash { display: none; }
+  .xp-head .resume-btn { width: 100%; justify-content: center; }
+}
+
+/* =========================================================
+   Stacking skill cards v2
+   Each card sticks below the previous one's heading, and the next card (solid, not
+   see-through) slides up over the previous card's body. All headings stay visible.
+   ========================================================= */
+html[data-flow] .service {
+  position: sticky;
+  top: calc(84px + var(--i) * 76px);
+  min-height: calc(min(64vh, 560px) - var(--i) * 76px);
+  background: var(--bg) !important;
+  clip-path: none !important; opacity: 1 !important;
+}
+html[data-flow] .service-body { opacity: 1 !important; }
+@media (max-width: 900px) {
+  html[data-flow] .service {
+    top: calc(70px + var(--i) * 52px);
+    min-height: calc(58svh - var(--i) * 52px);
+  }
+}
+/* light mode: the code background can stay a little stronger behind the reading sections */
+html[data-theme="light"] .codebg.is-dim { opacity: 0.6; }
