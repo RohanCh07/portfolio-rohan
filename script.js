@@ -14,22 +14,7 @@
 
   $("#year").textContent = new Date().getFullYear();
 
-  /* ---------- Dark / light mode toggle ---------- */
-  const modeBtn = $(".mode-toggle");
-  const setMode = (mode) => {
-    root.dataset.theme = mode;
-    root.dataset.accent = mode === "light" ? "orange" : "amber";
-    root.dataset.flow = "smart";
-    modeBtn.setAttribute("aria-label", mode === "light" ? "Switch to dark mode" : "Switch to light mode");
-    try { localStorage.setItem("rc-mode", mode); } catch (e) {}
-    window.dispatchEvent(new Event("scroll"));
-  };
-  modeBtn.addEventListener("click", () => {
-    root.classList.add("mode-anim");
-    setMode(root.dataset.theme === "light" ? "dark" : "light");
-    setTimeout(() => root.classList.remove("mode-anim"), 700);
-  });
-  modeBtn.setAttribute("aria-label", root.dataset.theme === "light" ? "Switch to dark mode" : "Switch to light mode");
+  /* One light theme only: the dark / light toggle was removed. */
 
   /* ---------- Live IST clock ---------- */
   const clock = $("#clock");
@@ -313,7 +298,8 @@
     window.addEventListener("mousemove", (e) => { mx = e.clientX; my = e.clientY; cursor.classList.add("visible"); });
     document.addEventListener("mouseleave", () => cursor.classList.remove("visible"));
     const loop = () => {
-      cx += (mx - cx) * 0.2; cy += (my - cy) * 0.2;
+      // the cursor glides after the mouse (8% of the distance per frame), like the reference site
+      cx += (mx - cx) * 0.08; cy += (my - cy) * 0.08;
       cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
       requestAnimationFrame(loop);
     };

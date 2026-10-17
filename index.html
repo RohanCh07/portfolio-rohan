@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark" data-accent="amber" data-flow="smart">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -48,19 +48,11 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter+Tight:wght@800;900&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="theme.css" />
   <link rel="stylesheet" href="flow.css" />
   <link rel="stylesheet" href="mobile.css" />
-  <script>
-    // Dark / light mode: apply the saved choice before the page paints (avoids a flash)
-    try {
-      if (localStorage.getItem("rc-mode") === "light") {
-        var d = document.documentElement.dataset; d.theme = "light"; d.accent = "orange";
-      }
-    } catch (e) {}
-  </script>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
@@ -105,12 +97,6 @@
         <span class="avatar"><img src="assets/avatar.jpg" alt="" onerror="this.remove()"><span>RC</span></span>
         <span class="roll">Contact</span>
       </a>
-      <button class="mode-toggle" type="button" aria-label="Switch to light mode" title="Switch light / dark">
-        <!-- sun (shown in dark mode) -->
-        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg>
-        <!-- moon (shown in light mode) -->
-        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg>
-      </button>
       <button class="btn btn-outline menu-toggle" aria-expanded="false" aria-controls="menu">
         <span class="menu-label">Menu</span>
       </button>
@@ -217,9 +203,9 @@
                 <div class="service-body">
                   <p class="service-desc">From RAG pipelines to agentic chatbots, I design LLM systems that are grounded, useful and production-ready.</p>
                   <ul class="sublist">
-                    <li><span class="mono">01</span><span class="stk">LangGraph &amp; LangChain Agents</span></li>
-                    <li><span class="mono">02</span><span class="stk">RAG &amp; Vector Databases</span></li>
-                    <li><span class="mono">03</span><span class="stk">PyTorch &amp; Model Tuning</span></li>
+                    <li><span class="mono">01</span>LangGraph &amp; LangChain Agents</li>
+                    <li><span class="mono">02</span>RAG &amp; Vector Databases</li>
+                    <li><span class="mono">03</span>PyTorch &amp; Model Tuning</li>
                   </ul>
                 </div>
               </div>
@@ -237,9 +223,9 @@
                 <div class="service-body">
                   <p class="service-desc">Clean, secure APIs and well-designed databases. I build the backbone that keeps apps fast and reliable.</p>
                   <ul class="sublist">
-                    <li><span class="mono">01</span><span class="stk">Django &amp; Django REST Framework</span></li>
-                    <li><span class="mono">02</span><span class="stk">FastAPI Services</span></li>
-                    <li><span class="mono">03</span><span class="stk">SQL &amp; Schema Design</span></li>
+                    <li><span class="mono">01</span>Django &amp; Django REST Framework</li>
+                    <li><span class="mono">02</span>FastAPI Services</li>
+                    <li><span class="mono">03</span>SQL &amp; Schema Design</li>
                   </ul>
                 </div>
               </div>
@@ -257,9 +243,9 @@
                 <div class="service-body">
                   <p class="service-desc">Turning raw data into decisions — through exploration, statistical modelling and predictive ML.</p>
                   <ul class="sublist">
-                    <li><span class="mono">01</span><span class="stk">EDA with Pandas &amp; NumPy</span></li>
-                    <li><span class="mono">02</span><span class="stk">Scikit-learn &amp; Optuna</span></li>
-                    <li><span class="mono">03</span><span class="stk">Dashboards &amp; Visualisation</span></li>
+                    <li><span class="mono">01</span>EDA with Pandas &amp; NumPy</li>
+                    <li><span class="mono">02</span>Scikit-learn &amp; Optuna</li>
+                    <li><span class="mono">03</span>Dashboards &amp; Visualisation</li>
                   </ul>
                 </div>
               </div>

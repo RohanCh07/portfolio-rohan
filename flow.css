@@ -744,74 +744,65 @@ html[data-flow] .hero::before {
 }
 
 /* =========================================================
-   Heavy grotesk type + "sticker" highlight (preview)
-   Headlines in Inter Tight Black with very tight spacing; the key phrase sits on a
-   slightly tilted orange sticker with a black outline and a hard shadow.
+   SINGLE THEME — grigoletti.ch colours
+   One light theme only (no dark mode): warm off-white page, near-black text,
+   grey body copy, light-grey lines and the orange-red accent.
    ========================================================= */
-html[data-flow] { --f-display: "Inter Tight", "Helvetica Neue", Arial, sans-serif; }
-html[data-flow] :is(.display, .display-lg, .display-md, .display-sm, .hero-title, .section-title, .cta-title,
-  .about-title, .project-name, .xp-company, .service-head h3, .service .num, .ticker-track) {
-  font-family: var(--f-display) !important; font-weight: 900 !important; letter-spacing: -0.055em !important;
+html[data-flow][data-accent="orange"] {
+  --bg: #ebe9e4; --ink: #111111; --ink-2: #555555; --mute: #555555; --mute-2: #aaaaaa;
+  --line: #dbdbdb; --line-dark: #dbdbdb;
+  --card: #ebe9e4; --card-2: #dbdbdb; --surface: #ebe9e4;
+  --accent: #ff4c24; --accent-fg: #111111; --accent-soft: rgba(255, 76, 36, 0.1);
+  --hi: #ff4c24; --hi-fg: #111111;
+  --glass: rgba(235, 233, 228, 0.82); --net-rgb: 255, 76, 36;
 }
-html[data-flow] :is(.hero-title, .section-title, .cta-title, .about-title) { line-height: 0.88 !important; }
-html[data-flow] .hero-title    { font-size: clamp(34px, 5.4vw, 92px) !important; }
-html[data-flow] .section-title { font-size: clamp(34px, 4.4vw, 70px) !important; }
-html[data-flow] .cta-title     { font-size: clamp(34px, 4.8vw, 80px) !important; }
-html[data-flow] .about-title   { font-size: clamp(34px, 4.4vw, 70px) !important; }
-html[data-flow] .project-name, html[data-flow] .service-head h3 { letter-spacing: -0.045em !important; }
-/* buttons, nav and list items: same family, a touch lighter and less tight so they stay readable */
-html[data-flow] :is(.btn, .sublist li, .display-sm) { font-family: var(--f-display) !important; font-weight: 800 !important; letter-spacing: -0.02em !important; }
-html[data-flow] .btn { font-size: 15px !important; }
-/* full stops, like the reference */
-html[data-flow] .hero-title .line:last-child > span::after,
-html[data-flow] .section-title::after { content: "."; color: var(--hi); }
+html[data-flow] .mode-toggle { display: none !important; }
+/* accents that were written as fixed colours elsewhere */
+html[data-flow] .xp-card:hover, html[data-flow] .xp-item.is-now .xp-card { border-color: rgba(255, 76, 36, 0.6) !important; }
+html[data-flow] .xp-item.is-now .xp-node { box-shadow: 0 0 0 5px rgba(255, 76, 36, 0.18) !important; }
+@media (hover: hover) and (min-width: 1000px) {
+  html[data-flow] .project:hover { box-shadow: inset 0 0 0 1px rgba(255, 76, 36, 0.6) !important; }
+}
 
-/* tight letters, but keep clear gaps between words */
-html[data-flow] :is(.display, .display-lg, .display-md, .display-sm, .hero-title, .section-title, .cta-title,
-  .about-title, .project-name, .xp-company, .service-head h3, .ticker-track) { word-spacing: 0.14em; }
-html[data-flow] :is(.btn, .sublist li, .byline .display-sm) { word-spacing: 0.12em; }
 
 /* =========================================================
-   Hover stickers v2
-   The text never changes. Hover the text itself and only a sticker background appears
-   behind it: an orange box with a black outline and a hard shadow, popping in at a slight tilt.
-   (The orange hero word and the orange full stops turn black so they stay visible on the box.)
+   ORIGINAL headings + buttons (grigoletti.ch)
+   Headings in the condensed display font (Anton stands in for grigoletti's paid
+   "PP Neue Corp Tight"). Buttons: 44px, 4px corners, uppercase; solid near-black
+   with off-white text, or an outlined version; no shadows.
    ========================================================= */
-html[data-flow] :is(.hero-title .hl, .section-title, .project-name, .service-head h3, .xp-company, .sublist .stk) {
-  display: inline-block; position: relative; isolation: isolate;
-  padding: 0.06em 0.16em 0.02em; margin-left: -0.16em;
-}
-html[data-flow] .sublist .stk { padding: 0.12em 0.3em 0.06em; margin-left: -0.3em; }
 html[data-flow] .hero-title .hl { color: var(--hi); }
-html[data-flow] :is(.hero-title .hl, .section-title, .project-name, .service-head h3, .xp-company, .sublist .stk)::before {
-  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-  background: var(--hi); border: 3px solid #000; box-shadow: 6px 6px 0 var(--ink);
-  opacity: 0; transform: rotate(-2deg) scale(0.9);
-  transition: opacity 0.14s ease, transform 0.26s cubic-bezier(0.3, 1.6, 0.5, 1);
+html[data-flow] .btn {
+  height: 44px; border-radius: 4px !important; box-shadow: none !important;
+  font-family: var(--f-display); font-size: 18px; text-transform: uppercase; letter-spacing: 0.01em;
 }
-html[data-flow] .sublist .stk::before { border-width: 2px; box-shadow: 4px 4px 0 var(--ink); transform: rotate(-1.5deg) scale(0.9); }
-@media (hover: hover) {
-  html[data-flow] :is(.hero-title .hl, .section-title, .project-name, .service-head h3, .xp-company, .sublist .stk):hover::before {
-    opacity: 1; transform: rotate(-2deg) scale(1);
-  }
-  html[data-flow] .sublist .stk:hover::before { transform: rotate(-1.5deg) scale(1); }
-  /* project rows slide their screenshot in on hover, which moves the name; so the name's whole area
-     (screenshot + name) keeps the sticker on, otherwise it would flicker off under the cursor */
-  html[data-flow] .project-main:hover .project-name::before { opacity: 1; transform: rotate(-2deg) scale(1); }
-  /* skill rows normally turn orange on hover; keep the text its normal colour on the sticker */
-  html[data-flow] .sublist li:hover .stk:hover { color: var(--ink); }
-  html[data-flow] .hero-title .hl:hover { color: #000; }
-  html[data-flow] .section-title:hover::after { color: #000; }
+html[data-flow] .btn-dark { background: #111111 !important; color: #ebe9e4 !important; border: 0 !important; }
+html[data-flow] .btn-outline, html[data-flow] .resume-btn {
+  background: transparent !important; color: #111111 !important; border: 1.5px solid #111111 !important;
 }
-/* phones and tablets can't hover: the hero sticker is simply always on there */
-@media (hover: none) {
-  html[data-flow] .hero-title .hl { color: #000; }
-  html[data-flow] .hero-title .hl::before { opacity: 1; transform: rotate(-2deg) scale(1); box-shadow: 4px 4px 0 var(--ink); }
-}
+html[data-flow] .btn-outline:hover, html[data-flow] .resume-btn:hover { background: #111111 !important; color: #ebe9e4 !important; }
+html[data-flow] .btn-light { background: #111111 !important; color: #ebe9e4 !important; }
+html[data-flow] .center-nav .btn { background: var(--bg) !important; }
+html[data-flow] .center-nav .btn:hover { background: #111111 !important; color: #ebe9e4 !important; }
+html[data-flow] .btn .avatar { border-radius: 3px; }
 
-/* phones: the heavy font is much wider than Anton, so the hero lines get a smaller size to fit */
-@media (max-width: 600px) {
-  html[data-flow] .hero-title { font-size: clamp(24px, 7.3vw, 40px) !important; }
-  html[data-flow] .section-title, html[data-flow] .about-title { font-size: clamp(28px, 9vw, 44px) !important; }
-  html[data-flow] .cta-title { font-size: clamp(28px, 8.6vw, 44px) !important; }
+/* =========================================================
+   RESTORED ORIGINAL design
+   The later restyling layer (html[data-flow]) is switched off, so the page uses the
+   original grigoletti-style look again. These rules only keep the newer pieces working.
+   ========================================================= */
+/* colours the Experience timeline and resume buttons rely on */
+:root { --hi: #ff4c24; --hi-fg: #111111; --net-rgb: 255, 76, 36; --surface: #ebe9e4; }
+/* hero background animation is off for now (to be decided) */
+html:not([data-flow]) .net { display: none !important; }
+/* About: static card, content visible straight away (no slow grow-in) */
+html:not([data-flow]) .about-stage { height: auto !important; }
+html:not([data-flow]) body .about-panel {
+  position: relative !important; top: auto !important; height: auto !important;
+  transform: none !important; border-radius: 14px;
+  padding-block: clamp(56px, 7vw, 112px) !important;
 }
+html:not([data-flow]) .about-intro { opacity: 1 !important; transition: none !important; }
+/* the resume button in the dark contact block needs a light outline */
+html:not([data-flow]) .cta .resume-btn { color: var(--bg); border-color: var(--bg); }
+html:not([data-flow]) .cta .resume-btn:hover { background: var(--bg); color: var(--ink); }
