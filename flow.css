@@ -806,3 +806,37 @@ html:not([data-flow]) .about-intro { opacity: 1 !important; transition: none !im
 /* the resume button in the dark contact block needs a light outline */
 html:not([data-flow]) .cta .resume-btn { color: var(--bg); border-color: var(--bg); }
 html:not([data-flow]) .cta .resume-btn:hover { background: var(--bg); color: var(--ink); }
+
+/* =========================================================
+   Experience — original style
+   Same language as the other sections: plain outlined cards that flip to near-black
+   on hover (like the project rows), neutral timeline, orange only for the current role,
+   cards fade in on scroll.
+   ========================================================= */
+html:not([data-flow]) .xp-line::before { background: var(--line) !important; }
+html:not([data-flow]) .xp-node { border: 1.5px solid var(--ink); background: var(--bg); box-shadow: none !important; }
+html:not([data-flow]) .xp-item.is-now .xp-node { background: var(--accent); border-color: var(--accent); }
+html:not([data-flow]) .xp-hash { color: var(--mute-2); }
+html:not([data-flow]) .xp-item.is-now .xp-hash { color: var(--accent); }
+html:not([data-flow]) .xp-card {
+  background: transparent !important; border: 1px solid var(--line) !important; border-radius: 10px;
+  box-shadow: none !important; -webkit-backdrop-filter: none; backdrop-filter: none;
+  transition: background 0.5s var(--ease), color 0.5s var(--ease), border-color 0.3s;
+}
+html:not([data-flow]) .xp-logo { background: transparent; border: 1px solid var(--line); color: var(--ink); }
+html:not([data-flow]) .xp-badge { color: var(--ink); border-color: var(--line); }
+html:not([data-flow]) .xp-badge i { background: var(--accent); box-shadow: none; }
+html:not([data-flow]) .xp-badge.is-edu { color: var(--mute); }
+html:not([data-flow]) .xp-company { color: inherit; }
+html:not([data-flow]) .xp-date { color: var(--mute); }
+html:not([data-flow]) .xp-points { color: var(--ink-2); opacity: 1; }
+html:not([data-flow]) .xp-tags span { border-color: var(--line); color: var(--mute); }
+@media (hover: hover) {
+  html:not([data-flow]) .xp-card:hover { background: var(--ink) !important; color: var(--bg); border-color: var(--ink) !important; }
+  html:not([data-flow]) .xp-card:hover :is(.xp-date, .xp-tags span, .xp-badge.is-edu) { color: #bdbab3; }
+  html:not([data-flow]) .xp-card:hover .xp-points { color: #d8d6d1; }
+  html:not([data-flow]) .xp-card:hover :is(.xp-logo, .xp-badge, .xp-tags span) { border-color: rgba(235, 233, 228, 0.25); color: var(--bg); }
+}
+/* Lumida's preview uses the dashboard mock; its volume-drop bars are the accent */
+.mock-lumida .m-chart .hi { background: var(--accent); }
+.mock-lumida .m-table b { white-space: nowrap; }
