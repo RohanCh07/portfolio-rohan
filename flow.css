@@ -772,36 +772,43 @@ html[data-flow] :is(.display, .display-lg, .display-md, .display-sm, .hero-title
 html[data-flow] :is(.btn, .sublist li, .byline .display-sm) { word-spacing: 0.12em; }
 
 /* =========================================================
-   Hover stickers
-   Nothing is boxed by default. Hover a component and its key text "sticks on":
-   an orange label with a black outline and a hard shadow pops in at a slight tilt.
-   Each target already has the sticker's padding (transparent), so nothing shifts.
+   Hover stickers v2
+   The text never changes. Hover the text itself and only a sticker background appears
+   behind it: an orange box with a black outline and a hard shadow, popping in at a slight tilt.
+   (The orange hero word and the orange full stops turn black so they stay visible on the box.)
    ========================================================= */
 html[data-flow] :is(.hero-title .hl, .section-title, .project-name, .service-head h3, .xp-company, .sublist .stk) {
-  display: inline-block; position: relative;
+  display: inline-block; position: relative; isolation: isolate;
   padding: 0.06em 0.16em 0.02em; margin-left: -0.16em;
-  border: 3px solid transparent; background: transparent;
-  transform: rotate(0deg); transform-origin: 30% 60%;
-  transition: background 0.16s, color 0.16s, border-color 0.16s, box-shadow 0.2s, transform 0.28s cubic-bezier(0.3, 1.6, 0.5, 1);
 }
-html[data-flow] .sublist .stk { padding: 0.12em 0.3em 0.06em; margin-left: -0.3em; border-width: 2px; }
+html[data-flow] .sublist .stk { padding: 0.12em 0.3em 0.06em; margin-left: -0.3em; }
 html[data-flow] .hero-title .hl { color: var(--hi); }
+html[data-flow] :is(.hero-title .hl, .section-title, .project-name, .service-head h3, .xp-company, .sublist .stk)::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: var(--hi); border: 3px solid #000; box-shadow: 6px 6px 0 var(--ink);
+  opacity: 0; transform: rotate(-2deg) scale(0.9);
+  transition: opacity 0.14s ease, transform 0.26s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+html[data-flow] .sublist .stk::before { border-width: 2px; box-shadow: 4px 4px 0 var(--ink); transform: rotate(-1.5deg) scale(0.9); }
 @media (hover: hover) {
-  html[data-flow] :is(.hero-title:hover .hl, .section-title:hover, .project:hover .project-name, .service:hover .service-head h3,
-      .xp-card:hover .xp-company, .sublist li:hover .stk) {
-    background: var(--hi) !important; color: #000 !important; border-color: #000;
-    box-shadow: 6px 6px 0 var(--ink); transform: rotate(-2deg);
+  html[data-flow] :is(.hero-title .hl, .section-title, .project-name, .service-head h3, .xp-company, .sublist .stk):hover::before {
+    opacity: 1; transform: rotate(-2deg) scale(1);
   }
-  html[data-flow] .sublist li:hover .stk { box-shadow: 4px 4px 0 var(--ink); transform: rotate(-1.5deg); }
+  html[data-flow] .sublist .stk:hover::before { transform: rotate(-1.5deg) scale(1); }
+  /* project rows slide their screenshot in on hover, which moves the name; so the name's whole area
+     (screenshot + name) keeps the sticker on, otherwise it would flicker off under the cursor */
+  html[data-flow] .project-main:hover .project-name::before { opacity: 1; transform: rotate(-2deg) scale(1); }
+  /* skill rows normally turn orange on hover; keep the text its normal colour on the sticker */
+  html[data-flow] .sublist li:hover .stk:hover { color: var(--ink); }
+  html[data-flow] .hero-title .hl:hover { color: #000; }
   html[data-flow] .section-title:hover::after { color: #000; }
 }
 /* phones and tablets can't hover: the hero sticker is simply always on there */
 @media (hover: none) {
-  html[data-flow] .hero-title .hl {
-    background: var(--hi) !important; color: #000 !important; border-color: #000;
-    box-shadow: 4px 4px 0 var(--ink); transform: rotate(-2deg);
-  }
+  html[data-flow] .hero-title .hl { color: #000; }
+  html[data-flow] .hero-title .hl::before { opacity: 1; transform: rotate(-2deg) scale(1); box-shadow: 4px 4px 0 var(--ink); }
 }
+
 /* phones: the heavy font is much wider than Anton, so the hero lines get a smaller size to fit */
 @media (max-width: 600px) {
   html[data-flow] .hero-title { font-size: clamp(24px, 7.3vw, 40px) !important; }
