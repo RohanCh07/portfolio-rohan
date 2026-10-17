@@ -48,7 +48,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter+Tight:wght@800;900&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="theme.css" />
   <link rel="stylesheet" href="flow.css" />
@@ -69,7 +69,6 @@
   <div class="grain" aria-hidden="true"></div>
   <!-- Page-wide particle network -->
   <canvas class="bgnet" id="bgnet" aria-hidden="true"></canvas>
-  <canvas class="codebg" id="codebg" aria-hidden="true"></canvas>
 
   <!-- Custom cursor (desktop only) -->
   <div class="cursor" aria-hidden="true"><span class="cursor-label"></span></div>
@@ -124,8 +123,8 @@
       <li><a href="#top"><span class="mono">01</span>Home</a></li>
       <li><a href="#services"><span class="mono">02</span>What I do</a></li>
       <li><a href="#projects"><span class="mono">03</span>Projects</a></li>
-      <li><a href="#about"><span class="mono">04</span>About me</a></li>
-      <li><a href="#experience"><span class="mono">05</span>Experience</a></li>
+      <li><a href="#experience"><span class="mono">04</span>Experience</a></li>
+      <li><a href="#about"><span class="mono">05</span>About me</a></li>
       <li><a href="#contact"><span class="mono">06</span>Contact</a></li>
     </ul>
     <div class="menu-foot">
@@ -218,9 +217,9 @@
                 <div class="service-body">
                   <p class="service-desc">From RAG pipelines to agentic chatbots, I design LLM systems that are grounded, useful and production-ready.</p>
                   <ul class="sublist">
-                    <li><span class="mono">01</span>LangGraph &amp; LangChain Agents</li>
-                    <li><span class="mono">02</span>RAG &amp; Vector Databases</li>
-                    <li><span class="mono">03</span>PyTorch &amp; Model Tuning</li>
+                    <li><span class="mono">01</span><span class="stk">LangGraph &amp; LangChain Agents</span></li>
+                    <li><span class="mono">02</span><span class="stk">RAG &amp; Vector Databases</span></li>
+                    <li><span class="mono">03</span><span class="stk">PyTorch &amp; Model Tuning</span></li>
                   </ul>
                 </div>
               </div>
@@ -238,9 +237,9 @@
                 <div class="service-body">
                   <p class="service-desc">Clean, secure APIs and well-designed databases. I build the backbone that keeps apps fast and reliable.</p>
                   <ul class="sublist">
-                    <li><span class="mono">01</span>Django &amp; Django REST Framework</li>
-                    <li><span class="mono">02</span>FastAPI Services</li>
-                    <li><span class="mono">03</span>SQL &amp; Schema Design</li>
+                    <li><span class="mono">01</span><span class="stk">Django &amp; Django REST Framework</span></li>
+                    <li><span class="mono">02</span><span class="stk">FastAPI Services</span></li>
+                    <li><span class="mono">03</span><span class="stk">SQL &amp; Schema Design</span></li>
                   </ul>
                 </div>
               </div>
@@ -258,9 +257,9 @@
                 <div class="service-body">
                   <p class="service-desc">Turning raw data into decisions — through exploration, statistical modelling and predictive ML.</p>
                   <ul class="sublist">
-                    <li><span class="mono">01</span>EDA with Pandas &amp; NumPy</li>
-                    <li><span class="mono">02</span>Scikit-learn &amp; Optuna</li>
-                    <li><span class="mono">03</span>Dashboards &amp; Visualisation</li>
+                    <li><span class="mono">01</span><span class="stk">EDA with Pandas &amp; NumPy</span></li>
+                    <li><span class="mono">02</span><span class="stk">Scikit-learn &amp; Optuna</span></li>
+                    <li><span class="mono">03</span><span class="stk">Dashboards &amp; Visualisation</span></li>
                   </ul>
                 </div>
               </div>
@@ -394,53 +393,11 @@
       </div>
     </section>
 
-    <!-- ============ ABOUT (grows from a small card to full screen) ============ -->
-    <section class="about" id="about">
-      <div class="about-stage">
-        <div class="about-panel" id="aboutPanel">
-          <div class="about-intro container">
-            <div class="about-head">
-              <div class="about-photo">
-                <!-- Add your photo as assets/me.jpg -->
-                <img src="assets/me.jpg" alt="Rohan Chauhan" onerror="this.remove()">
-                <span class="photo-fallback display">RC</span>
-              </div>
-              <div>
-                <span class="kicker"><b>[03]</b> — whoami</span>
-                <h2 class="display about-title">Hey — I'm<br>Rohan</h2>
-              </div>
-            </div>
-            <div class="intro-row about-text">
-              <span class="tag">About me</span>
-              <div class="intro-text">
-                <p>Final-year B.Tech CSE student at GNIOT, Greater Noida, with hands-on experience in machine learning, data analysis and AI-driven systems. I love turning messy, real-world problems into software that's simple to use.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="about-values">
-        <div class="container">
-          <ul class="values" id="values">
-            <li><b>Curious.</b><span class="icon">◎</span><p>I learn fast and I'm always digging into how things work under the hood.</p></li>
-            <li><b>Builder.</b><span class="icon">⌘</span><p>I ship end-to-end — from data pipeline to API to interface.</p></li>
-            <li><b>Consistent.</b><span class="icon">▲</span><p>Top 15 academic rank in my department across multiple semesters.</p></li>
-            <li><b>Communicator.</b><span class="icon">✦</span><p>Awarded "Eloquent Speaker" — I explain complex ideas clearly.</p></li>
-            <li><b>Analytical.</b><span class="icon">◇</span><p>Statistics and data first, opinions second.</p></li>
-            <li><b>Problem solver.</b><span class="icon">⚙</span><p>Bugs, bottlenecks, broken flows — I enjoy fixing them.</p></li>
-            <li><b>Team player.</b><span class="icon">❖</span><p>Collaborated in teams across three internships.</p></li>
-            <li><b>Always growing.</b><span class="icon">→</span><p>Intel Unnati AI/ML, Cisco Cybersecurity, Deloitte Data Analytics, AWS.</p></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
     <!-- ============ EXPERIENCE ============ -->
     <section class="container experience xp" id="experience">
       <div class="xp-head">
         <div>
-          <span class="kicker reveal"><b>[04]</b> — git log --career</span>
+          <span class="kicker reveal"><b>[03]</b> — git log --career</span>
           <h2 class="display section-title reveal decode">Experience</h2>
         </div>
         <a href="assets/Rohan-Chauhan-Resume.pdf" download class="btn btn-outline resume-btn"><span class="dl" aria-hidden="true">↓</span> Download resume</a>
@@ -509,6 +466,48 @@
       </ol>
     </section>
 
+    <!-- ============ ABOUT (grows from a small card to full screen) ============ -->
+    <section class="about" id="about">
+      <div class="about-stage">
+        <div class="about-panel" id="aboutPanel">
+          <div class="about-intro container">
+            <div class="about-head">
+              <div class="about-photo">
+                <!-- Add your photo as assets/me.jpg -->
+                <img src="assets/me.jpg" alt="Rohan Chauhan" onerror="this.remove()">
+                <span class="photo-fallback display">RC</span>
+              </div>
+              <div>
+                <span class="kicker"><b>[04]</b> — whoami</span>
+                <h2 class="display about-title">Hey — I'm<br>Rohan</h2>
+              </div>
+            </div>
+            <div class="intro-row about-text">
+              <span class="tag">About me</span>
+              <div class="intro-text">
+                <p>Final-year B.Tech CSE student at GNIOT, Greater Noida, with hands-on experience in machine learning, data analysis and AI-driven systems. I love turning messy, real-world problems into software that's simple to use.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-values">
+        <div class="container">
+          <ul class="values" id="values">
+            <li><b>Curious.</b><span class="icon">◎</span><p>I learn fast and I'm always digging into how things work under the hood.</p></li>
+            <li><b>Builder.</b><span class="icon">⌘</span><p>I ship end-to-end — from data pipeline to API to interface.</p></li>
+            <li><b>Consistent.</b><span class="icon">▲</span><p>Top 15 academic rank in my department across multiple semesters.</p></li>
+            <li><b>Communicator.</b><span class="icon">✦</span><p>Awarded "Eloquent Speaker" — I explain complex ideas clearly.</p></li>
+            <li><b>Analytical.</b><span class="icon">◇</span><p>Statistics and data first, opinions second.</p></li>
+            <li><b>Problem solver.</b><span class="icon">⚙</span><p>Bugs, bottlenecks, broken flows — I enjoy fixing them.</p></li>
+            <li><b>Team player.</b><span class="icon">❖</span><p>Collaborated in teams across three internships.</p></li>
+            <li><b>Always growing.</b><span class="icon">→</span><p>Intel Unnati AI/ML, Cisco Cybersecurity, Deloitte Data Analytics, AWS.</p></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <!-- ============ FAQ ============ -->
     <section class="container faq" id="faq">
       <span class="kicker reveal"><b>[05]</b> — cat faq.md</span>
@@ -574,6 +573,7 @@
         <li><a href="#top">Home</a></li>
         <li><a href="#services">What I do</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
         <li><a href="#about">About me</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
@@ -592,7 +592,6 @@
 
 
   <script src="assets/lenis.min.js" defer></script>
-  <script src="codebg.js" defer></script>
   <script src="script.js" defer></script>
   <script src="timeline.js" defer></script>
   <script src="stack.js" defer></script>

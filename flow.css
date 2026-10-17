@@ -668,3 +668,143 @@ html[data-theme="light"] .codebg.is-dim { opacity: 0.6; }
 @media (max-width: 900px) {
   html[data-flow] .service { top: calc(70px + var(--i) * 56px); }
 }
+
+/* =========================================================
+   CLEAN v4 — orange on pure black / pure white
+   One accent colour, no glows or textures, and the same lines and cards in every
+   section so the page reads as one design. (Placed last so it overrides the older themes.)
+   ========================================================= */
+/* dark mode */
+html[data-flow][data-accent="amber"] {
+  --bg: #000000; --ink: #ffffff; --ink-2: #b5b5b5; --mute: #8c8c8c; --mute-2: #5a5a5a;
+  --line: rgba(255, 255, 255, 0.13); --line-dark: rgba(255, 255, 255, 0.13);
+  --card: #000000; --card-2: #0b0b0b; --surface: #0a0a0a;
+  --accent: #ff5a1f; --accent-fg: #000000; --accent-soft: rgba(255, 90, 31, 0.12);
+  --hi: #ff5a1f; --hi-fg: #000000;
+  --glass: rgba(0, 0, 0, 0.72); --net-rgb: 255, 90, 31;
+}
+/* light mode */
+html[data-flow][data-accent="orange"] {
+  --bg: #ffffff; --ink: #000000; --ink-2: #3a3a3a; --mute: #6e6e6e; --mute-2: #a6a6a6;
+  --line: rgba(0, 0, 0, 0.12); --line-dark: rgba(0, 0, 0, 0.12);
+  --card: #ffffff; --card-2: #f5f5f5; --surface: #fafafa;
+  --accent: #ff5a1f; --accent-fg: #000000; --accent-soft: rgba(255, 90, 31, 0.1);
+  --hi: #ff5a1f; --hi-fg: #000000;
+  --glass: rgba(255, 255, 255, 0.78); --net-rgb: 255, 90, 31;
+}
+html[data-flow] body { background: var(--bg); }
+
+/* no textures or glows */
+html[data-flow] body::after { content: none !important; }
+html[data-flow] .grain { display: none !important; }
+html[data-flow] .hero-title .hl { color: var(--hi); text-shadow: none !important; }
+html[data-flow] .btn-dark, html[data-flow] .btn-light { box-shadow: none !important; }
+html[data-flow] .cursor { box-shadow: none !important; }
+html[data-flow] .kicker, html[data-flow] .status { color: var(--mute); }
+html[data-flow] .kicker b { color: var(--hi); }
+html[data-flow] .about-photo { background: var(--card-2) !important; border: 1px solid var(--line); }
+html[data-flow] .photo-fallback { color: var(--mute-2); }
+html[data-flow] .showcase-frame { background: var(--card-2); box-shadow: 0 0 0 1px var(--line), 0 30px 70px -40px rgba(0, 0, 0, 0.35) !important; }
+
+/* one kind of line everywhere: plain hairlines, no gradients, no glowing dots */
+html[data-flow="smart"] :is(.service, .dark-card, .sublist li, .project, .project-list, .accordion, .acc,
+  .values, .values li, .footer-grid > *, .menu-links li) { border-image: none !important; }
+html[data-flow="smart"] :is(.service, .project-list, .accordion, .values)::before { display: none !important; }
+html[data-flow="smart"] .byline .rule { background: var(--line) !important; }
+
+/* one kind of card everywhere: a quiet surface with a hairline border, orange border on hover */
+html[data-flow] .xp-card {
+  background: var(--surface) !important; border-color: var(--line) !important;
+  box-shadow: none !important; -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+html[data-flow] .xp-card:hover, html[data-flow] .xp-item.is-now .xp-card { border-color: rgba(255, 90, 31, 0.6) !important; }
+html[data-flow] .xp-logo { background: transparent; border-color: var(--line); color: var(--ink); }
+html[data-flow] .xp-item.is-now .xp-logo { border-color: var(--hi); color: var(--hi); }
+html[data-flow] .xp-line::before { background: var(--line) !important; }
+html[data-flow] .xp-item.is-now .xp-node { box-shadow: 0 0 0 5px rgba(255, 90, 31, 0.18) !important; }
+html[data-flow] .xp-badge i { box-shadow: none; }
+@media (hover: hover) and (min-width: 1000px) {
+  html[data-flow] .project:hover {
+    background: var(--surface) !important;
+    box-shadow: inset 0 0 0 1px rgba(255, 90, 31, 0.6) !important;
+  }
+  html[data-flow] .project:hover .meta { color: var(--hi) !important; }
+}
+
+/* clean background: a faint static grid behind the hero only, fading out towards the edges */
+html[data-flow] .hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse 70% 65% at 70% 35%, #000 0%, transparent 75%);
+          mask-image: radial-gradient(ellipse 70% 65% at 70% 35%, #000 0%, transparent 75%);
+  opacity: 0.55;
+}
+
+/* =========================================================
+   Heavy grotesk type + "sticker" highlight (preview)
+   Headlines in Inter Tight Black with very tight spacing; the key phrase sits on a
+   slightly tilted orange sticker with a black outline and a hard shadow.
+   ========================================================= */
+html[data-flow] { --f-display: "Inter Tight", "Helvetica Neue", Arial, sans-serif; }
+html[data-flow] :is(.display, .display-lg, .display-md, .display-sm, .hero-title, .section-title, .cta-title,
+  .about-title, .project-name, .xp-company, .service-head h3, .service .num, .ticker-track) {
+  font-family: var(--f-display) !important; font-weight: 900 !important; letter-spacing: -0.055em !important;
+}
+html[data-flow] :is(.hero-title, .section-title, .cta-title, .about-title) { line-height: 0.88 !important; }
+html[data-flow] .hero-title    { font-size: clamp(34px, 5.4vw, 92px) !important; }
+html[data-flow] .section-title { font-size: clamp(34px, 4.4vw, 70px) !important; }
+html[data-flow] .cta-title     { font-size: clamp(34px, 4.8vw, 80px) !important; }
+html[data-flow] .about-title   { font-size: clamp(34px, 4.4vw, 70px) !important; }
+html[data-flow] .project-name, html[data-flow] .service-head h3 { letter-spacing: -0.045em !important; }
+/* buttons, nav and list items: same family, a touch lighter and less tight so they stay readable */
+html[data-flow] :is(.btn, .sublist li, .display-sm) { font-family: var(--f-display) !important; font-weight: 800 !important; letter-spacing: -0.02em !important; }
+html[data-flow] .btn { font-size: 15px !important; }
+/* full stops, like the reference */
+html[data-flow] .hero-title .line:last-child > span::after,
+html[data-flow] .section-title::after { content: "."; color: var(--hi); }
+
+/* tight letters, but keep clear gaps between words */
+html[data-flow] :is(.display, .display-lg, .display-md, .display-sm, .hero-title, .section-title, .cta-title,
+  .about-title, .project-name, .xp-company, .service-head h3, .ticker-track) { word-spacing: 0.14em; }
+html[data-flow] :is(.btn, .sublist li, .byline .display-sm) { word-spacing: 0.12em; }
+
+/* =========================================================
+   Hover stickers
+   Nothing is boxed by default. Hover a component and its key text "sticks on":
+   an orange label with a black outline and a hard shadow pops in at a slight tilt.
+   Each target already has the sticker's padding (transparent), so nothing shifts.
+   ========================================================= */
+html[data-flow] :is(.hero-title .hl, .section-title, .project-name, .service-head h3, .xp-company, .sublist .stk) {
+  display: inline-block; position: relative;
+  padding: 0.06em 0.16em 0.02em; margin-left: -0.16em;
+  border: 3px solid transparent; background: transparent;
+  transform: rotate(0deg); transform-origin: 30% 60%;
+  transition: background 0.16s, color 0.16s, border-color 0.16s, box-shadow 0.2s, transform 0.28s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+html[data-flow] .sublist .stk { padding: 0.12em 0.3em 0.06em; margin-left: -0.3em; border-width: 2px; }
+html[data-flow] .hero-title .hl { color: var(--hi); }
+@media (hover: hover) {
+  html[data-flow] :is(.hero-title:hover .hl, .section-title:hover, .project:hover .project-name, .service:hover .service-head h3,
+      .xp-card:hover .xp-company, .sublist li:hover .stk) {
+    background: var(--hi) !important; color: #000 !important; border-color: #000;
+    box-shadow: 6px 6px 0 var(--ink); transform: rotate(-2deg);
+  }
+  html[data-flow] .sublist li:hover .stk { box-shadow: 4px 4px 0 var(--ink); transform: rotate(-1.5deg); }
+  html[data-flow] .section-title:hover::after { color: #000; }
+}
+/* phones and tablets can't hover: the hero sticker is simply always on there */
+@media (hover: none) {
+  html[data-flow] .hero-title .hl {
+    background: var(--hi) !important; color: #000 !important; border-color: #000;
+    box-shadow: 4px 4px 0 var(--ink); transform: rotate(-2deg);
+  }
+}
+/* phones: the heavy font is much wider than Anton, so the hero lines get a smaller size to fit */
+@media (max-width: 600px) {
+  html[data-flow] .hero-title { font-size: clamp(24px, 7.3vw, 40px) !important; }
+  html[data-flow] .section-title, html[data-flow] .about-title { font-size: clamp(28px, 9vw, 44px) !important; }
+  html[data-flow] .cta-title { font-size: clamp(28px, 8.6vw, 44px) !important; }
+}
