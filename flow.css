@@ -840,3 +840,40 @@ html:not([data-flow]) .xp-tags span { border-color: var(--line); color: var(--mu
 /* Lumida's preview uses the dashboard mock; its volume-drop bars are the accent */
 .mock-lumida .m-chart .hi { background: var(--accent); }
 .mock-lumida .m-table b { white-space: nowrap; }
+
+/* =========================================================
+   Projects — matched to grigoletti.ch
+   Desktop (1440px): rows 99px tall with thin #aaa lines; mono 16px year/category;
+   64px names starting ~30% across; link icon always visible. On hover the row becomes a
+   #111 card (8px corners) 172px tall, a 210x140 preview slides in before the name,
+   text turns off-white, and the other rows stay as they are.
+   ========================================================= */
+html:not([data-flow]) .project-list { border-top: 0; }
+html:not([data-flow]) .project { border-bottom: 1px solid #aaaaaa; }
+html:not([data-flow]) .project .ext { opacity: 1; transform: none; color: var(--mute); display: grid; place-items: center; transition: color 0.4s; }
+@media (min-width: 1000px) {
+  html:not([data-flow]) .project {
+    grid-template-columns: 29.5% minmax(0, 1fr) auto;
+    padding: 24px 0; margin-inline: 0; border-radius: 8px;
+    transition: background 0.5s var(--ease), color 0.5s var(--ease), padding 0.5s var(--ease), border-color 0.3s;
+  }
+  /* the preview slides out to the left of the name column, so that column must not clip it */
+  html:not([data-flow]) .project .project-main { overflow: visible; }
+  html:not([data-flow]) .project .meta { font-family: var(--f-mono); font-size: 16px; letter-spacing: -0.02em; color: var(--mute); }
+  html:not([data-flow]) .project .chips { display: none !important; }
+  html:not([data-flow]) .project-name { font-size: clamp(32px, 4.45vw, 64px) !important; line-height: 0.8; }
+  html:not([data-flow]) .project .project-media {
+    width: 0; height: 0; margin: 0; opacity: 0; border: 0 !important; border-radius: 8px; padding: 0; background: transparent;
+    overflow: hidden; flex-shrink: 0;
+    transition: width 0.5s var(--ease), height 0.5s var(--ease), margin 0.5s var(--ease), opacity 0.4s;
+  }
+  html:not([data-flow]) .project .project-media .mock,
+  html:not([data-flow]) .project .project-media img { width: 210px; min-width: 210px; aspect-ratio: 3 / 2; border-radius: 8px; }
+}
+@media (hover: hover) and (min-width: 1000px) {
+  html:not([data-flow]) .project:hover { background: #111111; color: #ebe9e4; padding: 16px; border-color: transparent; }
+  html:not([data-flow]) .project:hover .meta { color: #aaaaaa; }
+  html:not([data-flow]) .project:hover .ext { color: #ebe9e4; }
+  html:not([data-flow]) .project:hover .project-media { width: 210px; height: 140px; margin-left: -11vw; margin-right: 32px; opacity: 1; }
+  html:not([data-flow]) .project-list:hover .project:not(:hover) { color: var(--ink); }
+}
