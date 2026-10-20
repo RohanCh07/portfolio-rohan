@@ -877,3 +877,25 @@ html:not([data-flow]) .project .ext { opacity: 1; transform: none; color: var(--
   html:not([data-flow]) .project:hover .project-media { width: 210px; height: 140px; margin-left: -11vw; margin-right: 32px; opacity: 1; }
   html:not([data-flow]) .project-list:hover .project:not(:hover) { color: var(--ink); }
 }
+
+/* =========================================================
+   Distiller preview: architecture card (no frontend yet)
+   ========================================================= */
+.mock-arch { background: #161616; color: #e9e7e2; }
+.mock-arch .m-bar { background: #0f0f0f; }
+.mock-arch .m-bar em { margin-left: auto; font-style: normal; font-family: var(--f-mono); color: var(--accent); border: 1px solid rgba(255,76,36,.5); border-radius: 1cqw; padding: .3cqw 1cqw; }
+.mock-arch .a-body { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 5cqw; padding: 4cqw; }
+.mock-arch .a-row { display: flex; align-items: center; gap: 1.8cqw; }
+.mock-arch .a-col { display: flex; flex-direction: column; gap: 2cqw; flex: 1.1; }
+.mock-arch .a-box { flex: 1; border: 1px solid #3a3a3a; border-radius: 1.4cqw; padding: 2cqw 2.2cqw; font-size: 2.5cqw; font-weight: 600; line-height: 1.2; background: #1d1d1d; }
+.mock-arch .a-box small { display: block; margin-top: .8cqw; font-size: 1.7cqw; font-weight: 400; color: #9a978f; font-family: var(--f-mono); }
+.mock-arch .a-hub { border-color: #e9e7e2; }
+.mock-arch .a-hi { border-color: var(--accent); }
+.mock-arch .a-hi small { color: var(--accent); }
+.mock-arch .a-arrow { font-size: 3cqw; color: #77746d; }
+.mock-arch .a-loop { display: flex; align-items: center; gap: 1.3cqw; flex-wrap: wrap; font-family: var(--f-mono); font-size: 1.9cqw; color: #bdbab3; }
+.mock-arch .a-loop span { border: 1px dashed #4a4a4a; border-radius: 1cqw; padding: .8cqw 1.4cqw; }
+.mock-arch .a-loop span.a-hi { border: 1px solid var(--accent); color: var(--accent); }
+.project .wip { align-self: center; margin-left: 18px; flex-shrink: 0; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--accent); border: 1px solid currentColor; border-radius: 999px; padding: 4px 10px; }
+@media (max-width: 999px) { .project .wip { margin: 0; align-self: flex-start; } }
+.mock-arch .a-loop b { color: #66635c; font-weight: 400; }

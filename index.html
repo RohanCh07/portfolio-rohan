@@ -286,6 +286,37 @@
             <p class="project-desc">A self-hosted engine that connects read-only to any database, finds hidden relationships and data problems, explains them with an LLM and learns from human feedback. Found 15/15 hidden relationships and 13/13 planted problems with 0 false alarms. <span class="mono">Python · PostgreSQL · FastAPI · Gemini</span></p>
           </a>
 
+          <!-- PROJECT: Distiller (in progress) -->
+          <a class="project" href="https://github.com/Rohan708" target="_blank" rel="noopener" data-cursor="In progress">
+            <span class="meta-wrap"><span class="mono meta">2026, AI Backend</span><span class="chips"><i>Python</i><i>FastAPI</i><i>LiteLLM</i><i>LoRA</i><i>Ollama</i></span></span>
+            <div class="project-main">
+              <div class="project-media">
+                <div class="mock mock-arch">
+                  <div class="m-bar"><i></i><i></i><i></i><span>distiller · architecture</span><em>in progress</em></div>
+                  <div class="a-body">
+                    <div class="a-row">
+                      <div class="a-box">Your app<small>OPENAI_BASE_URL</small></div>
+                      <span class="a-arrow">→</span>
+                      <div class="a-box a-hub">Distiller gateway<small>FastAPI · router</small></div>
+                      <span class="a-arrow">→</span>
+                      <div class="a-col">
+                        <div class="a-box">Teacher LLM<small>GPT / Claude / Gemini</small></div>
+                        <div class="a-box a-hi">Student model<small>small · LoRA · cheap</small></div>
+                      </div>
+                    </div>
+                    <div class="a-loop">
+                      <span>log calls</span><b>→</b><span>group tasks</span><b>→</b><span>fine-tune</span><b>→</b><span>shadow test</span><b>→</b><span class="a-hi">route</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <h3 class="display project-name">Distiller</h3>
+              <span class="wip mono">In progress</span>
+            </div>
+            <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg></span>
+            <p class="project-desc">In progress: an OpenAI-compatible gateway (adopt it by changing one line) that logs a company's repetitive LLM calls, fine-tunes small open models with LoRA to copy the big model, tests them in shadow mode, then routes confident requests to the cheap model with fallback. Gateway skeleton and CLI working; training and routing in development. <span class="mono">Python · FastAPI · LiteLLM · LoRA</span></p>
+          </a>
+
           <!-- PROJECT 1 -->
           <a class="project" href="https://github.com/Rohan708" target="_blank" rel="noopener" data-cursor="View project">
             <span class="meta-wrap"><span class="mono meta">2025, AI Dev Tool</span><span class="chips"><i>TypeScript</i><i>FastAPI</i><i>LLM</i><i>RAG</i><i>Vector DB</i></span></span>
