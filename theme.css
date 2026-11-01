@@ -277,3 +277,6 @@ html .net.landscape#landscape { display: block !important; opacity: calc(1 - var
 .viz-plot .boundary { stroke: #ebe9e4; stroke-width: 1.5; stroke-dasharray: 5 4; }
 
 @media (prefers-reduced-motion: reduce) { .viz-caret { animation: none; } .viz-log li { animation: none; } }
+
+/* Page-wide cursor trail (trail.js) */
+.trail-layer { position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 390; }

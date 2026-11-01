@@ -1,7 +1,7 @@
 // =========================================================
 // Loss landscape: a slowly shifting contour map with a point
-// running gradient descent across it. Your cursor raises a
-// hill the optimiser has to route around.
+// running gradient descent across it. Your cursor sinks a
+// pit into the terrain and the optimiser rolls toward it.
 // No dependencies. Pauses when off screen or the tab is hidden.
 // =========================================================
 (() => {
@@ -54,10 +54,13 @@
       const e = b.a * Math.exp(-(dx * dx + dy * dy) / (2 * s2));
       f += e; gx += -e * dx / s2; gy += -e * dy / s2;
     }
-    if (hill.a > 0.001) {
-      const dx = x - hill.x, dy = y - hill.y, s2 = 0.09 * 0.09;
+    if (Math.abs(hill.a) > 0.001) {
+      const dx = x - hill.x, dy = y - hill.y, s2 = 0.14 * 0.14;
       const e = hill.a * Math.exp(-(dx * dx + dy * dy) / (2 * s2));
       f += e; gx += -e * dx / s2; gy += -e * dy / s2;
+      // a wide, shallow slope as well, so the pull is felt from across the screen
+      const w2 = 0.5 * 0.5, e2 = 0.8 * hill.a * Math.exp(-(dx * dx + dy * dy) / (2 * w2));
+      f += e2; gx += -e2 * dx / w2; gy += -e2 * dy / w2;
     }
     if (out) { out.gx = gx; out.gy = gy; }
     return f;
@@ -223,7 +226,7 @@
 
     for (let s = 0; s < 6; s++) stepOptimiser();
     // converged and rested: pause a moment, then reshape the land and start over
-    if (opt.rest > 240) { seed(); startOptimiser(); }
+    if (opt.rest > 240 && Math.abs(hill.a) < 0.05) { seed(); startOptimiser(); }
     draw();
   };
   const play = () => { if (!running && visible && !document.hidden) { running = true; last = performance.now(); requestAnimationFrame(frame); } };
@@ -250,8 +253,8 @@
   const toField = (e) => {
     const r = canvas.getBoundingClientRect();
     hill.tx = (e.clientX - r.left) / H; hill.ty = (e.clientY - r.top) / H;
-    if (hill.a < 0.01) { hill.x = hill.tx; hill.y = hill.ty; }
-    hill.ta = 0.7;
+    if (Math.abs(hill.a) < 0.01) { hill.x = hill.tx; hill.y = hill.ty; }
+    hill.ta = -1.8; // a pit under the cursor: the optimiser rolls toward you
   };
   host.addEventListener("pointermove", toField);
   host.addEventListener("pointerdown", toField);
