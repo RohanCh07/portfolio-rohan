@@ -210,3 +210,15 @@ html[data-theme="dark"] .chips i { color: var(--accent); border-color: color-mix
 @media (prefers-reduced-motion: reduce) {
   .status .dot, .caret::after { animation: none; }
 }
+
+/* Loss-landscape background in the hero (landscape.js) */
+:root {
+  --paper: var(--bg);
+  --contour: rgba(17, 17, 17, 0.12);
+  --contour-strong: rgba(17, 17, 17, 0.26);
+  --signal: var(--accent);
+}
+html .net.landscape#landscape { display: block !important; opacity: calc(1 - var(--hp, 0)); }
+.status .loss { color: var(--accent); font-variant-numeric: tabular-nums; }
+@media (prefers-reduced-motion: reduce) { .status .loss { display: none; } }
+@media (max-width: 999px) { html .net.landscape#landscape { opacity: 0.5; } }
