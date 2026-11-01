@@ -229,7 +229,7 @@ html .net.landscape#landscape { display: block !important; opacity: calc(1 - var
    ========================================================= */
 .service .split { position: relative; }
 .viz {
-  font-family: var(--f-mono); font-size: 12px; line-height: 1.5; color: #cfcdc8;
+  font-family: var(--f-mono); font-size: 12px; line-height: 1.5; color: #d0d0d0;
   background: #161616; border: 1px solid var(--line-dark); border-radius: 10px; overflow: hidden;
   box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6);
 }
@@ -239,7 +239,7 @@ html .net.landscape#landscape { display: block !important; opacity: calc(1 - var
 @media (max-width: 999px) { .viz { margin-top: 28px; } }
 .viz-bar {
   display: flex; align-items: center; gap: 6px; padding: 9px 12px;
-  border-bottom: 1px solid var(--line-dark); color: #8a8883; font-size: 11px;
+  border-bottom: 1px solid var(--line-dark); color: #8a8a8a; font-size: 11px;
 }
 .viz-bar i { width: 7px; height: 7px; border-radius: 50%; background: #3a3a3a; }
 .viz-bar span { margin-left: 8px; }
@@ -248,32 +248,32 @@ html .net.landscape#landscape { display: block !important; opacity: calc(1 - var
 .viz-body { padding: 14px 14px 16px; min-height: 196px; }
 
 /* AI: retrieve, then answer */
-.viz-q { color: #ebe9e4; margin-bottom: 12px; min-height: 18px; }
+.viz-q { color: #f4f4f2; margin-bottom: 12px; min-height: 18px; }
 .viz-q b { color: var(--accent); font-weight: 500; }
 .viz-chunks li { display: grid; grid-template-columns: 118px 1fr 34px; align-items: center; gap: 10px; padding: 4px 0; opacity: 0.25; transition: opacity .3s; }
 .viz-chunks li.on { opacity: 1; }
-.c-name { color: #8a8883; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.c-name { color: #8a8a8a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .c-bar { height: 4px; background: #262626; border-radius: 2px; overflow: hidden; }
 .c-bar b { display: block; height: 100%; width: 0; background: var(--accent); transition: width .6s cubic-bezier(.2,.7,.1,1); }
 .c-score { font-style: normal; text-align: right; font-variant-numeric: tabular-nums; }
-.viz-ans { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line-dark); color: #ebe9e4; min-height: 54px; }
+.viz-ans { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--line-dark); color: #f4f4f2; min-height: 54px; }
 .viz-caret { display: inline-block; width: 7px; height: 13px; background: var(--accent); vertical-align: -2px; margin-left: 2px; animation: vizblink 1s steps(1) infinite; }
 @keyframes vizblink { 50% { opacity: 0; } }
 
 /* Backend: live access log */
 .viz-log li { display: grid; grid-template-columns: 44px 1fr 34px 46px; gap: 8px; padding: 3px 0; white-space: nowrap; animation: vizin .35s ease-out; }
-.viz-log .m { color: #8a8883; }
-.viz-log .p { overflow: hidden; text-overflow: ellipsis; color: #ebe9e4; }
+.viz-log .m { color: #8a8a8a; }
+.viz-log .p { overflow: hidden; text-overflow: ellipsis; color: #f4f4f2; }
 .viz-log .s { color: #6fcf8e; }
 .viz-log .s.w { color: var(--accent); }
-.viz-log .t { text-align: right; color: #8a8883; font-variant-numeric: tabular-nums; }
+.viz-log .t { text-align: right; color: #8a8a8a; font-variant-numeric: tabular-nums; }
 @keyframes vizin { from { opacity: 0; transform: translateY(6px); } }
 
 /* Data & ML: a model learning a decision boundary */
 .viz-plot { display: block; width: 100%; height: auto; }
 .viz-plot circle { fill: #6b6965; }
 .viz-plot circle.b { fill: var(--accent); }
-.viz-plot circle.x { stroke: #ebe9e4; stroke-width: 1.5; }
-.viz-plot .boundary { stroke: #ebe9e4; stroke-width: 1.5; stroke-dasharray: 5 4; }
+.viz-plot circle.x { stroke: #f4f4f2; stroke-width: 1.5; }
+.viz-plot .boundary { stroke: #f4f4f2; stroke-width: 1.5; stroke-dasharray: 5 4; }
 
 @media (prefers-reduced-motion: reduce) { .viz-caret { animation: none; } .viz-log li { animation: none; } }

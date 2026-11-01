@@ -269,14 +269,14 @@ html[data-flow="cards"] .bgnet { opacity: 0.7; }
 
 /* ---------- Amber Terminal: warm black + phosphor amber ---------- */
 html[data-flow][data-accent="amber"] {
-  --bg: #0b0a08;
+  --bg: #0a0a0a;
   --ink: #f3ece0;
   --ink-2: #c9bfae;
   --mute: #8f8576;
   --mute-2: #5a5247;
   --line: rgba(243, 236, 224, 0.12);
   --line-dark: rgba(243, 236, 224, 0.12);
-  --card: #0b0a08;
+  --card: #0a0a0a;
   --card-2: #15130f;
   --accent: #ffb224;
   --accent-fg: #120d02;
@@ -360,20 +360,20 @@ html[data-flow][data-accent="cobalt"] .kicker b { color: var(--accent); }
    Original cream + orange, with the same smart network, fonts and effects
    ========================================================= */
 html[data-flow][data-accent="orange"] {
-  --bg: #ebe9e4;
-  --ink: #111111;
+  --bg: #f4f4f2;
+  --ink: #0a0a0a;
   --ink-2: #34322e;
   --mute: #6a665f;
   --mute-2: #a29d94;
   --line: rgba(17, 17, 17, 0.14);
   --line-dark: rgba(17, 17, 17, 0.14);
-  --card-2: #e2dfd8;
+  --card-2: #e3e3e2;
   --accent: #ff4c24;
-  --accent-fg: #111111;
+  --accent-fg: #0a0a0a;
   --accent-soft: rgba(255, 76, 36, 0.1);
   --hi: #ff4c24;
-  --hi-fg: #111111;
-  --glass: rgba(235, 233, 228, 0.8);
+  --hi-fg: #0a0a0a;
+  --glass: rgba(244, 244, 242, 0.8);
   --net-rgb: 255, 76, 36;
   --net-alpha: 1.15;
   --f-body: "Space Grotesk", "Inter", system-ui, sans-serif;
@@ -749,12 +749,12 @@ html[data-flow] .hero::before {
    grey body copy, light-grey lines and the orange-red accent.
    ========================================================= */
 html[data-flow][data-accent="orange"] {
-  --bg: #ebe9e4; --ink: #111111; --ink-2: #555555; --mute: #555555; --mute-2: #aaaaaa;
+  --bg: #f4f4f2; --ink: #0a0a0a; --ink-2: #555555; --mute: #555555; --mute-2: #aaaaaa;
   --line: #dbdbdb; --line-dark: #dbdbdb;
-  --card: #ebe9e4; --card-2: #dbdbdb; --surface: #ebe9e4;
-  --accent: #ff4c24; --accent-fg: #111111; --accent-soft: rgba(255, 76, 36, 0.1);
-  --hi: #ff4c24; --hi-fg: #111111;
-  --glass: rgba(235, 233, 228, 0.82); --net-rgb: 255, 76, 36;
+  --card: #f4f4f2; --card-2: #dbdbdb; --surface: #f4f4f2;
+  --accent: #ff4c24; --accent-fg: #0a0a0a; --accent-soft: rgba(255, 76, 36, 0.1);
+  --hi: #ff4c24; --hi-fg: #0a0a0a;
+  --glass: rgba(244, 244, 242, 0.82); --net-rgb: 255, 76, 36;
 }
 html[data-flow] .mode-toggle { display: none !important; }
 /* accents that were written as fixed colours elsewhere */
@@ -776,14 +776,14 @@ html[data-flow] .btn {
   height: 44px; border-radius: 4px !important; box-shadow: none !important;
   font-family: var(--f-display); font-size: 18px; text-transform: uppercase; letter-spacing: 0.01em;
 }
-html[data-flow] .btn-dark { background: #111111 !important; color: #ebe9e4 !important; border: 0 !important; }
+html[data-flow] .btn-dark { background: #0a0a0a !important; color: #f4f4f2 !important; border: 0 !important; }
 html[data-flow] .btn-outline, html[data-flow] .resume-btn {
-  background: transparent !important; color: #111111 !important; border: 1.5px solid #111111 !important;
+  background: transparent !important; color: #0a0a0a !important; border: 1.5px solid #0a0a0a !important;
 }
-html[data-flow] .btn-outline:hover, html[data-flow] .resume-btn:hover { background: #111111 !important; color: #ebe9e4 !important; }
-html[data-flow] .btn-light { background: #111111 !important; color: #ebe9e4 !important; }
+html[data-flow] .btn-outline:hover, html[data-flow] .resume-btn:hover { background: #0a0a0a !important; color: #f4f4f2 !important; }
+html[data-flow] .btn-light { background: #0a0a0a !important; color: #f4f4f2 !important; }
 html[data-flow] .center-nav .btn { background: var(--bg) !important; }
-html[data-flow] .center-nav .btn:hover { background: #111111 !important; color: #ebe9e4 !important; }
+html[data-flow] .center-nav .btn:hover { background: #0a0a0a !important; color: #f4f4f2 !important; }
 html[data-flow] .btn .avatar { border-radius: 3px; }
 
 /* =========================================================
@@ -792,7 +792,7 @@ html[data-flow] .btn .avatar { border-radius: 3px; }
    original grigoletti-style look again. These rules only keep the newer pieces working.
    ========================================================= */
 /* colours the Experience timeline and resume buttons rely on */
-:root { --hi: #ff4c24; --hi-fg: #111111; --net-rgb: 255, 76, 36; --surface: #ebe9e4; }
+:root { --hi: #ff4c24; --hi-fg: #0a0a0a; --net-rgb: 255, 76, 36; --surface: #f4f4f2; }
 /* hero background animation is off for now (to be decided) */
 html:not([data-flow]) .net { display: none !important; }
 /* About: static card, content visible straight away (no slow grow-in) */
@@ -833,9 +833,9 @@ html:not([data-flow]) .xp-points { color: var(--ink-2); opacity: 1; }
 html:not([data-flow]) .xp-tags span { border-color: var(--line); color: var(--mute); }
 @media (hover: hover) {
   html:not([data-flow]) .xp-card:hover { background: var(--ink) !important; color: var(--bg); border-color: var(--ink) !important; }
-  html:not([data-flow]) .xp-card:hover :is(.xp-date, .xp-tags span, .xp-badge.is-edu) { color: #bdbab3; }
-  html:not([data-flow]) .xp-card:hover .xp-points { color: #d8d6d1; }
-  html:not([data-flow]) .xp-card:hover :is(.xp-logo, .xp-badge, .xp-tags span) { border-color: rgba(235, 233, 228, 0.25); color: var(--bg); }
+  html:not([data-flow]) .xp-card:hover :is(.xp-date, .xp-tags span, .xp-badge.is-edu) { color: #bdbdbd; }
+  html:not([data-flow]) .xp-card:hover .xp-points { color: #d9d9d9; }
+  html:not([data-flow]) .xp-card:hover :is(.xp-logo, .xp-badge, .xp-tags span) { border-color: rgba(244, 244, 242, 0.25); color: var(--bg); }
 }
 /* Lumida's preview uses the dashboard mock; its volume-drop bars are the accent */
 .mock-lumida .m-chart .hi { background: var(--accent); }
@@ -871,9 +871,9 @@ html:not([data-flow]) .project .ext { opacity: 1; transform: none; color: var(--
   html:not([data-flow]) .project .project-media img { width: 210px; min-width: 210px; aspect-ratio: 3 / 2; border-radius: 8px; }
 }
 @media (hover: hover) and (min-width: 1000px) {
-  html:not([data-flow]) .project:hover { background: #111111; color: #ebe9e4; padding: 16px; border-color: transparent; }
+  html:not([data-flow]) .project:hover { background: #0a0a0a; color: #f4f4f2; padding: 16px; border-color: transparent; }
   html:not([data-flow]) .project:hover .meta { color: #aaaaaa; }
-  html:not([data-flow]) .project:hover .ext { color: #ebe9e4; }
+  html:not([data-flow]) .project:hover .ext { color: #f4f4f2; }
   html:not([data-flow]) .project:hover .project-media { width: 210px; height: 140px; margin-left: -11vw; margin-right: 32px; opacity: 1; }
   html:not([data-flow]) .project-list:hover .project:not(:hover) { color: var(--ink); }
 }
@@ -893,7 +893,7 @@ html:not([data-flow]) .project .ext { opacity: 1; transform: none; color: var(--
 .mock-arch .a-hi { border-color: var(--accent); }
 .mock-arch .a-hi small { color: var(--accent); }
 .mock-arch .a-arrow { font-size: 3cqw; color: #77746d; }
-.mock-arch .a-loop { display: flex; align-items: center; gap: 1.3cqw; flex-wrap: wrap; font-family: var(--f-mono); font-size: 1.9cqw; color: #bdbab3; }
+.mock-arch .a-loop { display: flex; align-items: center; gap: 1.3cqw; flex-wrap: wrap; font-family: var(--f-mono); font-size: 1.9cqw; color: #bdbdbd; }
 .mock-arch .a-loop span { border: 1px dashed #4a4a4a; border-radius: 1cqw; padding: .8cqw 1.4cqw; }
 .mock-arch .a-loop span.a-hi { border: 1px solid var(--accent); color: var(--accent); }
 .project .wip { align-self: center; margin-left: 18px; flex-shrink: 0; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; color: var(--accent); border: 1px solid currentColor; border-radius: 999px; padding: 4px 10px; }
