@@ -178,7 +178,7 @@ html:not([data-theme="dark"]) .dark-card .kicker { color: #8d8a84; }
 .meta-wrap { display: flex; flex-direction: column; gap: 10px; align-items: flex-start; }
 .chips { display: flex; flex-wrap: wrap; gap: 4px; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.6s var(--ease), opacity 0.4s; }
 .chips i {
-  font-style: normal; font-family: var(--f-mono); font-size: 11px; padding: 3px 7px; border-radius: 4px;
+  font-style: normal; font-family: var(--f-mono); font-size: 11px; padding: 3px 7px; border-radius: 3px;
   border: 1px solid currentColor; opacity: 0.75;
 }
 html[data-theme="dark"] .chips i { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 40%, transparent); background: var(--accent-soft); opacity: 1; }
@@ -230,7 +230,7 @@ html .net.landscape#landscape { display: block !important; opacity: calc(1 - var
 .service .split { position: relative; }
 .viz {
   font-family: var(--f-mono); font-size: 12px; line-height: 1.5; color: #d0d0d0;
-  background: #161616; border: 1px solid var(--line-dark); border-radius: 10px; overflow: hidden;
+  background: #161616; border: 1px solid var(--line-dark); border-radius: 6px; overflow: hidden;
   box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.6);
 }
 @media (min-width: 1000px) {

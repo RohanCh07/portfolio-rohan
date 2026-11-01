@@ -36,7 +36,7 @@
   html .about-panel {
     position: sticky; top: 0; height: 100svh; padding: 0;
     display: flex; align-items: center;
-    margin-inline: 0; border-radius: var(--r, 14px);
+    margin-inline: 0; border-radius: var(--r, 8px);
     transform: scale(var(--s, 0.5)) !important; transform-origin: center center;
   }
   html .about-intro { opacity: 0; transition: opacity 0.6s ease; padding-left: var(--gutter); }
