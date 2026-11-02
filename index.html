@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rohan Chauhan — Backend &amp; AI Engineer</title>
+  <meta name="description" content="Rohan Chauhan builds backend systems and AI-driven applications: APIs, data pipelines, LLM tools. Software Engineer at Moglix.">
+  <meta property="og:title" content="Rohan Chauhan — Backend & AI Engineer">
+  <meta property="og:description" content="Production APIs, data pipelines and LLM systems that solve real business problems.">
+  <meta property="og:image" content="assets/og-image.jpg">
+  <meta name="theme-color" content="#F3F0E9">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body>
+  <a class="skip" href="#work">Skip to work</a>
+
+  <header class="nav">
+    <a class="nav__name" href="#top">Rohan Chauhan</a>
+    <nav class="nav__links" aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav__right">
+      <span class="nav__clock mono" id="clock" aria-label="Local time in India">IST --:--</span>
+      <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle dark mode">
+        <span class="theme-btn__dot"></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero wrap">
+      <p class="status mono"><span class="pulse"></span>Software Engineer at Moglix · open to interesting problems</p>
+      <h1 class="hero__title">
+        I build <em>backends</em> and<br>
+        <em>AI systems</em> that hold up<br>
+        in production.
+      </h1>
+      <div class="hero__foot">
+        <p class="hero__lede">
+          Python engineer working on APIs, data pipelines and LLM-based tools.
+          I care about systems that are scalable, reliable and actually used by
+          the people they were built for.
+        </p>
+        <div class="hero__cta">
+          <a class="btn btn--solid" href="#work">See the work <span aria-hidden="true">↓</span></a>
+          <a class="btn" href="assets/Rohan-Chauhan-Resume.pdf" download>Résumé</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section class="work wrap" id="work">
+      <div class="section-head">
+        <h2 class="section-title">Selected work</h2>
+        <div class="filters" role="tablist" aria-label="Filter projects">
+          <button class="filter is-active" data-filter="all" role="tab" aria-selected="true">All <sup id="count-all"></sup></button>
+          <button class="filter" data-filter="company" role="tab" aria-selected="false">Company <sup id="count-company"></sup></button>
+          <button class="filter" data-filter="personal" role="tab" aria-selected="false">Personal <sup id="count-personal"></sup></button>
+          <button class="filter" data-filter="research" role="tab" aria-selected="false">Research <sup id="count-research"></sup></button>
+        </div>
+      </div>
+
+      <div class="index-head mono" aria-hidden="true">
+        <span>#</span><span>Project</span><span>For</span><span>Type</span><span>Year</span><span></span>
+      </div>
+      <ol class="projects" id="projects"></ol>
+      <noscript><p>Turn on JavaScript to see the project list.</p></noscript>
+    </section>
+
+    <!-- floating hover preview (desktop) -->
+    <div class="preview" id="preview" aria-hidden="true"></div>
+
+    <!-- EXPERIENCE -->
+    <section class="exp wrap" id="experience">
+      <div class="section-head">
+        <h2 class="section-title">Experience</h2>
+        <a class="link mono" href="assets/Rohan-Chauhan-Resume.pdf" download>Download résumé ↓</a>
+      </div>
+
+      <div class="roles">
+        <article class="role">
+          <div class="role__when mono">Jul 2026 — Now</div>
+          <div class="role__body">
+            <h3>Software Engineer <span>· Moglix</span></h3>
+            <p class="role__org mono">B2B supply chain</p>
+            <ul>
+              <li>Build REST APIs and backend systems, working with VLLMs, OCR techniques and LLM prediction models.</li>
+              <li>Work with the AI &amp; Analytics team on solutions for major clients and internal teams.</li>
+            </ul>
+            <p class="chips"><span>Python</span><span>REST</span><span>Kafka</span><span>Docker</span><span>Kaleyra</span><span>LLMs</span></p>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="role__when mono">Mar 2026 — Jul 2026</div>
+          <div class="role__body">
+            <h3>Python Engineering Intern <span>· Moglix</span></h3>
+            <ul>
+              <li>Designed and built analytical solutions covering data processing, analysis and programming.</li>
+              <li>Worked with teams to deliver insights and automate workflows. Built Cerebra, a GenAI chatbot for PRs and RFQs.</li>
+            </ul>
+            <p class="chips"><span>Python</span><span>MySQL</span><span>PostgreSQL</span><span>MongoDB</span><span>Kafka</span></p>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="role__when mono">Jun 2025 — Jan 2026</div>
+          <div class="role__body">
+            <h3>AI Research Intern <span>· Coding Jr</span></h3>
+            <ul>
+              <li>Worked as an SDE on an internal admin panel.</li>
+              <li>Designed backend logic and implemented core functionality with the team.</li>
+            </ul>
+            <p class="chips"><span>Python</span><span>REST</span><span>Web design</span></p>
+          </div>
+        </article>
+
+        <article class="role">
+          <div class="role__when mono">Apr 2024 — Jun 2024</div>
+          <div class="role__body">
+            <h3>Full-Stack Intern <span>· Wayspire</span></h3>
+            <ul>
+              <li>Built and debugged full-stack modules with a team, improving performance and UI.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about wrap" id="about">
+      <div class="section-head">
+        <h2 class="section-title">About</h2>
+      </div>
+      <div class="about__grid">
+        <figure class="about__photo">
+          <img src="assets/me.jpg" alt="Portrait of Rohan Chauhan" loading="lazy" width="600" height="750">
+        </figure>
+        <div class="about__text">
+          <p class="about__big">
+            B.Tech CSE (AI &amp; ML) at GNIOT, Greater Noida. I like the unglamorous
+            parts of software: <em>clean APIs</em>, <em>sane schemas</em>, pipelines that
+            don't fall over, plus the LLM layer on top that makes it useful.
+          </p>
+
+          <div class="facts">
+            <div class="fact">
+              <h3 class="mono">Stack</h3>
+              <p>Python · FastAPI · Django · Flask<br>SQL · PostgreSQL · MongoDB · Firebase<br>Kafka · Docker · AWS · CI/CD<br>Kotlin · Jetpack Compose · Java</p>
+            </div>
+            <div class="fact">
+              <h3 class="mono">Education</h3>
+              <p>B.Tech CSE (AI &amp; ML), GNIOT, 2022–26, CGPA 8.3<br>Class XII &amp; X, St Mary's School, Kashipur, 78%</p>
+            </div>
+            <div class="fact">
+              <h3 class="mono">Hackathons · 2024</h3>
+              <p>Smart India Hackathon, GNIOT<br>Hack KRMU 4.0, KRMU Gurugram<br>Road Safety Hackathon, NHAI &amp; HOAI<br>Build with India, Google Gurugram</p>
+            </div>
+            <div class="fact">
+              <h3 class="mono">Certifications</h3>
+              <p>Machine Learning A–Z, Udemy, 2023<br>AWS Deep Dive, AWS, 2023<br>Android App Development, Udemy, 2023</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- CONTACT -->
+  <footer class="contact" id="contact">
+    <div class="wrap">
+      <p class="mono contact__kicker">Have something worth building?</p>
+      <a class="contact__mail" href="mailto:chauhanrohan223@gmail.com">chauhanrohan223<span>@gmail.com</span></a>
+      <div class="contact__row">
+        <a class="link" href="https://www.linkedin.com/in/rohanchauhan07/" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a class="link" href="https://github.com/Rohan708" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="link" href="assets/Rohan-Chauhan-Resume.pdf" download>Résumé ↓</a>
+        <span class="mono contact__loc">Greater Noida, India · IST</span>
+      </div>
+      <p class="mono contact__fine">© <span id="year">2026</span> Rohan Chauhan. Hand-built with HTML, CSS &amp; JS.</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
