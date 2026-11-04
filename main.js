@@ -99,8 +99,8 @@
   var svg = $('#thread');
   var NS = 'http://www.w3.org/2000/svg';
   var PROJECT_PATTERNS = [
-    '0.2,0 0.07,0.2 0.15,0.5,n 0.5,0.57 0.86,0.5 0.93,0.8 0.8,1',
-    '0.8,0 0.93,0.22 0.85,0.48,n 0.5,0.43 0.14,0.52 0.07,0.82 0.2,1'
+    '0.3,0 0.16,0.24 0.24,0.5,n 0.52,0.6 0.8,0.52 0.84,0.8 0.7,1',
+    '0.7,0 0.84,0.22 0.76,0.48,n 0.48,0.42 0.2,0.5 0.16,0.8 0.3,1'
   ];
   var T = null; // current thread state
 
@@ -180,6 +180,24 @@
     });
     if (pts.length < 2) return;
 
+    // A real thread doesn't run in straight diagonals. Between anchors that are far apart,
+    // add soft side-to-side bends that fade out at each anchor, so the line meanders.
+    var vhNow = window.innerHeight, dense = [], seed = 0.7;
+    for (var pi = 0; pi < pts.length; pi++) {
+      var a = pts[pi], b = pts[pi + 1];
+      dense.push(a);
+      if (!b || (b.flag && b.flag.indexOf('m') !== -1)) continue;
+      var dy = b.y - a.y, steps = Math.floor(Math.abs(dy) / (vhNow * 0.38));
+      for (var k = 1; k < steps; k++) {
+        var tt = k / steps, env = Math.sin(Math.PI * tt);
+        var wobble = Math.sin(seed + (a.y + dy * tt) / (vhNow * 0.55)) * W * 0.075 * env;
+        var nx = a.x + (b.x - a.x) * tt + wobble;
+        dense.push({ x: Math.max(W * 0.05, Math.min(W * 0.95, nx)), y: a.y + dy * tt, flag: '', band: a.band });
+      }
+      seed += 1.3;
+    }
+    pts = dense;
+
     var geo = curve(pts);
     var total = geo.total || 1, lens = geo.lens, xs = geo.xs, ys = geo.ys, step = 0;
     // pathLength makes the browser's dash units match our computed lengths exactly
@@ -235,34 +253,38 @@
     drawThread();
   }
 
-  // Like a pen: once a section comes into view, its stretch of thread draws at a steady pace
-  // (about 1.2s per section) no matter how fast you scroll. It never un-draws.
-  var threadNow = 0, threadGoal = 0, tween = null;
-  var PER_SECTION = 1200;
+  // The thread is pulled by the scroll: it is drawn exactly down to a line two-thirds of the way
+  // down the screen, so its tip is always in view and stops the moment you stop.
+  // (Lenis already smooths the scroll, so this needs no extra easing.)
+  var READ = 0.67;
+  var threadNow = 0, threadGoal = 0, intro = null;
   var easeInOut = function (t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; };
+  function lengthAtScreenLine() {
+    var readY = window.scrollY + window.innerHeight * READ - T.mainTop;
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) return T.total;
+    var lo = 0, hi = T.maxY.length - 1;
+    while (lo < hi) { var mid = (lo + hi) >> 1; if (T.maxY[mid] > readY) hi = mid; else lo = mid + 1; }
+    return T.maxY[T.maxY.length - 1] <= readY ? T.total : T.lens[lo];
+  }
   function drawThread() {
     if (!T || reduceMotion) return;
     if (!root.classList.contains('is-loaded')) return;          // wait for the opening signature
-    var vh = window.innerHeight, reached = -1;
-    for (var i = 0; i < T.bands.length; i++) {
-      if (T.bands[i].getBoundingClientRect().top < vh * 0.78) reached = i; else break;
-    }
-    if (reached < 0) return;
-    var goal = T.bandEnd[reached];
-    if (window.scrollY + vh >= document.documentElement.scrollHeight - 4) goal = T.total;   // bottom of the page
-    if (goal <= threadGoal + 0.5) return;
-    var sections = 0;
-    for (var j = 0; j < T.bandEnd.length; j++) if (T.bandEnd[j] > threadGoal + 0.5 && T.bandEnd[j] <= goal + 0.5) sections++;
-    threadGoal = goal;
-    tween = { from: threadNow, to: goal, start: performance.now(), dur: Math.min(3200, PER_SECTION * Math.max(1, sections)) };
-    requestAnimationFrame(stepThread);
-  }
-  function stepThread(now) {
-    if (!T || !tween) return;
-    var k = Math.min(1, (now - tween.start) / tween.dur);
-    threadNow = tween.from + (tween.to - tween.from) * easeInOut(k);
+    threadGoal = lengthAtScreenLine();
+    if (intro) return;                                           // the opening glide is still running
+    threadNow = threadGoal;
     paintThread(threadNow);
-    if (k < 1) requestAnimationFrame(stepThread); else tween = null;
+  }
+  // once, after the signature: glide the hero's stretch in, then hand over to the scroll
+  function introThread() {
+    if (!T || reduceMotion) return;
+    threadGoal = lengthAtScreenLine();
+    intro = { from: 0, start: performance.now(), dur: 1400 };
+    (function frame(now) {
+      var k = Math.min(1, (now - intro.start) / intro.dur);
+      threadNow = intro.from + (lengthAtScreenLine() - intro.from) * easeInOut(k);
+      paintThread(threadNow);
+      if (k < 1) requestAnimationFrame(frame); else { intro = null; drawThread(); }
+    })(intro.start);
   }
   function paintThread(drawn) {
     T.path.style.strokeDashoffset = (T.total - drawn).toFixed(1);
@@ -278,40 +300,33 @@
     T.ring.setAttribute('opacity', live ? 0.55 : 0);
   }
 
-  /* skills map: when it comes into view it plays in order — stem, both sides of the fork together,
-     then both branches down to where they meet; each skill appears as the line reaches it */
+  /* skills map: pulled by the same screen line — the fork, then both branches draw down to it,
+     and each skill appears as the line reaches it */
   var skillmap = $('#skillmap');
   var skillLines = skillmap ? $$('.skillmap__lines path', skillmap) : [];
   var skillItems = skillmap ? $$('.skill', skillmap) : [];
   var skillNodes = skillmap ? $$('.skillmap__node, .skillmap__group', skillmap) : [];
   skillLines.forEach(function (p) { p.setAttribute('pathLength', '1'); p.style.strokeDasharray = '1 1'; p.style.strokeDashoffset = 1; });
-  var skillPlayed = false;
   function setLine(role, v) {
-    skillLines.forEach(function (p) { if (p.getAttribute('data-part') === role) p.style.strokeDashoffset = (1 - v).toFixed(3); });
-  }
-  function showAllSkills() {
-    skillLines.forEach(function (p) { p.style.strokeDashoffset = 0; });
-    skillItems.concat(skillNodes).forEach(function (el) { el.classList.add('is-on'); });
+    skillLines.forEach(function (p) { if (p.getAttribute('data-part') === role) p.style.strokeDashoffset = (1 - v).toFixed(4); });
   }
   function drawSkillmap() {
-    if (!skillmap || skillPlayed) return;
-    if (reduceMotion || window.innerWidth <= 1100) { skillPlayed = true; showAllSkills(); return; }
+    if (!skillmap) return;
+    if (reduceMotion || window.innerWidth <= 1100) {
+      skillLines.forEach(function (p) { p.style.strokeDashoffset = 0; });
+      skillItems.concat(skillNodes).forEach(function (el) { el.classList.add('is-on'); });
+      return;
+    }
     if (!root.classList.contains('is-loaded')) return;
-    if (skillmap.getBoundingClientRect().top > window.innerHeight * 0.72) return;
-    skillPlayed = true;
-    var t0 = performance.now();
-    // stem 0–450ms · fork arms 350–1000ms · branches 900–3300ms
-    var seg = function (now, a, b) { return Math.max(0, Math.min(1, (now - t0 - a) / (b - a))); };
-    (function frame(now) {
-      setLine('stem', easeInOut(seg(now, 0, 450)));
-      var arms = easeInOut(seg(now, 350, 1000));
-      setLine('arm', arms);
-      skillNodes.forEach(function (el) { el.classList.toggle('is-on', arms > 0.95); });
-      var br = seg(now, 900, 3300);
-      setLine('branch', br);
-      skillItems.forEach(function (li) { if (br >= parseFloat(li.getAttribute('data-t')) - 0.02) li.classList.add('is-on'); });
-      if (now - t0 < 3400) requestAnimationFrame(frame);
-    })(t0);
+    var r = skillmap.getBoundingClientRect();
+    var p = Math.max(0, Math.min(1, (window.innerHeight * READ - r.top) / r.height));   // where the screen line is, 0..1 down the map
+    setLine('stem', Math.min(1, p / 0.06));
+    var arms = Math.max(0, Math.min(1, (p - 0.05) / 0.07));
+    setLine('arm', arms);
+    skillNodes.forEach(function (el) { el.classList.toggle('is-on', arms > 0.95); });
+    var br = Math.max(0, Math.min(1, (p - 0.12) / 0.88));
+    setLine('branch', br);
+    skillItems.forEach(function (li) { li.classList.toggle('is-on', p >= parseFloat(li.style.getPropertyValue('--y')) / 100 - 0.01); });
   }
 
   var ticking = false;
@@ -542,7 +557,7 @@
     if (booted) return; booted = true;
     retone(); fitNames(); buildThread(); collectFloaters(); drawParallax();
     afterLoader(function () {
-      requestAnimationFrame(function () { root.classList.add('is-loaded'); setTimeout(function () { drawThread(); drawSkillmap(); }, 350); });
+      requestAnimationFrame(function () { root.classList.add('is-loaded'); setTimeout(function () { introThread(); drawSkillmap(); }, 350); });
     });
   }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(boot); else boot();
