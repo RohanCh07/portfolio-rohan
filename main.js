@@ -134,7 +134,8 @@
     $$('.band').filter(function (b) { return !b.hidden; }).forEach(function (band) {
       var r = band.getBoundingClientRect();
       var top = r.top - mRect.top, h = r.height;
-      var spec = band.dataset.thread || PROJECT_PATTERNS[projIdx++ % 2];
+      var narrow = window.innerWidth <= 1100;
+      var spec = (narrow && band.dataset.threadMobile) || band.dataset.thread || PROJECT_PATTERNS[projIdx++ % 2];
       spec.trim().split(/\s+/).forEach(function (tok) {
         var pt;
         if (tok.indexOf('a:') === 0) {
@@ -229,7 +230,7 @@
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function () {
       if (window.innerWidth !== lastW) { lastW = window.innerWidth; fitNames(); if (window.innerWidth > 760) setMenu(false); }
-      buildThread();
+      buildThread(); drawParallax();
     }, 160);
   });
   $$('.notes').forEach(function (d) { d.addEventListener('toggle', buildThread); });
@@ -255,18 +256,159 @@
       b.setAttribute('aria-pressed', String(on));
     });
     if (status) status.textContent = 'Showing ' + n + (cat === 'all' ? '' : ' ' + cat) + (n === 1 ? ' project' : ' projects');
-    retone(); fitNames(); buildThread();
+    retone(); fitNames(); buildThread(); collectFloaters(); drawParallax();
     var first = projects.filter(function (p) { return !p.hidden; })[0];
-    if (first) window.scrollTo({ top: first.getBoundingClientRect().top + window.scrollY, behavior: reduceMotion ? 'auto' : 'smooth' });
+    if (first) scrollToY(first.getBoundingClientRect().top + window.scrollY);
   }
   buttons.forEach(function (b) { b.addEventListener('click', function () { applyFilter(b.dataset.filter); }); });
+
+  /* ---------- smooth, weighted scrolling ---------- */
+  var lenis = null;
+  if (!reduceMotion && typeof window.Lenis === 'function') {
+    // low lerp + reduced wheel step = a slower, heavier glide
+    lenis = new window.Lenis({ lerp: 0.06, wheelMultiplier: 0.7, touchMultiplier: 1, smoothWheel: true, syncTouch: false });
+    var rafLoop = function (t) { lenis.raf(t); requestAnimationFrame(rafLoop); };
+    requestAnimationFrame(rafLoop);
+    root.style.scrollBehavior = 'auto';
+  }
+  function scrollToY(y) {
+    if (lenis) lenis.scrollTo(y, { duration: 1.8 });
+    else window.scrollTo({ top: y, behavior: reduceMotion ? 'auto' : 'smooth' });
+  }
+  // in-page links glide instead of jumping
+  $$('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href');
+      var target = id === '#top' ? document.body : document.querySelector(id);
+      if (!target || !lenis) return;
+      e.preventDefault();
+      scrollToY(id === '#top' ? 0 : target.getBoundingClientRect().top + window.scrollY);
+      history.replaceState(null, '', id);
+    });
+  });
+
+  /* ---------- project scenes: each project pins while its pieces arrive ---------- */
+  var scenesOn = !reduceMotion;
+  if (scenesOn) root.classList.add('scenes');
+  var scenes = [];
+  var clamp01 = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
+  var easeOut = function (t) { return 1 - Math.pow(1 - t, 3); };
+  function toPx(v) {
+    v = String(v).trim();
+    var n = parseFloat(v) || 0;
+    if (/vw$/.test(v)) return n * window.innerWidth / 100;
+    if (/vh$/.test(v)) return n * window.innerHeight / 100;
+    return n;
+  }
+  function collectFloaters() {
+    scenes = [];
+    $$('.project:not([hidden])').forEach(function (proj) {
+      var parts = [], k = { sketch: 0, card: 0, note: 0 };
+      $$('.project__stage > *', proj).forEach(function (el) {
+        var part = { el: el, kind: 'card', from: [0, 110], a0: 0, a1: 1, fade: true };
+        if (el.classList.contains('project__name')) { part.kind = 'name'; part.a0 = 0; part.a1 = 0.2; }
+        else if (el.classList.contains('sketch')) {
+          part.kind = 'sketch'; part.fade = false;
+          part.a0 = 0.06 + 0.07 * k.sketch++; part.a1 = part.a0 + 0.38;
+          part.from = el.dataset.from ? el.dataset.from.split(',') : [0, 0];
+          part.strokes = $$('path, rect, circle, ellipse', el);
+          part.strokes.forEach(function (n) { n.setAttribute('pathLength', '1'); n.style.strokeDasharray = '1 1'; });
+        }
+        else if (el.classList.contains('callout') || el.classList.contains('sketch-note')) {
+          part.kind = 'note'; part.from = [0, 36]; part.a0 = 0.38 + 0.06 * k.note++; part.a1 = part.a0 + 0.16;
+        }
+        else { part.a0 = 0.2 + 0.09 * k.card++; part.a1 = part.a0 + 0.22; }
+        parts.push(part);
+      });
+      scenes.push({ host: proj, parts: parts });
+    });
+  }
+  function settle(part) {   // final resting state (phones, reduced motion)
+    var el = part.el;
+    el.style.removeProperty('--px'); el.style.removeProperty('--py'); el.style.opacity = '';
+    if (part.kind === 'name') el.style.removeProperty('--reveal');
+    if (part.strokes) part.strokes.forEach(function (n) { n.style.strokeDashoffset = 0; });
+  }
+  function drawParallax() {
+    var narrow = window.innerWidth <= 760;
+    var vh = window.innerHeight;
+    scenes.forEach(function (sc) {
+      if (!scenesOn || narrow) { sc.parts.forEach(settle); return; }
+      var r = sc.host.getBoundingClientRect();
+      if (r.bottom < -100 || r.top > vh + 100) return;
+      var travel = Math.max(1, r.height - vh);
+      var p = clamp01(-r.top / travel);              // 0 = just pinned, 1 = about to leave
+      var lift = p > 0.86 ? -(p - 0.86) / 0.14 * 70 : 0;
+      sc.parts.forEach(function (part) {
+        var t = easeOut(clamp01((p - part.a0) / (part.a1 - part.a0)));
+        var el = part.el;
+        if (part.kind === 'name') {
+          el.style.setProperty('--reveal', t.toFixed(3));
+          el.style.setProperty('--py', (lift * 0.4).toFixed(1) + 'px');
+          return;
+        }
+        var fx = toPx(part.from[0]) * (1 - t), fy = toPx(part.from[1]) * (1 - t);
+        el.style.setProperty('--px', fx.toFixed(1) + 'px');
+        el.style.setProperty('--py', (fy + lift).toFixed(1) + 'px');
+        if (part.strokes) {
+          var d = easeOut(clamp01((p - part.a0) / (part.a1 - part.a0) * 1.15));
+          part.strokes.forEach(function (n) { n.style.strokeDashoffset = (1 - d).toFixed(3); });
+          el.style.opacity = Math.min(1, t * 4).toFixed(2);
+        } else if (part.fade) {
+          el.style.opacity = t.toFixed(3);
+        }
+      });
+    });
+  }
+  window.addEventListener('scroll', function () { requestAnimationFrame(drawParallax); }, { passive: true });
+
+  /* ---------- opening signature ---------- */
+  var loader = $('#loader');
+  function runLoader(done) {
+    var seen = false;
+    try { seen = sessionStorage.getItem('signed') === '1'; } catch (e) {}
+    if (!loader || reduceMotion || seen) { if (loader) loader.hidden = true; done(); return; }
+    root.classList.add('is-locked');
+    if (lenis) lenis.stop();
+    var paths = $$('path', loader);
+    var t0 = 250, total = 0;
+    paths.forEach(function (p) {
+      var len = p.getTotalLength();
+      var dur = Math.max(160, len * 1.25);           // longer strokes take longer, like a pen
+      p.style.strokeDasharray = len + ' ' + len;
+      p.style.strokeDashoffset = len;
+      p.style.transition = 'stroke-dashoffset ' + dur + 'ms cubic-bezier(.55,.1,.45,.9) ' + (t0 + total) + 'ms';
+      total += dur * 0.92;
+    });
+    requestAnimationFrame(function () { requestAnimationFrame(function () {
+      paths.forEach(function (p) { p.style.strokeDashoffset = 0; });
+    }); });
+    var finished = false;
+    function finish() {
+      if (finished) return; finished = true;
+      loader.classList.add('is-signed');
+      setTimeout(function () {
+        loader.classList.add('is-leaving');
+        root.classList.remove('is-locked');
+        if (lenis) lenis.start();
+        try { sessionStorage.setItem('signed', '1'); } catch (e) {}
+        done();
+        setTimeout(function () { loader.hidden = true; }, 1200);
+      }, 550);
+    }
+    setTimeout(finish, t0 + total + 250);
+    loader.addEventListener('click', finish);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' || e.key === 'Enter') finish(); }, { once: true });
+  }
 
   /* ---------- boot ---------- */
   var booted = false;
   function boot() {
     if (booted) return; booted = true;
-    retone(); fitNames(); buildThread();
-    requestAnimationFrame(function () { root.classList.add('is-loaded'); });
+    retone(); fitNames(); buildThread(); collectFloaters(); drawParallax();
+    runLoader(function () {
+      requestAnimationFrame(function () { root.classList.add('is-loaded'); });
+    });
   }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(boot); else boot();
   // the display font can finish loading after "ready" resolves; re-measure when it lands
