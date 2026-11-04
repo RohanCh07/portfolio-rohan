@@ -110,16 +110,37 @@
     return n;
   }
 
-  // smooth curve through points (Catmull-Rom → cubic Bézier)
+  // Smooth curve through points (Catmull-Rom → cubic Bézier). Points flagged "m" start a new
+  // run, so the thread can hand over to a drawing and pick up after it.
+  // Returns the path data plus samples computed with plain maths — measuring a long SVG path
+  // with getPointAtLength() thousands of times freezes the page, so we never do that.
   function curve(pts) {
-    var d = 'M' + pts[0].x.toFixed(1) + ' ' + pts[0].y.toFixed(1);
-    for (var i = 0; i < pts.length - 1; i++) {
-      var p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
-      var c1x = p1.x + (p2.x - p0.x) / 6, c1y = p1.y + (p2.y - p0.y) / 6;
-      var c2x = p2.x - (p3.x - p1.x) / 6, c2y = p2.y - (p3.y - p1.y) / 6;
-      d += ' C' + c1x.toFixed(1) + ' ' + c1y.toFixed(1) + ' ' + c2x.toFixed(1) + ' ' + c2y.toFixed(1) + ' ' + p2.x.toFixed(1) + ' ' + p2.y.toFixed(1);
-    }
-    return d;
+    var runs = [[]];
+    pts.forEach(function (p) {
+      if (p.flag.indexOf('m') !== -1 && runs[runs.length - 1].length) runs.push([]);
+      runs[runs.length - 1].push(p);
+    });
+    var d = [], lens = [], xs = [], ys = [], total = 0;
+    runs.filter(function (r) { return r.length > 1; }).forEach(function (run) {
+      d.push('M' + run[0].x.toFixed(1) + ' ' + run[0].y.toFixed(1));
+      lens.push(total); xs.push(run[0].x); ys.push(run[0].y);
+      for (var i = 0; i < run.length - 1; i++) {
+        var p0 = run[i - 1] || run[i], p1 = run[i], p2 = run[i + 1], p3 = run[i + 2] || p2;
+        var c1x = p1.x + (p2.x - p0.x) / 6, c1y = p1.y + (p2.y - p0.y) / 6;
+        var c2x = p2.x - (p3.x - p1.x) / 6, c2y = p2.y - (p3.y - p1.y) / 6;
+        d.push('C' + c1x.toFixed(1) + ' ' + c1y.toFixed(1) + ' ' + c2x.toFixed(1) + ' ' + c2y.toFixed(1) + ' ' + p2.x.toFixed(1) + ' ' + p2.y.toFixed(1));
+        var px = p1.x, py = p1.y, N = 20;
+        for (var k = 1; k <= N; k++) {
+          var t = k / N, u = 1 - t;
+          var x = u * u * u * p1.x + 3 * u * u * t * c1x + 3 * u * t * t * c2x + t * t * t * p2.x;
+          var y = u * u * u * p1.y + 3 * u * u * t * c1y + 3 * u * t * t * c2y + t * t * t * p2.y;
+          total += Math.sqrt((x - px) * (x - px) + (y - py) * (y - py));
+          lens.push(total); xs.push(x); ys.push(y);
+          px = x; py = y;
+        }
+      }
+    });
+    return { d: d.join(' '), lens: lens, xs: xs, ys: ys, total: total };
   }
 
   function buildThread() {
@@ -155,17 +176,15 @@
     });
     if (pts.length < 2) return;
 
-    var path = mk('path', { 'class': 'thread__path', d: curve(pts) });
+    var geo = curve(pts);
+    var total = geo.total || 1, lens = geo.lens, xs = geo.xs, ys = geo.ys, step = 0;
+    // pathLength makes the browser's dash units match our computed lengths exactly
+    var path = mk('path', { 'class': 'thread__path', d: geo.d, pathLength: total.toFixed(2) });
     svg.appendChild(path);
-    var total = path.getTotalLength();
 
-    // sample the path; cumulative max of y lets loops draw naturally while scrolling
-    var step = 6, lens = [], maxY = [], xs = [], ys = [], m = -Infinity;
-    for (var L = 0; L <= total; L += step) {
-      var q = path.getPointAtLength(L);
-      m = Math.max(m, q.y);
-      lens.push(L); maxY.push(m); xs.push(q.x); ys.push(q.y);
-    }
+    // cumulative max of y lets loops draw naturally while scrolling
+    var maxY = [], m = -Infinity;
+    for (var si = 0; si < ys.length; si++) { m = Math.max(m, ys[si]); maxY.push(m); }
 
     var nodes = [];
     pts.forEach(function (p) {
@@ -192,30 +211,76 @@
       nodes.push({ el: g, at: lens[best] });
     });
 
+    var ring = mk('circle', { 'class': 'thread__ring', r: 11, opacity: 0 });
+    svg.appendChild(ring);
     var head = mk('circle', { 'class': 'thread__head', r: 4, opacity: 0 });
     svg.appendChild(head);
 
     path.style.strokeDasharray = total + ' ' + total;
     path.style.strokeDashoffset = reduceMotion ? 0 : total;
-    T = { path: path, total: total, lens: lens, maxY: maxY, nodes: nodes, head: head, mainTop: mRect.top + window.scrollY };
+    T = { path: path, total: total, lens: lens, maxY: maxY, xs: xs, ys: ys, step: step, nodes: nodes, head: head, ring: ring, mainTop: mRect.top + window.scrollY };
+    if (threadNow > total) threadNow = total;
     drawThread();
   }
 
+  // the thread eases toward where the scroll says it should be, so it glides instead of jumping
+  var threadNow = 0, threadGoal = 0, threadAnim = false;
   function drawThread() {
     if (!T || reduceMotion) return;
     var readY = window.scrollY + window.innerHeight * 0.66 - T.mainTop;
     // first sample whose running max y passes the read line
     var lo = 0, hi = T.maxY.length - 1;
     while (lo < hi) { var mid = (lo + hi) >> 1; if (T.maxY[mid] > readY) hi = mid; else lo = mid + 1; }
-    var drawn = T.maxY[T.maxY.length - 1] <= readY ? T.total : T.lens[lo];
+    threadGoal = T.maxY[T.maxY.length - 1] <= readY ? T.total : T.lens[lo];
+    if (!threadAnim) { threadAnim = true; requestAnimationFrame(stepThread); }
+  }
+  function stepThread() {
+    if (!T) { threadAnim = false; return; }
+    var diff = threadGoal - threadNow;
+    threadNow += Math.abs(diff) < 0.5 ? diff : diff * 0.14;
+    paintThread(threadNow);
+    drawSkillmap();
+    if (Math.abs(threadGoal - threadNow) > 0.5) requestAnimationFrame(stepThread); else threadAnim = false;
+  }
+  function paintThread(drawn) {
     T.path.style.strokeDashoffset = (T.total - drawn).toFixed(1);
     T.nodes.forEach(function (n) { n.el.setAttribute('opacity', drawn >= n.at ? 1 : 0); });
     var live = drawn > 4 && drawn < T.total - 4;
     if (live) {
-      var p = T.path.getPointAtLength(drawn);
-      T.head.setAttribute('cx', p.x.toFixed(1)); T.head.setAttribute('cy', p.y.toFixed(1));
+      var lo2 = 0, hi2 = T.lens.length - 1;
+      while (lo2 < hi2) { var md = (lo2 + hi2) >> 1; if (T.lens[md] < drawn) lo2 = md + 1; else hi2 = md; }
+      var i = lo2;
+      T.head.setAttribute('cx', T.xs[i].toFixed(1)); T.head.setAttribute('cy', T.ys[i].toFixed(1));
+      T.ring.setAttribute('cx', T.xs[i].toFixed(1)); T.ring.setAttribute('cy', T.ys[i].toFixed(1));
     }
     T.head.setAttribute('opacity', live ? 1 : 0);
+    T.ring.setAttribute('opacity', live ? 0.55 : 0);
+  }
+
+  /* skills map: the fork and both branches draw as you scroll through it; skills light up as the line reaches them */
+  var skillmap = $('#skillmap');
+  var skillLines = skillmap ? $$('.skillmap__lines path', skillmap) : [];
+  var skillItems = skillmap ? $$('.skill', skillmap) : [];
+  skillLines.forEach(function (p) { p.setAttribute('pathLength', '1'); p.style.strokeDasharray = '1 1'; p.style.strokeDashoffset = reduceMotion ? 0 : 1; });
+  var skillNow = 0;
+  function drawSkillmap() {
+    if (!skillmap || reduceMotion || window.innerWidth <= 1100) {
+      skillLines.forEach(function (p) { p.style.strokeDashoffset = 0; });
+      return;
+    }
+    var r = skillmap.getBoundingClientRect(), vh = window.innerHeight;
+    var goal = Math.max(0, Math.min(1, (vh * 0.7 - r.top) / (r.height * 0.95)));
+    skillNow += (goal - skillNow) * 0.12;
+    var fork = Math.min(1, skillNow / 0.14);                 // stem + fork first
+    var branch = Math.max(0, Math.min(1, (skillNow - 0.1) / 0.9));
+    if (skillLines[0]) skillLines[0].style.strokeDashoffset = (1 - fork).toFixed(3);
+    if (skillLines[1]) skillLines[1].style.strokeDashoffset = (1 - branch).toFixed(3);
+    if (skillLines[2]) skillLines[2].style.strokeDashoffset = (1 - branch).toFixed(3);
+    skillItems.forEach(function (li) {
+      var y = parseFloat(li.style.getPropertyValue('--y')) / 100;
+      li.classList.toggle('is-on', skillNow >= y * 0.92);
+    });
+    if (Math.abs(goal - skillNow) > 0.002 && !threadAnim) requestAnimationFrame(drawSkillmap);
   }
 
   var ticking = false;
@@ -266,13 +331,13 @@
   var lenis = null;
   if (!reduceMotion && typeof window.Lenis === 'function') {
     // low lerp + reduced wheel step = a slower, heavier glide
-    lenis = new window.Lenis({ lerp: 0.06, wheelMultiplier: 0.7, touchMultiplier: 1, smoothWheel: true, syncTouch: false });
+    lenis = new window.Lenis({ lerp: 0.1, wheelMultiplier: 1, touchMultiplier: 1, smoothWheel: true, syncTouch: false });
     var rafLoop = function (t) { lenis.raf(t); requestAnimationFrame(rafLoop); };
     requestAnimationFrame(rafLoop);
     root.style.scrollBehavior = 'auto';
   }
   function scrollToY(y) {
-    if (lenis) lenis.scrollTo(y, { duration: 1.8 });
+    if (lenis) lenis.scrollTo(y, { duration: 1.2 });
     else window.scrollTo({ top: y, behavior: reduceMotion ? 'auto' : 'smooth' });
   }
   // in-page links glide instead of jumping
@@ -364,21 +429,25 @@
 
   /* ---------- opening signature ---------- */
   var loader = $('#loader');
-  function runLoader(done) {
+  var loaderDone = false, loaderWaiters = [];
+  function afterLoader(fn) { if (loaderDone) fn(); else loaderWaiters.push(fn); }
+  function runLoader() {
+    var release = function () { loaderDone = true; loaderWaiters.splice(0).forEach(function (f) { f(); }); };
     var seen = false;
     try { seen = sessionStorage.getItem('signed') === '1'; } catch (e) {}
-    if (!loader || reduceMotion || seen) { if (loader) loader.hidden = true; done(); return; }
+    if (!loader || reduceMotion || seen) { if (loader) loader.hidden = true; release(); return; }
     root.classList.add('is-locked');
     if (lenis) lenis.stop();
     var paths = $$('path', loader);
-    var t0 = 250, total = 0;
-    paths.forEach(function (p) {
-      var len = p.getTotalLength();
-      var dur = Math.max(160, len * 1.25);           // longer strokes take longer, like a pen
-      p.style.strokeDasharray = len + ' ' + len;
-      p.style.strokeDashoffset = len;
-      p.style.transition = 'stroke-dashoffset ' + dur + 'ms cubic-bezier(.55,.1,.45,.9) ' + (t0 + total) + 'ms';
-      total += dur * 0.92;
+    var lens = paths.map(function (p) { return p.getTotalLength(); });
+    var sum = lens.reduce(function (a, b) { return a + b; }, 0) || 1;
+    var DRAW = 1900, delay = 120;                       // whole signature in under two seconds
+    paths.forEach(function (p, i) {
+      var dur = DRAW * lens[i] / sum;
+      p.style.strokeDasharray = lens[i] + ' ' + lens[i];
+      p.style.strokeDashoffset = lens[i];
+      p.style.transition = 'stroke-dashoffset ' + dur.toFixed(0) + 'ms cubic-bezier(.45,.05,.55,.95) ' + delay.toFixed(0) + 'ms';
+      delay += dur;
     });
     requestAnimationFrame(function () { requestAnimationFrame(function () {
       paths.forEach(function (p) { p.style.strokeDashoffset = 0; });
@@ -386,19 +455,43 @@
     var finished = false;
     function finish() {
       if (finished) return; finished = true;
-      loader.classList.add('is-signed');
-      setTimeout(function () {
-        loader.classList.add('is-leaving');
-        root.classList.remove('is-locked');
-        if (lenis) lenis.start();
-        try { sessionStorage.setItem('signed', '1'); } catch (e) {}
-        done();
-        setTimeout(function () { loader.hidden = true; }, 1200);
-      }, 550);
+      loader.classList.add('is-leaving');
+      root.classList.remove('is-locked');
+      if (lenis) lenis.start();
+      try { sessionStorage.setItem('signed', '1'); } catch (e) {}
+      release();
+      setTimeout(function () { loader.hidden = true; }, 600);
     }
-    setTimeout(finish, t0 + total + 250);
+    setTimeout(finish, delay + 220);
     loader.addEventListener('click', finish);
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' || e.key === 'Enter') finish(); }, { once: true });
+  }
+  runLoader();   // starts straight away; does not wait for fonts
+
+
+  /* ---------- cursor ---------- */
+  var cur = $('#cursor');
+  if (cur && window.matchMedia('(hover: hover) and (pointer: fine)').matches && !reduceMotion) {
+    var cx = -100, cy = -100, tx = -100, ty = -100, moving = false;
+    cur.classList.add('is-hidden');
+    var follow = function () {
+      cx += (tx - cx) * 0.2; cy += (ty - cy) * 0.2;
+      cur.style.transform = 'translate3d(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px,0)';
+      if (Math.abs(tx - cx) > 0.1 || Math.abs(ty - cy) > 0.1) requestAnimationFrame(follow); else moving = false;
+    };
+    document.addEventListener('pointermove', function (e) {
+      tx = e.clientX; ty = e.clientY;
+      if (cur.classList.contains('is-hidden')) { cx = tx; cy = ty; cur.classList.remove('is-hidden'); }
+      if (!moving) { moving = true; requestAnimationFrame(follow); }
+    }, { passive: true });
+    document.addEventListener('pointerleave', function () { cur.classList.add('is-hidden'); });
+    document.addEventListener('pointerover', function (e) {
+      var labelled = e.target.closest('[data-cursor]');
+      var link = e.target.closest('a, button, summary, .filter');
+      cur.classList.toggle('is-active', !!labelled);
+      cur.classList.toggle('is-link', !labelled && !!link);
+      cur.setAttribute('data-label', labelled ? labelled.getAttribute('data-cursor') : '');
+    });
   }
 
   /* ---------- boot ---------- */
@@ -406,8 +499,8 @@
   function boot() {
     if (booted) return; booted = true;
     retone(); fitNames(); buildThread(); collectFloaters(); drawParallax();
-    runLoader(function () {
-      requestAnimationFrame(function () { root.classList.add('is-loaded'); });
+    afterLoader(function () {
+      requestAnimationFrame(function () { root.classList.add('is-loaded'); drawThread(); });
     });
   }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(boot); else boot();
