@@ -46,36 +46,6 @@
   color-scheme: light;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --paper-bg: #141413;
-    --paper-fg: var(--ivory);
-    --paper-muted: #AAA79F;
-    --paper-line: rgba(241, 238, 230, .16);
-    --paper-sheet: #1E1E1C;
-    --paper-sheet-fg: var(--ivory);
-    --paper-sheet-line: rgba(241, 238, 230, .34);
-    --ink-sheet: #1E1E1C;
-    --ink-sheet-fg: var(--ivory);
-    --ink-sheet-line: rgba(241, 238, 230, .34);
-    --shadow: 0 24px 50px -24px rgba(0, 0, 0, .95);
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --paper-bg: #141413;
-  --paper-fg: var(--ivory);
-  --paper-muted: #AAA79F;
-  --paper-line: rgba(241, 238, 230, .16);
-  --paper-sheet: #1E1E1C;
-  --paper-sheet-fg: var(--ivory);
-  --paper-sheet-line: rgba(241, 238, 230, .34);
-  --ink-sheet: #1E1E1C;
-  --ink-sheet-fg: var(--ivory);
-  --ink-sheet-line: rgba(241, 238, 230, .34);
-  --shadow: 0 24px 50px -24px rgba(0, 0, 0, .95);
-  color-scheme: dark;
-}
 
 .tone-paper {
   --bg: var(--paper-bg); --fg: var(--paper-fg); --muted: var(--paper-muted); --line: var(--paper-line);
@@ -746,3 +716,9 @@ html.is-locked, html.is-locked body { overflow: hidden; }
 /* signature with flourishes: a little wider, room for the under-swash */
 .loader__sig { width: min(80vw, 76rem); }
 @media (max-width: 760px) { .loader__sig { width: 96vw; } }
+
+/* ---------- skills: one continuous circle the thread flows through ---------- */
+.skillmap { height: auto; aspect-ratio: 1000 / 700; width: min(100%, 1080px); margin-left: auto; margin-right: auto; }
+.skillmap__group { transform: translate(-50%, 0) !important; }
+.skillmap__lines path { stroke-width: 2.2; }
+@media (max-width: 1100px) { .skillmap { aspect-ratio: auto; width: auto; } }
