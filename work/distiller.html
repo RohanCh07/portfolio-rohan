@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Distiller — Rohan Chauhan</title>
+  <meta name="description" content="Change one line, and repeated LLM calls slowly move to a small model you own.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Distiller — Rohan Chauhan">
+  <meta property="og:description" content="Change one line, and repeated LLM calls slowly move to a small model you own.">
+  <meta property="og:image" content="/assets/og-image.jpg">
+  <meta name="theme-color" content="#050505">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/ibm-plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/style.css?v=d1980a09">
+  <link rel="prev" href="/work/cerebra">
+  <link rel="next" href="/work/bug-detection">
+  <script>
+    (function () { var d = document.documentElement; d.classList.add('js', 'study-page'); try { localStorage.removeItem('theme'); } catch (e) {} })();
+  </script>
+</head>
+<body>
+  <a class="skip" href="#overview">Skip to the case study</a>
+
+  <header class="site-header" id="header">
+    <a class="wordmark" href="/" aria-label="Rohan Chauhan, home">RC</a>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="/#capabilities">Capabilities</a>
+      <a href="/#projects">Projects</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#about">About</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+  </header>
+
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+
+  <main id="top" class="study">
+    <svg class="thread" id="thread" aria-hidden="true" focusable="false"></svg>
+
+    <!-- HERO -->
+    <section class="band tone-paper study-hero" data-thread="0.04,0.06,n 0.06,0.3 0.3,0.55 0.8,0.7 0.965,1">
+      <div class="band__inner">
+        <p class="study-hero__label mono reveal"><span>03</span> / LLM infrastructure</p>
+        <h1 class="study-hero__name display">Distiller</h1>
+        <div class="study-hero__intro">
+          <p class="study-hero__pitch reveal">Change one line, and repeated LLM calls slowly move to a small model you own.</p>
+          <span class="study-hero__tag mono reveal">Project study</span>
+        </div>
+        <div class="study-hero__stage project__stage" aria-hidden="true">
+
+            <svg class="sketch" style="--x:58%;--y:-8%;--w:30vw;--r:0deg" viewBox="0 0 440 300" aria-hidden="true"><path d="M20 252 H170"/><rect class="fill" x="40" y="226" width="110" height="26" rx="3"/><path class="hot" d="M84 222 C76 210 92 204 86 192 C100 202 104 214 96 222"/><circle class="fill" cx="95" cy="150" r="58"/><path class="fill" d="M82 96 V44 H108 V96"/><rect class="fill" x="77" y="34" width="36" height="12" rx="2"/><path d="M45 168 Q95 150 145 168"/><circle cx="80" cy="182" r="3"/><circle cx="104" cy="190" r="2"/><circle cx="118" cy="176" r="2.5"/><path d="M108 54 C150 34 200 34 236 64"/><path class="fill" d="M226 54 L248 40 L382 188 L360 202 Z"/><path d="M236 64 L372 196" stroke-dasharray="3 5"/><path d="M262 64 V40 H276 M340 160 V138 H354"/><path class="fill" d="M352 214 H424 L414 286 H362 Z"/><path d="M358 258 H418"/><circle cx="376" cy="204" r="3.5" class="ink-hot"/></svg><p class="callout mono" style="--x:40%;--y:6%"><span>Big model</span><b>Every call logged</b></p><p class="callout mono" style="--x:84%;--y:76%"><span>Small model</span><b>LoRA · shadow-tested</b></p><div class="card card--code" style="--x:4%;--y:0%;--w:24vw;--r:-2deg">
+              <p class="card__head mono"><span>config.py</span><span>1 line</span></p>
+<pre class="mono"><span class="del">- base_url = "https://api.openai.com/v1"</span>
+<span class="add">+ base_url = "http://distiller:8000/v1"</span></pre>
+            </div>
+            <div class="card" style="--x:18%;--y:64%;--w:19vw;--r:1.5deg">
+              <p class="card__head mono"><span>$ distiller status</span><span></span></p>
+              <ul class="status mono">
+                <li><span class="ok">●</span><span>Gateway</span><span>working</span></li>
+                <li><span class="ok">●</span><span>Call logging</span><span>working</span></li>
+                <li><span class="wip">◐</span><span>LoRA training</span><span>building</span></li>
+                <li><span class="wip">◐</span><span>Shadow tests</span><span>building</span></li>
+                <li><span class="wip">◐</span><span>Routing</span><span>building</span></li>
+              </ul>
+            </div>
+          
+        </div>
+        <dl class="study-meta mono reveal">
+          <div><dt>Role</dt><dd>Solo — design and backend</dd></div>
+          <div><dt>Year</dt><dd>2026</dd></div>
+          <div><dt>Type</dt><dd>Personal</dd></div>
+          <div><dt>Status</dt><dd>In progress</dd></div>
+          <div class="study-meta__stack"><dt>Stack</dt><dd>Python / FastAPI / LiteLLM / LoRA / Ollama</dd></div>
+
+        </dl>
+      </div>
+    </section>
+
+    <nav class="study-contents mono" aria-label="Chapters">
+      <a class="study-contents__back" href="/#projects">← All projects</a>
+      <ol>
+        <li><a href="#overview"><span>01</span> Overview</a></li>
+        <li><a href="#problem"><span>02</span> Problem</a></li>
+        <li><a href="#system"><span>03</span> How it works</a></li>
+        <li><a href="#decisions"><span>04</span> Decisions</a></li>
+        <li><a href="#flow"><span>05</span> Flow</a></li>
+        <li><a href="#outcome"><span>06</span> Outcome</a></li>
+      </ol>
+    </nav>
+
+    <!-- OVERVIEW -->
+    <section class="band tone-ink study-chapter" id="overview" data-thread="0.965,0 0.975,0.5 0.965,1">
+      <div class="band__inner study-split">
+        <p class="study-kicker mono reveal">01 / Overview</p>
+        <h2 class="study-title reveal">An OpenAI-compatible gateway that learns your most repeated calls.</h2>
+        <p class="study-text reveal">Distiller sits between an application and its LLM provider. A team adopts it by changing one line — the base URL. It logs the calls that keep repeating, fine-tunes small open models with LoRA to copy the large model on exactly those tasks, tests them quietly, and only then starts routing to them.</p>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="band tone-paper study-chapter study-problem" id="problem" data-thread="0.965,0 0.955,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">02 / The problem</p>
+        <h2 class="study-title study-title--big reveal">Companies pay a large model to answer the same kind of question all day.</h2>
+        <div class="study-split study-split--low">
+          <p class="study-text reveal">A lot of production LLM traffic is repetitive: the same extraction, the same classification, the same formatting. A much smaller model could handle it — but switching safely means collecting data, training, evaluating and routing, which most teams never get round to.</p>
+          <ul class="study-points">
+            <li class="reveal"><span class="study-points__dot" aria-hidden="true"></span>Repetitive calls billed at large-model prices</li>
+            <li class="reveal"><span class="study-points__dot" aria-hidden="true"></span>No safe path from a big model to a small one</li>
+            <li class="reveal"><span class="study-points__dot" aria-hidden="true"></span>Switching models means touching application code</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SYSTEM -->
+    <section class="band tone-ink study-chapter" id="system" data-thread="0.965,0 0.975,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">03 / How it works</p>
+        <h2 class="study-title reveal">Log, train, test in the shadows, then route — with a fallback at every step.</h2>
+        <ol class="study-steps" style="--n:5">
+          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">01</span><h3>Gateway</h3><p>An OpenAI-compatible endpoint; adoption is a one-line change.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">02</span><h3>Log</h3><p>Record repeated calls and the large model's answers.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">03</span><h3>Fine-tune</h3><p>Train small open models with LoRA to copy those answers.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">04</span><h3>Shadow test</h3><p>Run the small model alongside the big one and compare.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">05</span><h3>Route</h3><p>Send confident requests to the small model, fall back otherwise.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- DECISIONS -->
+    <section class="band tone-paper study-chapter" id="decisions" data-thread="0.965,0 0.955,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">04 / Key decisions</p>
+        <h2 class="study-title reveal">The choices that shaped it.</h2>
+        <div class="study-decisions">
+          <article class="study-decision reveal">
+            <p class="study-decision__n mono">01</p>
+            <div><p class="study-decision__label mono">Question</p><h3>How do teams adopt it without rewriting code?</h3></div>
+            <div><p class="study-decision__label mono">Choice</p><p class="study-decision__choice">Be OpenAI-compatible.</p></div>
+            <div><p class="study-decision__label mono">Effect</p><p>Adoption is a one-line base-URL change.</p></div>
+          </article>
+          <article class="study-decision reveal">
+            <p class="study-decision__n mono">02</p>
+            <div><p class="study-decision__label mono">Question</p><h3>When is a small model good enough?</h3></div>
+            <div><p class="study-decision__label mono">Choice</p><p class="study-decision__choice">Prove it in shadow mode first.</p></div>
+            <div><p class="study-decision__label mono">Effect</p><p>Nothing is routed until the small model has matched the large one on real traffic.</p></div>
+          </article>
+          <article class="study-decision reveal">
+            <p class="study-decision__n mono">03</p>
+            <div><p class="study-decision__label mono">Question</p><h3>What if the small model is unsure?</h3></div>
+            <div><p class="study-decision__label mono">Choice</p><p class="study-decision__choice">Fall back to the large model.</p></div>
+            <div><p class="study-decision__label mono">Effect</p><p>Quality never drops below what the team had before.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FLOW -->
+    <section class="band tone-ink study-chapter" id="flow" data-thread="0.965,0 0.975,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">05 / The flow</p>
+        <h2 class="study-title reveal">What it looks like from the person using it.</h2>
+        <ol class="study-flow mono">
+          <li class="reveal"><span class="study-flow__n">01</span><span class="study-flow__dot" aria-hidden="true"></span>Point the app at Distiller</li>
+          <li class="reveal"><span class="study-flow__n">02</span><span class="study-flow__dot" aria-hidden="true"></span>Let it log real traffic</li>
+          <li class="reveal"><span class="study-flow__n">03</span><span class="study-flow__dot" aria-hidden="true"></span>Train and shadow-test small models</li>
+          <li class="reveal"><span class="study-flow__n">04</span><span class="study-flow__dot" aria-hidden="true"></span>Route confident requests</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- OUTCOME -->
+    <section class="band tone-paper study-chapter" id="outcome" data-thread="0.965,0 0.955,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">06 / Outcome</p>
+        <h2 class="study-title reveal">Built in the open, one stage at a time.</h2>
+        <dl class="study-stats">
+          <div class="reveal"><dt class="mono">Gateway skeleton and CLI</dt><dd>Working</dd></div>
+          <div class="reveal"><dt class="mono">LoRA training and routing</dt><dd>In development</dd></div>
+          <div class="reveal"><dt class="mono">To adopt it</dt><dd>1 line</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- NEXT -->
+    <section class="band tone-ink study-next" data-thread="0.965,0 0.975,0.22 0.93,0.4,e">
+      <a class="study-next__link" href="/work/bug-detection" data-cursor="Next">
+        <span class="study-next__label mono">04 / Next project</span>
+        <span class="study-next__name display">Bug Detection</span>
+        <span class="study-next__pitch">A VS Code extension that catches errors as they happen — and either teaches you, or fixes them.</span>
+        <span class="study-next__arrow" aria-hidden="true">↗</span>
+      </a>
+      <div class="study-next__foot mono">
+        <a href="/#projects">All projects</a>
+        <a href="/#contact">Contact</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/assets/lenis.min.js" defer></script>
+  <script src="/main.js?v=3a6834bb" defer></script>
+</body>
+</html>

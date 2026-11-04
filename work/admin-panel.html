@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Admin Panel — Rohan Chauhan</title>
+  <meta name="description" content="The internal panel a team runs its day on — I designed the backend logic and built the core features.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Admin Panel — Rohan Chauhan">
+  <meta property="og:description" content="The internal panel a team runs its day on — I designed the backend logic and built the core features.">
+  <meta property="og:image" content="/assets/og-image.jpg">
+  <meta name="theme-color" content="#050505">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/ibm-plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/style.css?v=d1980a09">
+  <link rel="prev" href="/work/blockauth">
+  <link rel="next" href="/work/flight-delay-predictor">
+  <script>
+    (function () { var d = document.documentElement; d.classList.add('js', 'study-page'); try { localStorage.removeItem('theme'); } catch (e) {} })();
+  </script>
+</head>
+<body>
+  <a class="skip" href="#overview">Skip to the case study</a>
+
+  <header class="site-header" id="header">
+    <a class="wordmark" href="/" aria-label="Rohan Chauhan, home">RC</a>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="/#capabilities">Capabilities</a>
+      <a href="/#projects">Projects</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#about">About</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+  </header>
+
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+
+  <main id="top" class="study">
+    <svg class="thread" id="thread" aria-hidden="true" focusable="false"></svg>
+
+    <!-- HERO -->
+    <section class="band tone-ink study-hero" data-thread="0.04,0.06,n 0.06,0.3 0.3,0.55 0.8,0.7 0.965,1">
+      <div class="band__inner">
+        <p class="study-hero__label mono reveal"><span>06</span> / Internal tools · Coding Jr</p>
+        <h1 class="study-hero__name display">Admin Panel</h1>
+        <div class="study-hero__intro">
+          <p class="study-hero__pitch reveal">The internal panel a team runs its day on — I designed the backend logic and built the core features.</p>
+          <span class="study-hero__tag mono reveal">Project study</span>
+        </div>
+        <div class="study-hero__stage project__stage" aria-hidden="true">
+
+            <svg class="sketch" style="--x:2%;--y:-6%;--w:23vw;--r:-2deg" viewBox="0 0 360 262" aria-hidden="true"><rect class="fill" x="8" y="8" width="344" height="214" rx="8"/><rect x="20" y="20" width="320" height="190" rx="2"/><path d="M20 40 H340 M84 40 V210"/><circle cx="32" cy="30" r="3"/><circle cx="44" cy="30" r="3"/><circle cx="56" cy="30" r="3"/><path d="M32 58 H70 M32 76 H70 M32 94 H64 M32 112 H70 M32 130 H60"/><rect x="28" y="52" width="48" height="12" rx="2" class="hot"/><rect x="98" y="54" width="70" height="40" rx="3"/><rect x="180" y="54" width="70" height="40" rx="3"/><rect x="262" y="54" width="66" height="40" rx="3"/><path d="M106 82 H130 M188 82 H220 M270 82 H300" stroke-width="3"/><path d="M100 196 V170 M120 196 V150 M140 196 V160 M160 196 V130 M180 196 V146 M200 196 V120 M220 196 V138" stroke-width="7"/><path d="M244 112 H328 M244 132 H328 M244 152 H310 M244 172 H328 M244 192 H300"/><path class="fill" d="M160 222 H200 L208 252 H152 Z"/><path d="M118 256 H242"/></svg><svg class="sketch" style="--x:42%;--y:66%;--w:9vw;--r:-10deg" viewBox="0 0 170 140" aria-hidden="true" data-from="0,-45vh"><circle class="fill" cx="40" cy="40" r="30"/><circle cx="40" cy="40" r="10"/><path class="fill" d="M66 54 L160 108 L150 124 L136 116 L128 130 L114 122 L120 108 L58 72 Z"/></svg><p class="callout mono" style="--x:44%;--y:-2%"><span>Roles</span><b>Admin · Mentor · Viewer</b></p><div class="card" style="--x:68%;--y:-2%;--w:21vw;--r:2deg">
+              <p class="card__head mono"><span>Users</span><span>3 of 48</span></p>
+              <table class="table mono">
+                <thead><tr><th>User</th><th>Role</th><th>Active</th></tr></thead>
+                <tbody>
+                  <tr><td>a.sharma</td><td>Admin</td><td><span class="toggle on"></span></td></tr>
+                  <tr><td>k.verma</td><td>Mentor</td><td><span class="toggle on"></span></td></tr>
+                  <tr><td>r.iyer</td><td>Viewer</td><td><span class="toggle"></span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card" style="--x:64%;--y:66%;--w:18vw;--r:-2deg">
+              <p class="card__head mono"><span>Audit log</span><span>Today</span></p>
+              <ul class="log mono">
+                <li>10:42 role changed → Mentor</li>
+                <li>10:15 access revoked</li>
+                <li>09:58 batch import · 12 rows</li>
+              </ul>
+            </div>
+          
+        </div>
+        <dl class="study-meta mono reveal">
+          <div><dt>Role</dt><dd>SDE, AI Research Internship</dd></div>
+          <div><dt>Year</dt><dd>2025</dd></div>
+          <div><dt>Type</dt><dd>Company</dd></div>
+          <div><dt>Status</dt><dd>Internal tool</dd></div>
+          <div class="study-meta__stack"><dt>Stack</dt><dd>Python / REST APIs / Web design / Git</dd></div>
+
+        </dl>
+      </div>
+    </section>
+
+    <nav class="study-contents mono" aria-label="Chapters">
+      <a class="study-contents__back" href="/#projects">← All projects</a>
+      <ol>
+        <li><a href="#overview"><span>01</span> Overview</a></li>
+        <li><a href="#problem"><span>02</span> Problem</a></li>
+        <li><a href="#system"><span>03</span> How it works</a></li>
+        <li><a href="#decisions"><span>04</span> Decisions</a></li>
+        <li><a href="#flow"><span>05</span> Flow</a></li>
+        <li><a href="#outcome"><span>06</span> Outcome</a></li>
+      </ol>
+    </nav>
+
+    <!-- OVERVIEW -->
+    <section class="band tone-paper study-chapter" id="overview" data-thread="0.965,0 0.975,0.5 0.965,1">
+      <div class="band__inner study-split">
+        <p class="study-kicker mono reveal">01 / Overview</p>
+        <h2 class="study-title reveal">The back office behind the product.</h2>
+        <p class="study-text reveal">During my AI Research internship at Coding Jr I worked as a Software Development Engineer on the company's internal admin panel. I designed its backend logic and implemented core features together with the team.</p>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="band tone-ink study-chapter study-problem" id="problem" data-thread="0.965,0 0.955,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">02 / The problem</p>
+        <h2 class="study-title study-title--big reveal">Internal teams need one dependable place to manage the platform.</h2>
+        <div class="study-split study-split--low">
+          <p class="study-text reveal">An admin panel is used every day by the people running the business, so its backend has to be predictable: clear endpoints, consistent rules, and features the team can build on.</p>
+          <ul class="study-points">
+            <li class="reveal"><span class="study-points__dot" aria-hidden="true"></span>Daily operational work for internal teams</li>
+            <li class="reveal"><span class="study-points__dot" aria-hidden="true"></span>Rules that must behave the same every time</li>
+            <li class="reveal"><span class="study-points__dot" aria-hidden="true"></span>A base the team can keep extending</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SYSTEM -->
+    <section class="band tone-paper study-chapter" id="system" data-thread="0.965,0 0.975,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">03 / How it works</p>
+        <h2 class="study-title reveal">A backend designed for the panel the team uses every day.</h2>
+        <ol class="study-steps" style="--n:4">
+          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">01</span><h3>Model</h3><p>Design the backend logic behind each panel feature.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">02</span><h3>Expose</h3><p>Serve it to the panel through REST APIs.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">03</span><h3>Build</h3><p>Implement the core features with the team.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">04</span><h3>Iterate</h3><p>Extend and refine as the team's needs grow.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- DECISIONS -->
+    <section class="band tone-ink study-chapter" id="decisions" data-thread="0.965,0 0.955,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">04 / Key decisions</p>
+        <h2 class="study-title reveal">The choices that shaped it.</h2>
+        <div class="study-decisions">
+          <article class="study-decision reveal">
+            <p class="study-decision__n mono">01</p>
+            <div><p class="study-decision__label mono">Question</p><h3>How should the panel talk to the backend?</h3></div>
+            <div><p class="study-decision__label mono">Choice</p><p class="study-decision__choice">Through REST APIs.</p></div>
+            <div><p class="study-decision__label mono">Effect</p><p>The panel and future tools can share the same backend logic.</p></div>
+          </article>
+          <article class="study-decision reveal">
+            <p class="study-decision__n mono">02</p>
+            <div><p class="study-decision__label mono">Question</p><h3>Where do the rules live?</h3></div>
+            <div><p class="study-decision__label mono">Choice</p><p class="study-decision__choice">In the backend, not the interface.</p></div>
+            <div><p class="study-decision__label mono">Effect</p><p>Behaviour stays consistent whichever screen triggers it.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FLOW -->
+    <section class="band tone-paper study-chapter" id="flow" data-thread="0.965,0 0.975,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">05 / The flow</p>
+        <h2 class="study-title reveal">What it looks like from the person using it.</h2>
+        <ol class="study-flow mono">
+          <li class="reveal"><span class="study-flow__n">01</span><span class="study-flow__dot" aria-hidden="true"></span>Team member opens the panel</li>
+          <li class="reveal"><span class="study-flow__n">02</span><span class="study-flow__dot" aria-hidden="true"></span>Picks a task</li>
+          <li class="reveal"><span class="study-flow__n">03</span><span class="study-flow__dot" aria-hidden="true"></span>Backend applies the rules</li>
+          <li class="reveal"><span class="study-flow__n">04</span><span class="study-flow__dot" aria-hidden="true"></span>Result is saved and shown</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- OUTCOME -->
+    <section class="band tone-ink study-chapter" id="outcome" data-thread="0.965,0 0.955,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">06 / Outcome</p>
+        <h2 class="study-title reveal">Core features shipped with the team.</h2>
+        <dl class="study-stats">
+          <div class="reveal"><dt class="mono">Logic designed</dt><dd>Backend</dd></div>
+          <div class="reveal"><dt class="mono">Implemented</dt><dd>Core features</dd></div>
+          <div class="reveal"><dt class="mono">Jun 2025 – Jan 2026</dt><dd>Coding Jr</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- NEXT -->
+    <section class="band tone-paper study-next" data-thread="0.965,0 0.975,0.22 0.93,0.4,e">
+      <a class="study-next__link" href="/work/flight-delay-predictor" data-cursor="Next">
+        <span class="study-next__label mono">07 / Next project</span>
+        <span class="study-next__name display">Flight Delay</span>
+        <span class="study-next__pitch">Live flight and weather data in; delay forecasts for India's busiest airports out.</span>
+        <span class="study-next__arrow" aria-hidden="true">↗</span>
+      </a>
+      <div class="study-next__foot mono">
+        <a href="/#projects">All projects</a>
+        <a href="/#contact">Contact</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/assets/lenis.min.js" defer></script>
+  <script src="/main.js?v=3a6834bb" defer></script>
+</body>
+</html>

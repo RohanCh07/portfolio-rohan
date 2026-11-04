@@ -212,6 +212,7 @@
     // A real thread doesn't run in straight diagonals. Between anchors that are far apart,
     // add soft side-to-side bends that fade out at each anchor, so the line meanders.
     var vhNow = window.innerHeight, dense = [], seed = 0.7;
+    var isStudy = root.classList.contains('study-page');
     for (var pi = 0; pi < pts.length; pi++) {
       var a = pts[pi], b = pts[pi + 1];
       dense.push(a);
@@ -219,7 +220,7 @@
       var dy = b.y - a.y, steps = Math.floor(Math.abs(dy) / (vhNow * 0.38));
       for (var k = 1; k < steps; k++) {
         var tt = k / steps, env = Math.sin(Math.PI * tt);
-        var wobble = Math.sin(seed + (a.y + dy * tt) / (vhNow * 0.55)) * W * 0.075 * env;
+        var wobble = Math.sin(seed + (a.y + dy * tt) / (vhNow * 0.55)) * W * (isStudy ? 0.012 : 0.075) * env;   // case studies: stay in the margin
         var nx = a.x + (b.x - a.x) * tt + wobble;
         dense.push({ x: Math.max(W * 0.05, Math.min(W * 0.95, nx)), y: a.y + dy * tt, flag: '', band: a.band });
       }
