@@ -11,24 +11,9 @@
   var year = $('#year');
   if (year) year.textContent = new Date().getFullYear();
 
-  /* ---------- theme ---------- */
-  var themeBtn = $('#themeToggle');
-  var themeLabel = $('#themeLabel');
-  var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
-  function currentTheme() { return root.dataset.theme || (darkQuery.matches ? 'dark' : 'light'); }
-  function syncTheme() {
-    var next = currentTheme() === 'dark' ? 'light' : 'dark';
-    if (themeLabel) themeLabel.textContent = next === 'dark' ? 'Dark' : 'Light';
-    if (themeBtn) themeBtn.setAttribute('aria-label', 'Switch to ' + next + ' theme');
-  }
-  if (themeBtn) themeBtn.addEventListener('click', function () {
-    var next = currentTheme() === 'dark' ? 'light' : 'dark';
-    root.dataset.theme = next;
-    try { localStorage.setItem('theme', next); } catch (e) {}
-    syncTheme();
-  });
-  if (darkQuery.addEventListener) darkQuery.addEventListener('change', syncTheme);
-  syncTheme();
+  /* ---------- theme: always the black / ivory look ---------- */
+  delete root.dataset.theme;
+  try { localStorage.removeItem('theme'); } catch (e) {}
 
   /* ---------- mobile menu ---------- */
   var header = $('#header');
@@ -310,6 +295,9 @@
   function setLine(role, v) {
     skillLines.forEach(function (p) { if (p.getAttribute('data-part') === role) p.style.strokeDashoffset = (1 - v).toFixed(4); });
   }
+  // Both halves of the circle start exactly where the thread arrives at the top and draw down
+  // with it: each half's tip stays level with the screen line the thread is drawn to.
+  var CY = 350, CR = 330, CH = 700;
   function drawSkillmap() {
     if (!skillmap) return;
     if (reduceMotion || window.innerWidth <= 1100) {
@@ -318,15 +306,12 @@
       return;
     }
     if (!root.classList.contains('is-loaded')) return;
-    var r = skillmap.getBoundingClientRect();
-    var p = Math.max(0, Math.min(1, (window.innerHeight * READ - r.top) / r.height));   // where the screen line is, 0..1 down the map
-    setLine('stem', Math.min(1, p / 0.06));
-    var arms = Math.max(0, Math.min(1, (p - 0.05) / 0.07));
-    setLine('arm', arms);
-    skillNodes.forEach(function (el) { el.classList.toggle('is-on', arms > 0.95); });
-    var br = Math.max(0, Math.min(1, (p - 0.12) / 0.88));
-    setLine('branch', br);
-    skillItems.forEach(function (li) { li.classList.toggle('is-on', p >= parseFloat(li.style.getPropertyValue('--y')) / 100 - 0.01); });
+    var box = skillmap.getBoundingClientRect();
+    var yBox = (window.innerHeight * READ - box.top) / box.height * CH;       // screen line, in circle units
+    var frac = yBox <= CY - CR ? 0 : yBox >= CY + CR ? 1 : Math.acos((CY - yBox) / CR) / Math.PI;
+    setLine('half', frac);
+    skillNodes.forEach(function (el) { el.classList.toggle('is-on', frac > 0.02); });
+    skillItems.forEach(function (li) { li.classList.toggle('is-on', frac >= parseFloat(li.getAttribute('data-t')) - 0.01); });
   }
 
   var ticking = false;
