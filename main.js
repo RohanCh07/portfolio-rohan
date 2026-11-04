@@ -29,9 +29,7 @@
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
 
   /* ---------- reveals ---------- */
-  // line art that draws itself: normalise every stroke to length 1
-  $$('.draw path, .draw rect, .draw circle').forEach(function (n) { n.setAttribute('pathLength', '1'); });
-  var revealEls = $$('.reveal, .project, .arc, .draw');
+  var revealEls = $$('.reveal, .project, .arc');
   if ('IntersectionObserver' in window && !reduceMotion) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
@@ -114,6 +112,16 @@
         var p0 = run[i - 1] || run[i], p1 = run[i], p2 = run[i + 1], p3 = run[i + 2] || p2;
         var c1x = p1.x + (p2.x - p0.x) / 6, c1y = p1.y + (p2.y - p0.y) / 6;
         var c2x = p2.x - (p3.x - p1.x) / 6, c2y = p2.y - (p3.y - p1.y) / 6;
+        if (p2.ctrl) {                       // rounded corner (quadratic as cubic)
+          c1x = p1.x + (p2.ctrl.x - p1.x) * 2 / 3; c1y = p1.y + (p2.ctrl.y - p1.y) * 2 / 3;
+          c2x = p2.x + (p2.ctrl.x - p2.x) * 2 / 3; c2y = p2.y + (p2.ctrl.y - p2.y) * 2 / 3;
+        } else if (p1.line && p2.line) {     // straight trace
+          c1x = p1.x + (p2.x - p1.x) / 3; c1y = p1.y + (p2.y - p1.y) / 3;
+          c2x = p1.x + (p2.x - p1.x) * 2 / 3; c2y = p1.y + (p2.y - p1.y) * 2 / 3;
+        } else {
+          if (p1.line && p0 !== p1) { c1x = p1.x + (p1.x - p0.x) * 0.33 * Math.min(1, Math.hypot(p2.x - p1.x, p2.y - p1.y) / (Math.hypot(p1.x - p0.x, p1.y - p0.y) || 1)); c1y = p1.y + (p1.y - p0.y) * 0.33 * Math.min(1, Math.hypot(p2.x - p1.x, p2.y - p1.y) / (Math.hypot(p1.x - p0.x, p1.y - p0.y) || 1)); }
+          if (p2.line && p3 !== p2) { c2x = p2.x - (p3.x - p2.x) * 0.33 * Math.min(1, Math.hypot(p2.x - p1.x, p2.y - p1.y) / (Math.hypot(p3.x - p2.x, p3.y - p2.y) || 1)); c2y = p2.y - (p3.y - p2.y) * 0.33 * Math.min(1, Math.hypot(p2.x - p1.x, p2.y - p1.y) / (Math.hypot(p3.x - p2.x, p3.y - p2.y) || 1)); }
+        }
         d.push('C' + c1x.toFixed(1) + ' ' + c1y.toFixed(1) + ' ' + c2x.toFixed(1) + ' ' + c2y.toFixed(1) + ' ' + p2.x.toFixed(1) + ' ' + p2.y.toFixed(1));
         var px = p1.x, py = p1.y, N = 20;
         for (var k = 1; k <= N; k++) {
@@ -165,13 +173,31 @@
     });
     if (pts.length < 2) return;
 
+    // Rounded right-angle routing: points flagged 'r' become rounded corners and points flagged
+    // 'l' are straight-line ends, so a stretch of thread can run like a circuit trace.
+    var routed = [];
+    for (var ri = 0; ri < pts.length; ri++) {
+      var V = pts[ri];
+      if (V.flag.indexOf('r') !== -1 && pts[ri - 1] && pts[ri + 1]) {
+        var A = pts[ri - 1], B = pts[ri + 1];
+        var la = Math.hypot(A.x - V.x, A.y - V.y), lb = Math.hypot(B.x - V.x, B.y - V.y);
+        var rad = Math.min(44, la / 2, lb / 2);
+        routed.push({ x: V.x + (A.x - V.x) / (la || 1) * rad, y: V.y + (A.y - V.y) / (la || 1) * rad, flag: '', band: V.band, line: true });
+        routed.push({ x: V.x + (B.x - V.x) / (lb || 1) * rad, y: V.y + (B.y - V.y) / (lb || 1) * rad, flag: '', band: V.band, line: true, ctrl: { x: V.x, y: V.y } });
+      } else {
+        if (V.flag.indexOf('l') !== -1) V.line = true;
+        routed.push(V);
+      }
+    }
+    pts = routed;
+
     // A real thread doesn't run in straight diagonals. Between anchors that are far apart,
     // add soft side-to-side bends that fade out at each anchor, so the line meanders.
     var vhNow = window.innerHeight, dense = [], seed = 0.7;
     for (var pi = 0; pi < pts.length; pi++) {
       var a = pts[pi], b = pts[pi + 1];
       dense.push(a);
-      if (!b || (b.flag && b.flag.indexOf('m') !== -1)) continue;
+      if (!b || (b.flag && b.flag.indexOf('m') !== -1) || (a.line && b.line)) continue;
       var dy = b.y - a.y, steps = Math.floor(Math.abs(dy) / (vhNow * 0.38));
       for (var k = 1; k < steps; k++) {
         var tt = k / steps, env = Math.sin(Math.PI * tt);
@@ -307,18 +333,46 @@
     }
     if (!root.classList.contains('is-loaded')) return;
     var box = skillmap.getBoundingClientRect();
-    var yBox = (window.innerHeight * READ - box.top) / box.height * CH;       // screen line, in circle units
+    var yBox = (window.innerHeight * READ - box.top) / box.height * CH + CR * 0.16;   // halves lead slightly
     var frac = yBox <= CY - CR ? 0 : yBox >= CY + CR ? 1 : Math.acos((CY - yBox) / CR) / Math.PI;
     setLine('half', frac);
     skillNodes.forEach(function (el) { el.classList.toggle('is-on', frac > 0.02); });
     skillItems.forEach(function (li) { li.classList.toggle('is-on', frac >= parseFloat(li.getAttribute('data-t')) - 0.01); });
   }
 
+  // Figures the thread turns into (funnel, chip, coil): each stroke draws as the screen line
+  // passes down through it, so the drawing and the thread read as one line.
+  var figures = $$('.figure').map(function (svg) {
+    var shapes = $$('path, rect, circle:not(.dot), ellipse', svg);
+    shapes.forEach(function (n) { n.setAttribute('pathLength', '1'); n.style.strokeDasharray = '1 1'; n.style.strokeDashoffset = reduceMotion ? 0 : 1; });
+    return { svg: svg, shapes: shapes, dots: $$('.dot', svg), label: $('.coil__label', svg) };
+  });
+  function drawFigures() {
+    var still = reduceMotion || !root.classList.contains('is-loaded');
+    if (!reduceMotion && !root.classList.contains('is-loaded')) return;
+    var line = window.innerHeight * READ;
+    figures.forEach(function (f) {
+      var box = f.svg.getBoundingClientRect();
+      if (!still && box.top > window.innerHeight + 200) return;          // not reached yet: nothing to draw
+      if (!still && box.bottom < -200 && f.done) return;                  // already fully drawn and gone by
+      var all = true;
+      f.shapes.forEach(function (n) {
+        var r = n.getBoundingClientRect();
+        var v = still ? 1 : Math.max(0, Math.min(1, (line - r.top) / Math.max(r.height, 1)));
+        if (v < 1) all = false;
+        n.style.strokeDashoffset = (1 - v).toFixed(4);
+      });
+      f.dots.forEach(function (dot) { var r = dot.getBoundingClientRect(); dot.classList.toggle('is-on', still || line > r.top + r.height / 2); });
+      if (f.label) f.label.style.opacity = all ? 1 : 0;
+      f.done = all;
+    });
+  }
+
   var ticking = false;
   window.addEventListener('scroll', function () {
     if (ticking) return;
     ticking = true;
-    requestAnimationFrame(function () { drawThread(); drawSkillmap(); ticking = false; });
+    requestAnimationFrame(function () { drawThread(); drawSkillmap(); drawFigures(); ticking = false; });
   }, { passive: true });
 
   var resizeTimer, lastW = window.innerWidth;
@@ -554,7 +608,7 @@
     if (booted) return; booted = true;
     retone(); fitNames(); buildThread(); collectFloaters(); drawParallax();
     afterLoader(function () {
-      requestAnimationFrame(function () { root.classList.add('is-loaded'); setTimeout(function () { introThread(); drawSkillmap(); }, 350); });
+      requestAnimationFrame(function () { root.classList.add('is-loaded'); setTimeout(function () { introThread(); drawSkillmap(); drawFigures(); }, 350); });
     });
   }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(boot); else boot();
