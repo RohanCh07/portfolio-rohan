@@ -84,7 +84,7 @@
     </section>
 
     <!-- CAPABILITIES -->
-    <section class="band tone-ink caps" id="capabilities" data-thread="0.5,0 a:capsTitle:0.97,0.04 a:capsTitle:0.97,1.12 a:capsTitle:0.5,1.2 a:skillmap:0.5,0,n a:skillmap:0.5,1,m 0.35,0.97 0.2,1" data-thread-mobile="0.5,0 0.93,0.08 0.06,0.3 0.05,0.9 0.2,1" aria-labelledby="capsTitle">
+    <section class="band tone-ink caps" id="capabilities" data-thread="0.5,0 a:capsTitle:0.97,0.04 a:capsTitle:0.97,1.06 a:skillmap:0.5,0,n a:skillmap:0.5,1,m 0.35,0.97 0.2,1" data-thread-mobile="0.5,0 0.93,0.08 0.06,0.3 0.05,0.9 0.2,1" aria-labelledby="capsTitle">
       <div class="band__inner">
         <h2 class="caps__title display reveal" id="capsTitle">
           <span>I build the backend.</span>
@@ -94,25 +94,27 @@
 
         <div class="skillmap" id="skillmap">
           <svg class="skillmap__lines" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M500 0 V60 M300 120 C340 80 420 60 500 60 C580 60 660 80 700 120" vector-effect="non-scaling-stroke"/>
-            <path d="M300 120 C120 520 260 930 500 1000" vector-effect="non-scaling-stroke"/>
-            <path d="M700 120 C880 520 740 930 500 1000" vector-effect="non-scaling-stroke"/>
+            <path data-part="stem" d="M500 0 V60" vector-effect="non-scaling-stroke"/>
+            <path data-part="arm" d="M500 60 C420 60 340 80 300 120" vector-effect="non-scaling-stroke"/>
+            <path data-part="arm" d="M500 60 C580 60 660 80 700 120" vector-effect="non-scaling-stroke"/>
+            <path data-part="branch" d="M300 120 C120 520 260 930 500 1000" vector-effect="non-scaling-stroke"/>
+            <path data-part="branch" d="M700 120 C880 520 740 930 500 1000" vector-effect="non-scaling-stroke"/>
           </svg>
           <span class="skillmap__node" style="--x:30%;--y:12%"></span>
           <span class="skillmap__node" style="--x:70%;--y:12%"></span>
-          <p class="skillmap__group mono" style="--x:30%;--y:12%">Backend</p>
-          <p class="skillmap__group mono" style="--x:70%;--y:12%">AI systems</p>
+          <p class="skillmap__group mono" data-side="l" style="--x:30%;--y:12%">Backend</p>
+          <p class="skillmap__group mono" data-side="r" style="--x:70%;--y:12%">AI systems</p>
           <ul class="skillmap__list">
-            <li class="skill" data-side="l" style="--x:24.26%;--y:28.76%"><span class="skill__dot"></span><h3 class="mono">REST APIs</h3><p>Endpoints with validation, auth and roles.</p></li>
-            <li class="skill" data-side="l" style="--x:21.83%;--y:49.56%"><span class="skill__dot"></span><h3 class="mono">FastAPI &amp; Django</h3><p>Services that stay readable as they grow.</p></li>
-            <li class="skill" data-side="l" style="--x:24.25%;--y:68.38%"><span class="skill__dot"></span><h3 class="mono">Databases</h3><p>PostgreSQL, MySQL, MongoDB, Firebase.</p></li>
-            <li class="skill" data-side="l" style="--x:30.75%;--y:83.98%"><span class="skill__dot"></span><h3 class="mono">Kafka pipelines</h3><p>Streams that move and check data reliably.</p></li>
-            <li class="skill" data-side="l" style="--x:39.34%;--y:94.17%"><span class="skill__dot"></span><h3 class="mono">Docker &amp; CI/CD</h3><p>Shipped on AWS, kept running.</p></li>
-            <li class="skill" data-side="r" style="--x:75.74%;--y:28.76%"><span class="skill__dot"></span><h3 class="mono">LLM apps</h3><p>Chatbots and assistants on real data.</p></li>
-            <li class="skill" data-side="r" style="--x:78.17%;--y:49.56%"><span class="skill__dot"></span><h3 class="mono">RAG</h3><p>Answers grounded in your own documents.</p></li>
-            <li class="skill" data-side="r" style="--x:75.75%;--y:68.38%"><span class="skill__dot"></span><h3 class="mono">Agents</h3><p>LangChain and LangGraph workflows.</p></li>
-            <li class="skill" data-side="r" style="--x:69.25%;--y:83.98%"><span class="skill__dot"></span><h3 class="mono">OCR &amp; VLLMs</h3><p>Scans and PDFs turned into clean records.</p></li>
-            <li class="skill" data-side="r" style="--x:60.66%;--y:94.17%"><span class="skill__dot"></span><h3 class="mono">Machine learning</h3><p>Scikit-learn and PyTorch models.</p></li>
+            <li class="skill" data-side="l" data-t="0.14" style="--x:24.26%;--y:28.76%"><span class="skill__dot"></span><h3 class="mono">REST APIs</h3><p>Endpoints with validation, auth and roles.</p></li>
+            <li class="skill" data-side="l" data-t="0.32" style="--x:21.83%;--y:49.56%"><span class="skill__dot"></span><h3 class="mono">FastAPI &amp; Django</h3><p>Services that stay readable as they grow.</p></li>
+            <li class="skill" data-side="l" data-t="0.5" style="--x:24.25%;--y:68.38%"><span class="skill__dot"></span><h3 class="mono">Databases</h3><p>PostgreSQL, MySQL, MongoDB, Firebase.</p></li>
+            <li class="skill" data-side="l" data-t="0.68" style="--x:30.75%;--y:83.98%"><span class="skill__dot"></span><h3 class="mono">Kafka pipelines</h3><p>Streams that move and check data reliably.</p></li>
+            <li class="skill" data-side="l" data-t="0.84" style="--x:39.34%;--y:94.17%"><span class="skill__dot"></span><h3 class="mono">Docker &amp; CI/CD</h3><p>Shipped on AWS, kept running.</p></li>
+            <li class="skill" data-side="r" data-t="0.14" style="--x:75.74%;--y:28.76%"><span class="skill__dot"></span><h3 class="mono">LLM apps</h3><p>Chatbots and assistants on real data.</p></li>
+            <li class="skill" data-side="r" data-t="0.32" style="--x:78.17%;--y:49.56%"><span class="skill__dot"></span><h3 class="mono">RAG</h3><p>Answers grounded in your own documents.</p></li>
+            <li class="skill" data-side="r" data-t="0.5" style="--x:75.75%;--y:68.38%"><span class="skill__dot"></span><h3 class="mono">Agents</h3><p>LangChain and LangGraph workflows.</p></li>
+            <li class="skill" data-side="r" data-t="0.68" style="--x:69.25%;--y:83.98%"><span class="skill__dot"></span><h3 class="mono">OCR &amp; VLLMs</h3><p>Scans and PDFs turned into clean records.</p></li>
+            <li class="skill" data-side="r" data-t="0.84" style="--x:60.66%;--y:94.17%"><span class="skill__dot"></span><h3 class="mono">Machine learning</h3><p>Scikit-learn and PyTorch models.</p></li>
           </ul>
         </div>
         <div class="toolset" aria-label="Toolset">

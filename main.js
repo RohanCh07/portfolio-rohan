@@ -124,6 +124,7 @@
     runs.filter(function (r) { return r.length > 1; }).forEach(function (run) {
       d.push('M' + run[0].x.toFixed(1) + ' ' + run[0].y.toFixed(1));
       lens.push(total); xs.push(run[0].x); ys.push(run[0].y);
+      run[0].len = total;
       for (var i = 0; i < run.length - 1; i++) {
         var p0 = run[i - 1] || run[i], p1 = run[i], p2 = run[i + 1], p3 = run[i + 2] || p2;
         var c1x = p1.x + (p2.x - p0.x) / 6, c1y = p1.y + (p2.y - p0.y) / 6;
@@ -138,6 +139,7 @@
           lens.push(total); xs.push(x); ys.push(y);
           px = x; py = y;
         }
+        p2.len = total;
       }
     });
     return { d: d.join(' '), lens: lens, xs: xs, ys: ys, total: total };
@@ -152,7 +154,8 @@
     svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
 
     var pts = [], projIdx = 0;
-    $$('.band').filter(function (b) { return !b.hidden; }).forEach(function (band) {
+    var bandEls = $$('.band').filter(function (b) { return !b.hidden; });
+    bandEls.forEach(function (band, bandIdx) {
       var r = band.getBoundingClientRect();
       var top = r.top - mRect.top, h = r.height;
       var narrow = window.innerWidth <= 1100;
@@ -171,6 +174,7 @@
         }
         var last = pts[pts.length - 1];
         if (last && Math.abs(last.y - pt.y) < 2 && Math.abs(last.x - pt.x) < 2) return; // band seams
+        pt.band = bandIdx;
         pts.push(pt);
       });
     });
@@ -218,29 +222,47 @@
 
     path.style.strokeDasharray = total + ' ' + total;
     path.style.strokeDashoffset = reduceMotion ? 0 : total;
-    T = { path: path, total: total, lens: lens, maxY: maxY, xs: xs, ys: ys, step: step, nodes: nodes, head: head, ring: ring, mainTop: mRect.top + window.scrollY };
+    // where each section's stretch of thread ends, so it can draw one section at a time
+    var bandEnd = bandEls.map(function () { return 0; });
+    pts.forEach(function (p) { if (p.len != null) bandEnd[p.band] = Math.max(bandEnd[p.band], p.len); });
+    for (var bi = 1; bi < bandEnd.length; bi++) bandEnd[bi] = Math.max(bandEnd[bi], bandEnd[bi - 1]);
+    T = { path: path, total: total, lens: lens, maxY: maxY, xs: xs, ys: ys, step: step, nodes: nodes, head: head, ring: ring,
+          bands: bandEls, bandEnd: bandEnd, mainTop: mRect.top + window.scrollY };
     if (threadNow > total) threadNow = total;
+    if (reduceMotion) threadNow = total;                         // no drawing animation: show it all
+    threadGoal = Math.min(threadGoal, total);
+    paintThread(threadNow);
     drawThread();
   }
 
-  // the thread eases toward where the scroll says it should be, so it glides instead of jumping
-  var threadNow = 0, threadGoal = 0, threadAnim = false;
+  // Like a pen: once a section comes into view, its stretch of thread draws at a steady pace
+  // (about 1.2s per section) no matter how fast you scroll. It never un-draws.
+  var threadNow = 0, threadGoal = 0, tween = null;
+  var PER_SECTION = 1200;
+  var easeInOut = function (t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; };
   function drawThread() {
     if (!T || reduceMotion) return;
-    var readY = window.scrollY + window.innerHeight * 0.66 - T.mainTop;
-    // first sample whose running max y passes the read line
-    var lo = 0, hi = T.maxY.length - 1;
-    while (lo < hi) { var mid = (lo + hi) >> 1; if (T.maxY[mid] > readY) hi = mid; else lo = mid + 1; }
-    threadGoal = T.maxY[T.maxY.length - 1] <= readY ? T.total : T.lens[lo];
-    if (!threadAnim) { threadAnim = true; requestAnimationFrame(stepThread); }
+    if (!root.classList.contains('is-loaded')) return;          // wait for the opening signature
+    var vh = window.innerHeight, reached = -1;
+    for (var i = 0; i < T.bands.length; i++) {
+      if (T.bands[i].getBoundingClientRect().top < vh * 0.78) reached = i; else break;
+    }
+    if (reached < 0) return;
+    var goal = T.bandEnd[reached];
+    if (window.scrollY + vh >= document.documentElement.scrollHeight - 4) goal = T.total;   // bottom of the page
+    if (goal <= threadGoal + 0.5) return;
+    var sections = 0;
+    for (var j = 0; j < T.bandEnd.length; j++) if (T.bandEnd[j] > threadGoal + 0.5 && T.bandEnd[j] <= goal + 0.5) sections++;
+    threadGoal = goal;
+    tween = { from: threadNow, to: goal, start: performance.now(), dur: Math.min(3200, PER_SECTION * Math.max(1, sections)) };
+    requestAnimationFrame(stepThread);
   }
-  function stepThread() {
-    if (!T) { threadAnim = false; return; }
-    var diff = threadGoal - threadNow;
-    threadNow += Math.abs(diff) < 0.5 ? diff : diff * 0.14;
+  function stepThread(now) {
+    if (!T || !tween) return;
+    var k = Math.min(1, (now - tween.start) / tween.dur);
+    threadNow = tween.from + (tween.to - tween.from) * easeInOut(k);
     paintThread(threadNow);
-    drawSkillmap();
-    if (Math.abs(threadGoal - threadNow) > 0.5) requestAnimationFrame(stepThread); else threadAnim = false;
+    if (k < 1) requestAnimationFrame(stepThread); else tween = null;
   }
   function paintThread(drawn) {
     T.path.style.strokeDashoffset = (T.total - drawn).toFixed(1);
@@ -249,45 +271,54 @@
     if (live) {
       var lo2 = 0, hi2 = T.lens.length - 1;
       while (lo2 < hi2) { var md = (lo2 + hi2) >> 1; if (T.lens[md] < drawn) lo2 = md + 1; else hi2 = md; }
-      var i = lo2;
-      T.head.setAttribute('cx', T.xs[i].toFixed(1)); T.head.setAttribute('cy', T.ys[i].toFixed(1));
-      T.ring.setAttribute('cx', T.xs[i].toFixed(1)); T.ring.setAttribute('cy', T.ys[i].toFixed(1));
+      T.head.setAttribute('cx', T.xs[lo2].toFixed(1)); T.head.setAttribute('cy', T.ys[lo2].toFixed(1));
+      T.ring.setAttribute('cx', T.xs[lo2].toFixed(1)); T.ring.setAttribute('cy', T.ys[lo2].toFixed(1));
     }
     T.head.setAttribute('opacity', live ? 1 : 0);
     T.ring.setAttribute('opacity', live ? 0.55 : 0);
   }
 
-  /* skills map: the fork and both branches draw as you scroll through it; skills light up as the line reaches them */
+  /* skills map: when it comes into view it plays in order — stem, both sides of the fork together,
+     then both branches down to where they meet; each skill appears as the line reaches it */
   var skillmap = $('#skillmap');
   var skillLines = skillmap ? $$('.skillmap__lines path', skillmap) : [];
   var skillItems = skillmap ? $$('.skill', skillmap) : [];
-  skillLines.forEach(function (p) { p.setAttribute('pathLength', '1'); p.style.strokeDasharray = '1 1'; p.style.strokeDashoffset = reduceMotion ? 0 : 1; });
-  var skillNow = 0;
+  var skillNodes = skillmap ? $$('.skillmap__node, .skillmap__group', skillmap) : [];
+  skillLines.forEach(function (p) { p.setAttribute('pathLength', '1'); p.style.strokeDasharray = '1 1'; p.style.strokeDashoffset = 1; });
+  var skillPlayed = false;
+  function setLine(role, v) {
+    skillLines.forEach(function (p) { if (p.getAttribute('data-part') === role) p.style.strokeDashoffset = (1 - v).toFixed(3); });
+  }
+  function showAllSkills() {
+    skillLines.forEach(function (p) { p.style.strokeDashoffset = 0; });
+    skillItems.concat(skillNodes).forEach(function (el) { el.classList.add('is-on'); });
+  }
   function drawSkillmap() {
-    if (!skillmap || reduceMotion || window.innerWidth <= 1100) {
-      skillLines.forEach(function (p) { p.style.strokeDashoffset = 0; });
-      return;
-    }
-    var r = skillmap.getBoundingClientRect(), vh = window.innerHeight;
-    var goal = Math.max(0, Math.min(1, (vh * 0.7 - r.top) / (r.height * 0.95)));
-    skillNow += (goal - skillNow) * 0.12;
-    var fork = Math.min(1, skillNow / 0.14);                 // stem + fork first
-    var branch = Math.max(0, Math.min(1, (skillNow - 0.1) / 0.9));
-    if (skillLines[0]) skillLines[0].style.strokeDashoffset = (1 - fork).toFixed(3);
-    if (skillLines[1]) skillLines[1].style.strokeDashoffset = (1 - branch).toFixed(3);
-    if (skillLines[2]) skillLines[2].style.strokeDashoffset = (1 - branch).toFixed(3);
-    skillItems.forEach(function (li) {
-      var y = parseFloat(li.style.getPropertyValue('--y')) / 100;
-      li.classList.toggle('is-on', skillNow >= y * 0.92);
-    });
-    if (Math.abs(goal - skillNow) > 0.002 && !threadAnim) requestAnimationFrame(drawSkillmap);
+    if (!skillmap || skillPlayed) return;
+    if (reduceMotion || window.innerWidth <= 1100) { skillPlayed = true; showAllSkills(); return; }
+    if (!root.classList.contains('is-loaded')) return;
+    if (skillmap.getBoundingClientRect().top > window.innerHeight * 0.72) return;
+    skillPlayed = true;
+    var t0 = performance.now();
+    // stem 0–450ms · fork arms 350–1000ms · branches 900–3300ms
+    var seg = function (now, a, b) { return Math.max(0, Math.min(1, (now - t0 - a) / (b - a))); };
+    (function frame(now) {
+      setLine('stem', easeInOut(seg(now, 0, 450)));
+      var arms = easeInOut(seg(now, 350, 1000));
+      setLine('arm', arms);
+      skillNodes.forEach(function (el) { el.classList.toggle('is-on', arms > 0.95); });
+      var br = seg(now, 900, 3300);
+      setLine('branch', br);
+      skillItems.forEach(function (li) { if (br >= parseFloat(li.getAttribute('data-t')) - 0.02) li.classList.add('is-on'); });
+      if (now - t0 < 3400) requestAnimationFrame(frame);
+    })(t0);
   }
 
   var ticking = false;
   window.addEventListener('scroll', function () {
     if (ticking) return;
     ticking = true;
-    requestAnimationFrame(function () { drawThread(); ticking = false; });
+    requestAnimationFrame(function () { drawThread(); drawSkillmap(); ticking = false; });
   }, { passive: true });
 
   var resizeTimer, lastW = window.innerWidth;
@@ -331,7 +362,7 @@
   var lenis = null;
   if (!reduceMotion && typeof window.Lenis === 'function') {
     // low lerp + reduced wheel step = a slower, heavier glide
-    lenis = new window.Lenis({ lerp: 0.1, wheelMultiplier: 1, touchMultiplier: 1, smoothWheel: true, syncTouch: false });
+    lenis = new window.Lenis({ duration: 1.05, wheelMultiplier: 0.9, touchMultiplier: 1, smoothWheel: true, syncTouch: false });
     var rafLoop = function (t) { lenis.raf(t); requestAnimationFrame(rafLoop); };
     requestAnimationFrame(rafLoop);
     root.style.scrollBehavior = 'auto';
@@ -433,9 +464,9 @@
   function afterLoader(fn) { if (loaderDone) fn(); else loaderWaiters.push(fn); }
   function runLoader() {
     var release = function () { loaderDone = true; loaderWaiters.splice(0).forEach(function (f) { f(); }); };
-    var seen = false;
-    try { seen = sessionStorage.getItem('signed') === '1'; } catch (e) {}
-    if (!loader || reduceMotion || seen) { if (loader) loader.hidden = true; release(); return; }
+    if (!loader || reduceMotion) { if (loader) loader.hidden = true; release(); return; }
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
     root.classList.add('is-locked');
     if (lenis) lenis.stop();
     var paths = $$('path', loader);
@@ -458,7 +489,6 @@
       loader.classList.add('is-leaving');
       root.classList.remove('is-locked');
       if (lenis) lenis.start();
-      try { sessionStorage.setItem('signed', '1'); } catch (e) {}
       release();
       setTimeout(function () { loader.hidden = true; }, 600);
     }
@@ -500,7 +530,7 @@
     if (booted) return; booted = true;
     retone(); fitNames(); buildThread(); collectFloaters(); drawParallax();
     afterLoader(function () {
-      requestAnimationFrame(function () { root.classList.add('is-loaded'); drawThread(); });
+      requestAnimationFrame(function () { root.classList.add('is-loaded'); setTimeout(function () { drawThread(); drawSkillmap(); }, 350); });
     });
   }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(boot); else boot();
