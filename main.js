@@ -146,7 +146,7 @@
     svg.setAttribute('width', W); svg.setAttribute('height', H);
     svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
 
-    var pts = [], projIdx = 0;
+    var pts = [], projIdx = 0, figs = [];
     var bandEls = $$('.band').filter(function (b) { return !b.hidden; });
     bandEls.forEach(function (band, bandIdx) {
       var r = band.getBoundingClientRect();
@@ -155,6 +155,19 @@
       var spec = (narrow && band.dataset.threadMobile) || band.dataset.thread || PROJECT_PATTERNS[projIdx++ % 2];
       spec.trim().split(/\s+/).forEach(function (tok) {
         var pt;
+        if (tok.indexOf('g:') === 0) {
+          // g:figureId — the thread itself traces this figure's outline (one continuous stroke)
+          var fsvg = document.getElementById(tok.slice(2));
+          if (!fsvg || !fsvg.getClientRects().length) return;
+          var fpath = fsvg.querySelector('path'), FL = fpath.getTotalLength(), ctm = fpath.getScreenCTM();
+          var nS = Math.max(40, Math.round(FL / 3)), fi = figs.length;
+          figs.push({ id: fsvg.id });
+          for (var ks = 0; ks <= nS; ks++) {
+            var q = fpath.getPointAtLength(FL * ks / nS);
+            pts.push({ x: ctm.a * q.x + ctm.c * q.y + ctm.e - mRect.left, y: ctm.b * q.x + ctm.d * q.y + ctm.f - mRect.top, flag: '', band: bandIdx, fig: fi });
+          }
+          return;
+        }
         if (tok.indexOf('a:') === 0) {
           // a:elementId:fx,fy[,flag] — a point relative to an element's box
           var bits = tok.split(':'), target = document.getElementById(bits[1]);
@@ -197,7 +210,7 @@
     for (var pi = 0; pi < pts.length; pi++) {
       var a = pts[pi], b = pts[pi + 1];
       dense.push(a);
-      if (!b || (b.flag && b.flag.indexOf('m') !== -1) || (a.line && b.line)) continue;
+      if (!b || (b.flag && b.flag.indexOf('m') !== -1) || (a.line && b.line) || a.fig != null || b.fig != null) continue;
       var dy = b.y - a.y, steps = Math.floor(Math.abs(dy) / (vhNow * 0.38));
       for (var k = 1; k < steps; k++) {
         var tt = k / steps, env = Math.sin(Math.PI * tt);
@@ -255,8 +268,18 @@
     var bandEnd = bandEls.map(function () { return 0; });
     pts.forEach(function (p) { if (p.len != null) bandEnd[p.band] = Math.max(bandEnd[p.band], p.len); });
     for (var bi = 1; bi < bandEnd.length; bi++) bandEnd[bi] = Math.max(bandEnd[bi], bandEnd[bi - 1]);
+    // each traced figure: where it starts and ends along the thread, and its vertical extent
+    figs.forEach(function (f, fi) {
+      var fp = pts.filter(function (q) { return q.fig === fi && q.len != null; });
+      if (!fp.length) return;
+      f.start = fp[0].len; f.end = fp[fp.length - 1].len;
+      f.top = Math.min.apply(null, fp.map(function (q) { return q.y; }));
+      f.bottom = Math.max.apply(null, fp.map(function (q) { return q.y; }));
+    });
+    var figById = {};
+    figs.forEach(function (f) { if (f.start != null) figById[f.id] = f; });
     T = { path: path, total: total, lens: lens, maxY: maxY, xs: xs, ys: ys, step: step, nodes: nodes, head: head, ring: ring,
-          bands: bandEls, bandEnd: bandEnd, mainTop: mRect.top + window.scrollY };
+          bands: bandEls, bandEnd: bandEnd, figs: figs.filter(function (f) { return f.start != null; }), figById: figById, mainTop: mRect.top + window.scrollY };
     if (threadNow > total) threadNow = total;
     if (reduceMotion) threadNow = total;                         // no drawing animation: show it all
     threadGoal = Math.min(threadGoal, total);
@@ -273,6 +296,10 @@
   function lengthAtScreenLine() {
     var readY = window.scrollY + window.innerHeight * READ - T.mainTop;
     if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) return T.total;
+    for (var fi = 0; fi < T.figs.length; fi++) {
+      var f = T.figs[fi];
+      if (readY >= f.top && readY < f.bottom) return f.start + (f.end - f.start) * (readY - f.top) / Math.max(1, f.bottom - f.top);
+    }
     var lo = 0, hi = T.maxY.length - 1;
     while (lo < hi) { var mid = (lo + hi) >> 1; if (T.maxY[mid] > readY) hi = mid; else lo = mid + 1; }
     return T.maxY[T.maxY.length - 1] <= readY ? T.total : T.lens[lo];
@@ -309,64 +336,96 @@
     }
     T.head.setAttribute('opacity', live ? 1 : 0);
     T.ring.setAttribute('opacity', live ? 0.55 : 0);
+    figureUi(drawn);
   }
+  function figProgress(id, drawn) {
+    var f = T && T.figById[id];
+    if (!f) return reduceMotion ? 1 : null;
+    return Math.max(0, Math.min(1, (drawn - f.start) / Math.max(1, f.end - f.start)));
+  }
+  function figureUi(drawn) {
+    var sp = figProgress('figSpiral', drawn);
+    if (sp != null) { toggleOn('#spiralIn', sp > 0); toggleOn('#spiralOut', sp > 0.92); }
+    var ci = figProgress('figCircle', drawn);
+    if (ci != null) {
+      var loop = Math.min(1, ci / 0.76);                       // the circle is ~76% of that stretch, the drop the rest
+      skillNodes.forEach(function (el) { el.classList.toggle('is-on', ci > 0); });
+      skillItems.forEach(function (li) { li.classList.toggle('is-on', loop >= parseFloat(li.getAttribute('data-t')) - 0.004); });
+    }
+    var co = figProgress('coil', drawn);
+    var plugEl = document.getElementById('plug');
+    if (plugEl) plugEl.classList.toggle('is-ready', reduceMotion || drawn >= T.total - 6 || (co != null && co > 0.985));
+  }
+  function toggleOn(sel, on) { var el = $(sel); if (el) el.classList.toggle('is-on', on); }
 
-  /* skills map: pulled by the same screen line — the fork, then both branches draw down to it,
-     and each skill appears as the line reaches it */
+  /* skills map: the circle is traced by the thread itself (see figureUi); phones and tablets get the list */
   var skillmap = $('#skillmap');
-  var skillLines = skillmap ? $$('.skillmap__lines path', skillmap) : [];
   var skillItems = skillmap ? $$('.skill', skillmap) : [];
   var skillNodes = skillmap ? $$('.skillmap__node, .skillmap__group', skillmap) : [];
-  skillLines.forEach(function (p) { p.setAttribute('pathLength', '1'); p.style.strokeDasharray = '1 1'; p.style.strokeDashoffset = 1; });
-  function setLine(role, v) {
-    skillLines.forEach(function (p) { if (p.getAttribute('data-part') === role) p.style.strokeDashoffset = (1 - v).toFixed(4); });
-  }
-  // Both halves of the circle start exactly where the thread arrives at the top and draw down
-  // with it: each half's tip stays level with the screen line the thread is drawn to.
-  var CY = 350, CR = 330, CH = 700;
   function drawSkillmap() {
     if (!skillmap) return;
-    if (reduceMotion || window.innerWidth <= 1100) {
-      skillLines.forEach(function (p) { p.style.strokeDashoffset = 0; });
-      skillItems.concat(skillNodes).forEach(function (el) { el.classList.add('is-on'); });
-      return;
-    }
-    if (!root.classList.contains('is-loaded')) return;
-    var box = skillmap.getBoundingClientRect();
-    var yBox = (window.innerHeight * READ - box.top) / box.height * CH + CR * 0.16;   // halves lead slightly
-    var frac = yBox <= CY - CR ? 0 : yBox >= CY + CR ? 1 : Math.acos((CY - yBox) / CR) / Math.PI;
-    setLine('half', frac);
-    skillNodes.forEach(function (el) { el.classList.toggle('is-on', frac > 0.02); });
-    skillItems.forEach(function (li) { li.classList.toggle('is-on', frac >= parseFloat(li.getAttribute('data-t')) - 0.01); });
+    if (reduceMotion || window.innerWidth <= 1100) skillItems.concat(skillNodes).forEach(function (el) { el.classList.add('is-on'); });
   }
+  function drawFigures() {}
 
-  // Figures the thread turns into (funnel, chip, coil): each stroke draws as the screen line
-  // passes down through it, so the drawing and the thread read as one line.
-  var figures = $$('.figure').map(function (svg) {
-    var shapes = $$('path, rect, circle:not(.dot), ellipse', svg);
-    shapes.forEach(function (n) { n.setAttribute('pathLength', '1'); n.style.strokeDasharray = '1 1'; n.style.strokeDashoffset = reduceMotion ? 0 : 1; });
-    return { svg: svg, shapes: shapes, dots: $$('.dot', svg), label: $('.coil__label', svg) };
-  });
-  function drawFigures() {
-    var still = reduceMotion || !root.classList.contains('is-loaded');
-    if (!reduceMotion && !root.classList.contains('is-loaded')) return;
-    var line = window.innerHeight * READ;
-    figures.forEach(function (f) {
-      var box = f.svg.getBoundingClientRect();
-      if (!still && box.top > window.innerHeight + 200) return;          // not reached yet: nothing to draw
-      if (!still && box.bottom < -200 && f.done) return;                  // already fully drawn and gone by
-      var all = true;
-      f.shapes.forEach(function (n) {
-        var r = n.getBoundingClientRect();
-        var v = still ? 1 : Math.max(0, Math.min(1, (line - r.top) / Math.max(r.height, 1)));
-        if (v < 1) all = false;
-        n.style.strokeDashoffset = (1 - v).toFixed(4);
-      });
-      f.dots.forEach(function (dot) { var r = dot.getBoundingClientRect(); dot.classList.toggle('is-on', still || line > r.top + r.height / 2); });
-      if (f.label) f.label.style.opacity = all ? 1 : 0;
-      f.done = all;
+  /* ---------- contact: pull the plug to open the message form ---------- */
+  (function () {
+    var plug = document.getElementById('plug'), form = document.getElementById('msgForm'), contact = document.getElementById('contact');
+    if (!plug || !form || !contact) return;
+    var wrap = plug.parentNode, coilSvg = wrap.querySelector('.coil');
+    var cord = document.createElement('span'); cord.className = 'cord'; wrap.appendChild(cord);
+    var dragging = false, sx = 0, sy = 0, dx = 0, dy = 0, SNAP = 120;
+    function openForm() {
+      form.hidden = false; contact.classList.add('is-messaging'); plug.setAttribute('aria-expanded', 'true');
+      var first = form.querySelector('input'); if (first) setTimeout(function () { first.focus({ preventScroll: true }); }, 250);
+    }
+    function closeForm() {
+      form.hidden = true; contact.classList.remove('is-messaging'); plug.setAttribute('aria-expanded', 'false'); plug.focus({ preventScroll: true });
+    }
+    function setPull(x, y) {
+      plug.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';
+      var len = Math.hypot(x, y);
+      cord.style.height = len.toFixed(1) + 'px';
+      cord.style.transform = 'rotate(' + (Math.atan2(-x, y) * 180 / Math.PI).toFixed(1) + 'deg)';
+    }
+    plug.addEventListener('pointerdown', function (e) {
+      if (!plug.classList.contains('is-ready')) return;
+      dragging = true; sx = e.clientX; sy = e.clientY; dx = dy = 0;
+      plug.setPointerCapture(e.pointerId); plug.classList.add('is-dragging');
+      if (lenis) lenis.stop();
     });
-  }
+    plug.addEventListener('pointermove', function (e) {
+      if (!dragging) return;
+      dx = (e.clientX - sx) * 0.6; dy = Math.max(0, e.clientY - sy);
+      setPull(dx, Math.min(dy, 220));
+    });
+    function release() {
+      if (!dragging) return;
+      dragging = false; plug.classList.remove('is-dragging');
+      if (lenis) lenis.start();
+      var pulled = dy > SNAP;
+      plug.style.transition = 'transform .5s cubic-bezier(.34,1.56,.64,1)';
+      cord.style.transition = 'height .45s cubic-bezier(.34,1.56,.64,1)';
+      setPull(0, 0);
+      setTimeout(function () { plug.style.transition = cord.style.transition = ''; }, 520);
+      if (pulled) openForm();
+      else if (Math.hypot(dx, dy) < 6) openForm();                // a plain click/tap also opens it
+    }
+    plug.addEventListener('pointerup', release);
+    plug.addEventListener('pointercancel', release);
+    plug.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openForm(); } });
+    form.querySelector('.msg__close').addEventListener('click', closeForm);
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var note = form.querySelector('.msg__note');
+      var fe = form.elements, name = fe['name'].value.trim(), email = fe['email'].value.trim(), msg = fe['message'].value.trim();
+      if (!name || !msg || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { note.textContent = 'Add your name, a valid email and a message.'; return; }
+      var subject = 'Portfolio message from ' + name;
+      var body = msg + '\n\n— ' + name + ' (' + email + ')';
+      window.location.href = 'mailto:chauhanrohan223@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      note.textContent = 'Your email app should open with the message ready to send.';
+    });
+  })();
 
   var ticking = false;
   window.addEventListener('scroll', function () {

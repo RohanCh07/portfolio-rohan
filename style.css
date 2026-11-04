@@ -736,3 +736,56 @@ html.is-locked, html.is-locked body { overflow: hidden; }
 .imprint path, .imprint rect, .imprint circle { stroke-width: 1.4; }
 .coil path, .coil rect { stroke-width: 1.3; }
 @media (max-width: 1100px) { .funnel, .funnel__label { display: none; } }
+
+/* ---------- figures are traced by the thread itself: the outlines below are invisible guides ---------- */
+.tfig { visibility: hidden; }
+.tfig--spiral { position: absolute; right: 10%; top: 14%; width: min(21vw, 290px); height: auto; }
+.tfig__label { position: absolute; right: 10%; width: min(21vw, 290px); text-align: center; font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); opacity: 0; transition: opacity .5s var(--ease); }
+.tfig__label.is-on { opacity: 1; }
+.tfig__label--in { top: calc(14% - 2rem); }
+.tfig__label--out { top: calc(14% + min(21vw, 290px) * 380 / 300 + 1rem); color: var(--signal); }
+@media (max-width: 1100px) { .tfig--spiral, .tfig__label { display: none; } }
+
+/* contact: coil + plug grip */
+.coil-wrap { position: absolute; z-index: 3; right: 7%; top: 0; width: min(28vw, 26rem); pointer-events: none; }
+.coil-wrap .coil { position: static; width: 100%; right: auto; left: auto; }
+.plug {
+  position: absolute; left: 50%; top: calc(100% * 520 / 600); width: 46px; height: 46px; margin: -23px 0 0 -23px;
+  border-radius: 50%; background: transparent; cursor: grab; pointer-events: auto; touch-action: none;
+  opacity: 0; transform: scale(.6); transition: opacity .4s var(--ease), transform .4s var(--ease);
+}
+.plug::before { content: ""; position: absolute; inset: 11px; border-radius: 50%; border: 2px solid var(--signal); background: var(--bg); transition: background-color .2s; }
+.plug::after { content: ""; position: absolute; inset: 19px; border-radius: 50%; background: var(--signal); }
+.plug.is-ready { opacity: 1; transform: none; }
+.plug:hover::before, .plug:focus-visible::before { background: var(--signal); }
+.plug.is-dragging { cursor: grabbing; transition: none; }
+.plug.is-dragging::before { background: var(--signal); }
+.plug__hint { position: absolute; top: calc(100% + .4rem); left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); pointer-events: none; }
+.plug.is-ready .plug__hint { animation: nudge 1.8s var(--ease-ui) infinite; }
+.coil-wrap .coil-stretch { stroke: var(--signal); }
+.cord { position: absolute; left: 50%; top: calc(100% * 520 / 600); width: 2px; margin-left: -1px; background: var(--signal); transform-origin: top; pointer-events: none; height: 0; }
+
+/* message form that opens when the plug is pulled */
+.msg { display: grid; gap: 1.4rem; max-width: 40rem; margin-top: 1.5rem; }
+.msg[hidden] { display: none; }
+.msg__head { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.msg__title { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--signal); }
+.msg__close { font: 400 1.6rem/1 var(--mono); color: var(--muted); padding: .2rem .5rem; }
+.msg__close:hover { color: var(--fg); }
+.msg__row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.msg label { display: grid; gap: .5rem; font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.msg input, .msg textarea {
+  font: 400 1.05rem/1.4 var(--display); color: var(--fg); background: transparent; border: 0; border-bottom: 1px solid var(--line);
+  padding: .5rem 0; letter-spacing: 0; text-transform: none; resize: none; border-radius: 0;
+}
+.msg input:focus-visible, .msg textarea:focus-visible { outline: 0; border-bottom-color: var(--signal); }
+.msg__send { justify-self: start; font-size: clamp(1.4rem, 2.6vw, 2.2rem); letter-spacing: -.05em; border-bottom: 3px solid currentColor; padding-bottom: .1em; }
+.msg__send:hover { color: var(--signal); }
+.msg__note { font-size: .74rem; color: var(--muted); min-height: 1.2em; }
+.contact.is-messaging .contact__title, .contact.is-messaging .contact__cta, .contact.is-messaging .contact__addr { display: none; }
+.js .msg:not([hidden]) { animation: msgIn .6s var(--ease) both; }
+@keyframes msgIn { from { opacity: 0; transform: translateY(1rem); } to { opacity: 1; transform: none; } }
+@media (max-width: 760px) {
+  .coil-wrap { right: 2%; width: 40vw; }
+  .msg__row { grid-template-columns: 1fr; }
+}
