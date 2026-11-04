@@ -742,3 +742,7 @@ html.is-locked, html.is-locked body { overflow: hidden; }
 
 /* the signature draws by fractions of each stroke, so it must scale normally (no fixed-width stroke) */
 .loader__sig path { vector-effect: none; }
+
+/* signature with flourishes: a little wider, room for the under-swash */
+.loader__sig { width: min(80vw, 76rem); }
+@media (max-width: 760px) { .loader__sig { width: 96vw; } }
