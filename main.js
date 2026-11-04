@@ -485,26 +485,38 @@
     root.classList.add('is-locked');
     if (lenis) lenis.stop();
     var paths = $$('path', loader);
-    // first path = lead-in from the left edge, last = tail off the right edge; the rest are the letters
+    // Pen timing, like a hand: the lead-in accelerates into the R, letters are written at a steady
+    // pace (each stroke easing in and out), a short pen-lift between the two words, then the
+    // closing swash is a fast whip that slows as it leaves the screen.
     var lens = paths.map(function (p) { return p.getTotalLength(); });
-    var letters = lens.slice(1, -1).reduce(function (a, b) { return a + b; }, 0) || 1;
-    var LEAD = 380, LETTERS = 2100, TAIL = 420, delay = 80;
-    // keep a fine ~1.8px nib whatever size the signature is drawn at
+    var kinds = paths.map(function (p) { return p.getAttribute('data-kind') || 'letter'; });
+    var letterLen = 0;
+    kinds.forEach(function (k, i) { if (k === 'letter') letterLen += lens[i]; });
+    var LEAD = 520, LETTERS = 1900, SWASH = 820, WORD_GAP = 140, delay = 120;
     var sigSvg = $('.loader__sig', loader);
     var vbW = sigSvg && sigSvg.viewBox && sigSvg.viewBox.baseVal ? sigSvg.viewBox.baseVal.width : 0;
     var scale = vbW ? sigSvg.getBoundingClientRect().width / vbW : 1;
-    var nib = (1.8 / (scale || 1)).toFixed(2);
+    var nib = (1.9 / (scale || 1)).toFixed(2);
+    var prevRight = null;
     paths.forEach(function (p, i) {
+      var k = kinds[i], dur, ease;
+      if (k === 'lead') { dur = LEAD; ease = 'cubic-bezier(.55,0,.85,.6)'; }
+      else if (k === 'swash') { dur = SWASH; ease = 'cubic-bezier(.2,.7,.35,1)'; }
+      else {
+        dur = Math.max(30, LETTERS * lens[i] / (letterLen || 1));
+        ease = 'cubic-bezier(.42,0,.58,1)';
+        var box = p.getBBox();
+        if (prevRight !== null && box.x - prevRight > 90) delay += WORD_GAP;   // lift the pen between words
+        prevRight = Math.max(prevRight || 0, box.x + box.width);
+      }
       p.style.strokeWidth = nib;
-      var last = i === paths.length - 1;
-      var dur = i === 0 ? LEAD : last ? TAIL : Math.max(24, LETTERS * lens[i] / letters);
-      // pathLength=1 measures every stroke as a fraction of itself, so nothing shows before its turn
       p.setAttribute('pathLength', '1');
       p.style.strokeDasharray = '1 1';
       p.style.transition = 'none';                     // jump straight to "hidden" — don't animate into it
       p.style.strokeDashoffset = '1';
-      p.dataset.draw = 'stroke-dashoffset ' + dur.toFixed(0) + 'ms ' + (i === 0 ? 'cubic-bezier(.5,0,.9,1)' : last ? 'cubic-bezier(.1,0,.5,1)' : 'linear') + ' ' + delay.toFixed(0) + 'ms';
-      delay += dur;
+      p.dataset.draw = 'stroke-dashoffset ' + dur.toFixed(0) + 'ms ' + ease + ' ' + delay.toFixed(0) + 'ms';
+      // strokes overlap slightly, so the pen never looks like it stops dead between pieces
+      delay += k === 'letter' ? dur * 0.9 : dur;
     });
     if (sigSvg) sigSvg.getBoundingClientRect();       // make the browser apply the hidden state now
     requestAnimationFrame(function () { requestAnimationFrame(function () {
