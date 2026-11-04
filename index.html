@@ -4,22 +4,21 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Rohan Chauhan — Backend &amp; AI Engineer</title>
-  <meta name="description" content="Rohan Chauhan builds backend systems and AI-driven applications: APIs, data pipelines and LLM tools. Software Engineer at Moglix, Greater Noida.">
+  <meta name="description" content="Rohan Chauhan is a backend and AI engineer at Moglix. He builds REST APIs, data pipelines and LLM systems that run in production.">
   <meta name="author" content="Rohan Chauhan">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Rohan Chauhan — Backend &amp; AI Engineer">
-  <meta property="og:description" content="Production APIs, data pipelines and LLM systems that solve real business problems.">
+  <meta property="og:description" content="REST APIs, data pipelines and LLM systems that run in production.">
   <meta property="og:image" content="assets/og-image.jpg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="theme-color" content="#ECE8DF" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0B0B0A" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#050505">
   <meta name="color-scheme" content="light dark">
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script>
     (function () {
@@ -30,102 +29,82 @@
   </script>
 </head>
 <body>
-  <a class="skip" href="#work">Skip to work</a>
+  <a class="skip" href="#projects">Skip to projects</a>
 
-  <!-- HEADER -->
-  <header class="site-header">
+  <header class="site-header" id="header">
     <a class="wordmark" href="#top" aria-label="Rohan Chauhan, back to top">RC</a>
     <nav class="nav" id="nav" aria-label="Sections">
-      <a href="#work">Work</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#projects">Projects</a>
       <a href="#experience">Experience</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch colour theme"><span class="theme-toggle__dot" aria-hidden="true"></span><span id="themeLabel">Dark</span></button>
     </nav>
-    <div class="header-tools">
-      <span class="clock" id="clock" aria-label="Local time in India">IST --:--</span>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch colour theme">
-        <span class="theme-toggle__dot" aria-hidden="true"></span>
-        <span class="theme-toggle__label" id="themeLabel">Dark</span>
-      </button>
-      <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
-    </div>
+    <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
   </header>
 
   <main id="top">
+    <svg class="thread" id="thread" aria-hidden="true" focusable="false"></svg>
 
     <!-- HERO -->
-    <section class="band tone-ink hero" data-tone="ink">
+    <section class="band tone-ink hero" data-thread="0.03,0.1,n 0.035,0.3 0.2,0.62 0.62,0.86 0.8,1">
       <div class="band__inner">
-        <p class="status mono reveal"><span class="pulse" aria-hidden="true"></span>Software Engineer at Moglix · Greater Noida, IST</p>
         <h1 class="hero__title display">
-          <span class="line"><span>Backends &amp; AI</span></span>
-          <span class="line"><span>built to run</span></span>
-          <span class="line"><span>in <em class="accent">production.</em></span></span>
+          <span class="line"><span>I build</span></span>
+          <span class="line"><span>the engine</span></span>
+          <span class="line"><span>room.</span></span>
         </h1>
         <div class="hero__foot">
-          <p class="hero__lede mono reveal">
-            Python engineer building APIs, data pipelines and LLM-powered tools,
-            the kind people actually rely on once they ship.
-          </p>
-          <div class="hero__cta reveal">
-            <a class="cta" href="#work">See the work <span class="cta__arrow" aria-hidden="true">↓</span></a>
-            <a class="cta cta--quiet" href="assets/Rohan-Chauhan-Resume.pdf" download>Résumé <span class="cta__arrow" aria-hidden="true">↓</span></a>
-          </div>
+          <p class="hero__lede mono reveal">Backend &amp; AI engineer at Moglix. REST APIs, data pipelines and LLM systems that run in production, not just in a demo.</p>
+          <a class="hero__hint mono reveal" href="#intro">Scroll to follow the thread <span aria-hidden="true">↓</span></a>
         </div>
-        <p class="scroll-hint mono" aria-hidden="true" data-trace-y>Scroll to trace the request <span>↓</span></p>
       </div>
     </section>
 
-    <!-- APPROACH -->
-    <section class="band tone-paper approach" data-tone="paper" aria-labelledby="approach-title">
+    <!-- INTRO -->
+    <section class="band tone-paper intro" id="intro" data-thread="0.86,0.06 0.78,0.24 0.66,0.36,n 0.72,0.5 0.86,0.42 0.8,0.3 0.7,0.46 0.6,0.8 0.5,1">
       <div class="band__inner">
-        <h2 class="approach__title display reveal" id="approach-title">
-          Every request<br>has a path.<br><span class="accent">I build the path.</span>
+        <h2 class="intro__title display reveal">
+          <span>From raw</span>
+          <span class="indent-1">data to the</span>
+          <span>right answer,</span>
+          <span class="indent-2">fast.</span>
         </h2>
-        <p class="approach__lede reveal">
-          Between someone clicking a button and something useful happening, there's an
-          API, some data, sometimes a model, and a lot that can go wrong. That middle part is my job.
-        </p>
-        <ol class="stages">
-          <li class="stage reveal">
-            <span class="stage__dot" aria-hidden="true" data-trace-y></span>
-            <span class="stage__n mono">01 / Request</span>
-            <h3>Clean APIs</h3>
-            <p>REST endpoints with real validation, roles and schemas that still make sense a year later.</p>
-          </li>
-          <li class="stage reveal">
-            <span class="stage__dot" aria-hidden="true"></span>
-            <span class="stage__n mono">02 / Data</span>
-            <h3>Pipelines</h3>
-            <p>Moving, checking and joining data across SQL, MongoDB and Kafka without losing any of it.</p>
-          </li>
-          <li class="stage reveal">
-            <span class="stage__dot" aria-hidden="true"></span>
-            <span class="stage__n mono">03 / Model</span>
-            <h3>LLM layer</h3>
-            <p>Chatbots, RAG, OCR and fine-tuned small models: the part that turns data into an answer.</p>
-          </li>
-          <li class="stage reveal">
-            <span class="stage__dot" aria-hidden="true"></span>
-            <span class="stage__n mono">04 / Response</span>
-            <h3>Holds up</h3>
-            <p>Docker, CI/CD, fallbacks and logs, so it keeps working after the demo is over.</p>
-          </li>
-        </ol>
+        <p class="intro__lede mono reveal">I connect messy business data, reliable APIs and the models on top, so the answer shows up quickly and correctly.</p>
+        <ul class="intro__tags mono reveal" aria-label="What I connect">
+          <li>Data</li><li>API</li><li>Model</li>
+        </ul>
       </div>
     </section>
 
-    <!-- WORK -->
-    <section class="work" id="work" aria-labelledby="work-title">
-      <div class="band tone-ink work-head" data-tone="ink">
-        <div class="band__inner">
-          <p class="kicker mono reveal">Selected work · 2024 — 2026</p>
-          <h2 class="work-head__title display reveal" id="work-title" data-trace-y="below">Things<br>I've built.</h2>
-          <p class="work-head__lede mono reveal">Shipped at work, built on my own, and one paper. Filter by where it came from.</p>
+    <!-- CAPABILITIES -->
+    <section class="band tone-ink caps" id="capabilities" data-thread="0.5,0.03 0.42,0.2 0.5,0.86,n 0.3,0.97 0.2,1" aria-labelledby="caps-title">
+      <div class="band__inner">
+        <h2 class="caps__title display reveal" id="caps-title">
+          <span>I build the backend.</span>
+          <span class="indent-1">And the model</span>
+          <span class="accent">on top of it.</span>
+        </h2>
+        <div class="arc" id="arc">
+          <svg class="arc__line" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M150 0 C150 260 320 392 500 392 C680 392 850 260 850 0" vector-effect="non-scaling-stroke"/>
+          </svg>
+          <ul class="arc__list">
+            <li class="arc__item" style="--x:16.2%;--y:22%" data-side="l"><span class="arc__dot"></span><h3 class="mono">Backend APIs</h3><p>REST services with validation, auth and roles.</p></li>
+            <li class="arc__item" style="--x:22.4%;--y:62%" data-side="l"><span class="arc__dot"></span><h3 class="mono">Data pipelines</h3><p>SQL, MongoDB and Kafka, moved and checked.</p></li>
+            <li class="arc__item" style="--x:35%;--y:93%" data-side="l"><span class="arc__dot"></span><h3 class="mono">OCR &amp; documents</h3><p>Turning scans and PDFs into clean records.</p></li>
+            <li class="arc__item" style="--x:65%;--y:93%" data-side="r"><span class="arc__dot"></span><h3 class="mono">LLM &amp; RAG</h3><p>Chatbots and retrieval grounded in real data.</p></li>
+            <li class="arc__item" style="--x:77.6%;--y:62%" data-side="r"><span class="arc__dot"></span><h3 class="mono">Automation</h3><p>Repeated work turned into reliable workflows.</p></li>
+            <li class="arc__item" style="--x:83.8%;--y:22%" data-side="r"><span class="arc__dot"></span><h3 class="mono">Ship &amp; run</h3><p>Docker, Git CI/CD and AWS, kept running.</p></li>
+          </ul>
         </div>
       </div>
+    </section>
 
-      <div class="filterbar" id="filterbar">
+    <!-- PROJECTS -->
+    <div class="projects" id="projects" aria-label="Projects">
+      <div class="filterbar">
         <div class="filters" role="group" aria-label="Filter projects">
           <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">All <sup data-count="all"></sup></button>
           <button class="filter" type="button" data-filter="company" aria-pressed="false">Company <sup data-count="company"></sup></button>
@@ -135,71 +114,61 @@
       </div>
       <p class="sr-only" id="filterStatus" aria-live="polite"></p>
 
-      <!-- Lumida -->
-      <article class="band project tone-paper" data-tone="paper" data-cat="personal" aria-labelledby="p-lumida">
+      <!-- 01 LUMIDA -->
+      <article class="band project tone-paper" data-cat="personal" aria-labelledby="p-lumida">
         <div class="band__inner">
           <header class="project__top">
-            <p class="project__label mono"><span class="project__num">01</span> / Personal · Data quality</p>
-            <p class="project__pitch mono">A self-hosted engine that reads your database, finds what's quietly broken, and tells you why.</p>
+            <p class="project__label mono"><span class="project__num">01</span> / Data quality · Personal</p>
+            <p class="project__pitch mono">Point it at any database, read-only. It finds the relationships nobody wrote down and the problems nobody noticed.</p>
           </header>
-          <h3 class="project__name display" id="p-lumida" data-trace-y><span class="fit">Lumida</span></h3>
-          <div class="project__art">
-            <figure class="art art--shot">
-              <img src="assets/project-lumida.jpg" alt="Lumida landing page: 'Light on your data.'" width="800" height="500" loading="lazy">
-            </figure>
-            <div class="art art--card art--metrics">
-              <p class="art__head mono"><span>Benchmark</span><span>Test DB</span></p>
-              <dl>
-                <div><dt>Hidden relationships</dt><dd>15<small>/15</small></dd></div>
-                <div><dt>Planted problems</dt><dd>13<small>/13</small></dd></div>
-                <div><dt>False alarms</dt><dd>0</dd></div>
+          <div class="project__stage">
+            <h3 class="project__name display" id="p-lumida"><span class="fit">Lumida</span></h3><svg class="sketch" style="--x:2%;--y:-4%;--w:13vw;--r:-4deg" viewBox="0 0 200 270" aria-hidden="true"><path class="fill" d="M20 30 V200 A80 20 0 0 0 180 200 V30 Z"/><ellipse class="fill" cx="100" cy="30" rx="80" ry="20"/><path d="M20 87 A80 20 0 0 0 180 87 M20 144 A80 20 0 0 0 180 144"/><path d="M42 66 H70 M42 123 H70 M42 180 H70"/><circle cx="150" cy="70" r="3" class="ink"/><circle cx="150" cy="127" r="3" class="ink"/><circle cx="150" cy="184" r="3" class="ink"/><rect class="fill" x="128" y="196" width="56" height="44" rx="5"/><path d="M140 196 V180 A16 16 0 0 1 172 180 V196"/><circle cx="156" cy="214" r="5"/><path d="M156 219 V228"/></svg><p class="callout mono" style="--x:16%;--y:6%"><span>orders_db</span><b>Read-only</b></p><svg class="sketch" style="--x:58%;--y:-6%;--w:27vw;--r:2deg" viewBox="0 0 380 250" aria-hidden="true"><rect class="fill" x="10" y="20" width="110" height="74" rx="3"/><path d="M10 38 H120"/><path d="M18 30 H70.5" stroke-width="2.4"/><path d="M18 50 H78.2"/><circle cx="108" cy="50" r="2" class="ink"/><path d="M18 64 H78.2"/><circle cx="108" cy="64" r="2" class="ink"/><path d="M18 78 H78.2"/><circle cx="108" cy="78" r="2" class="ink"/><rect class="fill" x="250" y="6" width="120" height="74" rx="3"/><path d="M250 24 H370"/><path d="M258 16 H316.0" stroke-width="2.4"/><path d="M258 36 H324.4"/><circle cx="358" cy="36" r="2" class="ink"/><path d="M258 50 H324.4"/><circle cx="358" cy="50" r="2" class="ink"/><path d="M258 64 H324.4"/><circle cx="358" cy="64" r="2" class="ink"/><rect class="fill" x="40" y="160" width="110" height="74" rx="3"/><path d="M40 178 H150"/><path d="M48 170 H100.5" stroke-width="2.4"/><path d="M48 190 H108.2"/><circle cx="138" cy="190" r="2" class="ink"/><path d="M48 204 H108.2"/><circle cx="138" cy="204" r="2" class="ink"/><path d="M48 218 H108.2"/><circle cx="138" cy="218" r="2" class="ink"/><rect class="fill" x="258" y="160" width="112" height="74" rx="3"/><path d="M258 178 H370"/><path d="M266 170 H319.6" stroke-width="2.4"/><path d="M266 190 H327.44"/><circle cx="358" cy="190" r="2" class="ink"/><path d="M266 204 H327.44"/><circle cx="358" cy="204" r="2" class="ink"/><path d="M266 218 H327.44"/><circle cx="358" cy="218" r="2" class="ink"/><path d="M120 50 C170 50 200 40 250 40"/><path d="M150 196 C200 196 210 196 258 196"/><path d="M310 80 V160"/><path class="hot" d="M95 94 C120 140 220 130 258 180" stroke-dasharray="6 6"/><circle class="fill" cx="178" cy="128" r="34"/><path class="hot" d="M168 118 L188 138 M188 118 L168 138"/><path d="M202 152 L232 182" stroke-width="7"/></svg><p class="callout mono" style="--x:84%;--y:72%"><span>customers ↔ orders</span><b>4 orphan rows</b></p><div class="card" style="--x:7%;--y:64%;--w:19vw;--r:-2deg">
+              <p class="card__head mono"><span>Benchmark</span><span>Test DB</span></p>
+              <dl class="metrics">
+                <div><dt class="mono">Hidden relationships</dt><dd>15<small>/15</small></dd></div>
+                <div><dt class="mono">Planted problems</dt><dd>13<small>/13</small></dd></div>
+                <div><dt class="mono">False alarms</dt><dd>0</dd></div>
               </dl>
             </div>
-            <div class="art art--card art--note">
-              <p class="art__head mono"><span>Finding</span><span class="tag">High</span></p>
-              <p class="mono small">orders.customer_ref → customers.id</p>
-              <p class="small">Undocumented link. 4 rows point to customers that don't exist.</p>
-              <p class="art__actions mono"><span class="pill">Confirm</span><span class="pill pill--ghost">Not an issue</span></p>
-            </div>
+            <figure class="shot" style="--x:52%;--y:60%;--w:27vw;--r:2deg">
+              <img src="assets/project-lumida.jpg" alt="Lumida's landing page: 'Light on your data.'" width="800" height="500" loading="lazy">
+            </figure>
           </div>
           <footer class="project__foot">
             <ul class="stack mono"><li>Python</li><li>PostgreSQL</li><li>FastAPI</li><li>Docker</li><li>Gemini</li></ul>
             <span class="project__year mono">2026</span>
             <a class="explore mono" href="https://lumida.netlify.app/" target="_blank" rel="noopener">Explore project <span aria-hidden="true">↗</span></a>
           </footer>
-          <details class="notes">
-            <summary class="mono">Case notes</summary>
+          <details class="notes"><summary class="mono">Case notes</summary>
             <div class="notes__body">
-              <p>Lumida connects read-only to any database and maps it out: the relationships nobody documented, what "normal" looks like for each table, and where the data has drifted. Every finding comes with evidence and a plain-language explanation from an LLM, and it learns from people marking findings as real or not.</p>
+              <p>Lumida connects read-only to any database and maps it: the relationships nobody documented, what "normal" looks like for each table, and where the data has drifted. Every finding comes with evidence and a plain-language explanation from an LLM, and it learns each time someone marks a finding as real or not.</p>
               <p>On a test database with planted issues it found all 15 hidden relationships and all 13 problems, with zero false alarms.</p>
             </div>
           </details>
         </div>
       </article>
 
-      <!-- Cerebra -->
-      <article class="band project tone-ink" data-tone="ink" data-cat="company" aria-labelledby="p-cerebra">
+      <!-- 02 CEREBRA -->
+      <article class="band project tone-ink" data-cat="company" aria-labelledby="p-cerebra">
         <div class="band__inner">
           <header class="project__top">
-            <p class="project__label mono"><span class="project__num">02</span> / Company · Moglix</p>
-            <p class="project__pitch mono">A GenAI assistant that turns a sentence into a purchase request or an RFQ inside Credlex.</p>
+            <p class="project__label mono"><span class="project__num">02</span> / Generative AI · Moglix</p>
+            <p class="project__pitch mono">Type what you need. Cerebra drafts the purchase request or RFQ in Credlex for you.</p>
           </header>
-          <h3 class="project__name display" id="p-cerebra" data-trace-y><span class="fit">Cerebra</span></h3>
-          <div class="project__art">
-            <div class="art art--card art--chat">
-              <p class="art__head mono"><span>Cerebra</span><span>Credlex</span></p>
+          <div class="project__stage">
+            <h3 class="project__name display" id="p-cerebra"><span class="fit">Cerebra</span></h3><svg class="sketch" style="--x:2%;--y:-4%;--w:14vw;--r:0deg" viewBox="0 0 230 250" aria-hidden="true"><path d="M18 6 V244 M212 6 V244 M18 84 H212 M18 164 H212 M18 244 H212"/><rect class="fill" x="30" y="34" width="62" height="50"/><path d="M61 34 V56"/><rect class="fill" x="98" y="48" width="48" height="36"/><path d="M122 48 V64"/><rect class="fill" x="150" y="22" width="52" height="62"/><path d="M176 22 V46"/><rect class="fill" x="30" y="118" width="80" height="46"/><path d="M70 118 V138"/><rect class="fill" x="118" y="104" width="84" height="60"/><path d="M160 104 V128"/><rect class="fill" x="30" y="196" width="50" height="48"/><rect class="fill" x="86" y="206" width="56" height="38"/><path d="M150 244 V180 H204 V244"/><path d="M150 200 H204"/></svg><p class="callout mono" style="--x:17%;--y:6%"><span>Item · safety gloves, L</span><b>200 pairs</b></p><svg class="sketch" style="--x:60%;--y:62%;--w:24vw;--r:0deg" viewBox="0 0 400 180" aria-hidden="true"><path d="M0 172 H400"/><rect class="fill" x="10" y="26" width="236" height="120" rx="3"/><path d="M10 56 H246 M70 26 V146 M130 26 V146 M190 26 V146"/><path class="fill" d="M246 66 H320 L362 112 V146 H246 Z"/><path d="M260 78 H314 L344 110 H260 Z"/><path d="M290 122 H304"/><circle class="fill" cx="74" cy="148" r="22"/><circle cx="74" cy="148" r="8"/><circle class="fill" cx="310" cy="148" r="22"/><circle cx="310" cy="148" r="8"/><path d="M362 132 H372"/></svg><p class="callout mono" style="--x:44%;--y:4%"><span>RFQ</span><b>→ 3 vendors</b></p><div class="card card--chat" style="--x:64%;--y:-2%;--w:22vw;--r:2deg">
+              <p class="card__head mono"><span>Cerebra</span><span>Credlex</span></p>
               <p class="bubble bubble--me">Raise a PR for 200 pairs of safety gloves, size L, needed by Friday.</p>
-              <p class="bubble">Drafted it. Want me to send an RFQ to approved vendors too?</p>
+              <p class="bubble">Drafted it. Should I also send an RFQ to approved vendors?</p>
             </div>
-            <div class="art art--card art--form">
-              <p class="art__head mono"><span>Purchase request</span><span>Draft</span></p>
+            <div class="card" style="--x:24%;--y:62%;--w:19vw;--r:-2.5deg">
+              <p class="card__head mono"><span>Purchase request</span><span>Draft</span></p>
               <dl class="rows mono">
                 <div><dt>Item</dt><dd>Safety gloves, L</dd></div>
                 <div><dt>Qty</dt><dd>200 pairs</dd></div>
                 <div><dt>Need by</dt><dd>Friday</dd></div>
                 <div><dt>Next</dt><dd>RFQ → vendors</dd></div>
               </dl>
-              <p class="art__actions mono"><span class="pill">Submit</span><span class="check" aria-hidden="true">✓</span></p>
             </div>
           </div>
           <footer class="project__foot">
@@ -207,37 +176,35 @@
             <span class="project__year mono">2026</span>
             <span class="explore explore--muted mono">Internal tool</span>
           </footer>
-          <details class="notes">
-            <summary class="mono">Case notes</summary>
+          <details class="notes"><summary class="mono">Case notes</summary>
             <div class="notes__body">
-              <p>Built during my time at Moglix. Raising purchase requests and RFQs in Credlex meant filling long forms; Cerebra lets people describe what they need in plain words and drafts the request for them, calling Credlex's APIs to create it once confirmed.</p>
+              <p>Built at Moglix. Raising purchase requests and RFQs in Credlex meant filling in long forms. Cerebra lets people describe what they need in plain words, drafts the request, and creates it through Credlex's APIs once they confirm.</p>
             </div>
           </details>
         </div>
       </article>
 
-      <!-- Distiller -->
-      <article class="band project tone-paper" data-tone="paper" data-cat="personal" aria-labelledby="p-distiller">
+      <!-- 03 DISTILLER -->
+      <article class="band project tone-paper" data-cat="personal" aria-labelledby="p-distiller">
         <div class="band__inner">
           <header class="project__top">
-            <p class="project__label mono"><span class="project__num">03</span> / Personal · LLM infra <span class="badge">In progress</span></p>
-            <p class="project__pitch mono">Change one line, and your repetitive LLM calls slowly move to a small model you own.</p>
+            <p class="project__label mono"><span class="project__num">03</span> / LLM infrastructure · Personal <span class="badge">In progress</span></p>
+            <p class="project__pitch mono">Swap one URL. Your repeated LLM calls quietly move to a small model you own.</p>
           </header>
-          <h3 class="project__name display" id="p-distiller" data-trace-y><span class="fit">Distiller</span></h3>
-          <div class="project__art">
-            <div class="art art--card art--term">
-              <p class="art__head mono"><span>~/app/config.py</span><span>1 line</span></p>
+          <div class="project__stage">
+            <h3 class="project__name display" id="p-distiller"><span class="fit">Distiller</span></h3><svg class="sketch" style="--x:58%;--y:-8%;--w:30vw;--r:0deg" viewBox="0 0 440 300" aria-hidden="true"><path d="M20 252 H170"/><rect class="fill" x="40" y="226" width="110" height="26" rx="3"/><path class="hot" d="M84 222 C76 210 92 204 86 192 C100 202 104 214 96 222"/><circle class="fill" cx="95" cy="150" r="58"/><path class="fill" d="M82 96 V44 H108 V96"/><rect class="fill" x="77" y="34" width="36" height="12" rx="2"/><path d="M45 168 Q95 150 145 168"/><circle cx="80" cy="182" r="3"/><circle cx="104" cy="190" r="2"/><circle cx="118" cy="176" r="2.5"/><path d="M108 54 C150 34 200 34 236 64"/><path class="fill" d="M226 54 L248 40 L382 188 L360 202 Z"/><path d="M236 64 L372 196" stroke-dasharray="3 5"/><path d="M262 64 V40 H276 M340 160 V138 H354"/><path class="fill" d="M352 214 H424 L414 286 H362 Z"/><path d="M358 258 H418"/><circle cx="376" cy="204" r="3.5" class="ink-hot"/></svg><p class="callout mono" style="--x:40%;--y:6%"><span>Big model</span><b>Every call logged</b></p><p class="callout mono" style="--x:84%;--y:76%"><span>Small model</span><b>LoRA · shadow-tested</b></p><div class="card card--code" style="--x:4%;--y:0%;--w:24vw;--r:-2deg">
+              <p class="card__head mono"><span>config.py</span><span>1 line</span></p>
 <pre class="mono"><span class="del">- base_url = "https://api.openai.com/v1"</span>
 <span class="add">+ base_url = "http://distiller:8000/v1"</span></pre>
             </div>
-            <div class="art art--card art--term art--pipeline">
-              <p class="art__head mono"><span>$ distiller status</span><span></span></p>
-              <ul class="mono">
-                <li><span class="ok">●</span><span>gateway</span><span>working</span></li>
-                <li><span class="ok">●</span><span>logging</span><span>working</span></li>
+            <div class="card" style="--x:18%;--y:64%;--w:19vw;--r:1.5deg">
+              <p class="card__head mono"><span>$ distiller status</span><span></span></p>
+              <ul class="status mono">
+                <li><span class="ok">●</span><span>Gateway</span><span>working</span></li>
+                <li><span class="ok">●</span><span>Call logging</span><span>working</span></li>
                 <li><span class="wip">◐</span><span>LoRA training</span><span>building</span></li>
-                <li><span class="wip">◐</span><span>shadow tests</span><span>building</span></li>
-                <li><span class="wip">◐</span><span>routing</span><span>building</span></li>
+                <li><span class="wip">◐</span><span>Shadow tests</span><span>building</span></li>
+                <li><span class="wip">◐</span><span>Routing</span><span>building</span></li>
               </ul>
             </div>
           </div>
@@ -246,36 +213,34 @@
             <span class="project__year mono">2026</span>
             <span class="explore explore--muted mono">In development</span>
           </footer>
-          <details class="notes">
-            <summary class="mono">Case notes</summary>
+          <details class="notes"><summary class="mono">Case notes</summary>
             <div class="notes__body">
-              <p>Distiller is an OpenAI-compatible gateway. It logs a company's repeated LLM calls, fine-tunes small open models with LoRA to imitate the big model on those tasks, tests them quietly in shadow mode, then routes the requests it's confident about to the cheap model, falling back to the big one when it isn't.</p>
-              <p>Status: the gateway skeleton and CLI work. Training and routing are in development.</p>
+              <p>Distiller is an OpenAI-compatible gateway, so a team adopts it by changing one line. It logs the company's repeated LLM calls, fine-tunes small open models with LoRA to copy the big model on those tasks, tests them in shadow mode, then sends the requests it's confident about to the cheap model and falls back to the big one when it isn't.</p>
+              <p>Status: the gateway and CLI work. Training and routing are in development.</p>
             </div>
           </details>
         </div>
       </article>
 
-      <!-- Bug tool -->
-      <article class="band project tone-ink" data-tone="ink" data-cat="personal" aria-labelledby="p-bug">
+      <!-- 04 BUG TOOL -->
+      <article class="band project tone-ink" data-cat="personal" aria-labelledby="p-bug">
         <div class="band__inner">
           <header class="project__top">
-            <p class="project__label mono"><span class="project__num">04</span> / Personal · Dev tools</p>
-            <p class="project__pitch mono">A VS Code extension that catches your errors and either teaches you, or fixes them.</p>
+            <p class="project__label mono"><span class="project__num">04</span> / Developer tools · Personal</p>
+            <p class="project__pitch mono">A VS Code extension that catches errors as they happen. Tutor mode explains them; Debugger mode fixes them.</p>
           </header>
-          <h3 class="project__name display" id="p-bug" data-trace-y><span class="fit">Bug Detection</span><span class="fit">&amp; Fix Tool</span></h3>
-          <div class="project__art">
-            <div class="art art--card art--editor">
-              <p class="art__head mono"><span>orders.py</span><span>Ln 42</span></p>
+          <div class="project__stage">
+            <h3 class="project__name display" id="p-bug"><span class="fit">Bug Detection</span><span class="fit">&amp; Fix Tool</span></h3><svg class="sketch" style="--x:3%;--y:58%;--w:23vw;--r:-2deg" viewBox="0 0 350 215" aria-hidden="true"><rect class="fill" x="50" y="8" width="250" height="168" rx="8"/><rect x="62" y="20" width="226" height="144" rx="2"/><path d="M62 36 H288"/><circle cx="72" cy="28" r="2.5"/><circle cx="82" cy="28" r="2.5"/><circle cx="92" cy="28" r="2.5"/><path d="M74 52 H150 M86 66 H200 M86 80 H170 M74 108 H140 M86 122 H230 M86 136 H190 M74 150 H120"/><path class="hot" d="M86 98 q5 -5 10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0"/><path class="fill" d="M10 182 H340 L322 210 H28 Z"/><path d="M150 196 H200"/></svg><svg class="sketch" style="--x:84%;--y:-2%;--w:9vw;--r:14deg" viewBox="0 0 170 200" aria-hidden="true"><path d="M66 44 L50 14 M104 44 L120 14"/><path d="M44 96 H8 M42 130 H4 M48 164 L16 190 M126 96 H162 M128 130 H166 M122 164 L154 190"/><ellipse class="fill" cx="85" cy="126" rx="42" ry="62"/><circle class="fill" cx="85" cy="58" r="21"/><path d="M85 79 V186 M56 112 H72 M98 112 H114 M60 146 H72 M98 146 H110"/></svg><p class="callout mono" style="--x:72%;--y:6%"><span>Caught live</span><b>Runtime + lint</b></p><div class="card card--code" style="--x:4%;--y:-2%;--w:23vw;--r:-2deg">
+              <p class="card__head mono"><span>orders.py</span><span>Ln 42</span></p>
 <pre class="mono"><span class="ln">41</span> user = get_user(uid)
 <span class="ln">42</span> name = <span class="squiggle">user["name"]</span>
 <span class="ln">43</span> return name.title()</pre>
               <p class="err mono">TypeError: 'NoneType' object is not subscriptable</p>
             </div>
-            <div class="art art--card art--modes">
+            <div class="card" style="--x:66%;--y:74%;--w:21vw;--r:2deg">
               <p class="seg mono"><span>Tutor</span><span class="on">Debugger</span></p>
-              <p class="small">get_user returns None when the id is unknown. Guard it before reading the name.</p>
-              <p class="art__actions mono"><span class="pill">Apply fix</span></p>
+              <p class="sm">get_user returns None for an unknown id. Check it before reading the name.</p>
+              <p class="card__actions mono"><span class="pill">Apply fix</span></p>
             </div>
           </div>
           <footer class="project__foot">
@@ -283,62 +248,56 @@
             <span class="project__year mono">2025</span>
             <span class="explore explore--muted mono">VS Code extension</span>
           </footer>
-          <details class="notes">
-            <summary class="mono">Case notes</summary>
+          <details class="notes"><summary class="mono">Case notes</summary>
             <div class="notes__body">
-              <p>The extension captures lint errors and runtime exceptions as they happen, then uses LLM-based retrieval over docs and code to explain them. Tutor mode walks you through why it broke; Debugger mode proposes a fix you can apply.</p>
+              <p>The extension captures lint errors and runtime exceptions as they happen, then uses LLM-based retrieval (RAG over a vector database) to explain them. Tutor mode walks you through why the code broke; Debugger mode proposes a fix you can apply.</p>
             </div>
           </details>
         </div>
       </article>
 
-      <!-- BlockAuth -->
-      <article class="band project tone-paper" data-tone="paper" data-cat="research" aria-labelledby="p-blockauth">
+      <!-- 05 BLOCKAUTH -->
+      <article class="band project tone-paper" data-cat="research" aria-labelledby="p-blockauth">
         <div class="band__inner">
           <header class="project__top">
             <p class="project__label mono"><span class="project__num">05</span> / Research · ICSDS-2025</p>
             <p class="project__pitch mono">Decentralised identity on a blockchain, so IoT devices can prove who they are without a central server.</p>
           </header>
-          <h3 class="project__name display" id="p-blockauth" data-trace-y><span class="fit">BlockAuth</span></h3>
-          <div class="project__art">
-            <div class="art art--chain" aria-hidden="true">
+          <div class="project__stage">
+            <h3 class="project__name display" id="p-blockauth"><span class="fit">BlockAuth</span></h3><svg class="sketch" style="--x:54%;--y:56%;--w:30vw;--r:0deg" viewBox="0 0 430 245" aria-hidden="true"><path d="M0 238 H430"/><rect class="fill" x="16" y="170" width="120" height="44" rx="6"/><path d="M36 170 V120 M116 170 V120"/><circle cx="38" cy="192" r="3" class="ink"/><circle cx="52" cy="192" r="3"/><circle cx="66" cy="192" r="3"/><path d="M90 192 H124"/><path d="M28 214 V238 M124 214 V238"/><path d="M214 238 V150"/><path class="fill" d="M190 124 H252 V150 H190 Z"/><path class="fill" d="M252 128 L272 120 V154 L252 146 Z"/><circle cx="204" cy="137" r="5"/><path d="M330 160 V148 M350 160 V148 M370 160 V148 M330 222 V234 M350 222 V234 M370 222 V234 M308 180 H296 M308 200 H296 M392 180 H404 M392 200 H404"/><rect class="fill" x="308" y="160" width="84" height="62" rx="5"/><rect x="330" y="176" width="40" height="30" rx="2"/><path class="hot" d="M76 120 C76 70 120 60 150 40" stroke-dasharray="5 6"/><path class="hot" d="M222 118 V60" stroke-dasharray="5 6"/><path class="hot" d="M350 146 C350 90 320 60 296 40" stroke-dasharray="5 6"/><rect class="fill" x="120" y="6" width="56" height="40" rx="3"/><rect class="fill" x="194" y="6" width="56" height="40" rx="3"/><rect class="fill" x="268" y="6" width="56" height="40" rx="3"/><path d="M176 26 H194 M250 26 H268" stroke-width="3"/><path d="M130 20 H160 M204 20 H234 M278 20 H308 M130 32 H150 M204 32 H224 M278 32 H298"/></svg><p class="callout mono" style="--x:3%;--y:4%"><span>DID · sensor-07</span><b>Identity on-chain</b></p><p class="callout mono" style="--x:3%;--y:20%"><span>Access</span><b>Granted · read</b></p><div class="chain" style="--x:4%;--y:66%;--w:42vw;--r:-1deg">
               <div class="block mono"><span>Block 0x1a</span><b>DID: sensor-07</b><small>prev 0x19</small></div>
               <span class="link-bar"></span>
               <div class="block mono"><span>Block 0x1b</span><b>Grant: read</b><small>prev 0x1a</small></div>
               <span class="link-bar"></span>
               <div class="block mono"><span>Block 0x1c</span><b>Verify ✓</b><small>prev 0x1b</small></div>
             </div>
-            <div class="art art--stamp mono" aria-hidden="true">
-              <span>Presented</span><b>ICSDS</b><span>Dec 2025</span>
-            </div>
+            <div class="stamp mono" style="--x:76%;--y:-4%;--r:-12deg"><span>Presented</span><b>ICSDS</b><span>Dec 2025</span></div>
           </div>
           <footer class="project__foot">
-            <ul class="stack mono"><li>Blockchain</li><li>DID</li><li>IoT security</li></ul>
+            <ul class="stack mono"><li>Blockchain</li><li>Decentralised ID</li><li>IoT security</li></ul>
             <span class="project__year mono">Dec 2025</span>
-            <span class="explore explore--muted mono">Paper</span>
+            <span class="explore explore--muted mono">Research paper</span>
           </footer>
-          <details class="notes">
-            <summary class="mono">Case notes</summary>
+          <details class="notes"><summary class="mono">Case notes</summary>
             <div class="notes__body">
-              <p>A blockchain-based decentralised identity management system for secure authentication and access control across IoT networks. Presented at ICSDS-2025, Hooghly Engineering &amp; Technology College.</p>
+              <p>A blockchain-based decentralised identity management system for secure authentication and access control across IoT networks. Presented as a research paper at ICSDS-2025, Hooghly Engineering &amp; Technology College, in December 2025.</p>
             </div>
           </details>
         </div>
       </article>
 
-      <!-- Admin panel -->
-      <article class="band project tone-ink" data-tone="ink" data-cat="company" aria-labelledby="p-admin">
+      <!-- 06 ADMIN PANEL -->
+      <article class="band project tone-ink" data-cat="company" aria-labelledby="p-admin">
         <div class="band__inner">
           <header class="project__top">
-            <p class="project__label mono"><span class="project__num">06</span> / Company · Coding Jr</p>
-            <p class="project__pitch mono">The internal panel a team runs its day on. I designed the backend logic and core features.</p>
+            <p class="project__label mono"><span class="project__num">06</span> / Internal tools · Coding Jr</p>
+            <p class="project__pitch mono">The admin panel a team runs its day on. I designed the backend logic and built the core features.</p>
           </header>
-          <h3 class="project__name display" id="p-admin" data-trace-y><span class="fit">Admin Panel</span></h3>
-          <div class="project__art">
-            <div class="art art--card art--table">
-              <p class="art__head mono"><span>Internal · Users</span><span>3 of 48</span></p>
-              <table class="mono">
-                <thead><tr><th>User</th><th>Role</th><th>Status</th></tr></thead>
+          <div class="project__stage">
+            <h3 class="project__name display" id="p-admin"><span class="fit">Admin Panel</span></h3><svg class="sketch" style="--x:2%;--y:-6%;--w:23vw;--r:-2deg" viewBox="0 0 360 262" aria-hidden="true"><rect class="fill" x="8" y="8" width="344" height="214" rx="8"/><rect x="20" y="20" width="320" height="190" rx="2"/><path d="M20 40 H340 M84 40 V210"/><circle cx="32" cy="30" r="3"/><circle cx="44" cy="30" r="3"/><circle cx="56" cy="30" r="3"/><path d="M32 58 H70 M32 76 H70 M32 94 H64 M32 112 H70 M32 130 H60"/><rect x="28" y="52" width="48" height="12" rx="2" class="hot"/><rect x="98" y="54" width="70" height="40" rx="3"/><rect x="180" y="54" width="70" height="40" rx="3"/><rect x="262" y="54" width="66" height="40" rx="3"/><path d="M106 82 H130 M188 82 H220 M270 82 H300" stroke-width="3"/><path d="M100 196 V170 M120 196 V150 M140 196 V160 M160 196 V130 M180 196 V146 M200 196 V120 M220 196 V138" stroke-width="7"/><path d="M244 112 H328 M244 132 H328 M244 152 H310 M244 172 H328 M244 192 H300"/><path class="fill" d="M160 222 H200 L208 252 H152 Z"/><path d="M118 256 H242"/></svg><svg class="sketch" style="--x:42%;--y:66%;--w:9vw;--r:-10deg" viewBox="0 0 170 140" aria-hidden="true"><circle class="fill" cx="40" cy="40" r="30"/><circle cx="40" cy="40" r="10"/><path class="fill" d="M66 54 L160 108 L150 124 L136 116 L128 130 L114 122 L120 108 L58 72 Z"/></svg><p class="callout mono" style="--x:44%;--y:-2%"><span>Roles</span><b>Admin · Mentor · Viewer</b></p><div class="card" style="--x:68%;--y:-2%;--w:21vw;--r:2deg">
+              <p class="card__head mono"><span>Users</span><span>3 of 48</span></p>
+              <table class="table mono">
+                <thead><tr><th>User</th><th>Role</th><th>Active</th></tr></thead>
                 <tbody>
                   <tr><td>a.sharma</td><td>Admin</td><td><span class="toggle on"></span></td></tr>
                   <tr><td>k.verma</td><td>Mentor</td><td><span class="toggle on"></span></td></tr>
@@ -346,9 +305,9 @@
                 </tbody>
               </table>
             </div>
-            <div class="art art--card art--log">
-              <p class="art__head mono"><span>Audit</span><span>today</span></p>
-              <ul class="mono small">
+            <div class="card" style="--x:64%;--y:66%;--w:18vw;--r:-2deg">
+              <p class="card__head mono"><span>Audit log</span><span>Today</span></p>
+              <ul class="log mono">
                 <li>10:42 role changed → Mentor</li>
                 <li>10:15 access revoked</li>
                 <li>09:58 batch import · 12 rows</li>
@@ -360,35 +319,30 @@
             <span class="project__year mono">2025</span>
             <span class="explore explore--muted mono">Internal tool</span>
           </footer>
-          <details class="notes">
-            <summary class="mono">Case notes</summary>
+          <details class="notes"><summary class="mono">Case notes</summary>
             <div class="notes__body">
-              <p>Built as an SDE during my AI Research internship at Coding Jr. I designed the backend logic and implemented the core features of the company's internal admin panel with the team.</p>
+              <p>Built as an SDE during my AI Research internship at Coding Jr. I designed the backend logic and built the core features of the company's internal admin panel with the team.</p>
             </div>
           </details>
         </div>
       </article>
 
-      <!-- Flight -->
-      <article class="band project tone-paper" data-tone="paper" data-cat="personal" aria-labelledby="p-flight">
+      <!-- 07 FLIGHT -->
+      <article class="band project tone-paper" data-cat="personal" aria-labelledby="p-flight">
         <div class="band__inner">
           <header class="project__top">
-            <p class="project__label mono"><span class="project__num">07</span> / Personal · Machine learning</p>
-            <p class="project__pitch mono">Live flight and weather data in, delay forecasts for India's busiest airports out.</p>
+            <p class="project__label mono"><span class="project__num">07</span> / Machine learning · Personal</p>
+            <p class="project__pitch mono">Live flight and weather data in; delay forecasts for India's busiest airports out.</p>
           </header>
-          <h3 class="project__name display" id="p-flight" data-trace-y><span class="fit">Flight Delay</span><span class="fit">Predictor</span></h3>
-          <div class="project__art">
-            <div class="art art--card art--board">
-              <p class="art__head mono"><span>Departures · forecast</span><span>Sample</span></p>
-              <ul class="mono">
+          <div class="project__stage">
+            <h3 class="project__name display" id="p-flight"><span class="fit">Flight Delay</span><span class="fit">Predictor</span></h3><svg class="sketch" style="--x:46%;--y:-6%;--w:30vw;--r:-6deg" viewBox="0 0 420 160" aria-hidden="true"><path class="fill" d="M24 92 C24 72 62 64 124 64 H330 C372 64 404 78 414 92 C404 104 382 110 330 110 H124 C62 110 24 104 24 92 Z"/><path class="fill" d="M44 70 L22 18 H48 L92 66 Z"/><path class="fill" d="M42 94 L14 116 H36 L74 100 Z"/><path class="fill" d="M196 100 L254 156 H282 L262 100 Z"/><ellipse class="fill" cx="246" cy="124" rx="24" ry="9"/><path d="M370 76 Q392 80 400 90 H372 Z"/><circle cx="140" cy="84" r="3.5"/><circle cx="160" cy="84" r="3.5"/><circle cx="180" cy="84" r="3.5"/><circle cx="200" cy="84" r="3.5"/><circle cx="220" cy="84" r="3.5"/><circle cx="240" cy="84" r="3.5"/><circle cx="260" cy="84" r="3.5"/><circle cx="280" cy="84" r="3.5"/><circle cx="300" cy="84" r="3.5"/><circle cx="320" cy="84" r="3.5"/><circle cx="340" cy="84" r="3.5"/><path d="M330 64 V110"/></svg><svg class="sketch" style="--x:3%;--y:46%;--w:7vw;--r:0deg" viewBox="0 0 150 300" aria-hidden="true"><path d="M0 296 H150"/><path class="fill" d="M58 296 V96 H92 V296 Z"/><path d="M58 140 H92 M58 190 H92 M58 240 H92"/><path class="fill" d="M26 54 H124 L112 96 H38 Z"/><path d="M40 62 H110 M48 62 V88 M75 62 V88 M102 62 V88"/><path class="fill" d="M34 54 L44 38 H106 L116 54 Z"/><path d="M75 38 V8"/><circle cx="75" cy="8" r="3" class="ink-hot"/></svg><svg class="sketch" style="--x:4%;--y:-4%;--w:11vw;--r:0deg" viewBox="0 0 200 120" aria-hidden="true"><path class="fill" d="M40 95 A28 28 0 0 1 38 40 A40 40 0 0 1 112 26 A32 32 0 0 1 166 50 A24 24 0 0 1 164 95 Z"/><path d="M60 106 L54 116 M100 106 L94 116 M140 106 L134 116"/></svg><p class="callout mono" style="--x:17%;--y:2%"><span>DEL · haze</span><b>Visibility 1.2 km</b></p><p class="callout mono" style="--x:12%;--y:90%"><span>DEL · 07:40 departure</span><b>Predicted +24m</b></p><div class="card" style="--x:68%;--y:76%;--w:22vw;--r:2deg">
+              <p class="card__head mono"><span>Departures forecast</span><span>Sample</span></p>
+              <ul class="board mono">
                 <li><b>DEL</b><span class="bar" style="--v:.62"></span><em>+24m</em></li>
                 <li><b>BOM</b><span class="bar" style="--v:.38"></span><em>+14m</em></li>
                 <li><b>BLR</b><span class="bar" style="--v:.18"></span><em>+6m</em></li>
-                <li><b>HYD</b><span class="bar" style="--v:.1"></span><em>on time</em></li>
+                <li><b>HYD</b><span class="bar" style="--v:.06"></span><em>on time</em></li>
               </ul>
-            </div>
-            <div class="art art--card art--wx mono">
-              <span>DEL · weather</span><b>Haze · 1.2 km</b><span>vis. feature ↑</span>
             </div>
           </div>
           <footer class="project__foot">
@@ -396,26 +350,24 @@
             <span class="project__year mono">2025</span>
             <span class="explore explore--muted mono">Streamlit dashboard</span>
           </footer>
-          <details class="notes">
-            <summary class="mono">Case notes</summary>
+          <details class="notes"><summary class="mono">Case notes</summary>
             <div class="notes__body">
-              <p>Pulls live flight and weather data for major Indian airports, engineers features from both, and forecasts departure delays with Scikit-learn models, all shown in a Streamlit dashboard.</p>
+              <p>A data pipeline pulls live flight and weather data for major Indian airports from external APIs. Scikit-learn models forecast departure delays, and a Streamlit dashboard shows live flight status next to the predictions.</p>
             </div>
           </details>
         </div>
       </article>
 
-      <!-- E-commerce -->
-      <article class="band project tone-ink" data-tone="ink" data-cat="personal" aria-labelledby="p-ecom">
+      <!-- 08 E-COMMERCE -->
+      <article class="band project tone-ink" data-cat="personal" aria-labelledby="p-ecom">
         <div class="band__inner">
           <header class="project__top">
-            <p class="project__label mono"><span class="project__num">08</span> / Personal · Backend</p>
+            <p class="project__label mono"><span class="project__num">08</span> / Backend · Personal</p>
             <p class="project__pitch mono">Products, carts and orders as a REST API, with roles, validation and a properly normalised schema.</p>
           </header>
-          <h3 class="project__name display" id="p-ecom" data-trace-y><span class="fit">E-Commerce</span><span class="fit">API</span></h3>
-          <div class="project__art">
-            <div class="art art--card art--json">
-              <p class="art__head mono"><span>GET /api/orders/1042</span><span class="tag tag--ok">200</span></p>
+          <div class="project__stage">
+            <h3 class="project__name display" id="p-ecom"><span class="fit">E-Commerce</span><span class="fit">API</span></h3><svg class="sketch" style="--x:62%;--y:-6%;--w:20vw;--r:0deg" viewBox="0 0 300 214" aria-hidden="true"><path d="M4 22 H48 L84 166 H262"/><path class="fill" d="M60 62 H296 L270 150 H82 Z"/><path d="M100 62 L110 150 M140 62 L146 150 M180 62 L182 150 M220 62 L216 150 M258 62 L250 150 M70 106 H284"/><rect class="fill" x="120" y="14" width="76" height="54" transform="rotate(-8 158 41)"/><path d="M158 14 V34" transform="rotate(-8 158 41)"/><rect class="fill" x="196" y="30" width="54" height="40" transform="rotate(6 223 50)"/><circle class="fill" cx="108" cy="194" r="16"/><circle class="fill" cx="240" cy="194" r="16"/></svg><svg class="sketch" style="--x:86%;--y:58%;--w:7vw;--r:6deg" viewBox="0 0 150 222" aria-hidden="true"><path class="fill" d="M10 10 H140 V206 L127 216 L114 206 L101 216 L88 206 L75 216 L62 206 L49 216 L36 206 L23 216 L10 206 Z"/><path d="M26 34 H96 M26 60 H124 M26 78 H110 M26 96 H124 M26 114 H100 M26 148 H124"/><path d="M26 172 H70 M96 172 H124" stroke-width="3"/></svg><svg class="sketch" style="--x:4%;--y:62%;--w:7vw;--r:-6deg" viewBox="0 0 160 200" aria-hidden="true"><path d="M52 62 V44 A28 28 0 0 1 108 44 V62"/><path class="fill" d="M22 62 H138 L148 192 H12 Z"/><circle cx="52" cy="80" r="4"/><circle cx="108" cy="80" r="4"/><path d="M50 130 H110"/></svg><p class="callout mono" style="--x:40%;--y:6%"><span>POST /api/cart</span><b>201 · created</b></p><div class="card card--code" style="--x:4%;--y:-2%;--w:22vw;--r:-2deg">
+              <p class="card__head mono"><span>GET /api/orders/1042</span><span class="tag tag--ok">200</span></p>
 <pre class="mono">{
   "id": 1042,
   "status": "paid",
@@ -423,142 +375,120 @@
   "total": "1,598.00"
 }</pre>
             </div>
-            <div class="art art--card art--json art--deny">
-              <p class="art__head mono"><span>DELETE /api/products/7</span><span class="tag">403</span></p>
+            <div class="card card--code" style="--x:58%;--y:78%;--w:22vw;--r:2deg">
+              <p class="card__head mono"><span>DELETE /api/products/7</span><span class="tag">403</span></p>
               <pre class="mono">{ "detail": "role 'customer' can't do that" }</pre>
             </div>
           </div>
           <footer class="project__foot">
             <ul class="stack mono"><li>Django REST</li><li>MySQL</li></ul>
             <span class="project__year mono">2024</span>
-            <span class="explore explore--muted mono">API</span>
+            <span class="explore explore--muted mono">REST API</span>
           </footer>
-          <details class="notes">
-            <summary class="mono">Case notes</summary>
+          <details class="notes"><summary class="mono">Case notes</summary>
             <div class="notes__body">
-              <p>REST APIs for products, carts and orders in Django REST Framework, with role-based access control, request validation and a normalised MySQL schema.</p>
+              <p>REST APIs for products, carts and orders in Django REST Framework, with role-based access control on Django's auth system, input validation, clean JSON responses and a normalised MySQL schema that handles stock updates and order totals.</p>
             </div>
           </details>
         </div>
       </article>
-    </section>
+    </div>
 
-    <!-- EXPERIENCE -->
-    <section class="band tone-paper exp" id="experience" data-tone="paper" aria-labelledby="exp-title">
-      <div class="band__inner">
-        <div class="section-head">
-          <h2 class="display section-title reveal" id="exp-title" data-trace-y="below">Experience</h2>
-          <a class="explore mono" href="assets/Rohan-Chauhan-Resume.pdf" download>Download résumé <span aria-hidden="true">↓</span></a>
-        </div>
-        <ol class="roles">
-          <li class="role reveal">
-            <p class="role__when mono">Jul 2026 — Now</p>
-            <div class="role__main">
-              <h3>Software Engineer</h3>
-              <p class="role__org mono">Moglix · B2B supply chain</p>
-            </div>
-            <div class="role__body">
-              <p>REST APIs and backend systems, working with VLLMs, OCR techniques and LLM prediction models. Delivering solutions for major clients and internal teams with the AI &amp; Analytics team.</p>
-              <ul class="stack mono"><li>Python</li><li>REST</li><li>Kafka</li><li>Kaleyra</li><li>Docker</li><li>Git</li></ul>
-            </div>
-          </li>
-          <li class="role reveal">
-            <p class="role__when mono">Mar 2026 — Jul 2026</p>
-            <div class="role__main">
-              <h3>Python Engineering Intern</h3>
-              <p class="role__org mono">Moglix</p>
-            </div>
-            <div class="role__body">
-              <p>Built analytical solutions across data processing, analysis and programming, delivering insights and automated workflows with the team. Built Cerebra.</p>
-              <ul class="stack mono"><li>Python</li><li>MySQL</li><li>PostgreSQL</li><li>MongoDB</li><li>Kafka</li></ul>
-            </div>
-          </li>
-          <li class="role reveal">
-            <p class="role__when mono">Jun 2025 — Jan 2026</p>
-            <div class="role__main">
-              <h3>AI Research Intern</h3>
-              <p class="role__org mono">Coding Jr</p>
-            </div>
-            <div class="role__body">
-              <p>Worked as an SDE on the internal admin panel: designed the backend logic and built its core features.</p>
-              <ul class="stack mono"><li>Python</li><li>REST</li><li>Web design</li><li>Git</li></ul>
-            </div>
-          </li>
-          <li class="role reveal">
-            <p class="role__when mono">Apr 2024 — Jun 2024</p>
-            <div class="role__main">
-              <h3>Full-Stack Intern</h3>
-              <p class="role__org mono">Wayspire</p>
-            </div>
-            <div class="role__body">
-              <p>Built and debugged full-stack modules as part of a team.</p>
-            </div>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section class="band tone-ink about" id="about" data-tone="ink" aria-labelledby="about-title">
+    <!-- ABOUT + EXPERIENCE -->
+    <section class="band tone-paper about" id="about" data-thread="0.86,0.03 0.92,0.12,n 0.62,0.2 0.94,0.4 0.9,0.7 0.96,1" aria-labelledby="about-title">
       <div class="band__inner">
         <p class="kicker mono reveal">About · Python AI / LLM / Backend developer</p>
-        <h2 class="about__title display reveal" id="about-title" data-trace-y="below">Quiet systems.<br><span class="accent">Loud results.</span></h2>
+        <h2 class="about__title display reveal" id="about-title"><span>I like the parts</span><span class="indent-1">nobody demos.</span></h2>
+
         <div class="about__grid">
           <figure class="about__photo reveal">
             <img src="assets/me.jpg" alt="Portrait of Rohan Chauhan" width="800" height="800" loading="lazy">
-            <figcaption class="mono"><span>Rohan Chauhan</span><span>Greater Noida, IN</span></figcaption>
+            <figcaption class="mono"><span>Rohan Chauhan</span><span>Greater Noida · IST</span></figcaption>
           </figure>
           <div class="about__text">
-            <p class="about__big reveal">
-              I'm a software engineer focused on backend engineering and AI-driven applications.
-              I've built production APIs, data pipelines and intelligent systems, and I care most
-              about making them scalable, reliable and useful for the business problem they exist to solve.
-            </p>
-            <div class="facts">
-              <div class="fact reveal">
-                <h3 class="mono">Stack</h3>
-                <p>Python, Java, Kotlin, XML<br>FastAPI, Django, Flask<br>SQL, MongoDB, Firebase<br>LangChain, LangGraph, PyTorch, Scikit-learn<br>Kafka, Docker, Kaleyra, AWS, Git CI/CD<br>Jetpack Compose, Room, MVVM<br>HTML, CSS, JS, Django templates</p>
+            <p class="about__big reveal">I'm a software engineer at Moglix, in the AI &amp; Analytics team. I build the backend half of AI products: REST APIs, data pipelines, OCR and LLM services, and the Kafka, Docker and CI/CD plumbing that keeps them running for real clients.</p>
+            <p class="about__small reveal">I care about systems that are scalable, reliable and actually solve the business problem they were built for. B.Tech CSE (AI &amp; ML), GNIOT, 2026.</p>
+            <a class="explore mono reveal" href="assets/Rohan-Chauhan-Resume.pdf" download>Download résumé <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+
+        <div class="exp" id="experience">
+          <h3 class="exp__title mono reveal">Experience</h3>
+          <ol class="roles">
+            <li class="role reveal">
+              <p class="role__when mono">Jul 2026 — Now</p>
+              <div class="role__main"><h4>Software Engineer</h4><p class="role__org mono">Moglix · B2B supply chain</p></div>
+              <div class="role__body">
+                <p>Building REST APIs and backend services for the AI &amp; Analytics team, working with VLLMs, OCR techniques and LLM prediction models. Shipping solutions for major clients and internal teams.</p>
+                <ul class="stack mono"><li>Python</li><li>REST</li><li>Kafka</li><li>Kaleyra</li><li>Docker</li><li>Git</li></ul>
               </div>
-              <div class="fact reveal">
-                <h3 class="mono">Education</h3>
-                <p>B.Tech CSE (AI &amp; ML)<br>GNIOT, Greater Noida<br>2022 — 2026 · CGPA 8.3</p>
-                <p>Top 15 department rank across several semesters<br>"Eloquent Speaker" award</p>
-                <p class="dim">Class XII (PCM) 2021 &amp; X 2019<br>St Mary's School, Kashipur · 78%</p>
+            </li>
+            <li class="role reveal">
+              <p class="role__when mono">Mar 2026 — Jul 2026</p>
+              <div class="role__main"><h4>Python Engineering Intern</h4><p class="role__org mono">Moglix</p></div>
+              <div class="role__body">
+                <p>Built data processing and analysis tools and automated recurring workflows for ongoing projects. Built Cerebra, a GenAI assistant for purchase requests and RFQs.</p>
+                <ul class="stack mono"><li>Python</li><li>MySQL</li><li>PostgreSQL</li><li>MongoDB</li><li>Kafka</li></ul>
               </div>
-              <div class="fact reveal">
-                <h3 class="mono">Hackathons · 2024</h3>
-                <p>Smart India Hackathon, GNIOT<br>Hack KRMU 4.0, KRMU Gurugram<br>Road Safety Hackathon, NHAI &amp; HOAI<br>Build with India, Google Gurugram</p>
+            </li>
+            <li class="role reveal">
+              <p class="role__when mono">Jun 2025 — Jan 2026</p>
+              <div class="role__main"><h4>AI Research Intern</h4><p class="role__org mono">Coding Jr</p></div>
+              <div class="role__body">
+                <p>Worked as an SDE on the company's internal admin panel: designed the backend logic and built its core features with the team.</p>
+                <ul class="stack mono"><li>Python</li><li>REST</li><li>Web design</li><li>Git</li></ul>
               </div>
-              <div class="fact reveal">
-                <h3 class="mono">Certifications</h3>
-                <p>Intel Unnati, AI/ML track · 2025<br>Intro to Cybersecurity, Cisco · 2025<br>Data Analytics simulation, Deloitte · 2025<br>Machine Learning A–Z, Udemy · 2023<br>AWS Deep Dive, AWS · 2023<br>Android App Development, Udemy · 2023</p>
-              </div>
-            </div>
+            </li>
+            <li class="role reveal">
+              <p class="role__when mono">Apr 2024 — Jun 2024</p>
+              <div class="role__main"><h4>Full-Stack Intern</h4><p class="role__org mono">Wayspire</p></div>
+              <div class="role__body"><p>Built and debugged full-stack modules with a team, improving performance and the UI.</p></div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="facts">
+          <div class="fact reveal">
+            <h3 class="mono">Stack</h3>
+            <p>Python, Java, Kotlin, XML<br>FastAPI, Django, Flask<br>SQL, MongoDB, Firebase<br>LangChain, LangGraph, PyTorch, Scikit-learn<br>Kafka, Docker, Kaleyra, AWS, Git CI/CD<br>Jetpack Compose, Room, MVVM<br>HTML, CSS, JS, Django templates</p>
+          </div>
+          <div class="fact reveal">
+            <h3 class="mono">Education</h3>
+            <p>B.Tech CSE (AI &amp; ML), GNIOT<br>2022 — 2026 · CGPA 8.3</p>
+            <p>Top 15 department rank across several semesters<br>"Eloquent Speaker" award</p>
+            <p class="dim">Class XII (PCM) 2021 &amp; X 2019<br>St Mary's School, Kashipur · 78%</p>
+          </div>
+          <div class="fact reveal">
+            <h3 class="mono">Hackathons · 2024</h3>
+            <p>Smart India Hackathon, GNIOT<br>Hack KRMU 4.0, KRMU Gurugram<br>Road Safety Hackathon, NHAI &amp; HOAI, Delhi<br>Build with India, Google Gurugram</p>
+          </div>
+          <div class="fact reveal">
+            <h3 class="mono">Certifications</h3>
+            <p>Intel Unnati, AI/ML track · 2025<br>Intro to Cybersecurity, Cisco · 2025<br>Data Analytics simulation, Deloitte · 2025<br>Machine Learning A–Z, Udemy · 2023<br>AWS Deep Dive, AWS · 2023<br>Android App Development, Udemy · 2023</p>
           </div>
         </div>
       </div>
     </section>
-  </main>
 
-  <!-- CONTACT -->
-  <footer class="band tone-paper contact" id="contact" data-tone="paper">
-    <div class="band__inner">
-      <p class="kicker mono reveal">Contact</p>
-      <h2 class="contact__title display reveal" data-trace-y="below" data-trace-end="200 OK">Got a system<br>that needs<br><span class="accent">building?</span></h2>
-      <a class="contact__mail reveal" href="mailto:chauhanrohan223@gmail.com">Say hello <span aria-hidden="true">↗</span></a>
-      <p class="contact__addr mono reveal">chauhanrohan223@gmail.com</p>
-      <div class="contact__row mono">
-        <a class="explore" href="https://www.linkedin.com/in/rohanchauhan07/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
-        <a class="explore" href="https://github.com/RohanCh07" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
-        <a class="explore" href="assets/Rohan-Chauhan-Resume.pdf" download>Résumé <span aria-hidden="true">↓</span></a>
+    <!-- CONTACT -->
+    <section class="band tone-ink contact" id="contact" data-thread="0.96,0 0.9,0.12 0.6,0.3 0.74,0.52,n 0.86,0.4 0.7,0.36 0.66,0.6 0.8,0.78 0.72,0.84,e" aria-labelledby="contact-title">
+      <div class="band__inner">
+        <h2 class="contact__title display reveal" id="contact-title"><span>Have data</span><span class="indent-1">that should</span><span>be working</span><span class="accent indent-2">harder?</span></h2>
+        <a class="contact__cta display reveal" href="mailto:chauhanrohan223@gmail.com">Let's build it <span aria-hidden="true">↗</span></a>
+        <p class="contact__addr mono reveal">chauhanrohan223@gmail.com</p>
+        <div class="contact__row mono">
+          <a class="explore" href="https://www.linkedin.com/in/rohanchauhan07/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+          <a class="explore" href="https://github.com/RohanCh07" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+          <a class="explore" href="assets/Rohan-Chauhan-Resume.pdf" download>Résumé <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="contact__fine mono">
+          <span>© <span id="year">2026</span> Rohan Chauhan</span>
+          <span>Greater Noida, India · IST</span>
+          <a href="#top">Back to top ↑</a>
+        </div>
       </div>
-      <div class="contact__fine mono">
-        <span>© <span id="year">2026</span> Rohan Chauhan</span>
-        <span>Greater Noida, India · IST</span>
-        <a href="#top">Back to top ↑</a>
-      </div>
-    </div>
-  </footer>
+    </section>
+  </main>
 
   <script src="main.js" defer></script>
 </body>

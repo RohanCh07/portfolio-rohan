@@ -1,5 +1,5 @@
-/* Rohan Chauhan — portfolio v2
-   theme · menu · clock · reveals · project filter · fitted titles · scroll trace */
+/* Rohan Chauhan — portfolio
+   theme · menu · reveals · project filter · fitted names · the scroll thread */
 (function () {
   'use strict';
 
@@ -8,301 +8,256 @@
   var $ = function (s, el) { return (el || document).querySelector(s); };
   var $$ = function (s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); };
 
-  /* ---------- year + IST clock ---------- */
   var year = $('#year');
   if (year) year.textContent = new Date().getFullYear();
-
-  var clock = $('#clock');
-  function tick() {
-    if (!clock) return;
-    try {
-      var t = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: false }).format(new Date());
-      clock.textContent = 'IST ' + t;
-    } catch (e) { clock.textContent = 'IST'; }
-  }
-  tick();
-  setInterval(tick, 20000);
 
   /* ---------- theme ---------- */
   var themeBtn = $('#themeToggle');
   var themeLabel = $('#themeLabel');
   var darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
   function currentTheme() { return root.dataset.theme || (darkQuery.matches ? 'dark' : 'light'); }
-  function syncThemeUI() {
+  function syncTheme() {
     var next = currentTheme() === 'dark' ? 'light' : 'dark';
     if (themeLabel) themeLabel.textContent = next === 'dark' ? 'Dark' : 'Light';
     if (themeBtn) themeBtn.setAttribute('aria-label', 'Switch to ' + next + ' theme');
   }
-  if (themeBtn) {
-    themeBtn.addEventListener('click', function () {
-      var next = currentTheme() === 'dark' ? 'light' : 'dark';
-      root.dataset.theme = next;
-      try { localStorage.setItem('theme', next); } catch (e) {}
-      syncThemeUI();
-    });
-  }
-  if (darkQuery.addEventListener) darkQuery.addEventListener('change', syncThemeUI);
-  syncThemeUI();
+  if (themeBtn) themeBtn.addEventListener('click', function () {
+    var next = currentTheme() === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    syncTheme();
+  });
+  if (darkQuery.addEventListener) darkQuery.addEventListener('change', syncTheme);
+  syncTheme();
 
   /* ---------- mobile menu ---------- */
-  var header = $('.site-header');
+  var header = $('#header');
   var menuBtn = $('#menuButton');
   function setMenu(open) {
-    if (!header || !menuBtn) return;
     header.classList.toggle('is-open', open);
     menuBtn.setAttribute('aria-expanded', String(open));
     menuBtn.textContent = open ? 'Close' : 'Menu';
     document.body.style.overflow = open ? 'hidden' : '';
   }
-  if (menuBtn) menuBtn.addEventListener('click', function () { setMenu(!header.classList.contains('is-open')); });
+  menuBtn.addEventListener('click', function () { setMenu(!header.classList.contains('is-open')); });
   $$('.nav a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
-  window.addEventListener('resize', function () { if (window.innerWidth > 760) setMenu(false); });
 
-  /* ---------- reveal on scroll ---------- */
-  var revealTargets = $$('.reveal, .project');
+  /* ---------- reveals ---------- */
+  var revealEls = $$('.reveal, .project, .arc');
   if ('IntersectionObserver' in window && !reduceMotion) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) { en.target.classList.add('is-in'); io.unobserve(en.target); }
       });
     }, { rootMargin: '0px 0px -12% 0px', threshold: 0.05 });
-    revealTargets.forEach(function (el) { io.observe(el); });
+    revealEls.forEach(function (el) { io.observe(el); });
   } else {
-    revealTargets.forEach(function (el) { el.classList.add('is-in'); });
+    revealEls.forEach(function (el) { el.classList.add('is-in'); });
   }
 
-  /* current section in nav */
   var navLinks = $$('.nav a');
   if ('IntersectionObserver' in window) {
     var navIO = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
-        if (!en.isIntersecting) return;
-        navLinks.forEach(function (a) { a.classList.toggle('is-current', a.getAttribute('href') === '#' + en.target.id); });
+        if (en.isIntersecting) navLinks.forEach(function (a) { a.classList.toggle('is-current', a.getAttribute('href') === '#' + en.target.id); });
       });
     }, { rootMargin: '-45% 0px -50% 0px' });
-    ['work', 'experience', 'about', 'contact'].forEach(function (id) { var el = document.getElementById(id); if (el) navIO.observe(el); });
+    ['capabilities', 'projects', 'experience', 'about', 'contact'].forEach(function (id) {
+      var el = document.getElementById(id); if (el) navIO.observe(el);
+    });
   }
 
-  /* ---------- fit giant project names to the width ---------- */
+  /* ---------- giant project names fill the width ---------- */
   function fitNames() {
-    $$('.project__name').forEach(function (h) {
-      if (h.closest('.project').hidden) return;
+    $$('.project:not([hidden]) .project__name').forEach(function (h) {
       var lines = $$('.fit', h);
       var avail = h.clientWidth;
       if (!avail) return;
       h.style.setProperty('--fs', '100px');
       var widest = 0;
-      lines.forEach(function (l) { widest = Math.max(widest, l.getBoundingClientRect().width); });
+      lines.forEach(function (l) { widest = Math.max(widest, l.scrollWidth); });
       if (!widest) return;
-      var size = 100 * (avail * 0.985) / widest;
-      var cap = Math.min(window.innerHeight * (lines.length > 1 ? 0.24 : 0.36), 340);
-      h.style.setProperty('--fs', Math.max(28, Math.min(size, cap)).toFixed(1) + 'px');
+      var size = 100 * avail * 0.99 / widest;
+      var cap = window.innerHeight * (lines.length > 1 ? 0.22 : 0.34);
+      h.style.setProperty('--fs', Math.max(30, Math.min(size, cap, 360)).toFixed(1) + 'px');
     });
   }
 
-  /* ---------- alternate tones on visible bands ---------- */
+  /* ---------- light/dark alternation of visible bands ---------- */
   function retone() {
-    var visible = $$('.band').filter(function (b) { return !b.hidden; });
-    visible.forEach(function (b, i) {
-      var tone = i % 2 === 0 ? 'ink' : 'paper';
-      b.classList.toggle('tone-ink', tone === 'ink');
-      b.classList.toggle('tone-paper', tone === 'paper');
-      b.dataset.tone = tone;
+    $$('.band').filter(function (b) { return !b.hidden; }).forEach(function (b, i) {
+      b.classList.toggle('tone-ink', i % 2 === 0);
+      b.classList.toggle('tone-paper', i % 2 === 1);
     });
   }
 
-  /* ---------- the trace: one right-angled line through every band ---------- */
-  var SVGNS = 'http://www.w3.org/2000/svg';
-  var traces = [];
+  /* ---------- the thread ---------- */
+  var main = $('main');
+  var svg = $('#thread');
+  var NS = 'http://www.w3.org/2000/svg';
+  var PROJECT_PATTERNS = [
+    '0.2,0 0.07,0.2 0.15,0.5,n 0.5,0.57 0.86,0.5 0.93,0.8 0.8,1',
+    '0.8,0 0.93,0.22 0.85,0.48,n 0.5,0.43 0.14,0.52 0.07,0.82 0.2,1'
+  ];
+  var T = null; // current thread state
 
-  function el(name, attrs) {
-    var n = document.createElementNS(SVGNS, name);
+  function mk(name, attrs) {
+    var n = document.createElementNS(NS, name);
     for (var k in attrs) n.setAttribute(k, attrs[k]);
     return n;
   }
 
-  function buildTraces() {
-    traces = [];
-    $$('.trace').forEach(function (s) { s.remove(); });
-    var bands = $$('.band').filter(function (b) { return !b.hidden; });
-
-    bands.forEach(function (band, i) {
-      var w = band.offsetWidth, h = band.offsetHeight;
-      if (!w || !h) return;
-      var inner = $('.band__inner', band);
-      var pad = parseFloat(getComputedStyle(inner).paddingLeft) || 16;
-      var gx = Math.max(6, pad * 0.45);
-      var left = gx, right = w - gx;
-      var xin = i % 2 === 0 ? left : right;
-      var xout = i % 2 === 0 ? right : left;
-
-      var anchor = $('[data-trace-y]', band);
-      var y = h * 0.5;
-      if (anchor) {
-        // layout offsets (not getBoundingClientRect) so reveal transforms don't skew it
-        var top = 0, node = anchor;
-        while (node && node !== band) { top += node.offsetTop; node = node.offsetParent; }
-        y = anchor.getAttribute('data-trace-y') === 'below'
-          ? top + anchor.offsetHeight + Math.min(40, Math.max(22, w * 0.02))
-          : top + anchor.offsetHeight / 2;
-      }
-      var y0 = i === 0 ? Math.min(h * 0.18, y - 40) : 0;
-      y = Math.max(y0 + 30, Math.min(h - 30, y));
-      var isEnd = i === bands.length - 1;
-      var endLabelEl = $('[data-trace-end]', band);
-      var r = Math.min(18, Math.abs(xout - xin) / 2);
-      var dir = xout > xin ? 1 : -1;
-
-      var d = 'M' + xin + ' ' + y0 + ' V' + (y - r) +
-        ' Q' + xin + ' ' + y + ' ' + (xin + dir * r) + ' ' + y;
-      var xEnd = isEnd ? (xin + dir * Math.min(Math.abs(xout - xin) * 0.82, Math.abs(xout - xin) - 120)) : xout;
-      if (isEnd) {
-        d += ' H' + xEnd;
-      } else {
-        d += ' H' + (xout - dir * r) + ' Q' + xout + ' ' + y + ' ' + xout + ' ' + (y + r) + ' V' + h;
-      }
-
-      var svg = el('svg', { 'class': 'trace', viewBox: '0 0 ' + w + ' ' + h, preserveAspectRatio: 'none', 'aria-hidden': 'true', focusable: 'false' });
-      var path = el('path', { 'class': 'trace__path', d: d });
-      svg.appendChild(path);
-
-      if (i === 0) {
-        svg.appendChild(el('circle', { 'class': 'trace__node', cx: xin, cy: y0, r: 6 }));
-        svg.appendChild(el('circle', { 'class': 'trace__core', cx: xin, cy: y0, r: 2.5 }));
-      }
-      if (isEnd) {
-        svg.appendChild(el('circle', { 'class': 'trace__node', cx: xEnd, cy: y, r: 7 }));
-        svg.appendChild(el('circle', { 'class': 'trace__core', cx: xEnd, cy: y, r: 3 }));
-        var label = el('text', { 'class': 'trace__label', x: xEnd - dir * 14, y: y + 26, 'text-anchor': dir > 0 ? 'end' : 'start' });
-        label.textContent = endLabelEl ? endLabelEl.getAttribute('data-trace-end') : '200 OK';
-        svg.appendChild(label);
-      } else if (!band.classList.contains('approach')) {
-        svg.appendChild(el('circle', { 'class': 'trace__node', cx: xout, cy: y, r: 5 }));
-      }
-      var packet = el('circle', { 'class': 'trace__packet', r: 4, cx: xin, cy: y0, opacity: 0 });
-      svg.appendChild(packet);
-
-      band.insertBefore(svg, band.firstChild);
-
-      var total = path.getTotalLength();
-      var v1 = Math.max(0, y - y0), hz = Math.abs(xEnd - xin), v2 = isEnd ? 0 : Math.max(0, h - y);
-      var geo = v1 + hz + v2 || 1;
-      var t = { band: band, path: path, packet: packet, total: total, scale: total / geo, y0: y0, y: y, h: h, v1: v1, hz: hz, v2: v2 };
-      path.style.strokeDasharray = total + ' ' + total;
-      path.style.strokeDashoffset = reduceMotion ? 0 : total;
-      traces.push(t);
-    });
-    drawTraces();
+  // smooth curve through points (Catmull-Rom → cubic Bézier)
+  function curve(pts) {
+    var d = 'M' + pts[0].x.toFixed(1) + ' ' + pts[0].y.toFixed(1);
+    for (var i = 0; i < pts.length - 1; i++) {
+      var p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
+      var c1x = p1.x + (p2.x - p0.x) / 6, c1y = p1.y + (p2.y - p0.y) / 6;
+      var c2x = p2.x - (p3.x - p1.x) / 6, c2y = p2.y - (p3.y - p1.y) / 6;
+      d += ' C' + c1x.toFixed(1) + ' ' + c1y.toFixed(1) + ' ' + c2x.toFixed(1) + ' ' + c2y.toFixed(1) + ' ' + p2.x.toFixed(1) + ' ' + p2.y.toFixed(1);
+    }
+    return d;
   }
 
-  /* map the viewport "read line" to how much of each band's trace is drawn */
-  function drawTraces() {
-    if (reduceMotion) return;
-    var vh = window.innerHeight;
-    var readLine = vh * 0.62;
-    traces.forEach(function (t) {
-      var top = t.band.getBoundingClientRect().top;
-      var ly = readLine - top;              // read line, in band coordinates
-      var span = Math.min(vh * 0.35, Math.max(120, t.v2 * 0.5));   // scroll spent drawing the horizontal run
-      var drawn;
-      if (ly <= t.y0) drawn = 0;
-      else if (ly <= t.y) drawn = ly - t.y0;
-      else if (ly <= t.y + span || t.v2 === 0) drawn = t.v1 + t.hz * Math.min(1, (ly - t.y) / span);
-      else drawn = t.v1 + t.hz + t.v2 * Math.min(1, (ly - t.y - span) / Math.max(1, t.h - t.y - span));
-      drawn = Math.max(0, Math.min(t.total, drawn * t.scale));
-      t.path.style.strokeDashoffset = (t.total - drawn).toFixed(1);
+  function buildThread() {
+    if (!svg || !main) return;
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    var mRect = main.getBoundingClientRect();
+    var W = main.clientWidth, H = main.scrollHeight;
+    svg.setAttribute('width', W); svg.setAttribute('height', H);
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
 
-      var active = drawn > 2 && drawn < t.total - 2;
-      if (active) {
-        var p = t.path.getPointAtLength(drawn);
-        t.packet.setAttribute('cx', p.x.toFixed(1));
-        t.packet.setAttribute('cy', p.y.toFixed(1));
-      }
-      t.packet.setAttribute('opacity', active ? 1 : 0);
+    var pts = [], projIdx = 0;
+    $$('.band').filter(function (b) { return !b.hidden; }).forEach(function (band) {
+      var r = band.getBoundingClientRect();
+      var top = r.top - mRect.top, h = r.height;
+      var spec = band.dataset.thread || PROJECT_PATTERNS[projIdx++ % 2];
+      spec.trim().split(/\s+/).forEach(function (tok) {
+        var p = tok.split(',');
+        var pt = { x: parseFloat(p[0]) * W, y: top + parseFloat(p[1]) * h, flag: p[2] || '' };
+        var last = pts[pts.length - 1];
+        if (last && Math.abs(last.y - pt.y) < 2 && Math.abs(last.x - pt.x) < 2) return; // band seams
+        pts.push(pt);
+      });
     });
+    if (pts.length < 2) return;
+
+    var path = mk('path', { 'class': 'thread__path', d: curve(pts) });
+    svg.appendChild(path);
+    var total = path.getTotalLength();
+
+    // sample the path; cumulative max of y lets loops draw naturally while scrolling
+    var step = 6, lens = [], maxY = [], xs = [], ys = [], m = -Infinity;
+    for (var L = 0; L <= total; L += step) {
+      var q = path.getPointAtLength(L);
+      m = Math.max(m, q.y);
+      lens.push(L); maxY.push(m); xs.push(q.x); ys.push(q.y);
+    }
+
+    var nodes = [];
+    pts.forEach(function (p) {
+      if (!p.flag) return;
+      // length along the path nearest to this point
+      var best = 0, bd = Infinity;
+      for (var i = 0; i < xs.length; i++) {
+        var dd = (xs[i] - p.x) * (xs[i] - p.x) + (ys[i] - p.y) * (ys[i] - p.y);
+        if (dd < bd) { bd = dd; best = i; }
+      }
+      var g = mk('g', { opacity: reduceMotion ? 1 : 0 });
+      g.style.transition = 'opacity .4s';
+      if (p.flag === 'e') {
+        g.appendChild(mk('circle', { 'class': 'thread__node', cx: p.x, cy: p.y, r: 9 }));
+        g.appendChild(mk('circle', { 'class': 'thread__core', cx: p.x, cy: p.y, r: 3.5 }));
+        var t = mk('text', { 'class': 'thread__label', x: p.x, y: p.y + 30, 'text-anchor': 'middle' });
+        t.textContent = '200 OK';
+        g.appendChild(t);
+      } else {
+        g.appendChild(mk('circle', { 'class': 'thread__node', cx: p.x, cy: p.y, r: 7 }));
+        g.appendChild(mk('circle', { 'class': 'thread__core', cx: p.x, cy: p.y, r: 2.6 }));
+      }
+      svg.appendChild(g);
+      nodes.push({ el: g, at: lens[best] });
+    });
+
+    var head = mk('circle', { 'class': 'thread__head', r: 4, opacity: 0 });
+    svg.appendChild(head);
+
+    path.style.strokeDasharray = total + ' ' + total;
+    path.style.strokeDashoffset = reduceMotion ? 0 : total;
+    T = { path: path, total: total, lens: lens, maxY: maxY, nodes: nodes, head: head, mainTop: mRect.top + window.scrollY };
+    drawThread();
+  }
+
+  function drawThread() {
+    if (!T || reduceMotion) return;
+    var readY = window.scrollY + window.innerHeight * 0.66 - T.mainTop;
+    // first sample whose running max y passes the read line
+    var lo = 0, hi = T.maxY.length - 1;
+    while (lo < hi) { var mid = (lo + hi) >> 1; if (T.maxY[mid] > readY) hi = mid; else lo = mid + 1; }
+    var drawn = T.maxY[T.maxY.length - 1] <= readY ? T.total : T.lens[lo];
+    T.path.style.strokeDashoffset = (T.total - drawn).toFixed(1);
+    T.nodes.forEach(function (n) { n.el.setAttribute('opacity', drawn >= n.at ? 1 : 0); });
+    var live = drawn > 4 && drawn < T.total - 4;
+    if (live) {
+      var p = T.path.getPointAtLength(drawn);
+      T.head.setAttribute('cx', p.x.toFixed(1)); T.head.setAttribute('cy', p.y.toFixed(1));
+    }
+    T.head.setAttribute('opacity', live ? 1 : 0);
   }
 
   var ticking = false;
   window.addEventListener('scroll', function () {
     if (ticking) return;
     ticking = true;
-    requestAnimationFrame(function () { drawTraces(); ticking = false; });
+    requestAnimationFrame(function () { drawThread(); ticking = false; });
   }, { passive: true });
 
-  var resizeTimer;
-  var lastW = window.innerWidth;
+  var resizeTimer, lastW = window.innerWidth;
   window.addEventListener('resize', function () {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function () {
-      // phones fire resize when the URL bar hides; only rebuild if width changed
-      var widthChanged = window.innerWidth !== lastW;
-      lastW = window.innerWidth;
-      if (widthChanged) fitNames();
-      buildTraces();
-    }, 150);
+      if (window.innerWidth !== lastW) { lastW = window.innerWidth; fitNames(); if (window.innerWidth > 760) setMenu(false); }
+      buildThread();
+    }, 160);
   });
-
-  /* rebuild when case notes open/close (height changes) */
-  $$('.notes').forEach(function (d) { d.addEventListener('toggle', function () { buildTraces(); }); });
+  $$('.notes').forEach(function (d) { d.addEventListener('toggle', buildThread); });
 
   /* ---------- project filter ---------- */
   var projects = $$('.project');
-  var filterBtns = $$('.filter');
+  var buttons = $$('.filter');
   var status = $('#filterStatus');
-  var labels = { all: 'all', company: 'company', personal: 'personal', research: 'research' };
-
-  function countFor(cat) {
-    return projects.filter(function (p) { return cat === 'all' || p.dataset.cat === cat; }).length;
-  }
-  $$('[data-count]').forEach(function (s) { s.textContent = countFor(s.dataset.count); });
-
-  function applyFilter(cat, scroll) {
+  $$('[data-count]').forEach(function (s) {
+    var c = s.dataset.count;
+    s.textContent = projects.filter(function (p) { return c === 'all' || p.dataset.cat === c; }).length;
+  });
+  function applyFilter(cat) {
     var n = 0;
     projects.forEach(function (p) {
       var show = cat === 'all' || p.dataset.cat === cat;
       p.hidden = !show;
-      if (show) {
-        n++;
-        var num = $('.project__num', p);
-        if (num) num.textContent = String(n).padStart(2, '0');
-        if (reduceMotion) p.classList.add('is-in');
-      }
+      if (show) { n++; $('.project__num', p).textContent = String(n).padStart(2, '0'); }
     });
-    filterBtns.forEach(function (b) {
+    buttons.forEach(function (b) {
       var on = b.dataset.filter === cat;
       b.classList.toggle('is-active', on);
       b.setAttribute('aria-pressed', String(on));
     });
-    if (status) status.textContent = 'Showing ' + n + ' ' + (cat === 'all' ? '' : labels[cat] + ' ') + (n === 1 ? 'project' : 'projects');
-    retone();
-    fitNames();
-    buildTraces();
-
-    if (scroll) {
-      var first = projects.filter(function (p) { return !p.hidden; })[0];
-      if (first) {
-        var top = first.getBoundingClientRect().top + window.scrollY;
-        if (Math.abs(window.scrollY - top) > 4) window.scrollTo({ top: top, behavior: reduceMotion ? 'auto' : 'smooth' });
-      }
-    }
+    if (status) status.textContent = 'Showing ' + n + (cat === 'all' ? '' : ' ' + cat) + (n === 1 ? ' project' : ' projects');
+    retone(); fitNames(); buildThread();
+    var first = projects.filter(function (p) { return !p.hidden; })[0];
+    if (first) window.scrollTo({ top: first.getBoundingClientRect().top + window.scrollY, behavior: reduceMotion ? 'auto' : 'smooth' });
   }
-  filterBtns.forEach(function (b) {
-    b.addEventListener('click', function () { applyFilter(b.dataset.filter, true); });
-  });
+  buttons.forEach(function (b) { b.addEventListener('click', function () { applyFilter(b.dataset.filter); }); });
 
   /* ---------- boot ---------- */
+  var booted = false;
   function boot() {
-    retone();
-    fitNames();
-    buildTraces();
+    if (booted) return; booted = true;
+    retone(); fitNames(); buildThread();
     requestAnimationFrame(function () { root.classList.add('is-loaded'); });
   }
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(boot);
-    setTimeout(function () { if (!root.classList.contains('is-loaded')) boot(); }, 1500);
-  } else {
-    boot();
-  }
-  window.addEventListener('load', function () { fitNames(); buildTraces(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(boot); else boot();
+  setTimeout(boot, 1500);
+  window.addEventListener('load', function () { fitNames(); buildThread(); });
 })();
