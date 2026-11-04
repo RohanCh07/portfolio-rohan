@@ -502,3 +502,53 @@ a.explore[download]:hover span { transform: translateY(3px); }
   .callout { position: relative; left: auto; top: auto; margin-left: 14px; align-self: center; min-width: 0; }
   .sketch { width: clamp(4.5rem, calc(var(--w) * 2.3), 100%); }
 }
+
+/* ---------- capabilities: branch into two groups ---------- */
+.caps .band__inner { min-height: auto; padding-bottom: clamp(5rem, 9vw, 8rem); }
+.branch { position: relative; height: clamp(5rem, 9vw, 8rem); margin-top: clamp(6rem, 11vw, 10rem); }
+.branch svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.branch path { fill: none; stroke: var(--signal); stroke-width: 2; }
+.branch__dot { position: absolute; left: var(--x); bottom: -7px; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: var(--bg); border: 2px solid var(--signal); }
+.groups { display: grid; grid-template-columns: 1fr 1fr; margin-top: 1.4rem; }
+.group { text-align: center; font-size: clamp(.68rem, .85vw, .82rem); letter-spacing: .16em; text-transform: uppercase; }
+.caps .arc { margin-top: clamp(1.5rem, 3vw, 3rem); }
+
+/* ---------- about: statement + imprint + signature ---------- */
+.about__intro {
+  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); grid-template-rows: 1fr auto;
+  gap: 2rem clamp(2rem, 5vw, 5rem); min-height: calc(100svh - var(--header-h) - 6rem); align-items: start;
+}
+.about__head { grid-column: 1; }
+.about__line { max-width: 38ch; margin-top: clamp(1.5rem, 3vw, 2.5rem); font-size: clamp(1rem, 1.3vw, 1.2rem); color: var(--muted); }
+.imprint { grid-column: 2; grid-row: 1 / span 2; width: 100%; max-width: 30rem; justify-self: end; align-self: center; overflow: visible; }
+.imprint path, .imprint rect, .imprint circle { fill: none; stroke: var(--signal); stroke-width: 1.6; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.about__sign { grid-column: 1; align-self: end; max-width: 30rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+.about__name { font-size: clamp(1.4rem, 2vw, 2rem); letter-spacing: -.05em; line-height: 1; }
+.about__sign .mono { margin-top: .6rem; font-size: .75rem; color: var(--muted); }
+.about .about__grid { margin-top: clamp(4rem, 9vw, 8rem); }
+
+/* ---------- contact: coiled cable ---------- */
+.contact { overflow: hidden; }
+.coil { position: absolute; z-index: 1; left: auto; right: 6%; top: 0; width: min(32vw, 30rem); height: auto; overflow: visible; pointer-events: none; }
+.coil path, .coil rect { fill: none; stroke: var(--signal); stroke-width: 2; vector-effect: non-scaling-stroke; stroke-linejoin: round; stroke-linecap: round; }
+.coil .fill { fill: var(--bg); }
+.coil__label { font: 500 13px/1 var(--mono); letter-spacing: .14em; fill: var(--signal); }
+
+/* draw-on for the decorative line art */
+.js .draw path, .js .draw rect, .js .draw circle { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 2.2s var(--ease); }
+.js .draw.is-in path, .js .draw.is-in rect, .js .draw.is-in circle { stroke-dashoffset: 0; }
+.js .draw .coil__label { opacity: 0; transition: opacity .6s 1.6s; }
+.js .draw.is-in .coil__label { opacity: 1; }
+
+@media (max-width: 760px) {
+  .branch { margin-top: 4rem; }
+  .groups { margin-bottom: 1rem; }
+  .about__intro { grid-template-columns: 1fr; min-height: 0; }
+  .imprint { grid-column: 1; grid-row: auto; justify-self: center; max-width: 16rem; }
+  .about__sign { grid-row: auto; }
+  .coil { right: 2%; width: 40vw; opacity: .9; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .draw path, .js .draw rect, .js .draw circle { stroke-dashoffset: 0 !important; }
+  .js .draw .coil__label { opacity: 1 !important; }
+}

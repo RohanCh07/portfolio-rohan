@@ -44,7 +44,9 @@
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
 
   /* ---------- reveals ---------- */
-  var revealEls = $$('.reveal, .project, .arc');
+  // line art that draws itself: normalise every stroke to length 1
+  $$('.draw path, .draw rect, .draw circle').forEach(function (n) { n.setAttribute('pathLength', '1'); });
+  var revealEls = $$('.reveal, .project, .arc, .draw');
   if ('IntersectionObserver' in window && !reduceMotion) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
@@ -134,8 +136,17 @@
       var top = r.top - mRect.top, h = r.height;
       var spec = band.dataset.thread || PROJECT_PATTERNS[projIdx++ % 2];
       spec.trim().split(/\s+/).forEach(function (tok) {
-        var p = tok.split(',');
-        var pt = { x: parseFloat(p[0]) * W, y: top + parseFloat(p[1]) * h, flag: p[2] || '' };
+        var pt;
+        if (tok.indexOf('a:') === 0) {
+          // a:elementId:fx,fy[,flag] — a point relative to an element's box
+          var bits = tok.split(':'), target = document.getElementById(bits[1]);
+          if (!target || !target.getClientRects().length) return;
+          var er = target.getBoundingClientRect(), q = bits[2].split(',');
+          pt = { x: er.left - mRect.left + parseFloat(q[0]) * er.width, y: er.top - mRect.top + parseFloat(q[1]) * er.height, flag: q[2] || '' };
+        } else {
+          var p = tok.split(',');
+          pt = { x: parseFloat(p[0]) * W, y: top + parseFloat(p[1]) * h, flag: p[2] || '' };
+        }
         var last = pts[pts.length - 1];
         if (last && Math.abs(last.y - pt.y) < 2 && Math.abs(last.x - pt.x) < 2) return; // band seams
         pts.push(pt);
