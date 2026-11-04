@@ -103,8 +103,12 @@
       if (p.flag.indexOf('m') !== -1 && runs[runs.length - 1].length) runs.push([]);
       runs[runs.length - 1].push(p);
     });
-    var d = [], lens = [], xs = [], ys = [], total = 0;
+    // Each run becomes its own <path>: browsers restart the dash pattern at every "M" inside a
+    // single path, which made the stretch after a break draw far ahead of the tip.
+    var d = [], lens = [], xs = [], ys = [], total = 0, pieces = [];
     runs.filter(function (r) { return r.length > 1; }).forEach(function (run) {
+      if (d.length) pieces.push({ d: d.join(' '), start: pieces.length ? pieces[pieces.length - 1].end : 0, end: total });
+      d = [];
       d.push('M' + run[0].x.toFixed(1) + ' ' + run[0].y.toFixed(1));
       lens.push(total); xs.push(run[0].x); ys.push(run[0].y);
       run[0].len = total;
@@ -135,7 +139,8 @@
         p2.len = total;
       }
     });
-    return { d: d.join(' '), lens: lens, xs: xs, ys: ys, total: total };
+    if (d.length) pieces.push({ d: d.join(' '), start: pieces.length ? pieces[pieces.length - 1].end : 0, end: total });
+    return { pieces: pieces, lens: lens, xs: xs, ys: ys, total: total };
   }
 
   function buildThread() {
@@ -224,9 +229,16 @@
 
     var geo = curve(pts);
     var total = geo.total || 1, lens = geo.lens, xs = geo.xs, ys = geo.ys, step = 0;
-    // pathLength makes the browser's dash units match our computed lengths exactly
-    var path = mk('path', { 'class': 'thread__path', d: geo.d, pathLength: total.toFixed(2) });
-    svg.appendChild(path);
+    // one <path> per piece; pathLength makes each piece's dash units match our computed lengths
+    var pieces = geo.pieces.map(function (pc) {
+      var L = Math.max(0.01, pc.end - pc.start);
+      var el = mk('path', { 'class': 'thread__path', d: pc.d, pathLength: L.toFixed(2) });
+      el.style.strokeDasharray = L + ' ' + L;
+      el.style.strokeDashoffset = reduceMotion ? 0 : L;
+      svg.appendChild(el);
+      return { el: el, start: pc.start, end: pc.end, len: L };
+    });
+    var path = pieces[0].el;
 
     // cumulative max of y lets loops draw naturally while scrolling
     var maxY = [], m = -Infinity;
@@ -262,8 +274,6 @@
     var head = mk('circle', { 'class': 'thread__head', r: 4, opacity: 0 });
     svg.appendChild(head);
 
-    path.style.strokeDasharray = total + ' ' + total;
-    path.style.strokeDashoffset = reduceMotion ? 0 : total;
     // where each section's stretch of thread ends, so it can draw one section at a time
     var bandEnd = bandEls.map(function () { return 0; });
     pts.forEach(function (p) { if (p.len != null) bandEnd[p.band] = Math.max(bandEnd[p.band], p.len); });
@@ -275,11 +285,15 @@
       f.start = fp[0].len; f.end = fp[fp.length - 1].len;
       f.top = Math.min.apply(null, fp.map(function (q) { return q.y; }));
       f.bottom = Math.max.apply(null, fp.map(function (q) { return q.y; }));
+      f.pts = pts.filter(function (q) { return q.fig === fi; }).map(function (q) { return [q.x, q.y]; });
     });
+    // the line shown while the plug is being pulled (the coil straightening out)
+    var pullPath = mk('path', { 'class': 'thread__pull', d: '', opacity: 0 });
+    svg.appendChild(pullPath);
     var figById = {};
     figs.forEach(function (f) { if (f.start != null) figById[f.id] = f; });
     T = { path: path, total: total, lens: lens, maxY: maxY, xs: xs, ys: ys, step: step, nodes: nodes, head: head, ring: ring,
-          bands: bandEls, bandEnd: bandEnd, figs: figs.filter(function (f) { return f.start != null; }), figById: figById, mainTop: mRect.top + window.scrollY };
+          bands: bandEls, bandEnd: bandEnd, figs: figs.filter(function (f) { return f.start != null; }), figById: figById, pull: pullPath, pieces: pieces, mainTop: mRect.top + window.scrollY };
     if (threadNow > total) threadNow = total;
     if (reduceMotion) threadNow = total;                         // no drawing animation: show it all
     threadGoal = Math.min(threadGoal, total);
@@ -304,13 +318,27 @@
     while (lo < hi) { var mid = (lo + hi) >> 1; if (T.maxY[mid] > readY) hi = mid; else lo = mid + 1; }
     return T.maxY[T.maxY.length - 1] <= readY ? T.total : T.lens[lo];
   }
+  // The tip follows the scroll, but never faster than a pen could move: long horizontal runs
+  // (like the route around the capabilities heading) draw across instead of appearing at once.
+  var PEN_SPEED = 2.1;                                           // px per millisecond
+  var stepping = false, lastStep = 0, pulling = false;
   function drawThread() {
     if (!T || reduceMotion) return;
     if (!root.classList.contains('is-loaded')) return;          // wait for the opening signature
     threadGoal = lengthAtScreenLine();
-    if (intro) return;                                           // the opening glide is still running
-    threadNow = threadGoal;
+    if (intro || pulling) return;                                // opening glide / plug being pulled
+    if (!stepping) { stepping = true; lastStep = performance.now(); requestAnimationFrame(stepThread); }
+  }
+  function stepThread(now) {
+    if (!T || pulling) { stepping = false; return; }
+    var dt = Math.min(48, Math.max(1, now - lastStep)); lastStep = now;
+    var diff = threadGoal - threadNow;
+    // pen speed for ordinary gaps (e.g. a long horizontal run); big jumps (nav links, back to top) catch up fast
+    var maxStep = PEN_SPEED * dt + Math.max(0, Math.abs(diff) - window.innerHeight * 1.6) * 0.18;
+    threadNow = Math.abs(diff) <= maxStep ? threadGoal : threadNow + (diff > 0 ? maxStep : -maxStep);
     paintThread(threadNow);
+    drawSkillmap();
+    if (threadNow !== threadGoal) requestAnimationFrame(stepThread); else stepping = false;
   }
   // once, after the signature: glide the hero's stretch in, then hand over to the scroll
   function introThread() {
@@ -325,7 +353,7 @@
     })(intro.start);
   }
   function paintThread(drawn) {
-    T.path.style.strokeDashoffset = (T.total - drawn).toFixed(1);
+    setDrawn(drawn);
     T.nodes.forEach(function (n) { n.el.setAttribute('opacity', drawn >= n.at ? 1 : 0); });
     var live = drawn > 4 && drawn < T.total - 4;
     if (live) {
@@ -338,6 +366,13 @@
     T.ring.setAttribute('opacity', live ? 0.55 : 0);
     figureUi(drawn);
   }
+  // how much of each piece is drawn, given how far along the whole thread the tip is
+  function setDrawn(drawn) {
+    T.pieces.forEach(function (pc) {
+      var v = Math.max(0, Math.min(pc.len, drawn - pc.start));
+      pc.el.style.strokeDashoffset = (pc.len - v).toFixed(1);
+    });
+  }
   function figProgress(id, drawn) {
     var f = T && T.figById[id];
     if (!f) return reduceMotion ? 1 : null;
@@ -346,75 +381,141 @@
   function figureUi(drawn) {
     var sp = figProgress('figSpiral', drawn);
     if (sp != null) { toggleOn('#spiralIn', sp > 0); toggleOn('#spiralOut', sp > 0.92); }
-    var ci = figProgress('figCircle', drawn);
-    if (ci != null) {
-      var loop = Math.min(1, ci / 0.76);                       // the circle is ~76% of that stretch, the drop the rest
-      skillNodes.forEach(function (el) { el.classList.toggle('is-on', ci > 0); });
-      skillItems.forEach(function (li) { li.classList.toggle('is-on', loop >= parseFloat(li.getAttribute('data-t')) - 0.004); });
-    }
     var co = figProgress('coil', drawn);
     var plugEl = document.getElementById('plug');
     if (plugEl) plugEl.classList.toggle('is-ready', reduceMotion || drawn >= T.total - 6 || (co != null && co > 0.985));
   }
   function toggleOn(sel, on) { var el = $(sel); if (el) el.classList.toggle('is-on', on); }
 
-  /* skills map: the circle is traced by the thread itself (see figureUi); phones and tablets get the list */
+  /* skills map: two halves draw down both sides together from where the thread arrives at the top,
+     each tip level with the thread's screen line, and they meet at the bottom just before the
+     thread carries on. Skills on both sides appear as their half reaches them. */
   var skillmap = $('#skillmap');
   var skillItems = skillmap ? $$('.skill', skillmap) : [];
   var skillNodes = skillmap ? $$('.skillmap__node, .skillmap__group', skillmap) : [];
+  var halves = skillmap ? $$('.skillmap__lines path', skillmap) : [];
+  halves.forEach(function (p) { p.setAttribute('pathLength', '1'); p.style.strokeDasharray = '1 1'; p.style.strokeDashoffset = reduceMotion ? 0 : 1; });
+  var CY = 350, CR = 330, CH = 700;
   function drawSkillmap() {
     if (!skillmap) return;
-    if (reduceMotion || window.innerWidth <= 1100) skillItems.concat(skillNodes).forEach(function (el) { el.classList.add('is-on'); });
+    if (reduceMotion || window.innerWidth <= 1100) {
+      halves.forEach(function (p) { p.style.strokeDashoffset = 0; });
+      skillItems.concat(skillNodes).forEach(function (el) { el.classList.add('is-on'); });
+      return;
+    }
+    if (!root.classList.contains('is-loaded')) return;
+    var box = skillmap.getBoundingClientRect();
+    // where the thread's tip is, in circle units (+ a small lead so the halves close first)
+    var yBox = (window.innerHeight * READ - box.top) / box.height * CH + CR * 0.18;
+    var frac = yBox <= CY - CR ? 0 : yBox >= CY + CR ? 1 : Math.acos((CY - yBox) / CR) / Math.PI;
+    if (T && T.figById && threadNow > 0) {
+      // once the thread is drawn past the bottom of the circle, the circle is always closed
+      var bottomY = box.top + window.scrollY - T.mainTop + box.height * 680 / 700;
+      if (lengthAtScreenLine() > 0 && window.scrollY + window.innerHeight * READ - T.mainTop > bottomY) frac = 1;
+    }
+    halves.forEach(function (p) { p.style.strokeDashoffset = (1 - frac).toFixed(4); });
+    skillNodes.forEach(function (el) { el.classList.toggle('is-on', frac > 0.03); });
+    skillItems.forEach(function (li) { li.classList.toggle('is-on', frac >= parseFloat(li.getAttribute('data-t')) - 0.01); });
   }
   function drawFigures() {}
 
-  /* ---------- contact: pull the plug to open the message form ---------- */
+  /* ---------- contact: pull the plug — the coil straightens out, then the message pop-up opens ---------- */
   (function () {
-    var plug = document.getElementById('plug'), form = document.getElementById('msgForm'), contact = document.getElementById('contact');
-    if (!plug || !form || !contact) return;
-    var wrap = plug.parentNode, coilSvg = wrap.querySelector('.coil');
-    var cord = document.createElement('span'); cord.className = 'cord'; wrap.appendChild(cord);
-    var dragging = false, sx = 0, sy = 0, dx = 0, dy = 0, SNAP = 120;
+    var plug = document.getElementById('plug'), form = document.getElementById('msgForm');
+    var backdrop = document.getElementById('msgBackdrop');
+    if (!plug || !form) return;
+    var PULL = 190;                                // how far you pull for the coil to go fully straight
+    var dragging = false, sx = 0, sy = 0, dx = 0, dy = 0, k = 0, anim = null, opened = false;
+    var ease = function (t) { return 1 - Math.pow(1 - t, 3); };
+
+    function coil() { return T && T.figById && T.figById.coil && T.figById.coil.pts; }
+    // Draw the coil bent toward a straight line from its top to the plug: k = 0 is the coil, 1 is taut.
+    function drawPull(ox, oy, kk) {
+      var P = coil(); if (!P) return;
+      var n = P.length, top = P[0], end = P[n - 1];
+      var ex = end[0] + ox, ey = end[1] + oy, out = [];
+      for (var i = 0; i < n; i++) {
+        var u = i / (n - 1);
+        var bx = P[i][0] + ox * u, by = P[i][1] + oy * u;          // bend with the hand
+        var lx = top[0] + (ex - top[0]) * u, ly = top[1] + (ey - top[1]) * u;   // the taut line
+        out.push((bx + (lx - bx) * kk).toFixed(1) + ' ' + (by + (ly - by) * kk).toFixed(1));
+      }
+      T.pull.setAttribute('d', 'M' + out.join(' L'));
+      plug.style.transform = 'translate(' + ox.toFixed(1) + 'px,' + oy.toFixed(1) + 'px)';
+    }
+    function beginPull() {
+      var f = T && T.figById && T.figById.coil; if (!f) return false;
+      pulling = true;
+      setDrawn(f.start);                                            // hide the drawn coil; the pull line replaces it
+      T.pull.setAttribute('opacity', 1);
+      return true;
+    }
+    function endPull() {
+      pulling = false;
+      T.pull.setAttribute('opacity', 0);
+      plug.style.transform = '';
+      paintThread(threadNow);
+    }
+    function tween(from, to, ms, done) {
+      if (anim) cancelAnimationFrame(anim.raf);
+      var t0 = performance.now();
+      anim = {};
+      (function frame(now) {
+        var t = Math.min(1, (now - t0) / ms), e = 1 - Math.pow(1 - t, 3);
+        var v = {}; for (var key in from) v[key] = from[key] + (to[key] - from[key]) * e;
+        drawPull(v.x, v.y, v.k);
+        if (t < 1) anim.raf = requestAnimationFrame(frame); else { anim = null; if (done) done(); }
+      })(t0);
+    }
     function openForm() {
-      form.hidden = false; contact.classList.add('is-messaging'); plug.setAttribute('aria-expanded', 'true');
-      var first = form.querySelector('input'); if (first) setTimeout(function () { first.focus({ preventScroll: true }); }, 250);
+      if (opened) return; opened = true;
+      backdrop.hidden = false; form.hidden = false; plug.setAttribute('aria-expanded', 'true');
+      if (lenis) lenis.stop();
+      var first = form.querySelector('input'); if (first) setTimeout(function () { first.focus({ preventScroll: true }); }, 200);
     }
     function closeForm() {
-      form.hidden = true; contact.classList.remove('is-messaging'); plug.setAttribute('aria-expanded', 'false'); plug.focus({ preventScroll: true });
+      if (!opened) return; opened = false;
+      backdrop.hidden = true; form.hidden = true; plug.setAttribute('aria-expanded', 'false');
+      if (lenis) lenis.start();
+      // the cable springs back into its coil
+      if (pulling) tween({ x: dx, y: dy, k: k }, { x: 0, y: 0, k: 0 }, 650, function () { dx = dy = k = 0; endPull(); plug.focus({ preventScroll: true }); });
+      else plug.focus({ preventScroll: true });
     }
-    function setPull(x, y) {
-      plug.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';
-      var len = Math.hypot(x, y);
-      cord.style.height = len.toFixed(1) + 'px';
-      cord.style.transform = 'rotate(' + (Math.atan2(-x, y) * 180 / Math.PI).toFixed(1) + 'deg)';
+    // pull to straighten; past the end of the pull it snaps taut and the pop-up opens
+    function untangleAndOpen() {
+      if (!pulling && !beginPull()) { openForm(); return; }
+      var ty = Math.max(dy, PULL), tx = dx;
+      tween({ x: dx, y: dy, k: k }, { x: tx, y: ty, k: 1 }, 520, function () { dx = tx; dy = ty; k = 1; openForm(); });
     }
+
     plug.addEventListener('pointerdown', function (e) {
-      if (!plug.classList.contains('is-ready')) return;
-      dragging = true; sx = e.clientX; sy = e.clientY; dx = dy = 0;
+      if (!plug.classList.contains('is-ready') || opened) return;
+      if (!beginPull()) return;
+      dragging = true; sx = e.clientX; sy = e.clientY; dx = dy = k = 0;
       plug.setPointerCapture(e.pointerId); plug.classList.add('is-dragging');
       if (lenis) lenis.stop();
     });
     plug.addEventListener('pointermove', function (e) {
       if (!dragging) return;
-      dx = (e.clientX - sx) * 0.6; dy = Math.max(0, e.clientY - sy);
-      setPull(dx, Math.min(dy, 220));
+      dx = (e.clientX - sx) * 0.7; dy = Math.max(0, e.clientY - sy);
+      dy = Math.min(dy, PULL * 1.25);
+      k = ease(Math.min(1, Math.hypot(dx, dy) / PULL));
+      drawPull(dx, dy, k);
     });
     function release() {
       if (!dragging) return;
       dragging = false; plug.classList.remove('is-dragging');
-      if (lenis) lenis.start();
-      var pulled = dy > SNAP;
-      plug.style.transition = 'transform .5s cubic-bezier(.34,1.56,.64,1)';
-      cord.style.transition = 'height .45s cubic-bezier(.34,1.56,.64,1)';
-      setPull(0, 0);
-      setTimeout(function () { plug.style.transition = cord.style.transition = ''; }, 520);
-      if (pulled) openForm();
-      else if (Math.hypot(dx, dy) < 6) openForm();                // a plain click/tap also opens it
+      if (lenis && !opened) lenis.start();
+      var moved = Math.hypot(dx, dy);
+      if (moved < 6 || k > 0.82) { untangleAndOpen(); return; }      // a tap, or pulled far enough
+      tween({ x: dx, y: dy, k: k }, { x: 0, y: 0, k: 0 }, 620, function () { dx = dy = k = 0; endPull(); });
     }
     plug.addEventListener('pointerup', release);
     plug.addEventListener('pointercancel', release);
-    plug.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openForm(); } });
+    plug.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); untangleAndOpen(); } });
     form.querySelector('.msg__close').addEventListener('click', closeForm);
+    backdrop.addEventListener('click', closeForm);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && opened) closeForm(); });
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var note = form.querySelector('.msg__note');
