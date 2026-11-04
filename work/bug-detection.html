@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Bug Detection &amp; Fix Tool — Rohan Chauhan</title>
+  <meta name="description" content="A VS Code extension that catches errors as they happen — and either teaches you, or fixes them.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Bug Detection &amp; Fix Tool — Rohan Chauhan">
+  <meta property="og:description" content="A VS Code extension that catches errors as they happen — and either teaches you, or fixes them.">
+  <meta property="og:image" content="/assets/og-image.jpg">
+  <meta name="theme-color" content="#050505">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/ibm-plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/style.css?v=d1980a09">
+  <link rel="prev" href="/work/distiller">
+  <link rel="next" href="/work/blockauth">
+  <script>
+    (function () { var d = document.documentElement; d.classList.add('js', 'study-page'); try { localStorage.removeItem('theme'); } catch (e) {} })();
+  </script>
+</head>
+<body>
+  <a class="skip" href="#overview">Skip to the case study</a>
+
+  <header class="site-header" id="header">
+    <a class="wordmark" href="/" aria-label="Rohan Chauhan, home">RC</a>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="/#capabilities">Capabilities</a>
+      <a href="/#projects">Projects</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#about">About</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+  </header>
+
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+
+  <main id="top" class="study">
+    <svg class="thread" id="thread" aria-hidden="true" focusable="false"></svg>
+
+    <!-- HERO -->
+    <section class="band tone-ink study-hero" data-thread="0.04,0.06,n 0.06,0.3 0.3,0.55 0.8,0.7 0.965,1">
+      <div class="band__inner">
+        <p class="study-hero__label mono reveal"><span>04</span> / Developer tools</p>
+        <h1 class="study-hero__name display">Bug Detection &amp; Fix Tool</h1>
+        <div class="study-hero__intro">
+          <p class="study-hero__pitch reveal">A VS Code extension that catches errors as they happen — and either teaches you, or fixes them.</p>
+          <span class="study-hero__tag mono reveal">Project study</span>
+        </div>
+        <div class="study-hero__stage project__stage" aria-hidden="true">
+
+            <svg class="sketch" style="--x:3%;--y:58%;--w:23vw;--r:-2deg" viewBox="0 0 350 215" aria-hidden="true"><rect class="fill" x="50" y="8" width="250" height="168" rx="8"/><rect x="62" y="20" width="226" height="144" rx="2"/><path d="M62 36 H288"/><circle cx="72" cy="28" r="2.5"/><circle cx="82" cy="28" r="2.5"/><circle cx="92" cy="28" r="2.5"/><path d="M74 52 H150 M86 66 H200 M86 80 H170 M74 108 H140 M86 122 H230 M86 136 H190 M74 150 H120"/><path class="hot" d="M86 98 q5 -5 10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0"/><path class="fill" d="M10 182 H340 L322 210 H28 Z"/><path d="M150 196 H200"/></svg><svg class="sketch" style="--x:84%;--y:-2%;--w:9vw;--r:14deg" viewBox="0 0 170 200" aria-hidden="true" data-from="14vw,-35vh"><path d="M66 44 L50 14 M104 44 L120 14"/><path d="M44 96 H8 M42 130 H4 M48 164 L16 190 M126 96 H162 M128 130 H166 M122 164 L154 190"/><ellipse class="fill" cx="85" cy="126" rx="42" ry="62"/><circle class="fill" cx="85" cy="58" r="21"/><path d="M85 79 V186 M56 112 H72 M98 112 H114 M60 146 H72 M98 146 H110"/></svg><p class="callout mono" style="--x:72%;--y:6%"><span>Caught live</span><b>Runtime + lint</b></p><div class="card card--code" style="--x:4%;--y:-2%;--w:23vw;--r:-2deg">
+              <p class="card__head mono"><span>orders.py</span><span>Ln 42</span></p>
+<pre class="mono"><span class="ln">41</span> user = get_user(uid)
+<span class="ln">42</span> name = <span class="squiggle">user["name"]</span>
+<span class="ln">43</span> return name.title()</pre>
+              <p class="err mono">TypeError: 'NoneType' object is not subscriptable</p>
+            </div>
+            <div class="card" style="--x:66%;--y:74%;--w:21vw;--r:2deg">
+              <p class="seg mono"><span>Tutor</span><span class="on">Debugger</span></p>
+              <p class="sm">get_user returns None for an unknown id. Check it before reading the name.</p>
+              <p class="card__actions mono"><span class="pill">Apply fix</span></p>
+            </div>
+          
+        </div>
+        <dl class="study-meta mono reveal">
+          <div><dt>Role</dt><dd>Solo — extension and backend</dd></div>
+          <div><dt>Year</dt><dd>2025</dd></div>
+          <div><dt>Type</dt><dd>Personal</dd></div>
+          <div><dt>Status</dt><dd>VS Code extension</dd></div>
+          <div class="study-meta__stack"><dt>Stack</dt><dd>TypeScript / VS Code API / FastAPI / Python / RAG / Vector DB</dd></div>
+
+        </dl>
+      </div>
+    </section>
+
+    <nav class="study-contents mono" aria-label="Chapters">
+      <a class="study-contents__back" href="/#projects">← All projects</a>
+      <ol>
+        <li><a href="#overview"><span>01</span> Overview</a></li>
+        <li><a href="#problem"><span>02</span> Problem</a></li>
+        <li><a href="#system"><span>03</span> How it works</a></li>
+        <li><a href="#decisions"><span>04</span> Decisions</a></li>
+        <li><a href="#flow"><span>05</span> Flow</a></li>
+        <li><a href="#outcome"><span>06</span> Outcome</a></li>
+      </ol>
+    </nav>
+
+    <!-- OVERVIEW -->
+    <section class="band tone-paper study-chapter" id="overview" data-thread="0.965,0 0.975,0.5 0.965,1">
+      <div class="band__inner study-split">
+        <p class="study-kicker mono reveal">01 / Overview</p>
+        <h2 class="study-title reveal">An error explained in your editor, the moment it appears.</h2>
+        <p class="study-text reveal">The extension captures both static lint errors and runtime exceptions while you work, then uses LLM-based retrieval (RAG over a vector database) to explain them. You choose how much help you want: Tutor mode explains why the code broke; Debugger mode proposes a fix.</p>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="band tone-ink study-chapter study-problem" id="problem" data-thread="0.965,0 0.955,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">02 / The problem</p>
+        <h2 class="study-title study-title--big reveal">An error message tells you what broke, rarely why.</h2>
+        <div class="study-split study-split--low">
+          <p class="study-text reveal">Learners need the reasoning behind an error to stop repeating it; experienced developers just want the fix. Most tools give the same terse message to both, and copying it into a search engine breaks your flow.</p>
+          <ul class="study-points">
+            <li class="reveal"><span class="study-points__dot" aria-hidden="true"></span>Terse messages without the reason behind them</li>
+            <li class="reveal"><span class="study-points__dot" aria-hidden="true"></span>Leaving the editor to search for answers</li>
+            <li class="reveal"><span class="study-points__dot" aria-hidden="true"></span>One kind of help for very different needs</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SYSTEM -->
+    <section class="band tone-paper study-chapter" id="system" data-thread="0.965,0 0.975,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">03 / How it works</p>
+        <h2 class="study-title reveal">Catch, retrieve, explain or fix — without leaving the editor.</h2>
+        <ol class="study-steps" style="--n:4">
+          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">01</span><h3>Capture</h3><p>Collect lint errors and runtime exceptions as they happen.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">02</span><h3>Retrieve</h3><p>Search a vector database for relevant docs and code context.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">03</span><h3>Explain</h3><p>An LLM reasons over the error and the retrieved context.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">04</span><h3>Tutor or fix</h3><p>Tutor mode teaches; Debugger mode proposes a change.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- DECISIONS -->
+    <section class="band tone-ink study-chapter" id="decisions" data-thread="0.965,0 0.955,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">04 / Key decisions</p>
+        <h2 class="study-title reveal">The choices that shaped it.</h2>
+        <div class="study-decisions">
+          <article class="study-decision reveal">
+            <p class="study-decision__n mono">01</p>
+            <div><p class="study-decision__label mono">Question</p><h3>One kind of help, or two?</h3></div>
+            <div><p class="study-decision__label mono">Choice</p><p class="study-decision__choice">Two modes: Tutor and Debugger.</p></div>
+            <div><p class="study-decision__label mono">Effect</p><p>Beginners learn the cause; experienced users get straight to the fix.</p></div>
+          </article>
+          <article class="study-decision reveal">
+            <p class="study-decision__n mono">02</p>
+            <div><p class="study-decision__label mono">Question</p><h3>How do answers stay grounded?</h3></div>
+            <div><p class="study-decision__label mono">Choice</p><p class="study-decision__choice">Retrieval (RAG) before generation.</p></div>
+            <div><p class="study-decision__label mono">Effect</p><p>Explanations are based on real documentation and code, not guesses.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FLOW -->
+    <section class="band tone-paper study-chapter" id="flow" data-thread="0.965,0 0.975,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">05 / The flow</p>
+        <h2 class="study-title reveal">What it looks like from the person using it.</h2>
+        <ol class="study-flow mono">
+          <li class="reveal"><span class="study-flow__n">01</span><span class="study-flow__dot" aria-hidden="true"></span>Write code as usual</li>
+          <li class="reveal"><span class="study-flow__n">02</span><span class="study-flow__dot" aria-hidden="true"></span>An error is caught</li>
+          <li class="reveal"><span class="study-flow__n">03</span><span class="study-flow__dot" aria-hidden="true"></span>Choose Tutor or Debugger</li>
+          <li class="reveal"><span class="study-flow__n">04</span><span class="study-flow__dot" aria-hidden="true"></span>Read the explanation or apply the fix</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- OUTCOME -->
+    <section class="band tone-ink study-chapter" id="outcome" data-thread="0.965,0 0.955,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">06 / Outcome</p>
+        <h2 class="study-title reveal">Help that matches the person asking for it.</h2>
+        <dl class="study-stats">
+          <div class="reveal"><dt class="mono">Tutor and Debugger</dt><dd>2 modes</dd></div>
+          <div class="reveal"><dt class="mono">Both kinds of error captured</dt><dd>Lint + runtime</dd></div>
+          <div class="reveal"><dt class="mono">Grounded explanations</dt><dd>RAG</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- NEXT -->
+    <section class="band tone-paper study-next" data-thread="0.965,0 0.975,0.22 0.93,0.4,e">
+      <a class="study-next__link" href="/work/blockauth" data-cursor="Next">
+        <span class="study-next__label mono">05 / Next project</span>
+        <span class="study-next__name display">BlockAuth</span>
+        <span class="study-next__pitch">Decentralised identity on a blockchain, so IoT devices can prove who they are without a central server.</span>
+        <span class="study-next__arrow" aria-hidden="true">↗</span>
+      </a>
+      <div class="study-next__foot mono">
+        <a href="/#projects">All projects</a>
+        <a href="/#contact">Contact</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/assets/lenis.min.js" defer></script>
+  <script src="/main.js?v=3a6834bb" defer></script>
+</body>
+</html>

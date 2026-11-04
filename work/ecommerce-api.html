@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>E-Commerce API — Rohan Chauhan</title>
+  <meta name="description" content="Products, carts and orders as a REST API, with roles, validation and a properly normalised schema.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="E-Commerce API — Rohan Chauhan">
+  <meta property="og:description" content="Products, carts and orders as a REST API, with roles, validation and a properly normalised schema.">
+  <meta property="og:image" content="/assets/og-image.jpg">
+  <meta name="theme-color" content="#050505">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/ibm-plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/style.css?v=d1980a09">
+  <link rel="prev" href="/work/flight-delay-predictor">
+  <link rel="next" href="/work/lumida">
+  <script>
+    (function () { var d = document.documentElement; d.classList.add('js', 'study-page'); try { localStorage.removeItem('theme'); } catch (e) {} })();
+  </script>
+</head>
+<body>
+  <a class="skip" href="#overview">Skip to the case study</a>
+
+  <header class="site-header" id="header">
+    <a class="wordmark" href="/" aria-label="Rohan Chauhan, home">RC</a>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="/#capabilities">Capabilities</a>
+      <a href="/#projects">Projects</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#about">About</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+  </header>
+
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+
+  <main id="top" class="study">
+    <svg class="thread" id="thread" aria-hidden="true" focusable="false"></svg>
+
+    <!-- HERO -->
+    <section class="band tone-ink study-hero" data-thread="0.04,0.06,n 0.06,0.3 0.3,0.55 0.8,0.7 0.965,1">
+      <div class="band__inner">
+        <p class="study-hero__label mono reveal"><span>08</span> / Backend</p>
+        <h1 class="study-hero__name display">E-Commerce API</h1>
+        <div class="study-hero__intro">
+          <p class="study-hero__pitch reveal">Products, carts and orders as a REST API, with roles, validation and a properly normalised schema.</p>
+          <span class="study-hero__tag mono reveal">Project study</span>
+        </div>
+        <div class="study-hero__stage project__stage" aria-hidden="true">
+
+            <svg class="sketch" style="--x:62%;--y:-6%;--w:20vw;--r:0deg" viewBox="0 0 300 214" aria-hidden="true" data-from="55vw,0"><path d="M4 22 H48 L84 166 H262"/><path class="fill" d="M60 62 H296 L270 150 H82 Z"/><path d="M100 62 L110 150 M140 62 L146 150 M180 62 L182 150 M220 62 L216 150 M258 62 L250 150 M70 106 H284"/><rect class="fill" x="120" y="14" width="76" height="54" transform="rotate(-8 158 41)"/><path d="M158 14 V34" transform="rotate(-8 158 41)"/><rect class="fill" x="196" y="30" width="54" height="40" transform="rotate(6 223 50)"/><circle class="fill" cx="108" cy="194" r="16"/><circle class="fill" cx="240" cy="194" r="16"/></svg><svg class="sketch" style="--x:86%;--y:58%;--w:7vw;--r:6deg" viewBox="0 0 150 222" aria-hidden="true" data-from="0,45vh"><path class="fill" d="M10 10 H140 V206 L127 216 L114 206 L101 216 L88 206 L75 216 L62 206 L49 216 L36 206 L23 216 L10 206 Z"/><path d="M26 34 H96 M26 60 H124 M26 78 H110 M26 96 H124 M26 114 H100 M26 148 H124"/><path d="M26 172 H70 M96 172 H124" stroke-width="3"/></svg><svg class="sketch" style="--x:4%;--y:62%;--w:7vw;--r:-6deg" viewBox="0 0 160 200" aria-hidden="true" data-from="-20vw,10vh"><path d="M52 62 V44 A28 28 0 0 1 108 44 V62"/><path class="fill" d="M22 62 H138 L148 192 H12 Z"/><circle cx="52" cy="80" r="4"/><circle cx="108" cy="80" r="4"/><path d="M50 130 H110"/></svg><p class="callout mono" style="--x:40%;--y:6%"><span>POST /api/cart</span><b>201 · created</b></p><div class="card card--code" style="--x:4%;--y:-2%;--w:22vw;--r:-2deg">
+              <p class="card__head mono"><span>GET /api/orders/1042</span><span class="tag tag--ok">200</span></p>
+<pre class="mono">{
+  "id": 1042,
+  "status": "paid",
+  "items": [{ "sku": "TS-01", "qty": 2 }],
+  "total": "1,598.00"
+}</pre>
+            </div>
+            <div class="card card--code" style="--x:58%;--y:78%;--w:22vw;--r:2deg">
+              <p class="card__head mono"><span>DELETE /api/products/7</span><span class="tag">403</span></p>
+              <pre class="mono">{ "detail": "role 'customer' can't do that" }</pre>
+            </div>
+          
+        </div>
+        <dl class="study-meta mono reveal">
+          <div><dt>Role</dt><dd>Solo — API and database</dd></div>
+          <div><dt>Year</dt><dd>2024</dd></div>
+          <div><dt>Type</dt><dd>Personal</dd></div>
+          <div><dt>Status</dt><dd>REST API</dd></div>
+          <div class="study-meta__stack"><dt>Stack</dt><dd>Python / Django / Django REST Framework / MySQL / Postman</dd></div>
+
+        </dl>
+      </div>
+    </section>
+
+    <nav class="study-contents mono" aria-label="Chapters">
+      <a class="study-contents__back" href="/#projects">← All projects</a>
+      <ol>
+        <li><a href="#overview"><span>01</span> Overview</a></li>
+        <li><a href="#problem"><span>02</span> Problem</a></li>
+        <li><a href="#system"><span>03</span> How it works</a></li>
+        <li><a href="#decisions"><span>04</span> Decisions</a></li>
+        <li><a href="#flow"><span>05</span> Flow</a></li>
+        <li><a href="#outcome"><span>06</span> Outcome</a></li>
+      </ol>
+    </nav>
+
+    <!-- OVERVIEW -->
+    <section class="band tone-paper study-chapter" id="overview" data-thread="0.965,0 0.975,0.5 0.965,1">
+      <div class="band__inner study-split">
+        <p class="study-kicker mono reveal">01 / Overview</p>
+        <h2 class="study-title reveal">The backend of a shop, built to be predictable.</h2>
+        <p class="study-text reveal">REST APIs for product, cart and order management with input validation and clean JSON responses. Authentication and role-based access control use Django's built-in auth system, on top of a normalised MySQL schema with ORM logic for stock updates and order totals.</p>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="band tone-ink study-chapter study-problem" id="problem" data-thread="0.965,0 0.955,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">02 / The problem</p>
+        <h2 class="study-title study-title--big reveal">Money and stock leave no room for "usually correct".</h2>
+        <div class="study-split study-split--low">
+          <p class="study-text reveal">An e-commerce backend has to keep stock, carts and orders consistent, reject bad input, and make sure customers cannot do what only staff should. Those rules belong in the API and the schema, not in each screen.</p>
+          <ul class="study-points">
+            <li class="reveal"><span class="study-points__dot" aria-hidden="true"></span>Stock and totals that must always add up</li>
+            <li class="reveal"><span class="study-points__dot" aria-hidden="true"></span>Different permissions for customers and staff</li>
+            <li class="reveal"><span class="study-points__dot" aria-hidden="true"></span>Clear errors when a request is invalid</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SYSTEM -->
+    <section class="band tone-paper study-chapter" id="system" data-thread="0.965,0 0.975,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">03 / How it works</p>
+        <h2 class="study-title reveal">Validation, roles and a normalised schema behind every endpoint.</h2>
+        <ol class="study-steps" style="--n:4">
+          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">01</span><h3>Request</h3><p>A client calls a product, cart or order endpoint.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">02</span><h3>Validate</h3><p>Input is checked; bad requests get a clear JSON error.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">03</span><h3>Authorise</h3><p>Django auth and roles decide what the caller may do.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">04</span><h3>Persist</h3><p>The ORM updates stock and totals in a normalised MySQL schema.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- DECISIONS -->
+    <section class="band tone-ink study-chapter" id="decisions" data-thread="0.965,0 0.955,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">04 / Key decisions</p>
+        <h2 class="study-title reveal">The choices that shaped it.</h2>
+        <div class="study-decisions">
+          <article class="study-decision reveal">
+            <p class="study-decision__n mono">01</p>
+            <div><p class="study-decision__label mono">Question</p><h3>Where should permissions be enforced?</h3></div>
+            <div><p class="study-decision__label mono">Choice</p><p class="study-decision__choice">Role-based access in the API, using Django auth.</p></div>
+            <div><p class="study-decision__label mono">Effect</p><p>A customer cannot reach staff actions, whatever client they use.</p></div>
+          </article>
+          <article class="study-decision reveal">
+            <p class="study-decision__n mono">02</p>
+            <div><p class="study-decision__label mono">Question</p><h3>How should the data be stored?</h3></div>
+            <div><p class="study-decision__label mono">Choice</p><p class="study-decision__choice">A normalised MySQL schema with ORM logic.</p></div>
+            <div><p class="study-decision__label mono">Effect</p><p>Stock updates and order totals stay consistent.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FLOW -->
+    <section class="band tone-paper study-chapter" id="flow" data-thread="0.965,0 0.975,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">05 / The flow</p>
+        <h2 class="study-title reveal">What it looks like from the person using it.</h2>
+        <ol class="study-flow mono">
+          <li class="reveal"><span class="study-flow__n">01</span><span class="study-flow__dot" aria-hidden="true"></span>Browse products</li>
+          <li class="reveal"><span class="study-flow__n">02</span><span class="study-flow__dot" aria-hidden="true"></span>Add to cart</li>
+          <li class="reveal"><span class="study-flow__n">03</span><span class="study-flow__dot" aria-hidden="true"></span>Place an order</li>
+          <li class="reveal"><span class="study-flow__n">04</span><span class="study-flow__dot" aria-hidden="true"></span>Stock and totals update</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- OUTCOME -->
+    <section class="band tone-ink study-chapter" id="outcome" data-thread="0.965,0 0.955,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">06 / Outcome</p>
+        <h2 class="study-title reveal">A clean, role-aware API for a shop.</h2>
+        <dl class="study-stats">
+          <div class="reveal"><dt class="mono">Products, carts, orders</dt><dd>3 resources</dd></div>
+          <div class="reveal"><dt class="mono">Access control</dt><dd>Role-based</dd></div>
+          <div class="reveal"><dt class="mono">MySQL schema</dt><dd>Normalised</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- NEXT -->
+    <section class="band tone-paper study-next" data-thread="0.965,0 0.975,0.22 0.93,0.4,e">
+      <a class="study-next__link" href="/work/lumida" data-cursor="Next">
+        <span class="study-next__label mono">01 / Next project</span>
+        <span class="study-next__name display">Lumida</span>
+        <span class="study-next__pitch">A self-hosted engine that reads your database, finds what is quietly broken, and explains why.</span>
+        <span class="study-next__arrow" aria-hidden="true">↗</span>
+      </a>
+      <div class="study-next__foot mono">
+        <a href="/#projects">All projects</a>
+        <a href="/#contact">Contact</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/assets/lenis.min.js" defer></script>
+  <script src="/main.js?v=3a6834bb" defer></script>
+</body>
+</html>

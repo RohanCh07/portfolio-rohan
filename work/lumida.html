@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Lumida — Rohan Chauhan</title>
+  <meta name="description" content="A self-hosted engine that reads your database, finds what is quietly broken, and explains why.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Lumida — Rohan Chauhan">
+  <meta property="og:description" content="A self-hosted engine that reads your database, finds what is quietly broken, and explains why.">
+  <meta property="og:image" content="/assets/og-image.jpg">
+  <meta name="theme-color" content="#050505">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/ibm-plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/style.css?v=d1980a09">
+  <link rel="prev" href="/work/ecommerce-api">
+  <link rel="next" href="/work/cerebra">
+  <script>
+    (function () { var d = document.documentElement; d.classList.add('js', 'study-page'); try { localStorage.removeItem('theme'); } catch (e) {} })();
+  </script>
+</head>
+<body>
+  <a class="skip" href="#overview">Skip to the case study</a>
+
+  <header class="site-header" id="header">
+    <a class="wordmark" href="/" aria-label="Rohan Chauhan, home">RC</a>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="/#capabilities">Capabilities</a>
+      <a href="/#projects">Projects</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#about">About</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+  </header>
+
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+
+  <main id="top" class="study">
+    <svg class="thread" id="thread" aria-hidden="true" focusable="false"></svg>
+
+    <!-- HERO -->
+    <section class="band tone-paper study-hero" data-thread="0.04,0.06,n 0.06,0.3 0.3,0.55 0.8,0.7 0.965,1">
+      <div class="band__inner">
+        <p class="study-hero__label mono reveal"><span>01</span> / Data quality</p>
+        <h1 class="study-hero__name display">Lumida</h1>
+        <div class="study-hero__intro">
+          <p class="study-hero__pitch reveal">A self-hosted engine that reads your database, finds what is quietly broken, and explains why.</p>
+          <span class="study-hero__tag mono reveal">Project study</span>
+        </div>
+        <div class="study-hero__stage project__stage" aria-hidden="true">
+
+            <svg class="sketch" style="--x:2%;--y:-4%;--w:13vw;--r:-4deg" viewBox="0 0 200 270" aria-hidden="true"><path class="fill" d="M20 30 V200 A80 20 0 0 0 180 200 V30 Z"/><ellipse class="fill" cx="100" cy="30" rx="80" ry="20"/><path d="M20 87 A80 20 0 0 0 180 87 M20 144 A80 20 0 0 0 180 144"/><path d="M42 66 H70 M42 123 H70 M42 180 H70"/><circle cx="150" cy="70" r="3" class="ink"/><circle cx="150" cy="127" r="3" class="ink"/><circle cx="150" cy="184" r="3" class="ink"/><rect class="fill" x="128" y="196" width="56" height="44" rx="5"/><path d="M140 196 V180 A16 16 0 0 1 172 180 V196"/><circle cx="156" cy="214" r="5"/><path d="M156 219 V228"/></svg><p class="callout mono" style="--x:16%;--y:6%"><span>orders_db</span><b>Read-only</b></p><svg class="sketch" style="--x:58%;--y:-6%;--w:27vw;--r:2deg" viewBox="0 0 380 250" aria-hidden="true"><rect class="fill" x="10" y="20" width="110" height="74" rx="3"/><path d="M10 38 H120"/><path d="M18 30 H70.5" stroke-width="2.4"/><path d="M18 50 H78.2"/><circle cx="108" cy="50" r="2" class="ink"/><path d="M18 64 H78.2"/><circle cx="108" cy="64" r="2" class="ink"/><path d="M18 78 H78.2"/><circle cx="108" cy="78" r="2" class="ink"/><rect class="fill" x="250" y="6" width="120" height="74" rx="3"/><path d="M250 24 H370"/><path d="M258 16 H316.0" stroke-width="2.4"/><path d="M258 36 H324.4"/><circle cx="358" cy="36" r="2" class="ink"/><path d="M258 50 H324.4"/><circle cx="358" cy="50" r="2" class="ink"/><path d="M258 64 H324.4"/><circle cx="358" cy="64" r="2" class="ink"/><rect class="fill" x="40" y="160" width="110" height="74" rx="3"/><path d="M40 178 H150"/><path d="M48 170 H100.5" stroke-width="2.4"/><path d="M48 190 H108.2"/><circle cx="138" cy="190" r="2" class="ink"/><path d="M48 204 H108.2"/><circle cx="138" cy="204" r="2" class="ink"/><path d="M48 218 H108.2"/><circle cx="138" cy="218" r="2" class="ink"/><rect class="fill" x="258" y="160" width="112" height="74" rx="3"/><path d="M258 178 H370"/><path d="M266 170 H319.6" stroke-width="2.4"/><path d="M266 190 H327.44"/><circle cx="358" cy="190" r="2" class="ink"/><path d="M266 204 H327.44"/><circle cx="358" cy="204" r="2" class="ink"/><path d="M266 218 H327.44"/><circle cx="358" cy="218" r="2" class="ink"/><path d="M120 50 C170 50 200 40 250 40"/><path d="M150 196 C200 196 210 196 258 196"/><path d="M310 80 V160"/><path class="hot" d="M95 94 C120 140 220 130 258 180" stroke-dasharray="6 6"/><circle class="fill" cx="178" cy="128" r="34"/><path class="hot" d="M168 118 L188 138 M188 118 L168 138"/><path d="M202 152 L232 182" stroke-width="7"/></svg><p class="callout mono" style="--x:84%;--y:72%"><span>customers ↔ orders</span><b>4 orphan rows</b></p><div class="card" style="--x:7%;--y:64%;--w:19vw;--r:-2deg">
+              <p class="card__head mono"><span>Benchmark</span><span>Test DB</span></p>
+              <dl class="metrics">
+                <div><dt class="mono">Hidden relationships</dt><dd>15<small>/15</small></dd></div>
+                <div><dt class="mono">Planted problems</dt><dd>13<small>/13</small></dd></div>
+                <div><dt class="mono">False alarms</dt><dd>0</dd></div>
+              </dl>
+            </div>
+            <figure class="shot" style="--x:52%;--y:60%;--w:27vw;--r:2deg">
+              <img src="/assets/project-lumida.jpg" alt="Lumida's landing page: 'Light on your data.'" width="800" height="500" loading="lazy">
+            </figure>
+          
+        </div>
+        <dl class="study-meta mono reveal">
+          <div><dt>Role</dt><dd>Solo — design, backend, ML</dd></div>
+          <div><dt>Year</dt><dd>2026</dd></div>
+          <div><dt>Type</dt><dd>Personal</dd></div>
+          <div><dt>Status</dt><dd>Live preview</dd></div>
+          <div class="study-meta__stack"><dt>Stack</dt><dd>Python / PostgreSQL / FastAPI / Docker / Gemini</dd></div>
+          <div class="study-meta__links"><dt>Links</dt><dd><a class="explore" data-cursor="Open" href="https://lumida.netlify.app/" target="_blank" rel="noopener">Open Lumida <span aria-hidden="true">↗</span></a></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <nav class="study-contents mono" aria-label="Chapters">
+      <a class="study-contents__back" href="/#projects">← All projects</a>
+      <ol>
+        <li><a href="#overview"><span>01</span> Overview</a></li>
+        <li><a href="#problem"><span>02</span> Problem</a></li>
+        <li><a href="#system"><span>03</span> How it works</a></li>
+        <li><a href="#decisions"><span>04</span> Decisions</a></li>
+        <li><a href="#flow"><span>05</span> Flow</a></li>
+        <li><a href="#outcome"><span>06</span> Outcome</a></li>
+      </ol>
+    </nav>
+
+    <!-- OVERVIEW -->
+    <section class="band tone-ink study-chapter" id="overview" data-thread="0.965,0 0.975,0.5 0.965,1">
+      <div class="band__inner study-split">
+        <p class="study-kicker mono reveal">01 / Overview</p>
+        <h2 class="study-title reveal">Point it at a database. Read the findings over coffee.</h2>
+        <p class="study-text reveal">Lumida connects read-only to an existing database and builds a picture of it on its own: which tables really relate to each other, what normal looks like for each column, and where the data has drifted. Every finding arrives with the evidence behind it and a plain-language explanation, so the person reading it does not need to know the schema by heart.</p>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="band tone-paper study-chapter study-problem" id="problem" data-thread="0.965,0 0.955,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">02 / The problem</p>
+        <h2 class="study-title study-title--big reveal">Bad data rarely breaks loudly. It hides in the joins nobody wrote down.</h2>
+        <div class="study-split study-split--low">
+          <p class="study-text reveal">Most production databases carry relationships that were never declared as foreign keys, and problems that only show up when a report looks wrong weeks later. Finding them by hand means reading the schema, guessing the joins and writing one-off queries — work that is slow and never finished.</p>
+          <ul class="study-points">
+            <li class="reveal"><span class="study-points__dot" aria-hidden="true"></span>Undeclared relationships between tables</li>
+            <li class="reveal"><span class="study-points__dot" aria-hidden="true"></span>Orphaned and inconsistent rows that pass every constraint</li>
+            <li class="reveal"><span class="study-points__dot" aria-hidden="true"></span>Findings that need explaining to people who did not build the schema</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- SYSTEM -->
+    <section class="band tone-ink study-chapter" id="system" data-thread="0.965,0 0.975,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">03 / How it works</p>
+        <h2 class="study-title reveal">Five steps, one direction: from the raw tables to a finding someone can act on.</h2>
+        <ol class="study-steps" style="--n:5">
+          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">01</span><h3>Connect</h3><p>Read-only connection to the database. Nothing is written back.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">02</span><h3>Map</h3><p>Infer the relationships between tables that were never declared.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">03</span><h3>Detect</h3><p>Profile each table and flag rows and values that break the pattern.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">04</span><h3>Explain</h3><p>An LLM turns each finding and its evidence into plain language.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">05</span><h3>Learn</h3><p>People confirm or dismiss findings, and Lumida learns from it.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- DECISIONS -->
+    <section class="band tone-paper study-chapter" id="decisions" data-thread="0.965,0 0.955,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">04 / Key decisions</p>
+        <h2 class="study-title reveal">The choices that shaped it.</h2>
+        <div class="study-decisions">
+          <article class="study-decision reveal">
+            <p class="study-decision__n mono">01</p>
+            <div><p class="study-decision__label mono">Question</p><h3>Should it be allowed to fix what it finds?</h3></div>
+            <div><p class="study-decision__label mono">Choice</p><p class="study-decision__choice">Read-only, always.</p></div>
+            <div><p class="study-decision__label mono">Effect</p><p>It can be pointed at production without risk, which is where the real problems live.</p></div>
+          </article>
+          <article class="study-decision reveal">
+            <p class="study-decision__n mono">02</p>
+            <div><p class="study-decision__label mono">Question</p><h3>Who decides that something is a problem?</h3></div>
+            <div><p class="study-decision__label mono">Choice</p><p class="study-decision__choice">The engine detects; the LLM only explains.</p></div>
+            <div><p class="study-decision__label mono">Effect</p><p>Findings stay reproducible and evidence-based, and the language model never invents an issue.</p></div>
+          </article>
+          <article class="study-decision reveal">
+            <p class="study-decision__n mono">03</p>
+            <div><p class="study-decision__label mono">Question</p><h3>How does it get better without retraining?</h3></div>
+            <div><p class="study-decision__label mono">Choice</p><p class="study-decision__choice">A confirm / dismiss loop on every finding.</p></div>
+            <div><p class="study-decision__label mono">Effect</p><p>Each review tunes what Lumida treats as normal for that database.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- FLOW -->
+    <section class="band tone-ink study-chapter" id="flow" data-thread="0.965,0 0.975,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">05 / The flow</p>
+        <h2 class="study-title reveal">What it looks like from the person using it.</h2>
+        <ol class="study-flow mono">
+          <li class="reveal"><span class="study-flow__n">01</span><span class="study-flow__dot" aria-hidden="true"></span>Connect a database</li>
+          <li class="reveal"><span class="study-flow__n">02</span><span class="study-flow__dot" aria-hidden="true"></span>Review the map of relationships</li>
+          <li class="reveal"><span class="study-flow__n">03</span><span class="study-flow__dot" aria-hidden="true"></span>Read the findings with evidence</li>
+          <li class="reveal"><span class="study-flow__n">04</span><span class="study-flow__dot" aria-hidden="true"></span>Confirm or dismiss each one</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- OUTCOME -->
+    <section class="band tone-paper study-chapter" id="outcome" data-thread="0.965,0 0.955,0.5 0.965,1">
+      <div class="band__inner">
+        <p class="study-kicker mono reveal">06 / Outcome</p>
+        <h2 class="study-title reveal">Tested against a database with problems planted on purpose.</h2>
+        <dl class="study-stats">
+          <div class="reveal"><dt class="mono">Hidden relationships found</dt><dd>15/15</dd></div>
+          <div class="reveal"><dt class="mono">Planted problems caught</dt><dd>13/13</dd></div>
+          <div class="reveal"><dt class="mono">False alarms</dt><dd>0</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- NEXT -->
+    <section class="band tone-ink study-next" data-thread="0.965,0 0.975,0.22 0.93,0.4,e">
+      <a class="study-next__link" href="/work/cerebra" data-cursor="Next">
+        <span class="study-next__label mono">02 / Next project</span>
+        <span class="study-next__name display">Cerebra</span>
+        <span class="study-next__pitch">A GenAI assistant that turns a sentence into a purchase request or an RFQ inside Credlex.</span>
+        <span class="study-next__arrow" aria-hidden="true">↗</span>
+      </a>
+      <div class="study-next__foot mono">
+        <a href="/#projects">All projects</a>
+        <a href="/#contact">Contact</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/assets/lenis.min.js" defer></script>
+  <script src="/main.js?v=3a6834bb" defer></script>
+</body>
+</html>
