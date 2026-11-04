@@ -442,7 +442,9 @@ a.explore[download]:hover span { transform: translateY(3px); }
 
 .art--term .del { color: #C2410C; }
 .art--term .add { color: #15803D; }
-.art--pipeline ul { font-size: .72rem; line-height: 1.9; white-space: pre; }
+.art--pipeline ul { display: grid; gap: .35rem; font-size: .72rem; }
+.art--pipeline li { display: grid; grid-template-columns: 1rem 1fr auto; gap: .5rem; }
+.art--pipeline li span:last-child { opacity: .65; }
 .ok { color: #16A34A; }
 .wip { color: var(--accent); }
 
