@@ -417,7 +417,7 @@ a.explore[download]:hover span { transform: translateY(3px); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
   .js .reveal, .js .hero__title .line > span, .js .project__name .fit, .js .project .project__stage > * { opacity: 1 !important; translate: 0 0 !important; filter: none !important; }
 }
 
@@ -551,4 +551,15 @@ a.explore[download]:hover span { transform: translateY(3px); }
 @media (prefers-reduced-motion: reduce) {
   .js .draw path, .js .draw rect, .js .draw circle { stroke-dashoffset: 0 !important; }
   .js .draw .coil__label { opacity: 1 !important; }
+}
+
+/* without JavaScript the names can't be measured, so let them wrap at a safe size */
+html:not(.js) .project__name { font-size: clamp(2.6rem, 9vw, 9rem); }
+html:not(.js) .project__name .fit { white-space: normal; width: auto; }
+html:not(.js) .hero__title .line > span { opacity: 1; }
+
+/* very narrow phones */
+@media (max-width: 360px) {
+  .filter { padding: .5rem .42rem; font-size: .56rem; letter-spacing: .03em; }
+  .filter sup { display: none; }
 }

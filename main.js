@@ -269,6 +269,12 @@
     requestAnimationFrame(function () { root.classList.add('is-loaded'); });
   }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(boot); else boot();
+  // the display font can finish loading after "ready" resolves; re-measure when it lands
+  if (document.fonts && document.fonts.load) {
+    var refit = function () { fitNames(); buildThread(); };
+    Promise.all([document.fonts.load('900 100px "Archivo"'), document.fonts.load('800 100px "Archivo"')]).then(refit, function () {});
+    if (document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', refit);
+  }
   setTimeout(boot, 1500);
   window.addEventListener('load', function () { fitNames(); buildThread(); });
 })();
