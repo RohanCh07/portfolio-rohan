@@ -318,18 +318,33 @@ function stageFor(anchor) {
 
 const v = { css: hash('style.css'), js: hash('main.js') };
 
+// short statements for each project's side card (hero)
+const LINES = {
+  'lumida': ['Read-only.', 'Evidence first.'],
+  'cerebra': ['One sentence.', 'One request.'],
+  'distiller': ['One line to adopt.', 'A fallback at every step.'],
+  'bug-detection': ['Caught live.', 'Explained or fixed.'],
+  'blockauth': ['No central server.', 'Verifiable access.'],
+  'admin-panel': ['Backend logic.', 'Core features.'],
+  'flight-delay-predictor': ['Live data in.', 'Forecasts out.'],
+  'ecommerce-api': ['Roles. Validation.', 'A clean schema.'],
+};
+
 function page(p, i) {
   const next = PROJECTS[(i + 1) % PROJECTS.length];
   const num = pad(i + 1);
   const title = `${p.name} — Rohan Chauhan`;
   const chapters = [['overview', 'Overview'], ['problem', 'Problem'], ['system', 'How it works'], ['decisions', 'Decisions'], ['flow', 'Flow'], ['outcome', 'Outcome']];
   const tones = ['paper', 'ink'];
-  let t = i % 2;                                   // alternate black / ivory, starting differently per project
+  let t = 0, g = 0;
   const tone = () => tones[(t++) % 2];
+  // the thread: one straight line down the centre gutter, a ring node at the top of each section
+  const gutter = () => { const id = 'gm' + (g++); return { id, attr: `data-thread="a:${id}:0,0,ln a:${id}:0,1,l"`, mark: `<span class="gutter-mark" id="${id}" aria-hidden="true"></span>` }; };
+  const line = LINES[p.slug] || [p.status, p.kind];
 
-  const meta = [
-    ['Role', p.role], ['Year', p.year], ['Type', p.kind], ['Status', p.status],
-  ];
+  const G = Array.from({ length: 9 }, gutter);
+  const hero = { attr: `data-thread="a:${G[0].id}:0,0.06,ln a:${G[0].id}:0,1,l"`, mark: G[0].mark };
+
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -375,112 +390,142 @@ function page(p, i) {
   <main id="top" class="study">
     <svg class="thread" id="thread" aria-hidden="true" focusable="false"></svg>
 
-    <!-- HERO -->
-    <section class="band tone-${tone()} study-hero" data-thread="0.04,0.06,n 0.06,0.3 0.3,0.55 0.8,0.7 0.965,1">
+    <!-- 01 HERO -->
+    <section class="band tone-${tone()} study-hero" ${hero.attr}>
+      ${hero.mark}
       <div class="band__inner">
-        <p class="study-hero__label mono reveal"><span>${num}</span> / ${esc(p.area)}</p>
-        <h1 class="study-hero__name display">${esc(p.name)}</h1>
-        <div class="study-hero__intro">
+        <div class="study-col">
+          <p class="study-label mono reveal"><span>${num}</span> / ${esc(p.area)}</p>
+          <h1 class="study-hero__name display">${esc(p.short || p.name)}</h1>
+          <div class="study-hero__rule"><span class="mono">Project study</span></div>
           <p class="study-hero__pitch reveal">${esc(p.pitch)}</p>
-          <span class="study-hero__tag mono reveal">Project study</span>
         </div>
-        <div class="study-hero__stage project__stage" aria-hidden="true">
+        <div class="study-hero__visual">
+          <div class="study-hero__stage project__stage" aria-hidden="true">
 ${stageFor(p.anchor)}
+          </div>
+          <aside class="study-card reveal">
+            <p class="study-card__label mono">${esc(p.kind)} · ${esc(p.year)}</p>
+            <p class="study-card__line">${esc(line[0])}<br>${esc(line[1])}</p>
+            <p class="study-card__tags mono">${p.stack.slice(0, 4).map(esc).join(' / ')}</p>
+          </aside>
         </div>
-        <dl class="study-meta mono reveal">
-${meta.map(([k, val]) => `          <div><dt>${k}</dt><dd>${esc(val)}</dd></div>`).join('\n')}
-          <div class="study-meta__stack"><dt>Stack</dt><dd>${p.stack.map(esc).join(' / ')}</dd></div>
-${p.links.length ? `          <div class="study-meta__links"><dt>Links</dt><dd>${p.links.map(l => `<a class="explore" data-cursor="Open" href="${l.href}" target="_blank" rel="noopener">${esc(l.label)} <span aria-hidden="true">↗</span></a>`).join(' ')}</dd></div>` : ''}
+        <p class="study-caption mono">${esc(p.name)} / ${esc(p.area)} / ${esc(p.year)}</p>
+        <dl class="study-meta">
+          <div><dt class="mono">Role</dt><dd>${esc(p.role)}</dd></div>
+          <div><dt class="mono">Status</dt><dd>${esc(p.status)}</dd></div>
+          <div><dt class="mono">Year</dt><dd>${esc(p.year)}</dd></div>
+          <div class="study-meta__wide"><dt class="mono">Stack</dt><dd>${p.stack.map(esc).join(' / ')}</dd></div>
+${p.links.length ? `          <div class="study-meta__wide"><dt class="mono">Links</dt><dd>${p.links.map(l => `<a class="explore mono" data-cursor="Open" href="${l.href}" target="_blank" rel="noopener">${esc(l.label)} <span aria-hidden="true">↗</span></a>`).join(' ')}</dd></div>` : ''}
         </dl>
+        <nav class="study-index mono" aria-label="In this study">
+          <span>In this study</span>
+          <ol>
+${chapters.map(([id, label]) => `            <li><a href="#${id}">${label}</a></li>`).join('\n')}
+          </ol>
+        </nav>
       </div>
     </section>
 
-    <nav class="study-contents mono" aria-label="Chapters">
-      <a class="study-contents__back" href="/#projects">← All projects</a>
-      <ol>
-${chapters.map(([id, label], k) => `        <li><a href="#${id}"><span>${pad(k + 1)}</span> ${label}</a></li>`).join('\n')}
-      </ol>
-    </nav>
-
-    <!-- OVERVIEW -->
-    <section class="band tone-${tone()} study-chapter" id="overview" data-thread="0.965,0 0.975,0.5 0.965,1">
-      <div class="band__inner study-split">
-        <p class="study-kicker mono reveal">01 / Overview</p>
-        <h2 class="study-title reveal">${esc(p.overview.title)}</h2>
-        <p class="study-text reveal">${esc(p.overview.text)}</p>
-      </div>
-    </section>
-
-    <!-- PROBLEM -->
-    <section class="band tone-${tone()} study-chapter study-problem" id="problem" data-thread="0.965,0 0.955,0.5 0.965,1">
+    <!-- 02 OVERVIEW -->
+    <section class="band tone-${tone()} study-chapter" id="overview" ${G[1].attr}>
+      ${G[1].mark}
       <div class="band__inner">
-        <p class="study-kicker mono reveal">02 / The problem</p>
-        <h2 class="study-title study-title--big reveal">${esc(p.problem.title)}</h2>
-        <div class="study-split study-split--low">
+        <p class="study-label mono reveal">02 / Overview</p>
+        <div class="study-two">
+          <h2 class="study-h2 reveal">${esc(p.overview.title)}</h2>
+          <p class="study-text reveal">${esc(p.overview.text)}</p>
+        </div>
+        <ol class="study-modules reveal" style="--n:${p.system.steps.length}">
+${p.system.steps.map(([h]) => `          <li>${esc(h)}</li>`).join('\n')}
+        </ol>
+        <p class="study-caption mono">${esc(p.name)} / how the parts connect</p>
+      </div>
+    </section>
+
+    <!-- 03 PROBLEM -->
+    <section class="band tone-${tone()} study-chapter" id="problem" ${G[2].attr}>
+      ${G[2].mark}
+      <div class="band__inner">
+        <p class="study-label mono reveal">03 / The problem</p>
+        <h2 class="study-h2 study-h2--big study-col reveal">${esc(p.problem.title)}</h2>
+        <div class="study-two study-two--low">
+          <div></div>
           <p class="study-text reveal">${esc(p.problem.text)}</p>
-          <ul class="study-points">
-${p.problem.points.map(pt => `            <li class="reveal"><span class="study-points__dot" aria-hidden="true"></span>${esc(pt)}</li>`).join('\n')}
-          </ul>
         </div>
-      </div>
-    </section>
-
-    <!-- SYSTEM -->
-    <section class="band tone-${tone()} study-chapter" id="system" data-thread="0.965,0 0.975,0.5 0.965,1">
-      <div class="band__inner">
-        <p class="study-kicker mono reveal">03 / How it works</p>
-        <h2 class="study-title reveal">${esc(p.system.title)}</h2>
-        <ol class="study-steps" style="--n:${p.system.steps.length}">
-${p.system.steps.map(([h, d], k) => `          <li class="study-step reveal"><span class="study-step__node" aria-hidden="true"></span><span class="study-step__n mono">${pad(k + 1)}</span><h3>${esc(h)}</h3><p>${esc(d)}</p></li>`).join('\n')}
+        <ol class="study-rows">
+${p.problem.points.map((pt, k) => `          <li class="reveal"><span class="study-rows__n mono">${pad(k + 1)}</span><h3>${esc(pt)}</h3></li>`).join('\n')}
         </ol>
       </div>
     </section>
 
-    <!-- DECISIONS -->
-    <section class="band tone-${tone()} study-chapter" id="decisions" data-thread="0.965,0 0.955,0.5 0.965,1">
+    <!-- 04 SYSTEM -->
+    <section class="band tone-${tone()} study-chapter" id="system" ${G[3].attr}>
+      ${G[3].mark}
       <div class="band__inner">
-        <p class="study-kicker mono reveal">04 / Key decisions</p>
-        <h2 class="study-title reveal">The choices that shaped it.</h2>
-        <div class="study-decisions">
-${p.decisions.map(([q, c, e], k) => `          <article class="study-decision reveal">
-            <p class="study-decision__n mono">${pad(k + 1)}</p>
-            <div><p class="study-decision__label mono">Question</p><h3>${esc(q)}</h3></div>
-            <div><p class="study-decision__label mono">Choice</p><p class="study-decision__choice">${esc(c)}</p></div>
-            <div><p class="study-decision__label mono">Effect</p><p>${esc(e)}</p></div>
-          </article>`).join('\n')}
-        </div>
-      </div>
-    </section>
-
-    <!-- FLOW -->
-    <section class="band tone-${tone()} study-chapter" id="flow" data-thread="0.965,0 0.975,0.5 0.965,1">
-      <div class="band__inner">
-        <p class="study-kicker mono reveal">05 / The flow</p>
-        <h2 class="study-title reveal">What it looks like from the person using it.</h2>
-        <ol class="study-flow mono">
-${p.flow.map((s, k) => `          <li class="reveal"><span class="study-flow__n">${pad(k + 1)}</span><span class="study-flow__dot" aria-hidden="true"></span>${esc(s)}</li>`).join('\n')}
+        <p class="study-label mono reveal">04 / How it works</p>
+        <h2 class="study-h2 study-col reveal">${esc(p.system.title)}</h2>
+        <ol class="study-rows study-rows--split">
+${p.system.steps.map(([h, d], k) => `          <li class="reveal"><span class="study-rows__n mono">${pad(k + 1)}</span><h3>${esc(h)}</h3><p>${esc(d)}</p></li>`).join('\n')}
         </ol>
       </div>
     </section>
 
-    <!-- OUTCOME -->
-    <section class="band tone-${tone()} study-chapter" id="outcome" data-thread="0.965,0 0.955,0.5 0.965,1">
+    <!-- 05 DECISIONS -->
+    <section class="band tone-${tone()} study-chapter" id="decisions" ${G[4].attr}>
+      ${G[4].mark}
       <div class="band__inner">
-        <p class="study-kicker mono reveal">06 / Outcome</p>
-        <h2 class="study-title reveal">${esc(p.outcome.title)}</h2>
+        <p class="study-label mono reveal">05 / Key decisions</p>
+        <h2 class="study-h2 study-h2--big study-col reveal">Where the important calls were made.</h2>
+${p.decisions.map(([q, c, e], k) => `        <article class="study-decision reveal">
+          <p class="study-label mono">Decision ${pad(k + 1)}</p>
+          <div class="study-two"><h3 class="study-h3">${esc(q)}</h3><div></div></div>
+          <ol class="study-rows study-rows--split">
+            <li><span class="study-rows__n mono">→</span><h3>The choice</h3><p>${esc(c)}</p></li>
+            <li><span class="study-rows__n mono">→</span><h3>What it gave</h3><p>${esc(e)}</p></li>
+          </ol>
+        </article>`).join('\n')}
+      </div>
+    </section>
+
+    <!-- 06 FLOW -->
+    <section class="band tone-${tone()} study-chapter" id="flow" ${G[5].attr}>
+      ${G[5].mark}
+      <div class="band__inner">
+        <p class="study-label mono reveal">06 / The flow</p>
+        <div class="study-two">
+          <h2 class="study-h2 reveal">From the first step to the result.</h2>
+          <p class="study-text reveal">What it looks like from the side of the person using it — the path through ${esc(p.short || p.name)} in ${p.flow.length} steps.</p>
+        </div>
+        <ol class="study-journey">
+${p.flow.map((s, k) => `          <li class="reveal"><span class="mono">${pad(k + 1)}</span>${esc(s)}</li>`).join('\n')}
+        </ol>
+        <p class="study-caption mono">${esc(p.name)} / user flow</p>
+      </div>
+    </section>
+
+    <!-- 07 OUTCOME -->
+    <section class="band tone-${tone()} study-chapter" id="outcome" ${G[6].attr}>
+      ${G[6].mark}
+      <div class="band__inner">
+        <p class="study-label mono reveal">07 / Outcome</p>
+        <h2 class="study-h2 study-h2--big study-col reveal">${esc(p.outcome.title)}</h2>
         <dl class="study-stats">
 ${p.outcome.stats.map(([n, l]) => `          <div class="reveal"><dt class="mono">${esc(l)}</dt><dd>${esc(n)}</dd></div>`).join('\n')}
         </dl>
       </div>
     </section>
 
-    <!-- NEXT -->
-    <section class="band tone-${tone()} study-next" data-thread="0.965,0 0.975,0.22 0.93,0.4,e">
+    <!-- 08 NEXT -->
+    <section class="band tone-${tone()} study-next" ${G[7].attr.replace(',0,1,l"', ',0,0.34,l"')}>
+      ${G[7].mark}
       <a class="study-next__link" href="/work/${next.slug}" data-cursor="Next">
-        <span class="study-next__label mono">${pad((i + 1) % PROJECTS.length + 1)} / Next project</span>
-        <span class="study-next__name display">${esc(next.short || next.name)}</span>
+        <span class="study-label mono">${pad((i + 1) % PROJECTS.length + 1)} / Next project</span>
+        <span class="study-next__row"><span class="study-next__name display">${esc(next.short || next.name)}</span><span class="study-next__arrow" aria-hidden="true">↗</span></span>
         <span class="study-next__pitch">${esc(next.pitch)}</span>
-        <span class="study-next__arrow" aria-hidden="true">↗</span>
+        <span class="study-next__stage project__stage" aria-hidden="true">
+${stageFor(next.anchor)}
+        </span>
       </a>
       <div class="study-next__foot mono">
         <a href="/#projects">All projects</a>
