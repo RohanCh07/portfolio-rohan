@@ -394,12 +394,23 @@
   var skillItems = skillmap ? $$('.skill', skillmap) : [];
   var skillNodes = skillmap ? $$('.skillmap__node, .skillmap__group', skillmap) : [];
   var halves = skillmap ? $$('.skillmap__lines path', skillmap) : [];
-  halves.forEach(function (p) { p.setAttribute('pathLength', '1'); p.style.strokeDasharray = '1 1'; p.style.strokeDashoffset = reduceMotion ? 0 : 1; });
+  // Measured in their real lengths (not pathLength + fixed-width stroke, which some Chrome
+  // versions dash differently), so "fully drawn" really is fully drawn everywhere.
+  var halfLen = halves.map(function (p) {
+    p.removeAttribute('pathLength'); p.removeAttribute('vector-effect');
+    var L = p.getTotalLength() || 1;
+    p.style.strokeDasharray = L + ' ' + L;
+    p.style.strokeDashoffset = reduceMotion ? 0 : L;
+    return L;
+  });
+  function setHalves(frac) {
+    halves.forEach(function (p, i) { p.style.strokeDashoffset = (halfLen[i] * (1 - frac)).toFixed(2); });
+  }
   var CY = 350, CR = 330, CH = 700;
   function drawSkillmap() {
     if (!skillmap) return;
     if (reduceMotion || window.innerWidth <= 1100) {
-      halves.forEach(function (p) { p.style.strokeDashoffset = 0; });
+      setHalves(1);
       skillItems.concat(skillNodes).forEach(function (el) { el.classList.add('is-on'); });
       return;
     }
@@ -408,12 +419,11 @@
     // where the thread's tip is, in circle units (+ a small lead so the halves close first)
     var yBox = (window.innerHeight * READ - box.top) / box.height * CH + CR * 0.18;
     var frac = yBox <= CY - CR ? 0 : yBox >= CY + CR ? 1 : Math.acos((CY - yBox) / CR) / Math.PI;
-    if (T && T.figById && threadNow > 0) {
-      // once the thread is drawn past the bottom of the circle, the circle is always closed
-      var bottomY = box.top + window.scrollY - T.mainTop + box.height * 680 / 700;
-      if (lengthAtScreenLine() > 0 && window.scrollY + window.innerHeight * READ - T.mainTop > bottomY) frac = 1;
-    }
-    halves.forEach(function (p) { p.style.strokeDashoffset = (1 - frac).toFixed(4); });
+    // the moment the thread has started its stretch below the circle, the circle is closed — no exceptions
+    // (while the screen line is inside the circle the thread waits exactly at that point, so require real progress past it)
+    if (T && T.pieces && T.pieces.length > 1 && threadNow > T.pieces[1].start + 4) frac = 1;
+    if (window.innerHeight * READ > box.top + box.height * 680 / 700) frac = 1;
+    setHalves(frac);
     skillNodes.forEach(function (el) { el.classList.toggle('is-on', frac > 0.03); });
     skillItems.forEach(function (li) { li.classList.toggle('is-on', frac >= parseFloat(li.getAttribute('data-t')) - 0.01); });
   }
