@@ -470,18 +470,30 @@
     root.classList.add('is-locked');
     if (lenis) lenis.stop();
     var paths = $$('path', loader);
+    // first path = lead-in from the left edge, last = tail off the right edge; the rest are the letters
     var lens = paths.map(function (p) { return p.getTotalLength(); });
-    var sum = lens.reduce(function (a, b) { return a + b; }, 0) || 1;
-    var DRAW = 1900, delay = 120;                       // whole signature in under two seconds
+    var letters = lens.slice(1, -1).reduce(function (a, b) { return a + b; }, 0) || 1;
+    var LEAD = 380, LETTERS = 2100, TAIL = 420, delay = 80;
+    // keep a fine ~1.8px nib whatever size the signature is drawn at
+    var sigSvg = $('.loader__sig', loader);
+    var vbW = sigSvg && sigSvg.viewBox && sigSvg.viewBox.baseVal ? sigSvg.viewBox.baseVal.width : 0;
+    var scale = vbW ? sigSvg.getBoundingClientRect().width / vbW : 1;
+    var nib = (1.8 / (scale || 1)).toFixed(2);
     paths.forEach(function (p, i) {
-      var dur = DRAW * lens[i] / sum;
-      p.style.strokeDasharray = lens[i] + ' ' + lens[i];
-      p.style.strokeDashoffset = lens[i];
-      p.style.transition = 'stroke-dashoffset ' + dur.toFixed(0) + 'ms cubic-bezier(.45,.05,.55,.95) ' + delay.toFixed(0) + 'ms';
+      p.style.strokeWidth = nib;
+      var last = i === paths.length - 1;
+      var dur = i === 0 ? LEAD : last ? TAIL : Math.max(24, LETTERS * lens[i] / letters);
+      // pathLength=1 measures every stroke as a fraction of itself, so nothing shows before its turn
+      p.setAttribute('pathLength', '1');
+      p.style.strokeDasharray = '1 1';
+      p.style.transition = 'none';                     // jump straight to "hidden" — don't animate into it
+      p.style.strokeDashoffset = '1';
+      p.dataset.draw = 'stroke-dashoffset ' + dur.toFixed(0) + 'ms ' + (i === 0 ? 'cubic-bezier(.5,0,.9,1)' : last ? 'cubic-bezier(.1,0,.5,1)' : 'linear') + ' ' + delay.toFixed(0) + 'ms';
       delay += dur;
     });
+    if (sigSvg) sigSvg.getBoundingClientRect();       // make the browser apply the hidden state now
     requestAnimationFrame(function () { requestAnimationFrame(function () {
-      paths.forEach(function (p) { p.style.strokeDashoffset = 0; });
+      paths.forEach(function (p) { p.style.transition = p.dataset.draw; p.style.strokeDashoffset = 0; });
     }); });
     var finished = false;
     function finish() {
