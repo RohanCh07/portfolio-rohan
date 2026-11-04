@@ -725,3 +725,12 @@ html.is-locked, html.is-locked body { overflow: hidden; }
   .cursor.is-down { transform-origin: center; }
 }
 @media (prefers-reduced-motion: reduce) { .cursor { display: none !important; } }
+
+/* fork labels beside their nodes; nodes and labels appear when the fork reaches them */
+.skillmap__group[data-side="l"] { transform: translate(calc(-100% - 1.4rem), -50%); }
+.skillmap__group[data-side="r"] { transform: translate(1.4rem, -50%); }
+.js .skillmap__node, .js .skillmap__group { opacity: 0; transition: opacity .5s var(--ease); }
+.js .skillmap__node.is-on, .js .skillmap__group.is-on { opacity: 1; }
+.js .skill { transition: opacity .7s var(--ease), translate .7s var(--ease); translate: 0 .5rem; }
+.js .skill.is-on { translate: 0 0; }
+@media (max-width: 1100px) { .js .skill { translate: 0 0; } }
