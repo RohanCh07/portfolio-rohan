@@ -1,0 +1,192 @@
+% ---------------------------------------------------------------------------
+%  Rohan Chauhan — résumé
+%  Build:  pdflatex rohan-chauhan-resume.tex
+%  Phone number: hidden by default because this PDF is linked from the public
+%  website. For a version you send privately, change \showphonefalse to
+%  \showphonetrue below and rebuild.
+% ---------------------------------------------------------------------------
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[a4paper,margin=1.5cm,top=1.3cm,bottom=1.3cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage[hidelinks]{hyperref}
+
+\newif\ifshowphone
+\showphonefalse          % \showphonetrue to print the phone number
+\newcommand{\phonenumber}{+91 XXXXX XXXXX}   % put your real number here, locally only
+
+\definecolor{ink}{HTML}{111111}
+\definecolor{muted}{HTML}{555555}
+\definecolor{accent}{HTML}{E0401A}
+\color{ink}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\tabcolsep}{4pt}
+\linespread{1.05}
+
+% section headings: bold caps with a thin rule
+\titleformat{\section}{\large\bfseries\color{ink}}{}{0pt}{\MakeUppercase}[\vspace{-.55em}{\color{accent}\rule{\linewidth}{0.8pt}}]
+\titlespacing*{\section}{0pt}{10pt}{5pt}
+
+\setlist[itemize]{leftmargin=1.1em,topsep=2pt,itemsep=1pt,parsep=0pt,label={\color{accent}\textbullet}}
+
+% \role{Title}{Organisation}{Dates}
+\newcommand{\role}[3]{%
+  \textbf{#1} \hfill {\color{muted}\small #3}\\
+  {\color{muted}#2}\par\vspace{1pt}}
+% \project{Name}{one-line description}{link or empty}
+\newcommand{\project}[3]{%
+  \textbf{#1}\ifx&#3&\else\hfill{\small\href{https://#3}{#3}}\fi\\
+  {\color{muted}\small #2}\par\vspace{1pt}}
+\newcommand{\tech}[1]{{\small\textbf{Tech:} #1}}
+
+\begin{document}
+
+% ------------------------------------------------------------------ header
+\begin{center}
+  {\fontsize{24}{26}\selectfont\bfseries ROHAN CHAUHAN}\\[3pt]
+  {\color{muted}Python AI / LLM / Backend and Web Application Developer}\\[4pt]
+  \small
+  \href{mailto:chauhanrohan223@gmail.com}{chauhanrohan223@gmail.com}
+  \ifshowphone\ \textbar\ \phonenumber\fi
+  \ \textbar\ Greater Noida, India\\
+  \href{https://www.linkedin.com/in/rohanchauhan07/}{linkedin.com/in/rohanchauhan07}
+  \ \textbar\ \href{https://github.com/RohanCh07}{github.com/RohanCh07}
+\end{center}
+
+% ------------------------------------------------------------------ summary
+\section{Who I am}
+Software Engineer specialising in backend engineering and AI-driven applications, with experience building
+production-oriented APIs, data pipelines and intelligent systems. Skilled in Python, FastAPI, databases, Kafka,
+Docker and LLM-based solutions, with a focus on scalable, reliable systems that solve real business problems.
+
+% ------------------------------------------------------------------ experience
+\section{Work experience}
+\role{Software Engineer}{Moglix · B2B supply chain}{Jul 2026 -- Present}
+\begin{itemize}
+  \item Build REST APIs and backend systems, working with VLLMs, OCR techniques and LLM prediction models.
+  \item Work with the AI \& Analytics team to deliver solutions for several major clients and internal teams.
+  \item \tech{Python, REST APIs, databases, data analysis, Kafka, Kaleyra, Git, Docker, AI models}
+\end{itemize}
+\vspace{4pt}
+
+\role{Python Engineering Intern}{Moglix}{Mar 2026 -- Jul 2026}
+\begin{itemize}
+  \item Designed and implemented analytical solutions covering data processing, analysis and programming.
+  \item Worked with teams to deliver insights and automate workflows for ongoing projects.
+  \item Built \textbf{Cerebra}, a GenAI chatbot that creates purchase requests (PRs) and RFQs in Credlex.
+  \item \tech{Python, REST APIs, MySQL, PostgreSQL, MongoDB, data analysis, Kafka, Kaleyra, Git}
+\end{itemize}
+\vspace{4pt}
+
+\role{AI Research Intern}{Coding Jr}{Jun 2025 -- Jan 2026}
+\begin{itemize}
+  \item Worked as a Software Development Engineer (SDE) on the company's internal admin panel.
+  \item Designed the backend logic and implemented core features with the team.
+  \item \tech{Python, REST APIs, web design, Git}
+\end{itemize}
+\vspace{4pt}
+
+\role{Full-Stack Intern}{Wayspire}{Apr 2024 -- Jun 2024}
+\begin{itemize}
+  \item Built and debugged full-stack modules with a team, improving performance and the user interface.
+\end{itemize}
+
+% ------------------------------------------------------------------ projects
+\section{Projects}
+\project{Lumida --- AI Data Anomaly Detection Engine}{Self-hosted engine that connects read-only to company databases, finds hidden data problems, explains them with an LLM and learns from human feedback.}{lumida.netlify.app}
+\begin{itemize}
+  \item Infers undocumented relationships between tables and flags data problems, each with evidence and a plain-language LLM explanation.
+  \item Human-in-the-loop: reviewers confirm or dismiss findings, and the engine learns from that feedback.
+  \item On a test database it found \textbf{15/15} hidden relationships and \textbf{13/13} planted problems with \textbf{0} false alarms.
+  \item \tech{Python, FastAPI, PostgreSQL, Docker, Google Gemini}
+\end{itemize}
+\vspace{4pt}
+
+\project{Distiller --- LLM Cost-Reduction Gateway (in progress)}{OpenAI-compatible gateway that teams adopt by changing one line.}{}
+\begin{itemize}
+  \item Logs a company's repetitive LLM calls, fine-tunes small open models with LoRA to copy the large model, tests them in shadow mode, then routes confident requests to the cheaper model with fallback.
+  \item Gateway skeleton and CLI working; training and routing in development.
+  \item \tech{Python, FastAPI, LiteLLM, LoRA, Ollama}
+\end{itemize}
+\vspace{4pt}
+
+\project{Bug Detection \& Fix Suggestion Tool}{VS Code extension for AI-assisted debugging.}{}
+\begin{itemize}
+  \item Captures both static lint errors and runtime exceptions, then uses LLM-based RAG over a vector database to explain or fix them.
+  \item Two modes: \textit{Tutor} explains why the code broke; \textit{Debugger} proposes a fix.
+  \item \tech{TypeScript, VS Code API, FastAPI, Python, RAG, vector DB}
+\end{itemize}
+\vspace{4pt}
+
+\project{Real-Time Flight Delay Predictor}{Delay forecasts for major Indian airports.}{}
+\begin{itemize}
+  \item Data pipeline that combines live flight and weather data from external APIs to forecast delays with an ML model.
+  \item Streamlit dashboard showing live flight status alongside the predictions.
+  \item \tech{Python, Scikit-learn, Pandas, Streamlit}
+\end{itemize}
+\vspace{4pt}
+
+\project{E-commerce REST API}{Backend for products, carts and orders.}{}
+\begin{itemize}
+  \item REST APIs with input validation, role-based access control on Django's auth system and clean JSON responses.
+  \item Normalised MySQL schema with ORM logic for stock updates and order totals.
+  \item \tech{Python, Django REST Framework, MySQL}
+\end{itemize}
+
+% ------------------------------------------------------------------ research
+\section{Research \& certifications}
+\textbf{BlockAuth --- Blockchain-based Decentralised Identity Management System}\\
+{\color{muted}\small Research paper presentation · ICSDS-2025 · Hooghly Engineering \& Technology College · Dec 2025}
+\begin{itemize}
+  \item Designed and developed a blockchain-based decentralised identity system for secure authentication and access control across IoT networks.
+  \item Presented the research at ICSDS-2025.
+\end{itemize}
+\vspace{3pt}
+\begin{tabularx}{\linewidth}{@{}X r@{}}
+  Machine Learning A--Z: AI, Python \& R + ChatGPT Bonus & Udemy · 2023 \\
+  AWS Deep Dive --- Certificate of Completion & AWS · 2023 \\
+  Android Application Development & Udemy · 2023 \\
+  Intel Unnati Program --- AI/ML Track & Intel · 2025 \\
+  Introduction to Cybersecurity & Cisco Networking Academy · 2025 \\
+  Data Analytics Job Simulation & Deloitte (Forage) · 2025 \\
+\end{tabularx}
+
+% ------------------------------------------------------------------ education
+\section{Education}
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}l X l r@{}}
+  B.Tech CSE (AI \& ML) & Greater Noida Institute of Technology & CGPA 8.3 & 2022 -- 2026 \\
+  Intermediate (PCM)    & St Mary's School, Kashipur           & 78\%     & 2021 \\
+  High School           & St Mary's School, Kashipur           & 78\%     & 2019 \\
+\end{tabularx}\\[3pt]
+{\small Top 15 department rank across multiple semesters · ``Eloquent Speaker'' award}
+
+% ------------------------------------------------------------------ skills
+\section{Skills}
+\begin{tabularx}{\linewidth}{@{}>{\bfseries}l X >{\bfseries}l X@{}}
+  Languages      & Python, Java, Kotlin, XML            & Server frameworks & FastAPI, Django, Flask \\
+  Databases      & SQL, MongoDB, FirebaseDB             & AI / ML           & LangChain, LangGraph, PyTorch, Scikit-learn \\
+  Cloud \& DevOps & AWS, Docker, Kafka, Git CI/CD       & Version control   & Git, GitHub \\
+  Android        & Jetpack Compose, Room DB, MVVM       & Web               & Django templating, HTML, CSS, JS \\
+\end{tabularx}
+
+% ------------------------------------------------------------------ hackathons
+\section{Hackathons}
+\begin{tabularx}{\linewidth}{@{}l X r@{}}
+  Smart India Hackathon      & Greater Noida Institute of Technology & 2024 \\
+  Hack KRMU 4.0              & KRMU University, Gurugram             & 2024 \\
+  Road Safety Hackathon      & NHAI and HOAI, Delhi                  & 2024 \\
+  Build with India Hackathon & Google Office, Gurugram               & 2024 \\
+\end{tabularx}
+
+\end{document}

@@ -1,654 +1,516 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rohan Chauhan | AI/ML & Software Engineer</title>
-  <meta name="description" content="Rohan Chauhan — software engineer building AI-powered products, GenAI applications and Python backends. SDE Intern at Moglix, open to SDE and AI/ML roles." />
-  <meta name="author" content="Rohan Chauhan" />
-  <meta name="theme-color" content="#0a0a0a" />
-  <meta name="color-scheme" content="dark light" />
-  <!-- Site address: https://chauhanrohan.vercel.app (also used in robots.txt and sitemap.xml) -->
-  <link rel="canonical" href="https://chauhanrohan.vercel.app/" />
-
-  <!-- Link previews (LinkedIn, WhatsApp, X, Slack…) -->
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="Rohan Chauhan" />
-  <meta property="og:title" content="Rohan Chauhan | AI/ML & Software Engineer" />
-  <meta property="og:description" content="I build AI-powered software that solves real problems — GenAI apps, ML systems and Python backends." />
-  <meta property="og:url" content="https://chauhanrohan.vercel.app/" />
-  <meta property="og:image" content="https://chauhanrohan.vercel.app/assets/og-image.jpg" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Rohan Chauhan — I build AI-powered software that solves real problems" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Rohan Chauhan | AI/ML & Software Engineer" />
-  <meta name="twitter:description" content="I build AI-powered software that solves real problems — GenAI apps, ML systems and Python backends." />
-  <meta name="twitter:image" content="https://chauhanrohan.vercel.app/assets/og-image.jpg" />
-
-  <!-- Helps Google show your name, role and profiles -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Rohan Chauhan",
-    "url": "https://chauhanrohan.vercel.app/",
-    "image": "https://chauhanrohan.vercel.app/assets/og-image.jpg",
-    "jobTitle": "Software Engineer (AI/ML)",
-    "worksFor": { "@type": "Organization", "name": "Moglix" },
-    "alumniOf": { "@type": "CollegeOrUniversity", "name": "Greater Noida Institute of Technology (GNIOT)" },
-    "email": "mailto:chauhanrohan223@gmail.com",
-    "sameAs": [
-      "https://github.com/Rohan708",
-      "https://www.linkedin.com/in/rohan-chauhan-0604732b2"
-    ],
-    "knowsAbout": ["Machine Learning", "Generative AI", "LangChain", "LangGraph", "RAG", "Python", "Django", "FastAPI", "SQL"]
-  }
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Rohan Chauhan — Backend &amp; AI Engineer</title>
+  <meta name="description" content="Rohan Chauhan is a backend and AI engineer at Moglix. He builds REST APIs, data pipelines and LLM systems that run in production.">
+  <meta name="author" content="Rohan Chauhan">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Rohan Chauhan — Backend &amp; AI Engineer">
+  <meta property="og:description" content="REST APIs, data pipelines and LLM systems that run in production.">
+  <meta property="og:image" content="assets/og-image.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#050505">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    (function () {
+      var d = document.documentElement;
+      d.classList.add('js');
+      try { var t = localStorage.getItem('theme'); if (t === 'light' || t === 'dark') d.dataset.theme = t; } catch (e) {}
+    })();
   </script>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="theme.css" />
-  <link rel="stylesheet" href="flow.css" />
-  <link rel="stylesheet" href="mobile.css" />
-  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
-  <link rel="icon" href="assets/favicon-32.png" type="image/png" sizes="32x32" />
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 </head>
 <body>
-  <div class="grain" aria-hidden="true"></div>
-  <!-- Page-wide particle network -->
-  <canvas class="bgnet" id="bgnet" aria-hidden="true"></canvas>
+  <a class="skip" href="#projects">Skip to projects</a>
 
-  <!-- Custom cursor (desktop only) -->
-  <div class="cursor" aria-hidden="true"><span class="cursor-label"></span></div>
-
-  <!-- ============ HEADER ============ -->
-  <header class="header">
-    <a href="#top" class="logo" aria-label="Home">
-      <svg viewBox="0 0 44 44" aria-hidden="true">
-        <rect x="0" y="0" width="20" height="44" rx="3"/>
-        <path d="M24 0h6a14 14 0 0 1 0 28h-6z"/>
-        <path d="M24 31h7l13 13H24z"/>
-      </svg>
-    </a>
-
-    <!-- Centre navigation (desktop) -->
-    <nav class="center-nav" aria-label="Main">
-      <div class="nav-group">
-        <a href="#services" class="btn btn-outline roll">What I do</a>
-        <button class="btn btn-outline nav-caret" aria-expanded="false" aria-label="Show services">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-        </button>
-        <div class="dropdown">
-          <a href="#svc-ai">AI &amp; GenAI</a>
-          <a href="#svc-backend">Backend Development</a>
-          <a href="#svc-data">Data &amp; Machine Learning</a>
-        </div>
-      </div>
-      <a href="#projects" class="btn btn-outline roll">Projects</a>
-      <a href="#about" class="btn btn-outline roll">About me</a>
+  <header class="site-header" id="header">
+    <a class="wordmark" href="#top" aria-label="Rohan Chauhan, back to top">RC</a>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="#capabilities">Capabilities</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch colour theme"><span class="theme-toggle__dot" aria-hidden="true"></span><span id="themeLabel">Dark</span></button>
     </nav>
-
-    <div class="header-actions">
-      <a href="#contact" class="btn btn-dark btn-contact roll-wrap">
-        <span class="avatar"><img src="assets/avatar.jpg" alt="" onerror="this.remove()"><span>RC</span></span>
-        <span class="roll">Contact</span>
-      </a>
-      <button class="btn btn-outline menu-toggle" aria-expanded="false" aria-controls="menu">
-        <span class="menu-label">Menu</span>
-      </button>
-    </div>
+    <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
   </header>
 
-  <!-- ============ FULLSCREEN MENU (mobile) ============ -->
-  <nav class="menu" id="menu" aria-hidden="true">
-    <ul class="menu-links">
-      <li><a href="#top"><span class="mono">01</span>Home</a></li>
-      <li><a href="#services"><span class="mono">02</span>What I do</a></li>
-      <li><a href="#projects"><span class="mono">03</span>Projects</a></li>
-      <li><a href="#experience"><span class="mono">04</span>Experience</a></li>
-      <li><a href="#about"><span class="mono">05</span>About me</a></li>
-      <li><a href="#contact"><span class="mono">06</span>Contact</a></li>
-    </ul>
-    <div class="menu-foot">
-      <a class="menu-resume mono" href="assets/Rohan-Chauhan-Resume.pdf" download>↓ Download resume</a>
-      <a href="mailto:chauhanrohan223@gmail.com">chauhanrohan223@gmail.com</a>
-      <div class="socials">
-        <a href="https://github.com/Rohan708" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://www.linkedin.com/in/rohan-chauhan-0604732b2" target="_blank" rel="noopener">LinkedIn</a>
-      </div>
-    </div>
-  </nav>
-
   <main id="top">
-    <!-- ============ HERO (sticky — the next section slides over it) ============ -->
-    <section class="hero" id="hero">
-      <canvas class="net landscape" id="landscape" aria-hidden="true"></canvas>
-      <div class="container hero-inner">
-        <div>
-        <div class="status" aria-label="Status">
-          <span><span class="dot"></span>Open to SDE / AI-ML roles</span>
-          <span class="sep">/</span>
-          <span>IST <span id="clock">--:--:--</span></span>
-          <span class="sep">/</span>
-          <span>28.47°N 77.50°E — Greater Noida</span>
-          <span class="sep">/</span>
-          <span class="loss" id="lossReadout" aria-hidden="true">Step 0, loss 1.000</span>
-        </div>
-        <h1 class="display hero-title">
-          <span class="line"><span>I build <span class="hl">AI-powered</span></span></span>
-          <span class="line"><span>software that solves</span></span>
-          <span class="line"><span>real problems</span></span>
+    <svg class="thread" id="thread" aria-hidden="true" focusable="false"></svg>
+
+    <!-- HERO -->
+    <section class="band tone-ink hero" data-thread="0.03,0.1,n 0.035,0.3 0.2,0.62 0.62,0.86 0.8,1">
+      <div class="band__inner">
+        <h1 class="hero__title display">
+          <span class="line"><span>I build</span></span>
+          <span class="line"><span>the engine</span></span>
+          <span class="line"><span>room.</span></span>
         </h1>
-        </div>
-
-        <div class="hero-bottom split">
-          <div class="hero-side reveal">
-            <p>Software engineer &amp; final-year CSE student. Currently building GenAI applications as an <strong>SDE Intern at Moglix</strong>.</p>
-            <div class="hero-ctas">
-              <a href="#contact" class="btn btn-dark roll-wrap">
-                <span class="avatar"><img src="assets/avatar.jpg" alt="" onerror="this.remove()"><span>RC</span></span>
-                <span class="roll">Get in touch</span>
-              </a>
-              <a href="#projects" class="btn btn-outline roll">See projects</a>
-              <a href="assets/Rohan-Chauhan-Resume.pdf" download class="btn btn-outline resume-btn"><span class="dl" aria-hidden="true">↓</span> Resume</a>
-            </div>
-          </div>
-
-          <div class="hero-showcase reveal">
-            <div class="showcase-frame">
-              <div class="showcase-track" id="showcaseTrack"><!-- filled by script.js --></div>
-              <div class="showcase-arrows">
-                <button class="sc-prev" aria-label="Previous project">←</button>
-                <button class="sc-next" aria-label="Next project">→</button>
-              </div>
-            </div>
-            <div class="byline">
-              <span class="display-sm">By Rohan Chauhan</span>
-              <span class="rule"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="hero-shade" aria-hidden="true"></div>
-    </section>
-
-    <!-- ============ SERVICES / WHAT I DO ============ -->
-    <section class="dark-card services-section" id="services">
-      <div class="container">
-        <span class="kicker reveal"><b>[01]</b> — capabilities.py</span>
-        <h2 class="display section-title reveal decode">What I can do</h2>
-
-        <div class="split intro-split">
-          <div></div>
-          <div class="intro-row reveal">
-            <span class="tag">Skills</span>
-            <div class="intro-text">
-              <p>Looking for someone who can take an idea from a notebook to a working product?</p>
-              <p>I combine machine learning, LLMs and solid backend engineering to build tools people actually use.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="services">
-          <article class="service" id="svc-ai" style="--i:0">
-            <div class="split">
-              <span class="display-lg num">01.</span>
-              <div>
-                <header class="service-head">
-                  <h3 class="display-lg">AI &amp; GenAI</h3>
-                  <span class="arrow">↙</span>
-                </header>
-                <div class="service-body">
-                  <p class="service-desc">From RAG pipelines to agentic chatbots, I design LLM systems that are grounded, useful and production-ready.</p>
-                  <ul class="sublist">
-                    <li><span class="mono">01</span>LangGraph &amp; LangChain Agents</li>
-                    <li><span class="mono">02</span>RAG &amp; Vector Databases</li>
-                    <li><span class="mono">03</span>PyTorch &amp; Model Tuning</li>
-                  </ul>
-              <div class="viz viz-ai" aria-hidden="true">
-                <div class="viz-bar"><i></i><i></i><i></i><span>agent.run()</span><em class="viz-state">retrieving</em></div>
-                <div class="viz-body">
-                  <p class="viz-q"><b>&gt;</b> <span class="q-text"></span></p>
-                  <ul class="viz-chunks">
-                    <li><span class="c-name"></span><i class="c-bar"><b></b></i><em class="c-score"></em></li>
-                    <li><span class="c-name"></span><i class="c-bar"><b></b></i><em class="c-score"></em></li>
-                    <li><span class="c-name"></span><i class="c-bar"><b></b></i><em class="c-score"></em></li>
-                  </ul>
-                  <p class="viz-ans"><span class="a-text"></span><span class="viz-caret"></span></p>
-                </div>
-              </div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <article class="service" id="svc-backend" style="--i:1">
-            <div class="split">
-              <span class="display-lg num">02.</span>
-              <div>
-                <header class="service-head">
-                  <h3 class="display-lg">Backend Development</h3>
-                  <span class="arrow">↙</span>
-                </header>
-                <div class="service-body">
-                  <p class="service-desc">Clean, secure APIs and well-designed databases. I build the backbone that keeps apps fast and reliable.</p>
-                  <ul class="sublist">
-                    <li><span class="mono">01</span>Django &amp; Django REST Framework</li>
-                    <li><span class="mono">02</span>FastAPI Services</li>
-                    <li><span class="mono">03</span>SQL &amp; Schema Design</li>
-                  </ul>
-              <div class="viz viz-api" aria-hidden="true">
-                <div class="viz-bar"><i></i><i></i><i></i><span>uvicorn · access.log</span><em class="viz-state">p95 <b class="p95">18</b> ms</em></div>
-                <div class="viz-body"><ol class="viz-log"></ol></div>
-              </div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <article class="service" id="svc-data" style="--i:2">
-            <div class="split">
-              <span class="display-lg num">03.</span>
-              <div>
-                <header class="service-head">
-                  <h3 class="display-lg">Data &amp; Machine Learning</h3>
-                  <span class="arrow">↙</span>
-                </header>
-                <div class="service-body">
-                  <p class="service-desc">Turning raw data into decisions — through exploration, statistical modelling and predictive ML.</p>
-                  <ul class="sublist">
-                    <li><span class="mono">01</span>EDA with Pandas &amp; NumPy</li>
-                    <li><span class="mono">02</span>Scikit-learn &amp; Optuna</li>
-                    <li><span class="mono">03</span>Dashboards &amp; Visualisation</li>
-                  </ul>
-              <div class="viz viz-ml" aria-hidden="true">
-                <div class="viz-bar"><i></i><i></i><i></i><span>train.py · logistic regression</span><em class="viz-state">epoch <b class="ep">0</b> · acc <b class="acc">0.50</b></em></div>
-                <div class="viz-body"><svg class="viz-plot" viewBox="0 0 400 220"><g class="pts"></g><line class="boundary" x1="0" y1="0" x2="0" y2="0"/></svg></div>
-              </div>
-                </div>
-              </div>
-            </div>
-          </article>
+        <div class="hero__foot">
+          <p class="hero__lede mono reveal">Backend &amp; AI engineer at Moglix. REST APIs, data pipelines and LLM systems that run in production, not just in a demo.</p>
+          <a class="hero__hint mono reveal" href="#intro">Scroll to follow the thread <span aria-hidden="true">↓</span></a>
         </div>
       </div>
     </section>
 
-    <!-- ============ PROJECTS ============ -->
-    <section class="projects" id="projects">
-      <div class="container">
-        <div class="split projects-top">
-          <div>
-            <span class="kicker reveal"><b>[02]</b> — ls ./projects</span>
-            <h2 class="display section-title reveal decode">Projects</h2>
-          </div>
-          <div class="intro-row reveal">
-            <span class="tag tag-soft">Portfolio</span>
-            <div class="intro-text">
-              <p>A few things I've built — from AI developer tools to ML dashboards and production-style APIs.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-list">
-          <!-- PROJECT 0: Lumida -->
-          <a class="project" href="https://lumida.netlify.app/" target="_blank" rel="noopener" data-cursor="View project">
-            <span class="meta-wrap"><span class="mono meta">2026, AI Data Tool</span><span class="chips"><i>Python</i><i>PostgreSQL</i><i>FastAPI</i><i>Docker</i><i>Gemini</i></span></span>
-            <div class="project-main">
-              <!-- To use a real screenshot: replace the .mock div with <img src="assets/project-lumida.jpg" alt=""> -->
-              <div class="project-media">
-                <img src="assets/project-lumida.jpg" alt="Lumida landing page — Light on your data" loading="lazy">
-              </div>
-              <h3 class="display project-name">Lumida: Data Anomaly Detection</h3>
-            </div>
-            <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg></span>
-            <p class="project-desc">A self-hosted engine that connects read-only to any database, finds hidden relationships and data problems, explains them with an LLM and learns from human feedback. Found 15/15 hidden relationships and 13/13 planted problems with 0 false alarms. <span class="mono">Python · PostgreSQL · FastAPI · Gemini</span></p>
-          </a>
-
-          <!-- PROJECT: Distiller (in progress) -->
-          <a class="project" href="https://github.com/Rohan708" target="_blank" rel="noopener" data-cursor="In progress">
-            <span class="meta-wrap"><span class="mono meta">2026, AI Backend</span><span class="chips"><i>Python</i><i>FastAPI</i><i>LiteLLM</i><i>LoRA</i><i>Ollama</i></span></span>
-            <div class="project-main">
-              <div class="project-media">
-                <div class="mock mock-arch">
-                  <div class="m-bar"><i></i><i></i><i></i><span>distiller · architecture</span><em>in progress</em></div>
-                  <div class="a-body">
-                    <div class="a-row">
-                      <div class="a-box">Your app<small>OPENAI_BASE_URL</small></div>
-                      <span class="a-arrow">→</span>
-                      <div class="a-box a-hub">Distiller gateway<small>FastAPI · router</small></div>
-                      <span class="a-arrow">→</span>
-                      <div class="a-col">
-                        <div class="a-box">Teacher LLM<small>GPT / Claude / Gemini</small></div>
-                        <div class="a-box a-hi">Student model<small>small · LoRA · cheap</small></div>
-                      </div>
-                    </div>
-                    <div class="a-loop">
-                      <span>log calls</span><b>→</b><span>group tasks</span><b>→</b><span>fine-tune</span><b>→</b><span>shadow test</span><b>→</b><span class="a-hi">route</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <h3 class="display project-name">Distiller</h3>
-              <span class="wip mono">In progress</span>
-            </div>
-            <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg></span>
-            <p class="project-desc">In progress: an OpenAI-compatible gateway (adopt it by changing one line) that logs a company's repetitive LLM calls, fine-tunes small open models with LoRA to copy the big model, tests them in shadow mode, then routes confident requests to the cheap model with fallback. Gateway skeleton and CLI working; training and routing in development. <span class="mono">Python · FastAPI · LiteLLM · LoRA</span></p>
-          </a>
-
-          <!-- PROJECT 1 -->
-          <a class="project" href="https://github.com/Rohan708" target="_blank" rel="noopener" data-cursor="View project">
-            <span class="meta-wrap"><span class="mono meta">2025, AI Dev Tool</span><span class="chips"><i>TypeScript</i><i>FastAPI</i><i>LLM</i><i>RAG</i><i>Vector DB</i></span></span>
-            <div class="project-main">
-              <!-- To use a real screenshot: replace the .mock div with <img src="assets/project-1.jpg" alt=""> -->
-              <div class="project-media">
-                <div class="mock mock-code">
-                  <div class="m-bar"><i></i><i></i><i></i><span>debugger.py — AI Assist</span></div>
-                  <div class="m-body">
-                    <div class="m-side"><b></b><b></b><b></b><b></b><b></b></div>
-                    <div class="m-editor">
-                      <p><em>1</em><k>def</k> fetch_user(id):</p>
-                      <p><em>2</em>&nbsp;&nbsp;data = db.get(id)</p>
-                      <p class="err"><em>3</em>&nbsp;&nbsp;<k>return</k> data[<s>"name"</s>]</p>
-                      <p><em>4</em></p>
-                      <p><em>5</em><k>def</k> main():</p>
-                      <p><em>6</em>&nbsp;&nbsp;user = fetch_user(<n>42</n>)</p>
-                      <p class="err"><em>7</em>&nbsp;&nbsp;print(usr)</p>
-                    </div>
-                    <div class="m-ai">
-                      <div class="m-toggle"><span class="on">Debugger</span><span>Tutor</span></div>
-                      <div class="m-msg"><b>KeyError</b> on line 3 — <i>data</i> can be <i>None</i>.</div>
-                      <div class="m-msg fix">Suggested fix:<br><code>return data.get("name") if data else None</code></div>
-                      <div class="m-msg"><b>NameError</b> line 7 — did you mean <i>user</i>?</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <h3 class="display project-name">Bug Detection &amp; Fix Tool</h3>
-            </div>
-            <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg></span>
-            <p class="project-desc">A VS Code extension that captures lint errors and runtime exceptions, then uses LLM-based RAG to explain them (Tutor) or fix them (Debugger). <span class="mono">TypeScript · FastAPI · RAG</span></p>
-          </a>
-
-          <!-- PROJECT 2 -->
-          <a class="project" href="https://github.com/Rohan708" target="_blank" rel="noopener" data-cursor="View project">
-            <span class="meta-wrap"><span class="mono meta">2025, Machine Learning</span><span class="chips"><i>Python</i><i>Scikit-learn</i><i>Streamlit</i><i>Pandas</i></span></span>
-            <div class="project-main">
-              <div class="project-media">
-                <div class="mock mock-dash">
-                  <div class="m-bar"><i></i><i></i><i></i><span>flight-delay.streamlit.app</span></div>
-                  <div class="m-body">
-                    <div class="m-nav"><b>✈ DelayCast</b><span>DEL</span><span>BOM</span><span>BLR</span><span>HYD</span></div>
-                    <div class="m-main">
-                      <div class="m-kpis">
-                        <div><small>Flights tracked</small><strong>1,284</strong></div>
-                        <div><small>Predicted delays</small><strong class="acc">23%</strong></div>
-                        <div><small>Model accuracy</small><strong>87.4%</strong></div>
-                      </div>
-                      <div class="m-chart">
-                        <span style="--h:40%"></span><span style="--h:62%"></span><span style="--h:35%"></span><span style="--h:78%"></span><span style="--h:55%"></span><span style="--h:90%" class="hi"></span><span style="--h:48%"></span><span style="--h:66%"></span><span style="--h:30%"></span><span style="--h:58%"></span><span style="--h:72%"></span><span style="--h:44%"></span>
-                      </div>
-                      <div class="m-table">
-                        <p><b>6E 2134</b><span>DEL → BOM</span><em class="ok">On time</em></p>
-                        <p><b>AI 865</b><span>BLR → DEL</span><em class="late">+42 min</em></p>
-                        <p><b>UK 951</b><span>HYD → CCU</span><em class="ok">On time</em></p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <h3 class="display project-name">Flight Delay Predictor</h3>
-            </div>
-            <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg></span>
-            <p class="project-desc">Real-time flight delay forecasts for major Indian airports, combining live flight and weather data in a Streamlit dashboard. <span class="mono">Scikit-learn · Streamlit · APIs</span></p>
-          </a>
-
-          <!-- PROJECT 3 -->
-          <a class="project" href="https://github.com/Rohan708" target="_blank" rel="noopener" data-cursor="View project">
-            <span class="meta-wrap"><span class="mono meta">2024, Backend</span><span class="chips"><i>Django REST</i><i>MySQL</i><i>Auth / RBAC</i><i>Postman</i></span></span>
-            <div class="project-main">
-              <div class="project-media">
-                <div class="mock mock-shop">
-                  <div class="m-bar"><i></i><i></i><i></i><span>api/v1/products</span></div>
-                  <div class="m-body">
-                    <div class="m-store">
-                      <div class="m-store-head"><b>STORE.</b><span>Cart (3)</span></div>
-                      <div class="m-grid">
-                        <div><i style="--c:#d9c7b0"></i><small>Sneakers</small><b>₹3,499</b></div>
-                        <div><i style="--c:#b7c4c9"></i><small>Backpack</small><b>₹1,899</b></div>
-                        <div><i style="--c:#c9b7c4"></i><small>Watch</small><b>₹5,250</b></div>
-                        <div><i style="--c:#c4c9b7"></i><small>Headphones</small><b>₹2,799</b></div>
-                      </div>
-                    </div>
-                    <div class="m-json">
-<pre><k>GET</k> /api/v1/orders/218
-<n>200 OK</n>
-{
-  <s>"id"</s>: 218,
-  <s>"status"</s>: <s>"shipped"</s>,
-  <s>"items"</s>: 3,
-  <s>"total"</s>: 12648,
-  <s>"role"</s>: <s>"customer"</s>
-}</pre>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <h3 class="display project-name">E-commerce API</h3>
-            </div>
-            <span class="ext" aria-hidden="true"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4l-9 9"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg></span>
-            <p class="project-desc">REST APIs for products, carts and orders with role-based access, validation and a normalised MySQL schema. <span class="mono">Django REST · MySQL</span></p>
-          </a>
-        </div>
+    <!-- INTRO -->
+    <section class="band tone-paper intro" id="intro" data-thread="0.86,0.06 0.78,0.24 0.66,0.36,n 0.72,0.5 0.86,0.42 0.8,0.3 0.7,0.46 0.6,0.8 0.5,1">
+      <div class="band__inner">
+        <h2 class="intro__title display reveal">
+          <span>From raw</span>
+          <span class="indent-1">data to the</span>
+          <span>right answer,</span>
+          <span class="indent-2">fast.</span>
+        </h2>
+        <p class="intro__lede mono reveal">I connect messy business data, reliable APIs and the models on top, so the answer shows up quickly and correctly.</p>
+        <ul class="intro__tags mono reveal" aria-label="What I connect">
+          <li>Data</li><li>API</li><li>Model</li>
+        </ul>
       </div>
     </section>
 
-    <!-- ============ EXPERIENCE ============ -->
-    <section class="container experience xp" id="experience">
-      <div class="xp-head">
-        <div>
-          <span class="kicker reveal"><b>[03]</b> — git log --career</span>
-          <h2 class="display section-title reveal decode">Experience</h2>
+    <!-- CAPABILITIES -->
+    <section class="band tone-ink caps" id="capabilities" data-thread="0.5,0 a:capsTitle:1.03,0.02 a:capsTitle:1.03,1.12 a:capsTitle:0.01,1.18 a:capsTitle:0,1.34 a:branch:0.5,0.02,n a:arc:0.5,0.995,n 0.2,1" aria-labelledby="capsTitle">
+      <div class="band__inner">
+        <h2 class="caps__title display reveal" id="capsTitle">
+          <span>I build the backend.</span>
+          <span class="indent-1">And the model</span>
+          <span class="accent">on top of it.</span>
+        </h2>
+
+        <div class="branch" id="branch" aria-hidden="true">
+          <svg viewBox="0 0 1000 120" preserveAspectRatio="none"><path d="M500 0 V58 M250 110 C320 62 420 58 500 58 C580 58 680 62 750 110" vector-effect="non-scaling-stroke"/></svg>
+          <span class="branch__dot" style="--x:25%"></span><span class="branch__dot" style="--x:75%"></span>
         </div>
-        <a href="assets/Rohan-Chauhan-Resume.pdf" download class="btn btn-outline resume-btn"><span class="dl" aria-hidden="true">↓</span> Download resume</a>
-      </div>
-
-      <ol class="xp-line">
-        <li class="xp-item is-now reveal">
-          <span class="xp-node" aria-hidden="true"></span>
-          <span class="xp-hash mono" aria-hidden="true">HEAD → main</span>
-          <article class="xp-card">
-            <div class="xp-top"><span class="xp-logo mono">MG</span><span class="xp-badge mono"><i></i>Now</span></div>
-            <h3 class="xp-company">Moglix</h3>
-            <p class="xp-role">SDE Intern</p>
-            <p class="xp-date mono" data-start="2026-03">Mar 2026 – Present</p>
-            <ul class="xp-points">
-              <li>Developed and work on Cerebra, a chatbot used to create PRs and RFQs in Credlex.</li>
-              <li>Building GenAI applications and analysis software.</li>
-            </ul>
-            <div class="xp-tags mono"><span>GenAI</span><span>Chatbots</span><span>Analytics</span></div>
-          </article>
-        </li>
-        <li class="xp-item reveal">
-          <span class="xp-node" aria-hidden="true"></span>
-          <span class="xp-hash mono" aria-hidden="true">7c2e91a</span>
-          <article class="xp-card">
-            <div class="xp-top"><span class="xp-logo mono">CJ</span></div>
-            <h3 class="xp-company">Coding Jr</h3>
-            <p class="xp-role">AI Research Intern</p>
-            <p class="xp-date mono" data-start="2025-06" data-end="2025-12">Jun 2025 – Dec 2025</p>
-            <ul class="xp-points">
-              <li>Researched Planto AI's architecture, features and market positioning.</li>
-              <li>Proposed improvements to user flow, model performance and personalisation.</li>
-            </ul>
-            <div class="xp-tags mono"><span>AI research</span><span>Product</span><span>UX</span></div>
-          </article>
-        </li>
-        <li class="xp-item reveal">
-          <span class="xp-node" aria-hidden="true"></span>
-          <span class="xp-hash mono" aria-hidden="true">e41b07d</span>
-          <article class="xp-card">
-            <div class="xp-top"><span class="xp-logo mono">WS</span></div>
-            <h3 class="xp-company">Wayspire</h3>
-            <p class="xp-role">Full-Stack Intern</p>
-            <p class="xp-date mono" data-start="2024-04" data-end="2024-06">Apr 2024 – Jun 2024</p>
-            <ul class="xp-points">
-              <li>Completed a three-month full-stack web development internship.</li>
-              <li>Collaborated with a team to build and debug full-stack modules, improving performance and UI.</li>
-            </ul>
-            <div class="xp-tags mono"><span>Full-stack</span><span>Debugging</span><span>UI</span></div>
-          </article>
-        </li>
-        <li class="xp-item is-edu reveal">
-          <span class="xp-node" aria-hidden="true"></span>
-          <span class="xp-hash mono" aria-hidden="true">init</span>
-          <article class="xp-card">
-            <div class="xp-top"><span class="xp-logo mono">GN</span><span class="xp-badge mono is-edu">Education</span></div>
-            <h3 class="xp-company">GNIOT, Greater Noida</h3>
-            <p class="xp-role">B.Tech, Computer Science</p>
-            <p class="xp-date mono">2022 – 2026</p>
-            <ul class="xp-points">
-              <li>CGPA 7.7 · Top 15 department rank across multiple semesters.</li>
-              <li>Class XII &amp; X — St. Mary's School, Kashipur (78%).</li>
-            </ul>
-          </article>
-        </li>
-      </ol>
-    </section>
-
-    <!-- ============ ABOUT (grows from a small card to full screen) ============ -->
-    <section class="about" id="about">
-      <div class="about-stage">
-        <div class="about-panel" id="aboutPanel">
-          <div class="about-intro container">
-            <div class="about-head">
-              <div class="about-photo">
-                <!-- Add your photo as assets/me.jpg -->
-                <img src="assets/me.jpg" alt="Rohan Chauhan" onerror="this.remove()">
-                <span class="photo-fallback display">RC</span>
-              </div>
-              <div>
-                <span class="kicker"><b>[04]</b> — whoami</span>
-                <h2 class="display about-title">Hey — I'm<br>Rohan</h2>
-              </div>
-            </div>
-            <div class="intro-row about-text">
-              <span class="tag">About me</span>
-              <div class="intro-text">
-                <p>Final-year B.Tech CSE student at GNIOT, Greater Noida, with hands-on experience in machine learning, data analysis and AI-driven systems. I love turning messy, real-world problems into software that's simple to use.</p>
-              </div>
-            </div>
-          </div>
+        <div class="groups">
+          <p class="group mono">Backend</p>
+          <p class="group mono">AI systems</p>
         </div>
-      </div>
 
-      <div class="about-values">
-        <div class="container">
-          <ul class="values" id="values">
-            <li><b>Curious.</b><span class="icon">◎</span><p>I learn fast and I'm always digging into how things work under the hood.</p></li>
-            <li><b>Builder.</b><span class="icon">⌘</span><p>I ship end-to-end — from data pipeline to API to interface.</p></li>
-            <li><b>Consistent.</b><span class="icon">▲</span><p>Top 15 academic rank in my department across multiple semesters.</p></li>
-            <li><b>Communicator.</b><span class="icon">✦</span><p>Awarded "Eloquent Speaker" — I explain complex ideas clearly.</p></li>
-            <li><b>Analytical.</b><span class="icon">◇</span><p>Statistics and data first, opinions second.</p></li>
-            <li><b>Problem solver.</b><span class="icon">⚙</span><p>Bugs, bottlenecks, broken flows — I enjoy fixing them.</p></li>
-            <li><b>Team player.</b><span class="icon">❖</span><p>Collaborated in teams across three internships.</p></li>
-            <li><b>Always growing.</b><span class="icon">→</span><p>Intel Unnati AI/ML, Cisco Cybersecurity, Deloitte Data Analytics, AWS.</p></li>
+        <div class="arc" id="arc">
+          <svg class="arc__line" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M150 0 C150 260 320 392 500 392 C680 392 850 260 850 0" vector-effect="non-scaling-stroke"/>
+          </svg>
+          <ul class="arc__list">
+            <li class="arc__item" style="--x:16.2%;--y:22%" data-side="l"><span class="arc__dot"></span><h3 class="mono">REST APIs</h3><p>Endpoints with validation, auth and roles.</p></li>
+            <li class="arc__item" style="--x:22.4%;--y:62%" data-side="l"><span class="arc__dot"></span><h3 class="mono">Data pipelines</h3><p>SQL, MongoDB and Kafka, moved and checked.</p></li>
+            <li class="arc__item" style="--x:35%;--y:93%" data-side="l"><span class="arc__dot"></span><h3 class="mono">Ship &amp; run</h3><p>Docker, Git CI/CD and AWS, kept running.</p></li>
+            <li class="arc__item" style="--x:65%;--y:93%" data-side="r"><span class="arc__dot"></span><h3 class="mono">LLM &amp; RAG</h3><p>Chatbots and retrieval grounded in real data.</p></li>
+            <li class="arc__item" style="--x:77.6%;--y:62%" data-side="r"><span class="arc__dot"></span><h3 class="mono">OCR &amp; VLLMs</h3><p>Scans and documents turned into clean records.</p></li>
+            <li class="arc__item" style="--x:83.8%;--y:22%" data-side="r"><span class="arc__dot"></span><h3 class="mono">Automation</h3><p>Repeated work turned into reliable workflows.</p></li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- ============ FAQ ============ -->
-    <section class="container faq" id="faq">
-      <span class="kicker reveal"><b>[05]</b> — cat faq.md</span>
-      <h2 class="display section-title reveal decode">Frequently asked questions</h2>
-      <div class="accordion reveal">
-        <details class="acc">
-          <summary data-cursor="Open"><span class="mono">(01)</span><span class="acc-title">Are you open to full-time roles?</span><span class="plus"></span></summary>
-          <div class="acc-body"><p>Yes. I'm looking for SDE and AI/ML roles starting after my graduation in 2026.</p></div>
-        </details>
-        <details class="acc">
-          <summary data-cursor="Open"><span class="mono">(02)</span><span class="acc-title">What's your main tech stack?</span><span class="plus"></span></summary>
-          <div class="acc-body"><p>Python first — Django / FastAPI on the backend, PyTorch, Scikit-learn, LangChain and LangGraph for AI, and SQL for data. I also work with Java and TypeScript.</p></div>
-        </details>
-        <details class="acc">
-          <summary data-cursor="Open"><span class="mono">(03)</span><span class="acc-title">What are you working on right now?</span><span class="plus"></span></summary>
-          <div class="acc-body"><p>At Moglix I'm building Cerebra, a GenAI chatbot that helps create purchase requests and RFQs, along with other analysis tools.</p></div>
-        </details>
-        <details class="acc">
-          <summary data-cursor="Open"><span class="mono">(04)</span><span class="acc-title">Where are you based?</span><span class="plus"></span></summary>
-          <div class="acc-body"><p>Greater Noida / Delhi NCR, India — and happy to work remotely or relocate.</p></div>
-        </details>
-        <details class="acc">
-          <summary data-cursor="Open"><span class="mono">(05)</span><span class="acc-title">Do you freelance or take on side projects?</span><span class="plus"></span></summary>
-          <div class="acc-body"><p>For the right idea, yes — especially anything involving AI agents, data or backend APIs. Drop me an email.</p></div>
-        </details>
-        <details class="acc">
-          <summary data-cursor="Open"><span class="mono">(06)</span><span class="acc-title">Can I see your resume?</span><span class="plus"></span></summary>
-          <div class="acc-body"><p>Of course — <a href="assets/Rohan-Chauhan-Resume.pdf" target="_blank" class="u">download it here</a>.</p></div>
-        </details>
+    <!-- PROJECTS -->
+    <div class="projects" id="projects" aria-label="Projects">
+      <div class="filterbar">
+        <div class="filters" role="group" aria-label="Filter projects">
+          <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">All <sup data-count="all"></sup></button>
+          <button class="filter" type="button" data-filter="company" aria-pressed="false">Company <sup data-count="company"></sup></button>
+          <button class="filter" type="button" data-filter="personal" aria-pressed="false">Personal <sup data-count="personal"></sup></button>
+          <button class="filter" type="button" data-filter="research" aria-pressed="false">Research <sup data-count="research"></sup></button>
+        </div>
       </div>
-    </section>
+      <p class="sr-only" id="filterStatus" aria-live="polite"></p>
 
-    <!-- ============ CTA ============ -->
-    <section class="cta-wrap container" id="contact">
-      <div class="cta">
-        <p class="cta-kicker mono reveal caret">&gt; lets_talk()</p>
-        <h2 class="display cta-title reveal decode">Ready to build<br>something together?</h2>
-        <div class="cta-actions reveal">
-        <a href="mailto:chauhanrohan223@gmail.com" class="btn btn-light roll-wrap">
-          <span class="avatar"><img src="assets/avatar.jpg" alt="" onerror="this.remove()"><span>RC</span></span>
-          <span class="roll">Say hello</span>
-        </a>
-        <a href="assets/Rohan-Chauhan-Resume.pdf" download class="btn btn-outline resume-btn"><span class="dl" aria-hidden="true">↓</span> Download resume</a>
+      <!-- 01 LUMIDA -->
+      <article class="band project tone-paper" data-cat="personal" aria-labelledby="p-lumida">
+        <div class="band__inner">
+          <header class="project__top">
+            <p class="project__label mono"><span class="project__num">01</span> / Data quality · Personal</p>
+            <p class="project__pitch mono">Point it at any database, read-only. It finds the relationships nobody wrote down and the problems nobody noticed.</p>
+          </header>
+          <div class="project__stage">
+            <h3 class="project__name display" id="p-lumida"><span class="fit">Lumida</span></h3><svg class="sketch" style="--x:2%;--y:-4%;--w:13vw;--r:-4deg" viewBox="0 0 200 270" aria-hidden="true"><path class="fill" d="M20 30 V200 A80 20 0 0 0 180 200 V30 Z"/><ellipse class="fill" cx="100" cy="30" rx="80" ry="20"/><path d="M20 87 A80 20 0 0 0 180 87 M20 144 A80 20 0 0 0 180 144"/><path d="M42 66 H70 M42 123 H70 M42 180 H70"/><circle cx="150" cy="70" r="3" class="ink"/><circle cx="150" cy="127" r="3" class="ink"/><circle cx="150" cy="184" r="3" class="ink"/><rect class="fill" x="128" y="196" width="56" height="44" rx="5"/><path d="M140 196 V180 A16 16 0 0 1 172 180 V196"/><circle cx="156" cy="214" r="5"/><path d="M156 219 V228"/></svg><p class="callout mono" style="--x:16%;--y:6%"><span>orders_db</span><b>Read-only</b></p><svg class="sketch" style="--x:58%;--y:-6%;--w:27vw;--r:2deg" viewBox="0 0 380 250" aria-hidden="true"><rect class="fill" x="10" y="20" width="110" height="74" rx="3"/><path d="M10 38 H120"/><path d="M18 30 H70.5" stroke-width="2.4"/><path d="M18 50 H78.2"/><circle cx="108" cy="50" r="2" class="ink"/><path d="M18 64 H78.2"/><circle cx="108" cy="64" r="2" class="ink"/><path d="M18 78 H78.2"/><circle cx="108" cy="78" r="2" class="ink"/><rect class="fill" x="250" y="6" width="120" height="74" rx="3"/><path d="M250 24 H370"/><path d="M258 16 H316.0" stroke-width="2.4"/><path d="M258 36 H324.4"/><circle cx="358" cy="36" r="2" class="ink"/><path d="M258 50 H324.4"/><circle cx="358" cy="50" r="2" class="ink"/><path d="M258 64 H324.4"/><circle cx="358" cy="64" r="2" class="ink"/><rect class="fill" x="40" y="160" width="110" height="74" rx="3"/><path d="M40 178 H150"/><path d="M48 170 H100.5" stroke-width="2.4"/><path d="M48 190 H108.2"/><circle cx="138" cy="190" r="2" class="ink"/><path d="M48 204 H108.2"/><circle cx="138" cy="204" r="2" class="ink"/><path d="M48 218 H108.2"/><circle cx="138" cy="218" r="2" class="ink"/><rect class="fill" x="258" y="160" width="112" height="74" rx="3"/><path d="M258 178 H370"/><path d="M266 170 H319.6" stroke-width="2.4"/><path d="M266 190 H327.44"/><circle cx="358" cy="190" r="2" class="ink"/><path d="M266 204 H327.44"/><circle cx="358" cy="204" r="2" class="ink"/><path d="M266 218 H327.44"/><circle cx="358" cy="218" r="2" class="ink"/><path d="M120 50 C170 50 200 40 250 40"/><path d="M150 196 C200 196 210 196 258 196"/><path d="M310 80 V160"/><path class="hot" d="M95 94 C120 140 220 130 258 180" stroke-dasharray="6 6"/><circle class="fill" cx="178" cy="128" r="34"/><path class="hot" d="M168 118 L188 138 M188 118 L168 138"/><path d="M202 152 L232 182" stroke-width="7"/></svg><p class="callout mono" style="--x:84%;--y:72%"><span>customers ↔ orders</span><b>4 orphan rows</b></p><div class="card" style="--x:7%;--y:64%;--w:19vw;--r:-2deg">
+              <p class="card__head mono"><span>Benchmark</span><span>Test DB</span></p>
+              <dl class="metrics">
+                <div><dt class="mono">Hidden relationships</dt><dd>15<small>/15</small></dd></div>
+                <div><dt class="mono">Planted problems</dt><dd>13<small>/13</small></dd></div>
+                <div><dt class="mono">False alarms</dt><dd>0</dd></div>
+              </dl>
+            </div>
+            <figure class="shot" style="--x:52%;--y:60%;--w:27vw;--r:2deg">
+              <img src="assets/project-lumida.jpg" alt="Lumida's landing page: 'Light on your data.'" width="800" height="500" loading="lazy">
+            </figure>
+          </div>
+          <footer class="project__foot">
+            <ul class="stack mono"><li>Python</li><li>PostgreSQL</li><li>FastAPI</li><li>Docker</li><li>Gemini</li></ul>
+            <span class="project__year mono">2026</span>
+            <a class="explore mono" href="https://lumida.netlify.app/" target="_blank" rel="noopener">Explore project <span aria-hidden="true">↗</span></a>
+          </footer>
+          <details class="notes"><summary class="mono">Case notes</summary>
+            <div class="notes__body">
+              <p>Lumida connects read-only to any database and maps it: the relationships nobody documented, what "normal" looks like for each table, and where the data has drifted. Every finding comes with evidence and a plain-language explanation from an LLM, and it learns each time someone marks a finding as real or not.</p>
+              <p>On a test database with planted issues it found all 15 hidden relationships and all 13 problems, with zero false alarms.</p>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <!-- 02 CEREBRA -->
+      <article class="band project tone-ink" data-cat="company" aria-labelledby="p-cerebra">
+        <div class="band__inner">
+          <header class="project__top">
+            <p class="project__label mono"><span class="project__num">02</span> / Generative AI · Moglix</p>
+            <p class="project__pitch mono">Type what you need. Cerebra drafts the purchase request or RFQ in Credlex for you.</p>
+          </header>
+          <div class="project__stage">
+            <h3 class="project__name display" id="p-cerebra"><span class="fit">Cerebra</span></h3><svg class="sketch" style="--x:2%;--y:-4%;--w:14vw;--r:0deg" viewBox="0 0 230 250" aria-hidden="true"><path d="M18 6 V244 M212 6 V244 M18 84 H212 M18 164 H212 M18 244 H212"/><rect class="fill" x="30" y="34" width="62" height="50"/><path d="M61 34 V56"/><rect class="fill" x="98" y="48" width="48" height="36"/><path d="M122 48 V64"/><rect class="fill" x="150" y="22" width="52" height="62"/><path d="M176 22 V46"/><rect class="fill" x="30" y="118" width="80" height="46"/><path d="M70 118 V138"/><rect class="fill" x="118" y="104" width="84" height="60"/><path d="M160 104 V128"/><rect class="fill" x="30" y="196" width="50" height="48"/><rect class="fill" x="86" y="206" width="56" height="38"/><path d="M150 244 V180 H204 V244"/><path d="M150 200 H204"/></svg><p class="callout mono" style="--x:17%;--y:6%"><span>Item · safety gloves, L</span><b>200 pairs</b></p><svg class="sketch" style="--x:60%;--y:62%;--w:24vw;--r:0deg" viewBox="0 0 400 180" aria-hidden="true"><path d="M0 172 H400"/><rect class="fill" x="10" y="26" width="236" height="120" rx="3"/><path d="M10 56 H246 M70 26 V146 M130 26 V146 M190 26 V146"/><path class="fill" d="M246 66 H320 L362 112 V146 H246 Z"/><path d="M260 78 H314 L344 110 H260 Z"/><path d="M290 122 H304"/><circle class="fill" cx="74" cy="148" r="22"/><circle cx="74" cy="148" r="8"/><circle class="fill" cx="310" cy="148" r="22"/><circle cx="310" cy="148" r="8"/><path d="M362 132 H372"/></svg><p class="callout mono" style="--x:44%;--y:4%"><span>RFQ</span><b>→ 3 vendors</b></p><div class="card card--chat" style="--x:64%;--y:-2%;--w:22vw;--r:2deg">
+              <p class="card__head mono"><span>Cerebra</span><span>Credlex</span></p>
+              <p class="bubble bubble--me">Raise a PR for 200 pairs of safety gloves, size L, needed by Friday.</p>
+              <p class="bubble">Drafted it. Should I also send an RFQ to approved vendors?</p>
+            </div>
+            <div class="card" style="--x:24%;--y:62%;--w:19vw;--r:-2.5deg">
+              <p class="card__head mono"><span>Purchase request</span><span>Draft</span></p>
+              <dl class="rows mono">
+                <div><dt>Item</dt><dd>Safety gloves, L</dd></div>
+                <div><dt>Qty</dt><dd>200 pairs</dd></div>
+                <div><dt>Need by</dt><dd>Friday</dd></div>
+                <div><dt>Next</dt><dd>RFQ → vendors</dd></div>
+              </dl>
+            </div>
+          </div>
+          <footer class="project__foot">
+            <ul class="stack mono"><li>Python</li><li>LLMs</li><li>REST APIs</li></ul>
+            <span class="project__year mono">2026</span>
+            <span class="explore explore--muted mono">Internal tool</span>
+          </footer>
+          <details class="notes"><summary class="mono">Case notes</summary>
+            <div class="notes__body">
+              <p>Built at Moglix. Raising purchase requests and RFQs in Credlex meant filling in long forms. Cerebra lets people describe what they need in plain words, drafts the request, and creates it through Credlex's APIs once they confirm.</p>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <!-- 03 DISTILLER -->
+      <article class="band project tone-paper" data-cat="personal" aria-labelledby="p-distiller">
+        <div class="band__inner">
+          <header class="project__top">
+            <p class="project__label mono"><span class="project__num">03</span> / LLM infrastructure · Personal <span class="badge">In progress</span></p>
+            <p class="project__pitch mono">Swap one URL. Your repeated LLM calls quietly move to a small model you own.</p>
+          </header>
+          <div class="project__stage">
+            <h3 class="project__name display" id="p-distiller"><span class="fit">Distiller</span></h3><svg class="sketch" style="--x:58%;--y:-8%;--w:30vw;--r:0deg" viewBox="0 0 440 300" aria-hidden="true"><path d="M20 252 H170"/><rect class="fill" x="40" y="226" width="110" height="26" rx="3"/><path class="hot" d="M84 222 C76 210 92 204 86 192 C100 202 104 214 96 222"/><circle class="fill" cx="95" cy="150" r="58"/><path class="fill" d="M82 96 V44 H108 V96"/><rect class="fill" x="77" y="34" width="36" height="12" rx="2"/><path d="M45 168 Q95 150 145 168"/><circle cx="80" cy="182" r="3"/><circle cx="104" cy="190" r="2"/><circle cx="118" cy="176" r="2.5"/><path d="M108 54 C150 34 200 34 236 64"/><path class="fill" d="M226 54 L248 40 L382 188 L360 202 Z"/><path d="M236 64 L372 196" stroke-dasharray="3 5"/><path d="M262 64 V40 H276 M340 160 V138 H354"/><path class="fill" d="M352 214 H424 L414 286 H362 Z"/><path d="M358 258 H418"/><circle cx="376" cy="204" r="3.5" class="ink-hot"/></svg><p class="callout mono" style="--x:40%;--y:6%"><span>Big model</span><b>Every call logged</b></p><p class="callout mono" style="--x:84%;--y:76%"><span>Small model</span><b>LoRA · shadow-tested</b></p><div class="card card--code" style="--x:4%;--y:0%;--w:24vw;--r:-2deg">
+              <p class="card__head mono"><span>config.py</span><span>1 line</span></p>
+<pre class="mono"><span class="del">- base_url = "https://api.openai.com/v1"</span>
+<span class="add">+ base_url = "http://distiller:8000/v1"</span></pre>
+            </div>
+            <div class="card" style="--x:18%;--y:64%;--w:19vw;--r:1.5deg">
+              <p class="card__head mono"><span>$ distiller status</span><span></span></p>
+              <ul class="status mono">
+                <li><span class="ok">●</span><span>Gateway</span><span>working</span></li>
+                <li><span class="ok">●</span><span>Call logging</span><span>working</span></li>
+                <li><span class="wip">◐</span><span>LoRA training</span><span>building</span></li>
+                <li><span class="wip">◐</span><span>Shadow tests</span><span>building</span></li>
+                <li><span class="wip">◐</span><span>Routing</span><span>building</span></li>
+              </ul>
+            </div>
+          </div>
+          <footer class="project__foot">
+            <ul class="stack mono"><li>Python</li><li>FastAPI</li><li>LiteLLM</li><li>LoRA</li><li>Ollama</li></ul>
+            <span class="project__year mono">2026</span>
+            <span class="explore explore--muted mono">In development</span>
+          </footer>
+          <details class="notes"><summary class="mono">Case notes</summary>
+            <div class="notes__body">
+              <p>Distiller is an OpenAI-compatible gateway, so a team adopts it by changing one line. It logs the company's repeated LLM calls, fine-tunes small open models with LoRA to copy the big model on those tasks, tests them in shadow mode, then sends the requests it's confident about to the cheap model and falls back to the big one when it isn't.</p>
+              <p>Status: the gateway and CLI work. Training and routing are in development.</p>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <!-- 04 BUG TOOL -->
+      <article class="band project tone-ink" data-cat="personal" aria-labelledby="p-bug">
+        <div class="band__inner">
+          <header class="project__top">
+            <p class="project__label mono"><span class="project__num">04</span> / Developer tools · Personal</p>
+            <p class="project__pitch mono">A VS Code extension that catches errors as they happen. Tutor mode explains them; Debugger mode fixes them.</p>
+          </header>
+          <div class="project__stage">
+            <h3 class="project__name display" id="p-bug"><span class="fit">Bug Detection</span><span class="fit">&amp; Fix Tool</span></h3><svg class="sketch" style="--x:3%;--y:58%;--w:23vw;--r:-2deg" viewBox="0 0 350 215" aria-hidden="true"><rect class="fill" x="50" y="8" width="250" height="168" rx="8"/><rect x="62" y="20" width="226" height="144" rx="2"/><path d="M62 36 H288"/><circle cx="72" cy="28" r="2.5"/><circle cx="82" cy="28" r="2.5"/><circle cx="92" cy="28" r="2.5"/><path d="M74 52 H150 M86 66 H200 M86 80 H170 M74 108 H140 M86 122 H230 M86 136 H190 M74 150 H120"/><path class="hot" d="M86 98 q5 -5 10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0"/><path class="fill" d="M10 182 H340 L322 210 H28 Z"/><path d="M150 196 H200"/></svg><svg class="sketch" style="--x:84%;--y:-2%;--w:9vw;--r:14deg" viewBox="0 0 170 200" aria-hidden="true"><path d="M66 44 L50 14 M104 44 L120 14"/><path d="M44 96 H8 M42 130 H4 M48 164 L16 190 M126 96 H162 M128 130 H166 M122 164 L154 190"/><ellipse class="fill" cx="85" cy="126" rx="42" ry="62"/><circle class="fill" cx="85" cy="58" r="21"/><path d="M85 79 V186 M56 112 H72 M98 112 H114 M60 146 H72 M98 146 H110"/></svg><p class="callout mono" style="--x:72%;--y:6%"><span>Caught live</span><b>Runtime + lint</b></p><div class="card card--code" style="--x:4%;--y:-2%;--w:23vw;--r:-2deg">
+              <p class="card__head mono"><span>orders.py</span><span>Ln 42</span></p>
+<pre class="mono"><span class="ln">41</span> user = get_user(uid)
+<span class="ln">42</span> name = <span class="squiggle">user["name"]</span>
+<span class="ln">43</span> return name.title()</pre>
+              <p class="err mono">TypeError: 'NoneType' object is not subscriptable</p>
+            </div>
+            <div class="card" style="--x:66%;--y:74%;--w:21vw;--r:2deg">
+              <p class="seg mono"><span>Tutor</span><span class="on">Debugger</span></p>
+              <p class="sm">get_user returns None for an unknown id. Check it before reading the name.</p>
+              <p class="card__actions mono"><span class="pill">Apply fix</span></p>
+            </div>
+          </div>
+          <footer class="project__foot">
+            <ul class="stack mono"><li>TypeScript</li><li>FastAPI</li><li>RAG</li><li>Vector DB</li></ul>
+            <span class="project__year mono">2025</span>
+            <span class="explore explore--muted mono">VS Code extension</span>
+          </footer>
+          <details class="notes"><summary class="mono">Case notes</summary>
+            <div class="notes__body">
+              <p>The extension captures lint errors and runtime exceptions as they happen, then uses LLM-based retrieval (RAG over a vector database) to explain them. Tutor mode walks you through why the code broke; Debugger mode proposes a fix you can apply.</p>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <!-- 05 BLOCKAUTH -->
+      <article class="band project tone-paper" data-cat="research" aria-labelledby="p-blockauth">
+        <div class="band__inner">
+          <header class="project__top">
+            <p class="project__label mono"><span class="project__num">05</span> / Research · ICSDS-2025</p>
+            <p class="project__pitch mono">Decentralised identity on a blockchain, so IoT devices can prove who they are without a central server.</p>
+          </header>
+          <div class="project__stage">
+            <h3 class="project__name display" id="p-blockauth"><span class="fit">BlockAuth</span></h3><svg class="sketch" style="--x:54%;--y:56%;--w:30vw;--r:0deg" viewBox="0 0 430 245" aria-hidden="true"><path d="M0 238 H430"/><rect class="fill" x="16" y="170" width="120" height="44" rx="6"/><path d="M36 170 V120 M116 170 V120"/><circle cx="38" cy="192" r="3" class="ink"/><circle cx="52" cy="192" r="3"/><circle cx="66" cy="192" r="3"/><path d="M90 192 H124"/><path d="M28 214 V238 M124 214 V238"/><path d="M214 238 V150"/><path class="fill" d="M190 124 H252 V150 H190 Z"/><path class="fill" d="M252 128 L272 120 V154 L252 146 Z"/><circle cx="204" cy="137" r="5"/><path d="M330 160 V148 M350 160 V148 M370 160 V148 M330 222 V234 M350 222 V234 M370 222 V234 M308 180 H296 M308 200 H296 M392 180 H404 M392 200 H404"/><rect class="fill" x="308" y="160" width="84" height="62" rx="5"/><rect x="330" y="176" width="40" height="30" rx="2"/><path class="hot" d="M76 120 C76 70 120 60 150 40" stroke-dasharray="5 6"/><path class="hot" d="M222 118 V60" stroke-dasharray="5 6"/><path class="hot" d="M350 146 C350 90 320 60 296 40" stroke-dasharray="5 6"/><rect class="fill" x="120" y="6" width="56" height="40" rx="3"/><rect class="fill" x="194" y="6" width="56" height="40" rx="3"/><rect class="fill" x="268" y="6" width="56" height="40" rx="3"/><path d="M176 26 H194 M250 26 H268" stroke-width="3"/><path d="M130 20 H160 M204 20 H234 M278 20 H308 M130 32 H150 M204 32 H224 M278 32 H298"/></svg><p class="callout mono" style="--x:3%;--y:4%"><span>DID · sensor-07</span><b>Identity on-chain</b></p><p class="callout mono" style="--x:3%;--y:20%"><span>Access</span><b>Granted · read</b></p><div class="chain" style="--x:4%;--y:66%;--w:42vw;--r:-1deg">
+              <div class="block mono"><span>Block 0x1a</span><b>DID: sensor-07</b><small>prev 0x19</small></div>
+              <span class="link-bar"></span>
+              <div class="block mono"><span>Block 0x1b</span><b>Grant: read</b><small>prev 0x1a</small></div>
+              <span class="link-bar"></span>
+              <div class="block mono"><span>Block 0x1c</span><b>Verify ✓</b><small>prev 0x1b</small></div>
+            </div>
+            <div class="stamp mono" style="--x:76%;--y:-4%;--r:-12deg"><span>Presented</span><b>ICSDS</b><span>Dec 2025</span></div>
+          </div>
+          <footer class="project__foot">
+            <ul class="stack mono"><li>Blockchain</li><li>Decentralised ID</li><li>IoT security</li></ul>
+            <span class="project__year mono">Dec 2025</span>
+            <span class="explore explore--muted mono">Research paper</span>
+          </footer>
+          <details class="notes"><summary class="mono">Case notes</summary>
+            <div class="notes__body">
+              <p>A blockchain-based decentralised identity management system for secure authentication and access control across IoT networks. Presented as a research paper at ICSDS-2025, Hooghly Engineering &amp; Technology College, in December 2025.</p>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <!-- 06 ADMIN PANEL -->
+      <article class="band project tone-ink" data-cat="company" aria-labelledby="p-admin">
+        <div class="band__inner">
+          <header class="project__top">
+            <p class="project__label mono"><span class="project__num">06</span> / Internal tools · Coding Jr</p>
+            <p class="project__pitch mono">The admin panel a team runs its day on. I designed the backend logic and built the core features.</p>
+          </header>
+          <div class="project__stage">
+            <h3 class="project__name display" id="p-admin"><span class="fit">Admin Panel</span></h3><svg class="sketch" style="--x:2%;--y:-6%;--w:23vw;--r:-2deg" viewBox="0 0 360 262" aria-hidden="true"><rect class="fill" x="8" y="8" width="344" height="214" rx="8"/><rect x="20" y="20" width="320" height="190" rx="2"/><path d="M20 40 H340 M84 40 V210"/><circle cx="32" cy="30" r="3"/><circle cx="44" cy="30" r="3"/><circle cx="56" cy="30" r="3"/><path d="M32 58 H70 M32 76 H70 M32 94 H64 M32 112 H70 M32 130 H60"/><rect x="28" y="52" width="48" height="12" rx="2" class="hot"/><rect x="98" y="54" width="70" height="40" rx="3"/><rect x="180" y="54" width="70" height="40" rx="3"/><rect x="262" y="54" width="66" height="40" rx="3"/><path d="M106 82 H130 M188 82 H220 M270 82 H300" stroke-width="3"/><path d="M100 196 V170 M120 196 V150 M140 196 V160 M160 196 V130 M180 196 V146 M200 196 V120 M220 196 V138" stroke-width="7"/><path d="M244 112 H328 M244 132 H328 M244 152 H310 M244 172 H328 M244 192 H300"/><path class="fill" d="M160 222 H200 L208 252 H152 Z"/><path d="M118 256 H242"/></svg><svg class="sketch" style="--x:42%;--y:66%;--w:9vw;--r:-10deg" viewBox="0 0 170 140" aria-hidden="true"><circle class="fill" cx="40" cy="40" r="30"/><circle cx="40" cy="40" r="10"/><path class="fill" d="M66 54 L160 108 L150 124 L136 116 L128 130 L114 122 L120 108 L58 72 Z"/></svg><p class="callout mono" style="--x:44%;--y:-2%"><span>Roles</span><b>Admin · Mentor · Viewer</b></p><div class="card" style="--x:68%;--y:-2%;--w:21vw;--r:2deg">
+              <p class="card__head mono"><span>Users</span><span>3 of 48</span></p>
+              <table class="table mono">
+                <thead><tr><th>User</th><th>Role</th><th>Active</th></tr></thead>
+                <tbody>
+                  <tr><td>a.sharma</td><td>Admin</td><td><span class="toggle on"></span></td></tr>
+                  <tr><td>k.verma</td><td>Mentor</td><td><span class="toggle on"></span></td></tr>
+                  <tr><td>r.iyer</td><td>Viewer</td><td><span class="toggle"></span></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card" style="--x:64%;--y:66%;--w:18vw;--r:-2deg">
+              <p class="card__head mono"><span>Audit log</span><span>Today</span></p>
+              <ul class="log mono">
+                <li>10:42 role changed → Mentor</li>
+                <li>10:15 access revoked</li>
+                <li>09:58 batch import · 12 rows</li>
+              </ul>
+            </div>
+          </div>
+          <footer class="project__foot">
+            <ul class="stack mono"><li>Python</li><li>REST APIs</li></ul>
+            <span class="project__year mono">2025</span>
+            <span class="explore explore--muted mono">Internal tool</span>
+          </footer>
+          <details class="notes"><summary class="mono">Case notes</summary>
+            <div class="notes__body">
+              <p>Built as an SDE during my AI Research internship at Coding Jr. I designed the backend logic and built the core features of the company's internal admin panel with the team.</p>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <!-- 07 FLIGHT -->
+      <article class="band project tone-paper" data-cat="personal" aria-labelledby="p-flight">
+        <div class="band__inner">
+          <header class="project__top">
+            <p class="project__label mono"><span class="project__num">07</span> / Machine learning · Personal</p>
+            <p class="project__pitch mono">Live flight and weather data in; delay forecasts for India's busiest airports out.</p>
+          </header>
+          <div class="project__stage">
+            <h3 class="project__name display" id="p-flight"><span class="fit">Flight Delay</span><span class="fit">Predictor</span></h3><svg class="sketch" style="--x:46%;--y:-6%;--w:30vw;--r:-6deg" viewBox="0 0 420 160" aria-hidden="true"><path class="fill" d="M24 92 C24 72 62 64 124 64 H330 C372 64 404 78 414 92 C404 104 382 110 330 110 H124 C62 110 24 104 24 92 Z"/><path class="fill" d="M44 70 L22 18 H48 L92 66 Z"/><path class="fill" d="M42 94 L14 116 H36 L74 100 Z"/><path class="fill" d="M196 100 L254 156 H282 L262 100 Z"/><ellipse class="fill" cx="246" cy="124" rx="24" ry="9"/><path d="M370 76 Q392 80 400 90 H372 Z"/><circle cx="140" cy="84" r="3.5"/><circle cx="160" cy="84" r="3.5"/><circle cx="180" cy="84" r="3.5"/><circle cx="200" cy="84" r="3.5"/><circle cx="220" cy="84" r="3.5"/><circle cx="240" cy="84" r="3.5"/><circle cx="260" cy="84" r="3.5"/><circle cx="280" cy="84" r="3.5"/><circle cx="300" cy="84" r="3.5"/><circle cx="320" cy="84" r="3.5"/><circle cx="340" cy="84" r="3.5"/><path d="M330 64 V110"/></svg><svg class="sketch" style="--x:3%;--y:46%;--w:7vw;--r:0deg" viewBox="0 0 150 300" aria-hidden="true"><path d="M0 296 H150"/><path class="fill" d="M58 296 V96 H92 V296 Z"/><path d="M58 140 H92 M58 190 H92 M58 240 H92"/><path class="fill" d="M26 54 H124 L112 96 H38 Z"/><path d="M40 62 H110 M48 62 V88 M75 62 V88 M102 62 V88"/><path class="fill" d="M34 54 L44 38 H106 L116 54 Z"/><path d="M75 38 V8"/><circle cx="75" cy="8" r="3" class="ink-hot"/></svg><svg class="sketch" style="--x:4%;--y:-4%;--w:11vw;--r:0deg" viewBox="0 0 200 120" aria-hidden="true"><path class="fill" d="M40 95 A28 28 0 0 1 38 40 A40 40 0 0 1 112 26 A32 32 0 0 1 166 50 A24 24 0 0 1 164 95 Z"/><path d="M60 106 L54 116 M100 106 L94 116 M140 106 L134 116"/></svg><p class="callout mono" style="--x:17%;--y:2%"><span>DEL · haze</span><b>Visibility 1.2 km</b></p><p class="callout mono" style="--x:12%;--y:90%"><span>DEL · 07:40 departure</span><b>Predicted +24m</b></p><div class="card" style="--x:68%;--y:76%;--w:22vw;--r:2deg">
+              <p class="card__head mono"><span>Departures forecast</span><span>Sample</span></p>
+              <ul class="board mono">
+                <li><b>DEL</b><span class="bar" style="--v:.62"></span><em>+24m</em></li>
+                <li><b>BOM</b><span class="bar" style="--v:.38"></span><em>+14m</em></li>
+                <li><b>BLR</b><span class="bar" style="--v:.18"></span><em>+6m</em></li>
+                <li><b>HYD</b><span class="bar" style="--v:.06"></span><em>on time</em></li>
+              </ul>
+            </div>
+          </div>
+          <footer class="project__foot">
+            <ul class="stack mono"><li>Python</li><li>Scikit-learn</li><li>Streamlit</li><li>Pandas</li></ul>
+            <span class="project__year mono">2025</span>
+            <span class="explore explore--muted mono">Streamlit dashboard</span>
+          </footer>
+          <details class="notes"><summary class="mono">Case notes</summary>
+            <div class="notes__body">
+              <p>A data pipeline pulls live flight and weather data for major Indian airports from external APIs. Scikit-learn models forecast departure delays, and a Streamlit dashboard shows live flight status next to the predictions.</p>
+            </div>
+          </details>
+        </div>
+      </article>
+
+      <!-- 08 E-COMMERCE -->
+      <article class="band project tone-ink" data-cat="personal" aria-labelledby="p-ecom">
+        <div class="band__inner">
+          <header class="project__top">
+            <p class="project__label mono"><span class="project__num">08</span> / Backend · Personal</p>
+            <p class="project__pitch mono">Products, carts and orders as a REST API, with roles, validation and a properly normalised schema.</p>
+          </header>
+          <div class="project__stage">
+            <h3 class="project__name display" id="p-ecom"><span class="fit">E-Commerce</span><span class="fit">API</span></h3><svg class="sketch" style="--x:62%;--y:-6%;--w:20vw;--r:0deg" viewBox="0 0 300 214" aria-hidden="true"><path d="M4 22 H48 L84 166 H262"/><path class="fill" d="M60 62 H296 L270 150 H82 Z"/><path d="M100 62 L110 150 M140 62 L146 150 M180 62 L182 150 M220 62 L216 150 M258 62 L250 150 M70 106 H284"/><rect class="fill" x="120" y="14" width="76" height="54" transform="rotate(-8 158 41)"/><path d="M158 14 V34" transform="rotate(-8 158 41)"/><rect class="fill" x="196" y="30" width="54" height="40" transform="rotate(6 223 50)"/><circle class="fill" cx="108" cy="194" r="16"/><circle class="fill" cx="240" cy="194" r="16"/></svg><svg class="sketch" style="--x:86%;--y:58%;--w:7vw;--r:6deg" viewBox="0 0 150 222" aria-hidden="true"><path class="fill" d="M10 10 H140 V206 L127 216 L114 206 L101 216 L88 206 L75 216 L62 206 L49 216 L36 206 L23 216 L10 206 Z"/><path d="M26 34 H96 M26 60 H124 M26 78 H110 M26 96 H124 M26 114 H100 M26 148 H124"/><path d="M26 172 H70 M96 172 H124" stroke-width="3"/></svg><svg class="sketch" style="--x:4%;--y:62%;--w:7vw;--r:-6deg" viewBox="0 0 160 200" aria-hidden="true"><path d="M52 62 V44 A28 28 0 0 1 108 44 V62"/><path class="fill" d="M22 62 H138 L148 192 H12 Z"/><circle cx="52" cy="80" r="4"/><circle cx="108" cy="80" r="4"/><path d="M50 130 H110"/></svg><p class="callout mono" style="--x:40%;--y:6%"><span>POST /api/cart</span><b>201 · created</b></p><div class="card card--code" style="--x:4%;--y:-2%;--w:22vw;--r:-2deg">
+              <p class="card__head mono"><span>GET /api/orders/1042</span><span class="tag tag--ok">200</span></p>
+<pre class="mono">{
+  "id": 1042,
+  "status": "paid",
+  "items": [{ "sku": "TS-01", "qty": 2 }],
+  "total": "1,598.00"
+}</pre>
+            </div>
+            <div class="card card--code" style="--x:58%;--y:78%;--w:22vw;--r:2deg">
+              <p class="card__head mono"><span>DELETE /api/products/7</span><span class="tag">403</span></p>
+              <pre class="mono">{ "detail": "role 'customer' can't do that" }</pre>
+            </div>
+          </div>
+          <footer class="project__foot">
+            <ul class="stack mono"><li>Django REST</li><li>MySQL</li></ul>
+            <span class="project__year mono">2024</span>
+            <span class="explore explore--muted mono">REST API</span>
+          </footer>
+          <details class="notes"><summary class="mono">Case notes</summary>
+            <div class="notes__body">
+              <p>REST APIs for products, carts and orders in Django REST Framework, with role-based access control on Django's auth system, input validation, clean JSON responses and a normalised MySQL schema that handles stock updates and order totals.</p>
+            </div>
+          </details>
+        </div>
+      </article>
+    </div>
+
+    <!-- ABOUT + EXPERIENCE -->
+    <section class="band tone-paper about" id="about" data-thread="0.9,0 a:imprint:0.5,0.03,n a:imprint:0.5,0.97 a:imprint:0.9,1.1 0.96,0.5 0.95,1" aria-labelledby="about-title">
+      <div class="band__inner">
+        <div class="about__intro">
+          <div class="about__head">
+            <p class="kicker mono reveal">About</p>
+            <h2 class="about__title display reveal" id="about-title"><span>I like the parts</span><span class="indent-1">nobody demos.</span></h2>
+            <p class="about__line reveal">Queues, schemas, retries and the model calls behind them. The work that decides whether a product holds up.</p>
+          </div>
+          <svg class="imprint draw" id="imprint" viewBox="0 0 400 400" aria-hidden="true"><rect x="150" y="150" width="100" height="100" rx="8"/><rect x="170" y="170" width="60" height="60" rx="3"/><path d="M182 200 H218 M200 182 V218"/><path d="M160 150 V132 L135.0 107.0 V80" transform="rotate(0 200 200)"/><circle cx="135" cy="80" r="4.5" transform="rotate(0 200 200)"/><path d="M176 150 V118 L161.0 103.0 V30" transform="rotate(0 200 200)"/><circle cx="161" cy="30" r="4.5" transform="rotate(0 200 200)"/><path d="M192 150 V104 L187.0 99.0 V55" transform="rotate(0 200 200)"/><circle cx="187" cy="55" r="4.5" transform="rotate(0 200 200)"/><path d="M208 150 V132 L213.0 127.0 V0" transform="rotate(0 200 200)"/><circle cx="213" cy="0" r="4.5" transform="rotate(0 200 200)"/><path d="M224 150 V118 L239.0 103.0 V70" transform="rotate(0 200 200)"/><circle cx="239" cy="70" r="4.5" transform="rotate(0 200 200)"/><path d="M240 150 V104 L265.0 79.0 V15" transform="rotate(0 200 200)"/><circle cx="265" cy="15" r="4.5" transform="rotate(0 200 200)"/><path d="M160 150 V132 L135.0 107.0 V80" transform="rotate(90 200 200)"/><circle cx="135" cy="80" r="4.5" transform="rotate(90 200 200)"/><path d="M176 150 V118 L161.0 103.0 V30" transform="rotate(90 200 200)"/><circle cx="161" cy="30" r="4.5" transform="rotate(90 200 200)"/><path d="M192 150 V104 L187.0 99.0 V55" transform="rotate(90 200 200)"/><circle cx="187" cy="55" r="4.5" transform="rotate(90 200 200)"/><path d="M208 150 V132 L213.0 127.0 V0" transform="rotate(90 200 200)"/><circle cx="213" cy="0" r="4.5" transform="rotate(90 200 200)"/><path d="M224 150 V118 L239.0 103.0 V70" transform="rotate(90 200 200)"/><circle cx="239" cy="70" r="4.5" transform="rotate(90 200 200)"/><path d="M240 150 V104 L265.0 79.0 V15" transform="rotate(90 200 200)"/><circle cx="265" cy="15" r="4.5" transform="rotate(90 200 200)"/><path d="M160 150 V132 L135.0 107.0 V80" transform="rotate(180 200 200)"/><circle cx="135" cy="80" r="4.5" transform="rotate(180 200 200)"/><path d="M176 150 V118 L161.0 103.0 V30" transform="rotate(180 200 200)"/><circle cx="161" cy="30" r="4.5" transform="rotate(180 200 200)"/><path d="M192 150 V104 L187.0 99.0 V55" transform="rotate(180 200 200)"/><circle cx="187" cy="55" r="4.5" transform="rotate(180 200 200)"/><path d="M208 150 V132 L213.0 127.0 V0" transform="rotate(180 200 200)"/><circle cx="213" cy="0" r="4.5" transform="rotate(180 200 200)"/><path d="M224 150 V118 L239.0 103.0 V70" transform="rotate(180 200 200)"/><circle cx="239" cy="70" r="4.5" transform="rotate(180 200 200)"/><path d="M240 150 V104 L265.0 79.0 V15" transform="rotate(180 200 200)"/><circle cx="265" cy="15" r="4.5" transform="rotate(180 200 200)"/><path d="M160 150 V132 L135.0 107.0 V80" transform="rotate(270 200 200)"/><circle cx="135" cy="80" r="4.5" transform="rotate(270 200 200)"/><path d="M176 150 V118 L161.0 103.0 V30" transform="rotate(270 200 200)"/><circle cx="161" cy="30" r="4.5" transform="rotate(270 200 200)"/><path d="M192 150 V104 L187.0 99.0 V55" transform="rotate(270 200 200)"/><circle cx="187" cy="55" r="4.5" transform="rotate(270 200 200)"/><path d="M208 150 V132 L213.0 127.0 V0" transform="rotate(270 200 200)"/><circle cx="213" cy="0" r="4.5" transform="rotate(270 200 200)"/><path d="M224 150 V118 L239.0 103.0 V70" transform="rotate(270 200 200)"/><circle cx="239" cy="70" r="4.5" transform="rotate(270 200 200)"/><path d="M240 150 V104 L265.0 79.0 V15" transform="rotate(270 200 200)"/><circle cx="265" cy="15" r="4.5" transform="rotate(270 200 200)"/></svg>
+          <div class="about__sign reveal">
+            <p class="about__name display">Rohan Chauhan.</p>
+            <p class="mono">Python AI / LLM / Backend developer.</p>
+          </div>
+        </div>
+
+        <div class="about__grid">
+          <figure class="about__photo reveal">
+            <img src="assets/me.jpg" alt="Portrait of Rohan Chauhan" width="800" height="800" loading="lazy">
+            <figcaption class="mono"><span>Rohan Chauhan</span><span>Greater Noida · IST</span></figcaption>
+          </figure>
+          <div class="about__text">
+            <p class="about__big reveal">I'm a software engineer at Moglix, in the AI &amp; Analytics team. I build the backend half of AI products: REST APIs, data pipelines, OCR and LLM services, and the Kafka, Docker and CI/CD plumbing that keeps them running for real clients.</p>
+            <p class="about__small reveal">I care about systems that are scalable, reliable and actually solve the business problem they were built for. B.Tech CSE (AI &amp; ML), GNIOT, 2026.</p>
+            <a class="explore mono reveal" href="assets/Rohan-Chauhan-Resume.pdf" download>Download résumé <span aria-hidden="true">↓</span></a>
+          </div>
+        </div>
+
+        <div class="exp" id="experience">
+          <h3 class="exp__title mono reveal">Experience</h3>
+          <ol class="roles">
+            <li class="role reveal">
+              <p class="role__when mono">Jul 2026 — Now</p>
+              <div class="role__main"><h4>Software Engineer</h4><p class="role__org mono">Moglix · B2B supply chain</p></div>
+              <div class="role__body">
+                <p>Building REST APIs and backend services for the AI &amp; Analytics team, working with VLLMs, OCR techniques and LLM prediction models. Shipping solutions for major clients and internal teams.</p>
+                <ul class="stack mono"><li>Python</li><li>REST</li><li>Kafka</li><li>Kaleyra</li><li>Docker</li><li>Git</li></ul>
+              </div>
+            </li>
+            <li class="role reveal">
+              <p class="role__when mono">Mar 2026 — Jul 2026</p>
+              <div class="role__main"><h4>Python Engineering Intern</h4><p class="role__org mono">Moglix</p></div>
+              <div class="role__body">
+                <p>Built data processing and analysis tools and automated recurring workflows for ongoing projects. Built Cerebra, a GenAI assistant for purchase requests and RFQs.</p>
+                <ul class="stack mono"><li>Python</li><li>MySQL</li><li>PostgreSQL</li><li>MongoDB</li><li>Kafka</li></ul>
+              </div>
+            </li>
+            <li class="role reveal">
+              <p class="role__when mono">Jun 2025 — Jan 2026</p>
+              <div class="role__main"><h4>AI Research Intern</h4><p class="role__org mono">Coding Jr</p></div>
+              <div class="role__body">
+                <p>Worked as an SDE on the company's internal admin panel: designed the backend logic and built its core features with the team.</p>
+                <ul class="stack mono"><li>Python</li><li>REST</li><li>Web design</li><li>Git</li></ul>
+              </div>
+            </li>
+            <li class="role reveal">
+              <p class="role__when mono">Apr 2024 — Jun 2024</p>
+              <div class="role__main"><h4>Full-Stack Intern</h4><p class="role__org mono">Wayspire</p></div>
+              <div class="role__body"><p>Built and debugged full-stack modules with a team, improving performance and the UI.</p></div>
+            </li>
+          </ol>
+        </div>
+
+        <div class="facts">
+          <div class="fact reveal">
+            <h3 class="mono">Stack</h3>
+            <p>Python, Java, Kotlin, XML<br>FastAPI, Django, Flask<br>SQL, MongoDB, Firebase<br>LangChain, LangGraph, PyTorch, Scikit-learn<br>Kafka, Docker, Kaleyra, AWS, Git CI/CD<br>Jetpack Compose, Room, MVVM<br>HTML, CSS, JS, Django templates</p>
+          </div>
+          <div class="fact reveal">
+            <h3 class="mono">Education</h3>
+            <p>B.Tech CSE (AI &amp; ML), GNIOT<br>2022 — 2026 · CGPA 8.3</p>
+            <p>Top 15 department rank across several semesters<br>"Eloquent Speaker" award</p>
+            <p class="dim">Class XII (PCM) 2021 &amp; X 2019<br>St Mary's School, Kashipur · 78%</p>
+          </div>
+          <div class="fact reveal">
+            <h3 class="mono">Hackathons · 2024</h3>
+            <p>Smart India Hackathon, GNIOT<br>Hack KRMU 4.0, KRMU Gurugram<br>Road Safety Hackathon, NHAI &amp; HOAI, Delhi<br>Build with India, Google Gurugram</p>
+          </div>
+          <div class="fact reveal">
+            <h3 class="mono">Certifications</h3>
+            <p>Intel Unnati, AI/ML track · 2025<br>Intro to Cybersecurity, Cisco · 2025<br>Data Analytics simulation, Deloitte · 2025<br>Machine Learning A–Z, Udemy · 2023<br>AWS Deep Dive, AWS · 2023<br>Android App Development, Udemy · 2023</p>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- CONTACT -->
+    <section class="band tone-ink contact" id="contact" data-thread="0.95,0 0.9,0.06 a:coil:0.5,0" aria-labelledby="contact-title">
+      <div class="band__inner">
+        <h2 class="contact__title display reveal" id="contact-title"><span>Have data</span><span class="indent-1">that should</span><span>be working</span><span class="accent indent-1">harder?</span></h2>
+        <a class="contact__cta display reveal" href="mailto:chauhanrohan223@gmail.com">Let's build it <span aria-hidden="true">↗</span></a>
+        <p class="contact__addr mono reveal">chauhanrohan223@gmail.com</p>
+        <div class="contact__row mono">
+          <a class="explore" href="https://www.linkedin.com/in/rohanchauhan07/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+          <a class="explore" href="https://github.com/RohanCh07" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+          <a class="explore" href="assets/Rohan-Chauhan-Resume.pdf" download>Résumé <span aria-hidden="true">↓</span></a>
+        </div>
+        <div class="contact__fine mono">
+          <span>© <span id="year">2026</span> Rohan Chauhan</span>
+          <span>Greater Noida, India · IST</span>
+          <a href="#top">Back to top ↑</a>
+        </div>
+      </div>
+      <svg class="coil draw" id="coil" viewBox="0 0 300 600" aria-hidden="true"><path d="M150.0 0.0 L150.0 40.0 L193.5 60.0 L193.5 60.1 L193.4 60.1 L193.0 60.2 L192.5 60.3 L191.9 60.4 L191.0 60.5 L190.0 60.6 L188.8 60.7 L187.5 60.9 L186.0 61.1 L184.4 61.3 L182.6 61.5 L180.7 61.8 L178.6 62.1 L176.4 62.5 L174.2 62.8 L171.8 63.3 L169.3 63.7 L166.7 64.2 L164.0 64.8 L161.3 65.4 L158.6 66.0 L155.7 66.7 L152.9 67.5 L150.0 68.2 L147.1 69.1 L144.2 69.9 L141.3 70.9 L138.5 71.8 L135.7 72.8 L132.9 73.9 L130.2 75.0 L127.5 76.2 L124.9 77.3 L122.4 78.6 L120.1 79.8 L117.8 81.1 L115.6 82.5 L113.6 83.8 L111.7 85.2 L109.9 86.6 L108.4 88.1 L106.9 89.6 L105.6 91.1 L104.5 92.6 L103.6 94.1 L102.9 95.6 L102.3 97.2 L101.9 98.7 L101.8 100.3 L101.8 101.8 L102.0 103.4 L102.4 104.9 L102.9 106.5 L103.7 108.0 L104.7 109.5 L105.8 111.0 L107.1 112.5 L108.6 113.9 L110.3 115.3 L112.1 116.7 L114.1 118.1 L116.2 119.4 L118.5 120.7 L120.9 122.0 L123.4 123.2 L126.1 124.4 L128.8 125.5 L131.7 126.6 L134.6 127.7 L137.6 128.7 L140.6 129.7 L143.7 130.6 L146.8 131.5 L150.0 132.3 L153.2 133.1 L156.3 133.8 L159.5 134.5 L162.6 135.2 L165.7 135.8 L168.7 136.3 L171.6 136.8 L174.5 137.3 L177.3 137.7 L180.0 138.1 L182.6 138.4 L185.0 138.8 L187.4 139.0 L189.5 139.3 L191.6 139.5 L193.4 139.7 L195.1 139.8 L196.7 140.0 L198.0 140.1 L199.2 140.2 L200.2 140.3 L200.9 140.4 L201.5 140.4 L201.9 140.5 L202.0 140.5 L202.0 140.6 L201.7 140.7 L201.3 140.7 L200.6 140.8 L199.8 140.9 L198.7 141.0 L197.4 141.1 L196.0 141.3 L194.4 141.4 L192.6 141.6 L190.6 141.8 L188.4 142.1 L186.1 142.3 L183.7 142.7 L181.1 143.0 L178.4 143.4 L175.5 143.8 L172.6 144.3 L169.5 144.8 L166.4 145.3 L163.2 145.9 L160.0 146.6 L156.7 147.3 L153.3 148.0 L150.0 148.8 L146.6 149.6 L143.3 150.5 L140.0 151.4 L136.7 152.4 L133.5 153.4 L130.3 154.5 L127.2 155.6 L124.2 156.7 L121.2 157.9 L118.4 159.1 L115.7 160.4 L113.2 161.7 L110.8 163.0 L108.5 164.4 L106.4 165.8 L104.5 167.2 L102.7 168.6 L101.2 170.1 L99.8 171.6 L98.6 173.1 L97.7 174.6 L96.9 176.2 L96.3 177.7 L96.0 179.3 L95.9 180.8 L96.0 182.4 L96.3 183.9 L96.8 185.5 L97.5 187.0 L98.4 188.5 L99.6 190.0 L100.9 191.5 L102.4 193.0 L104.2 194.4 L106.1 195.9 L108.2 197.3 L110.4 198.6 L112.8 200.0 L115.4 201.3 L118.1 202.5 L120.9 203.8 L123.8 204.9 L126.8 206.1 L130.0 207.2 L133.2 208.3 L136.5 209.3 L139.8 210.2 L143.2 211.2 L146.6 212.0 L150.0 212.9 L153.4 213.6 L156.8 214.4 L160.2 215.1 L163.5 215.7 L166.8 216.3 L170.0 216.9 L173.2 217.4 L176.2 217.8 L179.1 218.3 L181.9 218.6 L184.6 219.0 L187.2 219.3 L189.6 219.6 L191.8 219.8 L193.9 220.0 L195.8 220.2 L197.6 220.4 L199.1 220.5 L200.4 220.6 L201.6 220.7 L202.5 220.8 L203.2 220.9 L203.7 221.0 L204.0 221.0 L204.1 221.1 L204.0 221.2 L203.7 221.2 L203.1 221.3 L202.3 221.4 L201.4 221.4 L200.2 221.5 L198.8 221.7 L197.3 221.8 L195.5 222.0 L193.6 222.2 L191.5 222.4 L189.2 222.6 L186.8 222.9 L184.3 223.2 L181.6 223.6 L178.8 223.9 L175.8 224.4 L172.8 224.8 L169.7 225.3 L166.5 225.9 L163.3 226.5 L160.0 227.1 L156.7 227.8 L153.4 228.6 L150.0 229.3 L146.7 230.2 L143.3 231.0 L140.0 232.0 L136.8 232.9 L133.6 233.9 L130.5 235.0 L127.4 236.1 L124.5 237.3 L121.6 238.4 L118.9 239.7 L116.3 240.9 L113.9 242.2 L111.6 243.6 L109.4 244.9 L107.4 246.3 L105.6 247.7 L104.0 249.2 L102.6 250.7 L101.3 252.2 L100.2 253.7 L99.4 255.2 L98.7 256.7 L98.3 258.3 L98.0 259.8 L98.0 261.4 L98.1 262.9 L98.5 264.5 L99.1 266.0 L99.8 267.6 L100.8 269.1 L102.0 270.6 L103.3 272.1 L104.9 273.5 L106.6 275.0 L108.4 276.4 L110.5 277.8 L112.6 279.2 L115.0 280.5 L117.4 281.8 L120.0 283.1 L122.7 284.3 L125.5 285.5 L128.4 286.6 L131.3 287.7 L134.3 288.8 L137.4 289.8 L140.5 290.8 L143.7 291.7 L146.8 292.6 L150.0 293.4 L153.2 294.2 L156.3 294.9 L159.4 295.6 L162.4 296.3 L165.4 296.9 L168.3 297.4 L171.2 297.9 L173.9 298.4 L176.6 298.8 L179.1 299.2 L181.5 299.5 L183.8 299.8 L185.9 300.1 L187.9 300.4 L189.7 300.6 L191.4 300.8 L192.9 300.9 L194.2 301.1 L195.3 301.2 L196.3 301.3 L197.1 301.4 L197.6 301.5 L198.0 301.5 L198.2 301.6 L198.2 301.6 L198.1 301.7 L197.7 301.8 L197.1 301.8 L196.4 301.9 L195.5 302.0 L194.4 302.1 L193.1 302.2 L191.6 302.4 L190.1 302.5 L188.3 302.7 L186.4 302.9 L184.4 303.2 L182.2 303.4 L179.9 303.8 L177.6 304.1 L175.1 304.5 L172.5 304.9 L169.8 305.4 L167.1 305.9 L164.3 306.4 L161.5 307.0 L158.7 307.7 L155.8 308.4 L152.9 309.1 L150.0 309.9 L147.1 310.7 L144.3 311.6 L141.4 312.5 L138.7 313.5 L136.0 314.5 L133.3 315.6 L130.7 316.7 L128.2 317.8 L125.8 319.0 L123.6 320.2 L121.4 321.5 L119.3 322.8 L117.4 324.1 L115.6 325.5 L114.0 326.9 L112.5 328.3 L111.2 329.7 L110.0 331.2 L109.0 332.7 L108.1 334.2 L107.5 335.7 L107.0 337.3 L106.6 338.8 L106.5 340.4 L106.5 341.9 L106.7 343.5 L107.0 345.0 L107.5 346.6 L108.2 348.1 L109.1 349.6 L110.1 351.1 L111.2 352.6 L112.5 354.1 L114.0 355.5 L115.6 357.0 L117.3 358.4 L119.1 359.7 L121.1 361.1 L123.1 362.4 L125.3 363.6 L127.5 364.9 L129.8 366.0 L132.2 367.2 L134.7 368.3 L137.2 369.3 L139.7 370.4 L142.2 371.3 L144.8 372.3 L147.4 373.1 L150.0 374.0 L152.6 374.7 L155.1 375.5 L157.6 376.2 L160.1 376.8 L162.6 377.4 L164.9 378.0 L167.2 378.5 L169.4 378.9 L171.6 379.4 L173.6 379.7 L175.5 380.1 L177.4 380.4 L179.1 380.7 L180.7 380.9 L182.1 381.1 L183.4 381.3 L184.6 381.5 L185.7 381.6 L186.6 381.7 L187.3 381.8 L187.9 381.9 L188.4 382.0 L188.7 382.1 L188.8 382.1 L188.8 382.2 L188.6 382.3 L188.3 382.3 L187.9 382.4 L187.2 382.5 L186.5 382.5 L185.6 382.6 L184.6 382.8 L183.4 382.9 L182.1 383.1 L180.7 383.3 L179.2 383.5 L177.5 383.7 L175.8 384.0 L174.0 384.3 L172.1 384.6 L170.1 385.0 L168.0 385.5 L165.9 385.9 L163.7 386.4 L161.5 387.0 L159.2 387.6 L156.9 388.2 L154.6 388.9 L152.3 389.6 L150.0 390.4 L147.7 391.3 L145.4 392.1 L143.2 393.1 L140.9 394.0 L138.8 395.0 L136.6 396.1 L134.6 397.2 L132.6 398.3 L130.7 399.5 L128.8 400.8 L127.1 402.0 L125.5 403.3 L123.9 404.7 L122.5 406.0 L121.2 407.4 L120.0 408.8 L118.9 410.3 L117.9 411.8 L117.1 413.3 L116.4 414.8 L115.8 416.3 L115.4 417.8 L115.1 419.4 L115.0 420.9 L115.0 422.5 L115.1 424.0 L115.4 425.6 L115.8 427.1 L116.3 428.7 L117.0 430.2 L117.8 431.7 L118.7 433.2 L119.7 434.6 L120.9 436.1 L122.1 437.5 L123.5 438.9 L125.0 440.3 L126.5 441.6 L128.2 442.9 L129.9 444.2 L131.7 445.4 L133.6 446.6 L135.5 447.7 L137.5 448.8 L139.5 449.9 L141.6 450.9 L143.7 451.9 L145.8 452.8 L147.9 453.7 L150.0 454.5 L152.1 455.3 L154.2 456.0 L156.3 456.7 L158.3 457.4 L160.4 458.0 L162.3 458.5 L164.2 459.0 L166.1 459.5 L167.9 459.9 L169.6 460.3 L171.2 460.6 L172.8 460.9 L174.2 461.2 L175.6 461.5 L176.8 461.7 L178.0 461.9 L179.0 462.0 L179.9 462.2 L180.7 462.3 L181.4 462.4 L182.0 462.5 L182.4 462.6 L182.7 462.6 L182.9 462.7 L182.9 462.7 L182.8 462.8 L182.6 462.9 L182.3 462.9 L181.8 463.0 L181.2 463.1 L180.5 463.2 L179.7 463.3 L178.7 463.5 L177.7 463.6 L176.5 463.8 L175.2 464.0 L173.8 464.3 L172.4 464.5 L170.8 464.9 L169.2 465.2 L167.5 465.6 L165.7 466.0 L163.9 466.5 L162.0 467.0 L160.1 467.5 L158.1 468.1 L156.1 468.8 L154.1 469.5 L152.0 470.2 L150.0 471.0 L148.0 471.8 L145.9 472.7 L143.9 473.6 L141.9 474.6 L139.9 475.6 L138.0 476.6 L136.1 477.8 L134.3 478.9 L132.5 480.1 L130.8 481.3 L129.2 482.6 L127.6 483.9 L126.2 485.2 L124.8 486.6 L123.5 488.0 L122.3 489.4 L121.3 490.8 L120.3 492.3 L119.5 493.8 L118.8 495.3 L118.2 496.8 L117.7 498.4 L117.4 499.9 L117.2 501.5 L117.1 503.0 L117.1 504.6 L117.3 506.1 L117.6 507.7 L118.0 509.2 L118.6 510.7 L119.3 512.2 L120.1 513.7 L121.0 515.2 L122.0 516.6 L123.2 518.1 L124.4 519.5 L125.8 520.8 L127.2 522.2 L128.8 523.5 L130.4 524.7 L132.1 526.0 L133.9 527.1 L135.8 528.3 L137.7 529.4 L139.6 530.4 L141.7 531.5 L143.7 532.4 L145.8 533.4 L147.9 534.2 L150.0 535.1 L152.1 535.8 L154.2 536.6 L156.3 537.3 L158.4 537.9 L160.5 538.5 L162.5 539.1 L164.5 539.6 L166.4 540.0 L168.3 540.5 L170.1 540.8 L171.8 541.2 L173.5 541.5 L175.0 541.8 L176.5 542.0 L177.9 542.2 L179.1 542.4 L180.3 542.6 L181.3 542.7 L182.2 542.8 L183.0 542.9 L183.7 543.0 L184.2 543.1 L184.6 543.2 L184.9 543.2 L185.0 543.3 L185.0 543.4 L184.9 543.4 L184.6 543.5 L184.2 543.6 L183.6 543.6 L182.9 543.7 L182.1 543.9 L181.1 544.0 L180.0 544.2 L178.8 544.4 L177.5 544.6 L176.1 544.8 L174.5 545.1 L172.9 545.4 L171.2 545.7 L169.3 546.1 L167.4 546.6 L165.4 547.0 L163.4 547.5 L161.2 548.1 L159.1 548.7 L156.8 549.3 L154.6 550.0 L152.3 550.7 L150.0 551.5 L147.7 552.4 L145.4 553.2 L143.1 554.2 L140.8 555.1 L138.5 556.1 L136.3 557.2 L134.1 558.3 L132.0 559.4 L129.9 560.6 L127.9 561.9 L126.0 563.1 L124.2 564.4 L122.5 565.8 L120.8 567.1 L119.3 568.5 L117.9 569.9 L116.6 571.4 L115.4 572.9 L114.4 574.4 L113.5 575.9 L112.8 577.4 L112.1 578.9 L111.7 580.5 L111.4 582.0 L111.2 583.6 L111.2 585.1 L111.3 586.7 L111.6 588.2 L112.1 589.7 L112.7 591.3 L113.4 592.8 L114.3 594.3 L115.4 595.7 L116.6 597.2 L117.9 598.6 L119.3 600.0 L120.9 601.4 L122.6 602.7 L124.5 604.0 L126.4 605.3 L128.4 606.5 L130.6 607.7 L132.8 608.8 L135.1 609.9 L137.4 611.0 L139.9 612.0 L142.4 613.0 L144.9 613.9 L147.4 614.8 L150.0 615.6 L152.6 616.4 L155.2 617.1 L157.8 617.8 L160.3 618.5 L162.8 619.0 L165.3 619.6 L167.8 620.1 L170.2 620.6 L172.5 621.0 L174.7 621.4 L176.9 621.7 L178.9 622.0 L180.9 622.3 L182.7 622.6 L184.4 622.8 L186.0 623.0 L187.5 623.1 L188.8 623.3 L189.9 623.4 L190.9 623.5 L191.8 623.6 L192.5 623.7 L193.0 623.7 L193.3 623.8 L193.5 623.8 L193.5 633.8 L140.0 500.0 L150.0 520.0"/><rect class="fill" x="128.0" y="520" width="44" height="40" rx="5"/><path d="M140.0 560 V578 M160.0 560 V578 M128.0 532 H172.0"/><text class="coil__label" x="150.0" y="598" text-anchor="middle">200 OK</text></svg>
+    </section>
   </main>
 
-  <!-- ============ FOOTER ============ -->
-  <footer class="footer container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="#top" class="logo" aria-label="Home">
-          <svg viewBox="0 0 44 44" aria-hidden="true">
-            <rect x="0" y="0" width="20" height="44" rx="3"/>
-            <path d="M24 0h6a14 14 0 0 1 0 28h-6z"/>
-            <path d="M24 31h7l13 13H24z"/>
-          </svg>
-        </a>
-        <span class="badge">● Open to SDE / AI-ML roles</span>
-      </div>
-      <ul>
-        <li><a href="#top">Home</a></li>
-        <li><a href="#services">What I do</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#about">About me</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <ul>
-        <li><a href="https://github.com/Rohan708" target="_blank" rel="noopener">GitHub</a></li>
-        <li><a href="https://www.linkedin.com/in/rohan-chauhan-0604732b2" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="mailto:chauhanrohan223@gmail.com">Email</a></li>
-        <li><a href="assets/Rohan-Chauhan-Resume.pdf" target="_blank">Resume</a></li>
-      </ul>
-    </div>
-    <div class="footer-bottom mono">
-      <span>© <span id="year"></span> Rohan Chauhan</span>
-      <span>Built with HTML, CSS &amp; JS</span>
-    </div>
-  </footer>
-
-
-  <script src="assets/lenis.min.js" defer></script>
-  <script src="script.js" defer></script>
-  <script src="landscape.js" defer></script>
-  <script src="timeline.js" defer></script>
-  <script src="stack.js" defer></script>
-  <script src="services.js" defer></script>
+  <script src="main.js" defer></script>
 </body>
 </html>
