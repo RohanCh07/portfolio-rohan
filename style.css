@@ -1,8 +1,3 @@
-/* Fonts are self-hosted (SIL Open Font License): Archivo (variable) and IBM Plex Mono */
-@font-face { font-family: "Archivo"; src: url("assets/fonts/archivo-latin.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: "IBM Plex Mono"; src: url("assets/fonts/ibm-plex-mono-400-latin.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-@font-face { font-family: "IBM Plex Mono"; src: url("assets/fonts/ibm-plex-mono-500-latin.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
-
 /* ==========================================================================
    Rohan Chauhan — portfolio
    Black / ivory bands, a red-orange thread through the page,
@@ -23,23 +18,23 @@
 
   --black: #050505;
   --ivory: #F1EEE6;
-  --signal: #FF3B12;
+  --signal: #FF4B1F;
 
   /* light theme: ivory bands are ivory */
   --paper-bg: var(--ivory);
-  --paper-fg: #11100F;
+  --paper-fg: #0B0A09;
   --paper-muted: #66625B;
-  --paper-line: rgba(17, 16, 15, .2);
+  --paper-line: rgba(11, 10, 9, .18);
   --paper-sheet: #F7F5EF;
-  --paper-sheet-fg: #11100F;
+  --paper-sheet-fg: #0B0A09;
   --paper-sheet-line: #0B0A09;
 
   --ink-bg: var(--black);
   --ink-fg: var(--ivory);
   --ink-muted: #AAA79F;
-  --ink-line: #f1eee63d;
-  --ink-sheet: #D8D5CC;
-  --ink-sheet-fg: #11100F;
+  --ink-line: rgba(241, 238, 230, .24);
+  --ink-sheet: #DCD8CF;
+  --ink-sheet-fg: #0B0A09;
   --ink-sheet-line: transparent;
 
   --shadow: 0 24px 50px -28px rgba(0, 0, 0, .6);
@@ -130,7 +125,7 @@ main { position: relative; }
 
 /* the thread: one SVG laid over the whole page, under the content */
 .thread { position: absolute; left: 0; top: 0; z-index: 1; pointer-events: none; overflow: visible; }
-.thread__path { fill: none; stroke: var(--signal); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.thread__path { fill: none; stroke: var(--signal); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .thread__node { fill: none; stroke: var(--signal); stroke-width: 1.6; transition: opacity var(--mid); }
 .thread__core, .thread__head { fill: var(--signal); }
 .thread__label { font: 500 11px/1 var(--mono); letter-spacing: .14em; fill: var(--signal); }
@@ -248,7 +243,7 @@ main { position: relative; }
 .sketch, .card, .shot, .chain, .stamp, .sketch-note {
   position: absolute; left: var(--x); top: var(--y); z-index: 2;
   transform: rotate(var(--r, 0deg));
-  transition: opacity .6s var(--ease);
+  transition: transform .15s linear, opacity .9s var(--ease), filter .9s var(--ease);
 }
 .sketch { width: var(--w); height: auto; overflow: visible; }
 .sketch path, .sketch rect, .sketch circle, .sketch ellipse { fill: none; stroke: currentColor; stroke-width: 1.6; vector-effect: non-scaling-stroke; stroke-linejoin: round; stroke-linecap: round; }
@@ -592,7 +587,7 @@ html.is-locked, html.is-locked body { overflow: hidden; }
 .caps .arc__item { width: min(15rem, 20vw); }
 
 /* ---------- parallax: pieces drift at their own speed (desktop) ---------- */
-.js .project .project__stage > :not(.project__name) { translate: none; filter: none; }
+.js .project .project__stage > :not(.project__name) { translate: none; filter: blur(6px); transition: opacity 1s var(--ease), filter 1s var(--ease), transform var(--mid) var(--ease); }
 .js .project.is-in .project__stage > :not(.project__name) { translate: none; filter: none; }
 .project__stage > [data-py] { will-change: transform; }
 .sketch, .card, .shot, .chain, .stamp { transform: translate3d(0, var(--py, 0px), 0) rotate(var(--r, 0deg)); }
@@ -625,7 +620,7 @@ html.is-locked, html.is-locked body { overflow: hidden; }
 .callout, .sketch-note { transform: translate3d(var(--px, 0px), var(--py, 0px), 0); }
 .card:hover, .shot:hover, .chain:hover { transform: translate3d(var(--px, 0px), calc(var(--py, 0px) - 6px), 0) rotate(0deg); }
 @media (min-width: 761px) {
-  .js.scenes .project { height: 175svh; }
+  .js.scenes .project { height: 240svh; }
   .js.scenes .project .band__inner {
     position: sticky; top: 0; height: 100svh; min-height: 0; overflow: hidden;
     padding-top: calc(var(--header-h) + 2.5rem); padding-bottom: 1.5rem;
@@ -655,73 +650,3 @@ html.is-locked, html.is-locked body { overflow: hidden; }
   .caps .arc__list { grid-template-columns: 1fr; }
   .caps .arc__list .arc__item:nth-child(even) .arc__dot { display: block; }
 }
-
-/* ---------- opening signature v2: thin pen line across the screen, then a cut to the hero ---------- */
-.loader { transition: opacity .55s var(--ease); display: block; }
-.loader.is-leaving { transform: none; opacity: 0; pointer-events: none; }
-.loader__sig { position: absolute; left: 0; top: 50%; width: 100vw; max-width: none; transform: translateY(-50%); }
-.loader__sig path { stroke-width: 1.8; vector-effect: non-scaling-stroke; }
-@media (max-width: 760px) { .loader__sig { width: 150vw; left: -25vw; } }
-
-/* ---------- skills: fork → two branches → meet at the bottom ---------- */
-.skillmap { position: relative; height: clamp(46rem, 66vw, 62rem); margin-top: clamp(4rem, 8vw, 7rem); }
-.skillmap__lines { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.skillmap__lines path { fill: none; stroke: var(--signal); stroke-width: 2; stroke-linecap: round; }
-.skillmap__node, .skill__dot {
-  position: absolute; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%;
-  background: var(--bg); border: 2px solid var(--signal); transition: background-color var(--mid);
-}
-.skillmap__node { left: var(--x); top: var(--y); }
-.skillmap__group { position: absolute; left: var(--x); top: var(--y); transform: translate(-50%, -3.2rem); font-size: clamp(.7rem, .85vw, .82rem); letter-spacing: .18em; text-transform: uppercase; white-space: nowrap; }
-.skillmap__list { position: absolute; inset: 0; }
-.skill { position: absolute; left: var(--x); top: var(--y); width: min(16rem, 22vw); }
-.skill__dot { left: 0; top: 0; margin: -7px 0 0 -7px; }
-.skill[data-side="l"] { transform: translate(calc(-100% - 1.4rem), -1.1rem); text-align: right; }
-.skill[data-side="l"] .skill__dot { left: calc(100% + 1.4rem); }
-.skill[data-side="r"] { transform: translate(1.4rem, -1.1rem); }
-.skill[data-side="r"] .skill__dot { left: -1.4rem; }
-.skill .skill__dot { top: 1.1rem; }
-.skill h3 { font-size: clamp(.8rem, 1.05vw, 1rem); font-weight: 400; letter-spacing: .08em; text-transform: uppercase; }
-.skill p { margin-top: .35rem; font-size: .84rem; color: var(--muted); line-height: 1.45; }
-.skill:hover .skill__dot { background: var(--signal); }
-.js .skill { opacity: 0; transition: opacity .8s var(--ease); }
-.js .skill.is-on { opacity: 1; }
-
-@media (max-width: 1100px) {
-  .skillmap { height: auto; margin-top: 3rem; }
-  .skillmap__lines, .skillmap__node, .skillmap__group { display: none; }
-  .skillmap__list { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.6rem 2.5rem; padding-left: 1.6rem; border-left: 2px solid var(--signal); }
-  .skill, .skill[data-side] { position: relative; left: auto; top: auto; width: auto; transform: none; text-align: left; }
-  .skill[data-side] .skill__dot { left: calc(-1.6rem - 1px); top: .55rem; }
-  .js .skill { opacity: 1; }
-}
-@media (max-width: 760px) { .skillmap__list { grid-template-columns: 1fr; } }
-@media (prefers-reduced-motion: reduce) { .js .skill { opacity: 1; } }
-
-/* motion tuning: GPU-friendly moving parts, hover lift is the only eased transform */
-.project__stage > * { backface-visibility: hidden; }
-.card:hover, .shot:hover, .chain:hover, .sketch:hover { transition: transform .3s var(--ease); }
-
-/* ---------- thread tip ---------- */
-.thread__ring { fill: none; stroke: var(--signal); stroke-width: 1.8; }
-.thread__head { filter: drop-shadow(0 0 6px rgba(255, 59, 18, .5)); }
-@media (min-width: 1100px) { .thread__path { stroke-width: 2.2; } .thread__ring { stroke-width: 2.2; } }
-
-/* ---------- cursor: a ring that trails the pointer and swells over links ---------- */
-.cursor { display: none; }
-@media (hover: hover) and (pointer: fine) {
-  .cursor {
-    display: grid; place-items: center; position: fixed; left: 0; top: 0; z-index: 900; pointer-events: none;
-    width: 28px; height: 28px; margin: -14px 0 0 -14px; border-radius: 50%;
-    border: 1.5px solid var(--signal); background: transparent;
-    transition: width .35s var(--ease), height .35s var(--ease), margin .35s var(--ease), background-color .25s, border-color .25s, opacity .25s;
-    will-change: transform;
-  }
-  .cursor::after { content: attr(data-label); color: var(--black); font: 500 .58rem/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; opacity: 0; transition: opacity .2s; }
-  .cursor.is-link { width: 14px; height: 14px; margin: -7px 0 0 -7px; background: var(--signal); }
-  .cursor.is-active { width: 74px; height: 74px; margin: -37px 0 0 -37px; background: var(--signal); }
-  .cursor.is-active::after { opacity: 1; }
-  .cursor.is-hidden { opacity: 0; }
-  .cursor.is-down { transform-origin: center; }
-}
-@media (prefers-reduced-motion: reduce) { .cursor { display: none !important; } }

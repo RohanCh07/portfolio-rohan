@@ -16,8 +16,9 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/favicon-32.png" sizes="32x32">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/ibm-plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script>
     (function () {
@@ -30,7 +31,16 @@
 <body>
   <a class="skip" href="#projects">Skip to projects</a>
   <div class="loader" id="loader" role="status" aria-label="Opening Rohan Chauhan's portfolio">
-    <svg class="loader__sig" viewBox="0 0 1600 520" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><g transform="translate(60 0) skewX(-14)"><path d="M -260 380 C -40 384 120 378 190 372 C 205 300 225 200 245 130 C 300 90 390 105 375 170 C 362 225 285 240 230 228 C 280 262 320 330 365 372 C 380 384 400 378 412 360 C 420 335 452 325 465 345 C 476 368 452 390 430 384 C 410 378 416 344 442 340 C 460 337 478 345 492 352 C 515 300 540 200 552 150 C 560 115 532 112 526 148 C 516 210 510 300 506 380 C 516 345 540 325 560 330 C 578 336 572 370 576 382 C 582 392 598 384 610 368 C 600 345 625 330 648 338 C 628 328 602 345 606 370 C 610 392 640 386 650 350 C 648 376 652 392 670 384 C 680 366 686 345 690 335 C 694 356 690 372 690 386 C 700 350 720 330 740 336 C 756 342 750 372 756 384 C 764 396 790 386 820 366"/><path d="M 990 170 C 940 140 870 170 860 250 C 850 330 900 390 960 380 C 990 375 1005 360 1015 345 C 1035 290 1055 200 1066 150 C 1074 118 1046 116 1040 150 C 1030 210 1024 300 1020 380 C 1030 345 1052 325 1072 330 C 1090 336 1084 370 1088 382 C 1094 392 1108 384 1120 368 C 1110 345 1135 330 1158 338 C 1138 328 1112 345 1116 370 C 1120 392 1150 386 1160 350 C 1158 376 1162 392 1180 384 C 1190 368 1196 350 1200 336 C 1196 360 1194 380 1206 386 C 1222 392 1238 370 1244 340 C 1242 362 1240 382 1256 386 C 1268 388 1276 378 1284 368 C 1300 300 1320 200 1330 150 C 1338 118 1310 116 1304 150 C 1294 210 1288 300 1284 382 C 1294 345 1316 325 1336 330 C 1354 336 1348 370 1352 382 C 1358 392 1372 384 1384 368 C 1374 345 1399 330 1422 338 C 1402 328 1376 345 1380 370 C 1384 392 1414 386 1424 350 C 1422 376 1426 392 1444 384 C 1454 366 1460 345 1464 335 C 1468 356 1464 372 1464 386 C 1474 350 1494 330 1514 336 C 1530 342 1524 372 1530 384 C 1546 398 1640 380 1900 374"/></g></svg>
+    <svg class="loader__sig" viewBox="0 0 900 460" aria-hidden="true">
+      <path d="M150 352 C162 290 178 210 194 146"/>
+      <path d="M194 146 C236 112 306 120 296 172 C287 216 226 226 188 214 C232 240 262 300 302 330 C322 342 338 322 348 302"/>
+      <path d="M348 302 C356 280 384 270 398 290 C409 310 388 336 366 330 C346 324 352 294 378 290 C394 288 408 293 424 300"/>
+      <path d="M424 300 C444 258 462 182 472 142 C480 110 456 110 451 140 C442 200 437 282 434 336 C442 304 462 282 482 287 C498 292 492 322 494 336 C498 346 512 340 522 326"/>
+      <path d="M522 326 C528 300 548 286 568 293 C550 284 526 300 530 322 C534 342 562 336 570 304 C568 326 570 342 588 336"/>
+      <path d="M588 336 C598 320 602 302 608 290 C610 310 607 326 608 340 C614 306 632 288 650 292 C664 296 660 326 664 338 C672 348 700 340 736 316"/>
+      <path d="M118 392 C300 368 540 366 820 346"/>
+    </svg>
+    <p class="loader__name mono">Rohan Chauhan · Backend &amp; AI</p>
   </div>
 
   
@@ -46,8 +56,6 @@
     </nav>
     <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
   </header>
-
-  <div class="cursor" id="cursor" aria-hidden="true"></div>
 
   <main id="top">
     <svg class="thread" id="thread" aria-hidden="true" focusable="false"></svg>
@@ -84,7 +92,7 @@
     </section>
 
     <!-- CAPABILITIES -->
-    <section class="band tone-ink caps" id="capabilities" data-thread="0.5,0 a:capsTitle:0.97,0.04 a:capsTitle:0.97,1.12 a:capsTitle:0.5,1.2 a:skillmap:0.5,0,n a:skillmap:0.5,1,m 0.35,0.97 0.2,1" data-thread-mobile="0.5,0 0.93,0.08 0.06,0.3 0.05,0.9 0.2,1" aria-labelledby="capsTitle">
+    <section class="band tone-ink caps" id="capabilities" data-thread="0.5,0 a:capsTitle:1.03,0.02 a:capsTitle:1.03,1.12 a:capsTitle:0.01,1.18 a:capsTitle:0,1.34 a:branch:0.5,0.02,n a:arc:0.5000,0.0395,n a:arc:0.3622,0.0755 a:arc:0.2454,0.1782 a:arc:0.1674,0.3319 a:arc:0.1400,0.5132 a:arc:0.1674,0.6944 a:arc:0.2454,0.8481 a:arc:0.3622,0.9508 a:arc:0.5000,0.9868,n 0.2,1" data-thread-mobile="0.5,0 0.92,0.08 0.06,0.3 a:branch:0.5,0.02,n 0.06,0.62 0.06,0.95 0.2,1" aria-labelledby="capsTitle">
       <div class="band__inner">
         <h2 class="caps__title display reveal" id="capsTitle">
           <span>I build the backend.</span>
@@ -92,27 +100,28 @@
           <span class="accent">on top of it.</span>
         </h2>
 
-        <div class="skillmap" id="skillmap">
-          <svg class="skillmap__lines" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
-            <path d="M500 0 V60 M300 120 C340 80 420 60 500 60 C580 60 660 80 700 120" vector-effect="non-scaling-stroke"/>
-            <path d="M300 120 C120 520 260 930 500 1000" vector-effect="non-scaling-stroke"/>
-            <path d="M700 120 C880 520 740 930 500 1000" vector-effect="non-scaling-stroke"/>
-          </svg>
-          <span class="skillmap__node" style="--x:30%;--y:12%"></span>
-          <span class="skillmap__node" style="--x:70%;--y:12%"></span>
-          <p class="skillmap__group mono" style="--x:30%;--y:12%">Backend</p>
-          <p class="skillmap__group mono" style="--x:70%;--y:12%">AI systems</p>
-          <ul class="skillmap__list">
-            <li class="skill" data-side="l" style="--x:24.26%;--y:28.76%"><span class="skill__dot"></span><h3 class="mono">REST APIs</h3><p>Endpoints with validation, auth and roles.</p></li>
-            <li class="skill" data-side="l" style="--x:21.83%;--y:49.56%"><span class="skill__dot"></span><h3 class="mono">FastAPI &amp; Django</h3><p>Services that stay readable as they grow.</p></li>
-            <li class="skill" data-side="l" style="--x:24.25%;--y:68.38%"><span class="skill__dot"></span><h3 class="mono">Databases</h3><p>PostgreSQL, MySQL, MongoDB, Firebase.</p></li>
-            <li class="skill" data-side="l" style="--x:30.75%;--y:83.98%"><span class="skill__dot"></span><h3 class="mono">Kafka pipelines</h3><p>Streams that move and check data reliably.</p></li>
-            <li class="skill" data-side="l" style="--x:39.34%;--y:94.17%"><span class="skill__dot"></span><h3 class="mono">Docker &amp; CI/CD</h3><p>Shipped on AWS, kept running.</p></li>
-            <li class="skill" data-side="r" style="--x:75.74%;--y:28.76%"><span class="skill__dot"></span><h3 class="mono">LLM apps</h3><p>Chatbots and assistants on real data.</p></li>
-            <li class="skill" data-side="r" style="--x:78.17%;--y:49.56%"><span class="skill__dot"></span><h3 class="mono">RAG</h3><p>Answers grounded in your own documents.</p></li>
-            <li class="skill" data-side="r" style="--x:75.75%;--y:68.38%"><span class="skill__dot"></span><h3 class="mono">Agents</h3><p>LangChain and LangGraph workflows.</p></li>
-            <li class="skill" data-side="r" style="--x:69.25%;--y:83.98%"><span class="skill__dot"></span><h3 class="mono">OCR &amp; VLLMs</h3><p>Scans and PDFs turned into clean records.</p></li>
-            <li class="skill" data-side="r" style="--x:60.66%;--y:94.17%"><span class="skill__dot"></span><h3 class="mono">Machine learning</h3><p>Scikit-learn and PyTorch models.</p></li>
+        <div class="branch" id="branch" aria-hidden="true">
+          <svg viewBox="0 0 1000 120" preserveAspectRatio="none"><path d="M500 0 V58 M250 110 C320 62 420 58 500 58 C580 58 680 62 750 110" vector-effect="non-scaling-stroke"/></svg>
+          <span class="branch__dot" style="--x:25%"></span><span class="branch__dot" style="--x:75%"></span>
+        </div>
+        <div class="groups">
+          <p class="group mono">Backend</p>
+          <p class="group mono">AI systems</p>
+        </div>
+
+        <div class="arc" id="arc">
+          <svg class="arc__line" viewBox="0 0 1000 760" aria-hidden="true"><path d="M500 30 A360 360 0 0 1 500 750"/></svg>
+          <ul class="arc__list">
+            <li class="arc__item" style="--x:28.84%;--y:12.99%" data-side="l"><span class="arc__dot"></span><h3 class="mono">REST APIs</h3><p>Endpoints with validation, auth and roles.</p></li>
+            <li class="arc__item" style="--x:17.92%;--y:29.81%" data-side="l"><span class="arc__dot"></span><h3 class="mono">FastAPI &amp; Django</h3><p>Services that stay readable as they grow.</p></li>
+            <li class="arc__item" style="--x:14.00%;--y:51.32%" data-side="l"><span class="arc__dot"></span><h3 class="mono">Databases</h3><p>PostgreSQL, MySQL, MongoDB, Firebase.</p></li>
+            <li class="arc__item" style="--x:17.92%;--y:72.82%" data-side="l"><span class="arc__dot"></span><h3 class="mono">Kafka pipelines</h3><p>Streams that move and check data reliably.</p></li>
+            <li class="arc__item" style="--x:28.84%;--y:89.64%" data-side="l"><span class="arc__dot"></span><h3 class="mono">Docker &amp; CI/CD</h3><p>Shipped on AWS, kept running.</p></li>
+            <li class="arc__item" style="--x:71.16%;--y:12.99%" data-side="r"><span class="arc__dot"></span><h3 class="mono">LLM apps</h3><p>Chatbots and assistants on real data.</p></li>
+            <li class="arc__item" style="--x:82.08%;--y:29.81%" data-side="r"><span class="arc__dot"></span><h3 class="mono">RAG</h3><p>Answers grounded in your own documents.</p></li>
+            <li class="arc__item" style="--x:86.00%;--y:51.32%" data-side="r"><span class="arc__dot"></span><h3 class="mono">Agents</h3><p>LangChain and LangGraph workflows.</p></li>
+            <li class="arc__item" style="--x:82.08%;--y:72.82%" data-side="r"><span class="arc__dot"></span><h3 class="mono">OCR &amp; VLLMs</h3><p>Scans and PDFs turned into clean records.</p></li>
+            <li class="arc__item" style="--x:71.16%;--y:89.64%" data-side="r"><span class="arc__dot"></span><h3 class="mono">Machine learning</h3><p>Scikit-learn and PyTorch models.</p></li>
           </ul>
         </div>
         <div class="toolset" aria-label="Toolset">
@@ -157,9 +166,9 @@
           <footer class="project__foot">
             <ul class="stack mono"><li>Python</li><li>PostgreSQL</li><li>FastAPI</li><li>Docker</li><li>Gemini</li></ul>
             <span class="project__year mono">2026</span>
-            <a class="explore mono" data-cursor="Open" href="https://lumida.netlify.app/" target="_blank" rel="noopener">Explore project <span aria-hidden="true">↗</span></a>
+            <a class="explore mono" href="https://lumida.netlify.app/" target="_blank" rel="noopener">Explore project <span aria-hidden="true">↗</span></a>
           </footer>
-          <details class="notes"><summary class="mono" data-cursor="Read">Case notes</summary>
+          <details class="notes"><summary class="mono">Case notes</summary>
             <div class="notes__body">
               <p>Lumida connects read-only to any database and maps it: the relationships nobody documented, what "normal" looks like for each table, and where the data has drifted. Every finding comes with evidence and a plain-language explanation from an LLM, and it learns each time someone marks a finding as real or not.</p>
               <p>On a test database with planted issues it found all 15 hidden relationships and all 13 problems, with zero false alarms.</p>
@@ -196,7 +205,7 @@
             <span class="project__year mono">2026</span>
             <span class="explore explore--muted mono">Internal tool</span>
           </footer>
-          <details class="notes"><summary class="mono" data-cursor="Read">Case notes</summary>
+          <details class="notes"><summary class="mono">Case notes</summary>
             <div class="notes__body">
               <p>Built at Moglix. Raising purchase requests and RFQs in Credlex meant filling in long forms. Cerebra lets people describe what they need in plain words, drafts the request, and creates it through Credlex's APIs once they confirm.</p>
             </div>
@@ -233,7 +242,7 @@
             <span class="project__year mono">2026</span>
             <span class="explore explore--muted mono">In development</span>
           </footer>
-          <details class="notes"><summary class="mono" data-cursor="Read">Case notes</summary>
+          <details class="notes"><summary class="mono">Case notes</summary>
             <div class="notes__body">
               <p>Distiller is an OpenAI-compatible gateway, so a team adopts it by changing one line. It logs the company's repeated LLM calls, fine-tunes small open models with LoRA to copy the big model on those tasks, tests them in shadow mode, then sends the requests it's confident about to the cheap model and falls back to the big one when it isn't.</p>
               <p>Status: the gateway and CLI work. Training and routing are in development.</p>
@@ -268,7 +277,7 @@
             <span class="project__year mono">2025</span>
             <span class="explore explore--muted mono">VS Code extension</span>
           </footer>
-          <details class="notes"><summary class="mono" data-cursor="Read">Case notes</summary>
+          <details class="notes"><summary class="mono">Case notes</summary>
             <div class="notes__body">
               <p>The extension captures lint errors and runtime exceptions as they happen, then uses LLM-based retrieval (RAG over a vector database) to explain them. Tutor mode walks you through why the code broke; Debugger mode proposes a fix you can apply.</p>
             </div>
@@ -298,7 +307,7 @@
             <span class="project__year mono">Dec 2025</span>
             <span class="explore explore--muted mono">Research paper</span>
           </footer>
-          <details class="notes"><summary class="mono" data-cursor="Read">Case notes</summary>
+          <details class="notes"><summary class="mono">Case notes</summary>
             <div class="notes__body">
               <p>A blockchain-based decentralised identity management system for secure authentication and access control across IoT networks. Presented as a research paper at ICSDS-2025, Hooghly Engineering &amp; Technology College, in December 2025.</p>
             </div>
@@ -339,7 +348,7 @@
             <span class="project__year mono">2025</span>
             <span class="explore explore--muted mono">Internal tool</span>
           </footer>
-          <details class="notes"><summary class="mono" data-cursor="Read">Case notes</summary>
+          <details class="notes"><summary class="mono">Case notes</summary>
             <div class="notes__body">
               <p>Built as an SDE during my AI Research internship at Coding Jr. I designed the backend logic and built the core features of the company's internal admin panel with the team.</p>
             </div>
@@ -370,7 +379,7 @@
             <span class="project__year mono">2025</span>
             <span class="explore explore--muted mono">Streamlit dashboard</span>
           </footer>
-          <details class="notes"><summary class="mono" data-cursor="Read">Case notes</summary>
+          <details class="notes"><summary class="mono">Case notes</summary>
             <div class="notes__body">
               <p>A data pipeline pulls live flight and weather data for major Indian airports from external APIs. Scikit-learn models forecast departure delays, and a Streamlit dashboard shows live flight status next to the predictions.</p>
             </div>
@@ -405,7 +414,7 @@
             <span class="project__year mono">2024</span>
             <span class="explore explore--muted mono">REST API</span>
           </footer>
-          <details class="notes"><summary class="mono" data-cursor="Read">Case notes</summary>
+          <details class="notes"><summary class="mono">Case notes</summary>
             <div class="notes__body">
               <p>REST APIs for products, carts and orders in Django REST Framework, with role-based access control on Django's auth system, input validation, clean JSON responses and a normalised MySQL schema that handles stock updates and order totals.</p>
             </div>
@@ -504,7 +513,7 @@
     <section class="band tone-ink contact" id="contact" data-thread="0.95,0 0.9,0.06 a:coil:0.5,0" aria-labelledby="contact-title">
       <div class="band__inner">
         <h2 class="contact__title display reveal" id="contact-title"><span>Have data</span><span class="indent-1">that should</span><span>be working</span><span class="accent indent-1">harder?</span></h2>
-        <a class="contact__cta display reveal" data-cursor="Write" href="mailto:chauhanrohan223@gmail.com">Let's build it <span aria-hidden="true">↗</span></a>
+        <a class="contact__cta display reveal" href="mailto:chauhanrohan223@gmail.com">Let's build it <span aria-hidden="true">↗</span></a>
         <p class="contact__addr mono reveal">chauhanrohan223@gmail.com</p>
         <div class="contact__row mono">
           <a class="explore" href="https://www.linkedin.com/in/rohanchauhan07/" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
