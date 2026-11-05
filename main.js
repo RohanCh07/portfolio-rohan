@@ -435,6 +435,9 @@
     var plug = document.getElementById('plug'), form = document.getElementById('msgForm');
     var backdrop = document.getElementById('msgBackdrop');
     if (!plug || !form) return;
+    // the pop-up sits at the top level so nothing in the contact section can cover it
+    if (backdrop) document.body.appendChild(backdrop);
+    document.body.appendChild(form);
     var PULL = 190;                                // how far you pull for the coil to go fully straight
     var dragging = false, sx = 0, sy = 0, dx = 0, dy = 0, k = 0, anim = null, opened = false;
     var ease = function (t) { return 1 - Math.pow(1 - t, 3); };
