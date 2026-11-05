@@ -1034,3 +1034,33 @@ html.is-locked, html.is-locked body { overflow: hidden; }
 }
 
 .study-next__stage.project__stage { margin-bottom: 5rem; }
+
+/* ======================================================================
+   Audit fixes
+   ====================================================================== */
+/* 1) contrast: small red text on ivory uses a deeper red (4.96:1); bright red stays on black,
+      on the thread and on large type */
+.tone-paper { --signal-text: #C2290A; }
+.tone-ink { --signal-text: var(--signal); }
+.tone-paper .role__org, .tone-paper .fact h3, .tone-paper .study-rows__n, .tone-paper .tfig__label--out,
+.tone-paper .study-label span, .tone-paper .study-decision__n, .tone-paper .stamp, .tone-paper .badge,
+.tone-paper .wip, .tone-paper .callout::before { color: var(--signal-text); border-color: var(--signal-text); }
+.del { color: #B8350F; }
+.add { color: #1E6B38; }
+.err { color: #A3200C; }
+.tone-ink .card--dark .del, .card--dark .del { color: #FF7A55; }
+
+/* 2) comfortable tap targets (≥ 24px) for the small mono links, without changing their look */
+.explore { padding-top: .35rem; }
+.hero__hint, .contact__fine a, .study-next__foot a, .study-index a, .study-contents a { display: inline-block; padding-block: .5rem; }
+.notes summary { padding-block: .6rem; }
+
+/* 3) the message pop-up lives at the top level of the page (moved there by main.js) */
+body > .msg-backdrop { z-index: 990; }
+body > .msg { z-index: 991; }
+.msg__send { white-space: nowrap; }
+.tone-ink .card:not(.card--dark) .del { color: #9A2B0B; }
+.tone-ink .card:not(.card--dark) .add { color: #155027; }
+.wordmark { display: inline-block; padding: .35rem .35rem .35rem 0; }
+
+.msg__send > span { display: inline-block; margin-left: .25em; }
