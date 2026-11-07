@@ -325,7 +325,39 @@
     svg.appendChild(pullPath);
     var figById = {};
     figs.forEach(function (f) { if (f.start != null) figById[f.id] = f; });
-    T = { gaps: geo.gaps, path: path, total: total, lens: lens, maxY: maxY, xs: xs, ys: ys, step: step, nodes: nodes, head: head, ring: ring,
+    // the hero's stretch is drawn on its own when the page opens; a copy in front of every other
+    // letter of the name makes it look threaded through the letters
+    var heroEnd = bandEnd[0] || 0, front = [];
+    var heroIn = $('.hero .band__inner'), heroTitleEl = document.getElementById('heroTitle');
+    var oldFront = $('.thread-front'); if (oldFront) oldFront.remove();
+    if (heroIn && heroTitleEl && !reduceMotion) {
+      var hr = heroIn.getBoundingClientRect();
+      var fsvg = mk('svg', { 'class': 'thread-front', width: W, height: H, viewBox: '0 0 ' + W + ' ' + H, 'aria-hidden': 'true' });
+      fsvg.style.left = (mRect.left - hr.left) + 'px'; fsvg.style.top = (mRect.top - hr.top) + 'px';
+      var defs = mk('defs', {}), mask = mk('mask', { id: 'threadWeave', maskUnits: 'userSpaceOnUse', x: 0, y: 0, width: W, height: H });
+      mask.appendChild(mk('rect', { x: 0, y: 0, width: W, height: H, fill: 'black' }));
+      var li = 0;
+      $$('.line > span', heroTitleEl).forEach(function (sp) {
+        var tn = sp.firstChild; if (!tn || tn.nodeType !== 3) return;
+        for (var ci = 0; ci < tn.length; ci++) {
+          if (!tn.data[ci].trim()) continue;
+          var rg = document.createRange(); rg.setStart(tn, ci); rg.setEnd(tn, ci + 1);
+          var cr = rg.getBoundingClientRect();
+          if (li++ % 2 === 0) mask.appendChild(mk('rect', { x: cr.left - mRect.left, y: cr.top - mRect.top, width: cr.width, height: cr.height, fill: 'white' }));
+        }
+      });
+      defs.appendChild(mask); fsvg.appendChild(defs);
+      var fg = mk('g', { mask: 'url(#threadWeave)' });
+      pieces.forEach(function (pc) {
+        if (pc.start >= heroEnd) return;
+        var c = mk('path', { d: pc.el.getAttribute('d'), pathLength: pc.len.toFixed(2) });
+        c.style.strokeDasharray = pc.len + ' ' + pc.len; c.style.strokeDashoffset = pc.el.style.strokeDashoffset;
+        fg.appendChild(c); front.push({ el: c, start: pc.start, len: pc.len });
+      });
+      fsvg.appendChild(fg);
+      heroIn.appendChild(fsvg);
+    }
+    T = { heroEnd: heroEnd, front: front, gaps: geo.gaps, path: path, total: total, lens: lens, maxY: maxY, xs: xs, ys: ys, step: step, nodes: nodes, head: head, ring: ring,
           bands: bandEls, bandEnd: bandEnd, figs: figs.filter(function (f) { return f.start != null; }), figById: figById, pull: pullPath, pieces: pieces, mainTop: mRect.top + window.scrollY };
     if (threadNow > total) threadNow = total;
     if (reduceMotion) threadNow = total;                         // no drawing animation: show it all
@@ -358,7 +390,7 @@
   function drawThread() {
     if (!T || reduceMotion) return;
     if (!root.classList.contains('is-loaded')) return;          // wait for the opening signature
-    threadGoal = lengthAtScreenLine();
+    threadGoal = Math.max(lengthAtScreenLine(), heroDrawn && T.heroEnd ? T.heroEnd : 0);
     if (intro || pulling) return;                                // opening glide / plug being pulled
     threadNow = threadGoal;
     paintThread(threadNow);
@@ -376,15 +408,17 @@
     if (threadNow !== threadGoal) requestAnimationFrame(stepThread); else stepping = false;
   }
   // once, after the signature: glide the hero's stretch in, then hand over to the scroll
+  var heroDrawn = false;
   function introThread() {
-    if (!T || reduceMotion) return;
-    threadGoal = lengthAtScreenLine();
-    intro = { from: 0, start: performance.now(), dur: 1400 };
+    if (!T || reduceMotion) { heroDrawn = true; unlockScroll(); return; }
+    var target = T.heroEnd || lengthAtScreenLine();
+    intro = { start: performance.now(), dur: 3000 };
     (function frame(now) {
       var k = Math.min(1, (now - intro.start) / intro.dur);
-      threadNow = intro.from + (lengthAtScreenLine() - intro.from) * easeInOut(k);
+      threadNow = (T.heroEnd || target) * k;
       paintThread(threadNow);
-      if (k < 1) requestAnimationFrame(frame); else { intro = null; drawThread(); unlockScroll(); }
+      if (k < 1) requestAnimationFrame(frame);
+      else { intro = null; heroDrawn = true; drawThread(); unlockScroll(); }
     })(intro.start);
   }
   function paintThread(drawn) {
@@ -404,7 +438,7 @@
   }
   // how much of each piece is drawn, given how far along the whole thread the tip is
   function setDrawn(drawn) {
-    T.pieces.forEach(function (pc) {
+    T.pieces.concat(T.front || []).forEach(function (pc) {
       var v = Math.max(0, Math.min(pc.len, drawn - pc.start));
       pc.el.style.strokeDashoffset = (pc.len - v).toFixed(1);
     });
@@ -855,11 +889,12 @@
   var booted = false;
   function boot() {
     if (booted) return; booted = true;
+    if (!reduceMotion) { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; window.scrollTo(0, 0); lockScroll(); }
     retone(); fitNames(); buildThread(); collectFloaters(); drawParallax();
     afterLoader(function () {
       requestAnimationFrame(function () { root.classList.add('is-loaded');
         // the hero's small print sits below the reveal margin on short screens; show it with the headline
-        $$('.hero .reveal').forEach(function (el, i) { setTimeout(function () { el.classList.add('is-in'); }, 700 + i * 120); }); setTimeout(function () { introThread(); drawSkillmap(); drawFigures(); }, 350); setTimeout(unlockScroll, 2600); setTimeout(buildThread, 2300); });
+        $$('.hero .reveal').forEach(function (el, i) { setTimeout(function () { el.classList.add('is-in'); }, 700 + i * 120); }); setTimeout(buildThread, 1500); setTimeout(function () { introThread(); drawSkillmap(); drawFigures(); }, 1100); setTimeout(unlockScroll, 5200); });
     });
   }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(boot); else boot();

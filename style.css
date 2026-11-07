@@ -1238,12 +1238,6 @@ body > .msg { z-index: 991; }
 .caps .toolset__track li::before { border-color: #050505; background: var(--signal); border: 0; width: 7px; height: 7px; }
 .caps { overflow: hidden; }
 
-/* =========================================================
-   opening signature: written with a pen, then the curtain lifts
-   ========================================================= */
-.site-loader { position: fixed; inset: 0; z-index: 1100; display: grid; place-items: center; overflow: hidden; background: #050505; touch-action: none; will-change: transform; }
-html:not(.js) .site-loader, .site-loader[hidden] { display: none; }
-.loader-signature { display: block; width: 100%; height: auto; overflow: visible; }
-.loader-signature path { opacity: 0; fill: none; stroke: var(--signal); stroke-linecap: round; stroke-linejoin: round; }
-.loader-pen { opacity: 0; fill: var(--signal); }
-@media (max-width: 600px) { .loader-signature { width: 94%; } }
+/* hero thread: a second copy sits in front of every other letter of the name, so it weaves through it */
+.thread-front { position: absolute; z-index: 3; pointer-events: none; overflow: visible; }
+.thread-front path { fill: none; stroke: var(--signal); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
