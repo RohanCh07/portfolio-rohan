@@ -1089,3 +1089,66 @@ body > .msg { z-index: 991; }
   .contact .band__inner { justify-content: flex-start; padding-top: calc(var(--header-h) + 15rem); }
   .imprint { max-width: 15rem; }
 }
+
+/* =========================================================
+   hero: name + draggable stickers
+   ========================================================= */
+.hero--stickers .band__inner { position: relative; }
+.hero--stickers .hero__title { font-size: clamp(3.6rem, 13.9vw, 16.5rem); line-height: .8; letter-spacing: -.07em; margin-top: auto; position: relative; z-index: 2; }
+.hero--stickers .hero__indent { padding-left: .6em; }
+.hero--stickers .hero__foot { position: relative; z-index: 3; }
+.stickers { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
+.sticker {
+  --dx: 0px; --dy: 0px; --s: 1;
+  position: absolute; left: var(--x); top: var(--y); pointer-events: auto; user-select: none; -webkit-user-select: none;
+  font: 800 clamp(.95rem, 1.55vw, 1.4rem)/1 var(--display); text-transform: uppercase; letter-spacing: -.03em; white-space: nowrap;
+  padding: .65em .95em; color: #050505; box-shadow: 0 .55rem 0 rgba(0,0,0,.5);
+  transform: translate(var(--dx), var(--dy)) rotate(var(--r)) scale(var(--s));
+  transition: transform .5s cubic-bezier(.34,1.56,.64,1), box-shadow .25s;
+}
+.sticker--signal { background: var(--signal); }
+.sticker--ivory { background: #F1EEE6; }
+.sticker--pill { border-radius: 999px; }
+.sticker--card { border-radius: .45em; }
+.sticker--outline { background: #050505; color: #F1EEE6; border: 2px solid #F1EEE6; border-radius: 999px; font: 500 clamp(.72rem, 1.05vw, .95rem)/1 var(--mono); letter-spacing: .1em; }
+.sticker--code { border-radius: .4rem; font: 400 clamp(.72rem, .98vw, .9rem)/1.4 var(--mono); text-transform: none; letter-spacing: 0; padding: .8em 1.1em; }
+.sticker--badge { width: clamp(7rem, 11.8vw, 10.6rem); aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center; text-align: center; padding: 0; font-size: clamp(1.1rem, 1.7vw, 1.6rem); line-height: .92; white-space: normal; }
+.sticker--star { width: clamp(3.4rem, 5.8vw, 5.4rem); height: auto; padding: 0; box-shadow: none; fill: #F1EEE6; overflow: visible; }
+.sticker--star path { filter: drop-shadow(0 .4rem 0 rgba(0,0,0,.5)); }
+@media (hover: hover) and (pointer: fine) {
+  .sticker { cursor: grab; }
+  .is-loaded .sticker:hover { --s: 1.05; }
+}
+.sticker.is-dragging { --s: 1.1; cursor: grabbing; transition: none; z-index: 5; box-shadow: 0 1.3rem 1.4rem rgba(0,0,0,.45); }
+.sticker.is-dropped { animation: sticker-wobble .55s cubic-bezier(.34,1.56,.64,1); }
+@keyframes sticker-wobble { 30% { rotate: 6deg; } 60% { rotate: -3deg; } 100% { rotate: 0deg; } }
+/* entrance: slap the stickers on one by one after the name blurs in */
+.js .sticker { opacity: 0; --s: 1.6; }
+.is-loaded .sticker { opacity: 1; --s: 1; transition: transform .6s cubic-bezier(.34,1.56,.64,1), opacity .2s; }
+.is-loaded .sticker.is-dragging { transition: none; --s: 1.1; }
+.is-loaded .sticker:nth-child(1) { transition-delay: .55s; } .is-loaded .sticker:nth-child(2) { transition-delay: .7s; }
+.is-loaded .sticker:nth-child(3) { transition-delay: .85s; } .is-loaded .sticker:nth-child(4) { transition-delay: 1s; }
+.is-loaded .sticker:nth-child(5) { transition-delay: 1.15s; } .is-loaded .sticker:nth-child(6) { transition-delay: 1.3s; }
+.is-loaded .sticker:nth-child(7) { transition-delay: 1.45s; }
+.is-loaded .sticker.is-settled { transition-delay: 0s; }
+@media (hover: none) { .hero__drag { display: none; } }
+@media (prefers-reduced-motion: reduce) { .js .sticker { opacity: 1; --s: 1; } }
+
+@media (max-width: 1100px) {
+  .hero--stickers .hero__title { margin-top: 0; padding-top: 22vh; }
+}
+@media (max-width: 760px) {
+  .hero--stickers .hero__title { font-size: 17vw; padding-top: 26vh; }
+  .hero--stickers .hero__indent { padding-left: .3em; }
+  .sticker { font-size: .78rem; }
+  .sticker--outline, .sticker--code { font-size: .64rem; }
+  .sticker--badge { width: 5.8rem; font-size: .95rem; }
+  .sticker--star { width: 2.6rem; }
+  #stLlm { --x: 6% !important; --y: 15% !important; }
+  #stRest { --x: 40% !important; --y: 22% !important; }
+  #stStack { --x: 30% !important; --y: 49% !important; }
+  #stCerebra { --x: 8% !important; --y: 57% !important; }
+  #stCode { display: none; }
+  #stBadge { --x: 66% !important; --y: 56% !important; }
+  #stStar { --x: 80% !important; --y: 12% !important; }
+}

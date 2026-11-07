@@ -686,6 +686,35 @@
   }
   window.addEventListener('scroll', function () { requestAnimationFrame(drawParallax); }, { passive: true });
 
+  /* ---------- hero stickers: drag them around (mouse / pen); the thread re-routes on drop ---------- */
+  var stickers = $$('.sticker');
+  if (stickers.length && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    stickers.forEach(function (st) {
+      st.setAttribute('data-cursor', 'Drag');
+      var sx = 0, sy = 0, ox = 0, oy = 0, drag = false;
+      st.addEventListener('pointerdown', function (e) {
+        if (e.button !== 0) return;
+        e.preventDefault(); drag = true; st.classList.add('is-settled', 'is-dragging'); st.classList.remove('is-dropped');
+        sx = e.clientX; sy = e.clientY;
+        ox = parseFloat(st.style.getPropertyValue('--dx')) || 0; oy = parseFloat(st.style.getPropertyValue('--dy')) || 0;
+        st.setPointerCapture(e.pointerId);
+      });
+      st.addEventListener('pointermove', function (e) {
+        if (!drag) return;
+        st.style.setProperty('--dx', (ox + e.clientX - sx) + 'px');
+        st.style.setProperty('--dy', (oy + e.clientY - sy) + 'px');
+      });
+      var drop = function () {
+        if (!drag) return; drag = false;
+        st.classList.remove('is-dragging'); void st.offsetWidth; st.classList.add('is-dropped');
+        setTimeout(buildThread, 420);   // let the wobble finish, then route the thread through the new spot
+      };
+      st.addEventListener('pointerup', drop); st.addEventListener('pointercancel', drop);
+    });
+  }
+  // after the entrance pop-in, drop the stagger delays so hover / drag feel instant
+  setTimeout(function () { stickers.forEach(function (st) { st.classList.add('is-settled'); }); }, 3200);
+
   /* ---------- filter pill: fade out before it slides over the next section ---------- */
   var fbar = $('.filterbar'), projWrap = $('#projects');
   if (fbar && projWrap) {
@@ -730,7 +759,7 @@
     afterLoader(function () {
       requestAnimationFrame(function () { root.classList.add('is-loaded');
         // the hero's small print sits below the reveal margin on short screens; show it with the headline
-        $$('.hero .reveal').forEach(function (el, i) { setTimeout(function () { el.classList.add('is-in'); }, 700 + i * 120); }); setTimeout(function () { introThread(); drawSkillmap(); drawFigures(); }, 350); });
+        $$('.hero .reveal').forEach(function (el, i) { setTimeout(function () { el.classList.add('is-in'); }, 700 + i * 120); }); setTimeout(function () { introThread(); drawSkillmap(); drawFigures(); }, 350); setTimeout(buildThread, 2300); });
     });
   }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(boot); else boot();
