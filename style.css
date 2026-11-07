@@ -1208,3 +1208,32 @@ body > .msg { z-index: 991; }
   .nav a { padding: 0; border-radius: 0; rotate: none !important; background: none !important; color: #F1EEE6 !important; }
   .nav a sup { font-size: .8rem; margin-right: .5rem; color: var(--signal) !important; }
 }
+
+/* =========================================================
+   a pinch of sticker funk: intro + capabilities (layouts unchanged)
+   ========================================================= */
+.intro__title em { font-style: normal; }
+.w-hl { position: relative; z-index: 0; }
+.w-hl::before { content: ""; position: absolute; z-index: -1; left: -.06em; right: -.04em; top: .22em; bottom: .04em; background: var(--signal); rotate: -1deg; transform-origin: left; transform: scaleX(0); transition: transform .9s .4s var(--ease); }
+.reveal.is-in .w-hl::before { transform: scaleX(1); }
+.w-zap { display: inline-block; vertical-align: .9em; margin-left: .5rem; padding: .5em .8em; font-size: clamp(.68rem, .9vw, .85rem); font-weight: 500; letter-spacing: .06em; line-height: 1; background: #050505; color: #F1EEE6; border-radius: 999px; rotate: 8deg; box-shadow: 0 .25rem 0 rgba(0,0,0,.25); }
+.intro__tags--stickers { gap: .7rem; }
+.intro__tags--stickers li { padding: .6em 1em; border-radius: 999px; border: 1.5px solid currentColor; color: #111; rotate: -2deg; }
+.intro__tags--stickers li:nth-child(2) { background: var(--signal); border-color: var(--signal); rotate: 3deg; }
+.intro__tags--stickers li::before { display: none; }
+/* spiral labels become small stickers, placed above / below the spiral */
+.tfig__label { right: calc(13% + min(24vw, 360px) / 2); width: auto; translate: 50% 0; padding: .55em .85em; border-radius: .3rem; letter-spacing: .14em; white-space: nowrap; }
+.tfig__label--in { top: calc(50% - min(24vw, 360px) * 380 / 600 - 3.2rem); background: #F1EEE6; color: #111; border: 1.5px dashed #111; rotate: -5deg; }
+.tfig__label--out { top: calc(50% + min(24vw, 360px) * 380 / 600 + .4rem); background: var(--signal); color: #050505 !important; rotate: 3deg; box-shadow: .2rem .2rem 0 #111; }
+
+/* capabilities: group labels as stickers, skill names pop on hover, toolset as a tilted tape */
+.skillmap__group { padding: .55em 1em; border-radius: 999px; color: #050505; font-weight: 500; }
+.skillmap__group--ivory { background: #F1EEE6; rotate: -4deg; }
+.skillmap__group--signal { background: var(--signal); rotate: 4deg; }
+.skill h3 { display: inline-block; padding: .2em .4em; margin: -.2em -.4em; border-radius: .25rem; transition: background-color .2s, color .2s, rotate .35s cubic-bezier(.34,1.56,.64,1); }
+.skill[data-side="l"]:hover h3 { background: #F1EEE6; color: #050505 !important; rotate: -3deg; }
+.skill[data-side="r"]:hover h3 { background: var(--signal); color: #050505 !important; rotate: 3deg; }
+.caps .toolset { margin-left: calc(var(--pad) * -1 - 2%); margin-right: calc(var(--pad) * -1 - 2%); background: #F1EEE6; color: #050505; border: 0; rotate: -2deg; -webkit-mask-image: none; mask-image: none; box-shadow: 0 .8rem 1.4rem rgba(0,0,0,.4); }
+.caps .toolset__track { font-weight: 500; }
+.caps .toolset__track li::before { border-color: #050505; background: var(--signal); border: 0; width: 7px; height: 7px; }
+.caps { overflow: hidden; }

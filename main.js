@@ -48,7 +48,7 @@
         if (en.isIntersecting) navLinks.forEach(function (a) { a.classList.toggle('is-current', a.getAttribute('href') === '#' + en.target.id); });
       });
     }, { rootMargin: '-45% 0px -50% 0px' });
-    ['capabilities', 'projects', 'experience', 'about', 'contact'].forEach(function (id) {
+    ['home', 'intro', 'capabilities', 'projects', 'experience', 'about', 'contact'].forEach(function (id) {
       var el = document.getElementById(id); if (el) navIO.observe(el);
     });
   }
