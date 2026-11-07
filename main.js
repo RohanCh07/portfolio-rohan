@@ -686,6 +686,13 @@
   }
   window.addEventListener('scroll', function () { requestAnimationFrame(drawParallax); }, { passive: true });
 
+  /* ---------- skills ticker lives on the first screen only; the menu slides up once it has scrolled away ---------- */
+  var tickerEl = $('.ticker'), headerEl = $('#header');
+  if (tickerEl && headerEl) {
+    var tickerCheck = function () { headerEl.classList.toggle('is-past-ticker', window.scrollY > tickerEl.offsetHeight); };
+    window.addEventListener('scroll', tickerCheck, { passive: true }); tickerCheck();
+  }
+
   /* ---------- hero stickers: drag them around (mouse / pen); the thread re-routes on drop ---------- */
   var stickers = $$('.sticker');
   if (stickers.length && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
