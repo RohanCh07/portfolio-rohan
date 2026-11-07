@@ -686,69 +686,15 @@
   }
   window.addEventListener('scroll', function () { requestAnimationFrame(drawParallax); }, { passive: true });
 
-  /* ---------- opening signature ---------- */
-  var loader = $('#loader');
-  var loaderDone = false, loaderWaiters = [];
-  function afterLoader(fn) { if (loaderDone) fn(); else loaderWaiters.push(fn); }
-  function runLoader() {
-    var release = function () { loaderDone = true; loaderWaiters.splice(0).forEach(function (f) { f(); }); };
-    if (!loader || reduceMotion) { if (loader) loader.hidden = true; release(); return; }
-    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-    window.scrollTo(0, 0);
-    root.classList.add('is-locked');
-    if (lenis) lenis.stop();
-    var paths = $$('path', loader);
-    // Pen timing, like a hand: the lead-in accelerates into the R, letters are written at a steady
-    // pace (each stroke easing in and out), a short pen-lift between the two words, then the
-    // closing swash is a fast whip that slows as it leaves the screen.
-    var lens = paths.map(function (p) { return p.getTotalLength(); });
-    var kinds = paths.map(function (p) { return p.getAttribute('data-kind') || 'letter'; });
-    var letterLen = 0;
-    kinds.forEach(function (k, i) { if (k === 'letter') letterLen += lens[i]; });
-    var LEAD = 520, LETTERS = 1900, SWASH = 820, WORD_GAP = 140, delay = 120;
-    var sigSvg = $('.loader__sig', loader);
-    var vbW = sigSvg && sigSvg.viewBox && sigSvg.viewBox.baseVal ? sigSvg.viewBox.baseVal.width : 0;
-    var scale = vbW ? sigSvg.getBoundingClientRect().width / vbW : 1;
-    var nib = (1.9 / (scale || 1)).toFixed(2);
-    var prevRight = null;
-    paths.forEach(function (p, i) {
-      var k = kinds[i], dur, ease;
-      if (k === 'lead') { dur = LEAD; ease = 'cubic-bezier(.55,0,.85,.6)'; }
-      else if (k === 'swash') { dur = SWASH; ease = 'cubic-bezier(.2,.7,.35,1)'; }
-      else {
-        dur = Math.max(30, LETTERS * lens[i] / (letterLen || 1));
-        ease = 'cubic-bezier(.42,0,.58,1)';
-        var box = p.getBBox();
-        if (prevRight !== null && box.x - prevRight > 90) delay += WORD_GAP;   // lift the pen between words
-        prevRight = Math.max(prevRight || 0, box.x + box.width);
-      }
-      p.style.strokeWidth = nib;
-      p.setAttribute('pathLength', '1');
-      p.style.strokeDasharray = '1 1';
-      p.style.transition = 'none';                     // jump straight to "hidden" — don't animate into it
-      p.style.strokeDashoffset = '1';
-      p.dataset.draw = 'stroke-dashoffset ' + dur.toFixed(0) + 'ms ' + ease + ' ' + delay.toFixed(0) + 'ms';
-      // strokes overlap slightly, so the pen never looks like it stops dead between pieces
-      delay += k === 'letter' ? dur * 0.9 : dur;
-    });
-    if (sigSvg) sigSvg.getBoundingClientRect();       // make the browser apply the hidden state now
-    requestAnimationFrame(function () { requestAnimationFrame(function () {
-      paths.forEach(function (p) { p.style.transition = p.dataset.draw; p.style.strokeDashoffset = 0; });
-    }); });
-    var finished = false;
-    function finish() {
-      if (finished) return; finished = true;
-      loader.classList.add('is-leaving');
-      root.classList.remove('is-locked');
-      if (lenis) lenis.start();
-      release();
-      setTimeout(function () { loader.hidden = true; }, 600);
-    }
-    setTimeout(finish, delay + 220);
-    loader.addEventListener('click', finish);
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' || e.key === 'Enter') finish(); }, { once: true });
+  /* ---------- filter pill: fade out before it slides over the next section ---------- */
+  var fbar = $('.filterbar'), projWrap = $('#projects');
+  if (fbar && projWrap) {
+    var fbarCheck = function () { fbar.classList.toggle('is-gone', projWrap.getBoundingClientRect().bottom < window.innerHeight * 0.35); };
+    window.addEventListener('scroll', fbarCheck, { passive: true }); fbarCheck();
   }
-  runLoader();   // starts straight away; does not wait for fonts
+
+  /* ---------- page start (no loader: the hero blurs in as soon as fonts are ready) ---------- */
+  function afterLoader(fn) { fn(); }
 
 
   /* ---------- cursor ---------- */
@@ -782,7 +728,9 @@
     if (booted) return; booted = true;
     retone(); fitNames(); buildThread(); collectFloaters(); drawParallax();
     afterLoader(function () {
-      requestAnimationFrame(function () { root.classList.add('is-loaded'); setTimeout(function () { introThread(); drawSkillmap(); drawFigures(); }, 350); });
+      requestAnimationFrame(function () { root.classList.add('is-loaded');
+        // the hero's small print sits below the reveal margin on short screens; show it with the headline
+        $$('.hero .reveal').forEach(function (el, i) { setTimeout(function () { el.classList.add('is-in'); }, 700 + i * 120); }); setTimeout(function () { introThread(); drawSkillmap(); drawFigures(); }, 350); });
     });
   }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(boot); else boot();
