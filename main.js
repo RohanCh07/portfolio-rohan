@@ -105,12 +105,21 @@
     });
     // Each run becomes its own <path>: browsers restart the dash pattern at every "M" inside a
     // single path, which made the stretch after a break draw far ahead of the tip.
-    var d = [], lens = [], xs = [], ys = [], total = 0, pieces = [];
+    var d = [], lens = [], xs = [], ys = [], total = 0, pieces = [], gaps = [], runStart = 0;
     runs.filter(function (r) { return r.length > 1; }).forEach(function (run) {
-      if (d.length) pieces.push({ d: d.join(' '), start: pieces.length ? pieces[pieces.length - 1].end : 0, end: total });
+      if (d.length) {
+        pieces.push({ d: d.join(' '), start: runStart, end: total });
+        // a break hands the thread over to a drawing (the capabilities circle): give that drawing
+        // its own stretch of scroll, as long as the half-circle it draws, so the thread never waits
+        var gx = xs[xs.length - 1], gy = ys[ys.length - 1], q = run[0];
+        var gl = Math.hypot(q.x - gx, q.y - gy) * Math.PI / 2, g0 = total;
+        for (var gk = 1; gk <= 24; gk++) { lens.push(g0 + gl * gk / 24); xs.push(gx + (q.x - gx) * gk / 24); ys.push(gy + (q.y - gy) * gk / 24); }
+        total += gl; gaps.push({ start: g0, end: total });
+      }
+      runStart = total;
       d = [];
       d.push('M' + run[0].x.toFixed(1) + ' ' + run[0].y.toFixed(1));
-      lens.push(total); xs.push(run[0].x); ys.push(run[0].y);
+      if (!lens.length) { lens.push(total); xs.push(run[0].x); ys.push(run[0].y); }
       run[0].len = total;
       for (var i = 0; i < run.length - 1; i++) {
         var p0 = run[i - 1] || run[i], p1 = run[i], p2 = run[i + 1], p3 = run[i + 2] || p2;
@@ -139,8 +148,8 @@
         p2.len = total;
       }
     });
-    if (d.length) pieces.push({ d: d.join(' '), start: pieces.length ? pieces[pieces.length - 1].end : 0, end: total });
-    return { pieces: pieces, lens: lens, xs: xs, ys: ys, total: total };
+    if (d.length) pieces.push({ d: d.join(' '), start: runStart, end: total });
+    return { pieces: pieces, lens: lens, xs: xs, ys: ys, total: total, gaps: gaps };
   }
 
   function buildThread() {
@@ -241,9 +250,32 @@
     });
     var path = pieces[0].el;
 
-    // cumulative max of y lets loops draw naturally while scrolling
-    var maxY = [], m = -Infinity;
-    for (var si = 0; si < ys.length; si++) { m = Math.max(m, ys[si]); maxY.push(m); }
+    // Scroll → length. Each section's stretch gets its own map from page height to length: the
+    // thread's real height, blended with an even spread and forced to keep going down. Loops,
+    // horizontal runs and the circle then draw at a steady pace as you scroll, and the tip stays
+    // right with the screen line instead of racing ahead and waiting.
+    var maxY = new Array(ys.length);
+    var bStarts = [];
+    pts.forEach(function (p) { if (p.len != null && (bStarts.length === 0 || p.band !== bStarts[bStarts.length - 1].band)) bStarts.push({ band: p.band, len: p.len }); });
+    var idxAt = function (L) { var lo = 0, hi = lens.length - 1; while (lo < hi) { var md = (lo + hi) >> 1; if (lens[md] < L) lo = md + 1; else hi = md; } return lo; };
+    var floorY = -Infinity;
+    for (var bs = 0; bs < bStarts.length; bs++) {
+      var ia = idxAt(bStarts[bs].len), ib = bs + 1 < bStarts.length ? idxAt(bStarts[bs + 1].len) : lens.length - 1;
+      if (bs === 0) ia = 0;
+      if (ib <= ia) { for (var z = ia; z <= ib; z++) maxY[z] = Math.max(floorY, ys[z]); continue; }
+      var r0 = Math.max(floorY, ys[ia]), n1 = ys[ib];
+      if (n1 <= r0 + 1) n1 = r0 + 1;
+      var cnt = ib - ia, stepMin = (n1 - r0) / cnt * 0.35, last = r0, tmp = [r0];
+      for (var k2 = 1; k2 <= cnt; k2++) {
+        var lin = r0 + (n1 - r0) * k2 / cnt;
+        last = Math.max(last + stepMin, 0.55 * ys[ia + k2] + 0.45 * lin);
+        tmp.push(last);
+      }
+      var sc = (n1 - r0) / ((tmp[cnt] - r0) || 1);
+      for (var k3 = 0; k3 <= cnt; k3++) maxY[ia + k3] = r0 + (tmp[k3] - r0) * sc;
+      floorY = maxY[ib];
+    }
+    for (var zf = 0; zf < maxY.length; zf++) if (maxY[zf] == null) maxY[zf] = zf ? maxY[zf - 1] : ys[0];
 
     var nodes = [];
     pts.forEach(function (p) {
@@ -293,7 +325,7 @@
     svg.appendChild(pullPath);
     var figById = {};
     figs.forEach(function (f) { if (f.start != null) figById[f.id] = f; });
-    T = { path: path, total: total, lens: lens, maxY: maxY, xs: xs, ys: ys, step: step, nodes: nodes, head: head, ring: ring,
+    T = { gaps: geo.gaps, path: path, total: total, lens: lens, maxY: maxY, xs: xs, ys: ys, step: step, nodes: nodes, head: head, ring: ring,
           bands: bandEls, bandEnd: bandEnd, figs: figs.filter(function (f) { return f.start != null; }), figById: figById, pull: pullPath, pieces: pieces, mainTop: mRect.top + window.scrollY };
     if (threadNow > total) threadNow = total;
     if (reduceMotion) threadNow = total;                         // no drawing animation: show it all
@@ -305,19 +337,19 @@
   // The thread is pulled by the scroll: it is drawn exactly down to a line two-thirds of the way
   // down the screen, so its tip is always in view and stops the moment you stop.
   // (Lenis already smooths the scroll, so this needs no extra easing.)
-  var READ = 0.67;
+  var READ = 0.68;
   var threadNow = 0, threadGoal = 0, intro = null;
   var easeInOut = function (t) { return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; };
   function lengthAtScreenLine() {
     var readY = window.scrollY + window.innerHeight * READ - T.mainTop;
     if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 4) return T.total;
-    for (var fi = 0; fi < T.figs.length; fi++) {
-      var f = T.figs[fi];
-      if (readY >= f.top && readY < f.bottom) return f.start + (f.end - f.start) * (readY - f.top) / Math.max(1, f.bottom - f.top);
-    }
-    var lo = 0, hi = T.maxY.length - 1;
-    while (lo < hi) { var mid = (lo + hi) >> 1; if (T.maxY[mid] > readY) hi = mid; else lo = mid + 1; }
-    return T.maxY[T.maxY.length - 1] <= readY ? T.total : T.lens[lo];
+    var M = T.maxY, n = M.length - 1;
+    if (readY <= M[0]) return 0;
+    if (readY >= M[n]) return T.total;
+    var lo = 0, hi = n;
+    while (lo < hi) { var mid = (lo + hi) >> 1; if (M[mid] > readY) hi = mid; else lo = mid + 1; }
+    var y0 = M[lo - 1], y1 = M[lo];
+    return T.lens[lo - 1] + (T.lens[lo] - T.lens[lo - 1]) * (readY - y0) / Math.max(0.0001, y1 - y0);
   }
   // The tip follows the scroll, but never faster than a pen could move: long horizontal runs
   // (like the route around the capabilities heading) draw across instead of appearing at once.
@@ -328,7 +360,9 @@
     if (!root.classList.contains('is-loaded')) return;          // wait for the opening signature
     threadGoal = lengthAtScreenLine();
     if (intro || pulling) return;                                // opening glide / plug being pulled
-    if (!stepping) { stepping = true; lastStep = performance.now(); requestAnimationFrame(stepThread); }
+    threadNow = threadGoal;
+    paintThread(threadNow);
+    drawSkillmap();
   }
   function stepThread(now) {
     if (!T || pulling) { stepping = false; return; }
@@ -350,13 +384,14 @@
       var k = Math.min(1, (now - intro.start) / intro.dur);
       threadNow = intro.from + (lengthAtScreenLine() - intro.from) * easeInOut(k);
       paintThread(threadNow);
-      if (k < 1) requestAnimationFrame(frame); else { intro = null; drawThread(); }
+      if (k < 1) requestAnimationFrame(frame); else { intro = null; drawThread(); unlockScroll(); }
     })(intro.start);
   }
   function paintThread(drawn) {
     setDrawn(drawn);
     T.nodes.forEach(function (n) { n.el.setAttribute('opacity', drawn >= n.at ? 1 : 0); });
-    var live = drawn > 4 && drawn < T.total - 4;
+    var inGap = (T.gaps || []).some(function (g) { return drawn > g.start + 1 && drawn < g.end - 1; });
+    var live = drawn > 4 && drawn < T.total - 4 && !inGap;
     if (live) {
       var lo2 = 0, hi2 = T.lens.length - 1;
       while (lo2 < hi2) { var md = (lo2 + hi2) >> 1; if (T.lens[md] < drawn) lo2 = md + 1; else hi2 = md; }
@@ -416,14 +451,9 @@
       return;
     }
     if (!root.classList.contains('is-loaded')) return;
-    var box = skillmap.getBoundingClientRect();
-    // where the thread's tip is, in circle units (+ a small lead so the halves close first)
-    var yBox = (window.innerHeight * READ - box.top) / box.height * CH + CR * 0.18;
-    var frac = yBox <= CY - CR ? 0 : yBox >= CY + CR ? 1 : Math.acos((CY - yBox) / CR) / Math.PI;
-    // the moment the thread has started its stretch below the circle, the circle is closed — no exceptions
-    // (while the screen line is inside the circle the thread waits exactly at that point, so require real progress past it)
-    if (T && T.pieces && T.pieces.length > 1 && threadNow > T.pieces[1].start + 4) frac = 1;
-    if (window.innerHeight * READ > box.top + box.height * 680 / 700) frac = 1;
+    var g = T && T.gaps && T.gaps[0];
+    if (!g) return;
+    var frac = Math.max(0, Math.min(1, (threadNow - g.start) / Math.max(1, g.end - g.start)));
     setHalves(frac);
     skillNodes.forEach(function (el) { el.classList.toggle('is-on', frac > 0.03); });
     skillItems.forEach(function (li) { li.classList.toggle('is-on', frac >= parseFloat(li.getAttribute('data-t')) - 0.01); });
@@ -730,7 +760,70 @@
   }
 
   /* ---------- page start (no loader: the hero blurs in as soon as fonts are ready) ---------- */
-  function afterLoader(fn) { fn(); }
+  /* ---------- opening signature (pen writes the name, then the curtain lifts) ---------- */
+  var loaderDone = false, loaderWaiters = [];
+  function afterLoader(fn) { if (loaderDone) fn(); else loaderWaiters.push(fn); }
+  function releaseLoader() { if (loaderDone) return; loaderDone = true; loaderWaiters.splice(0).forEach(function (f) { f(); }); }
+  var scrollLocked = false;
+  function lockScroll() { scrollLocked = true; root.classList.add('is-locked'); if (lenis) lenis.stop(); }
+  function unlockScroll() { if (!scrollLocked) return; scrollLocked = false; root.classList.remove('is-locked'); if (lenis) lenis.start(); }
+  (function runLoader() {
+    var loader = $('#loader');
+    if (!loader) { releaseLoader(); return; }
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+    lockScroll();
+    var sigSvg = $('.loader-signature', loader), pen = $('.loader-pen', loader), paths = $$('path', sigSvg);
+    var power3 = function (t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+    if (reduceMotion) {
+      paths.forEach(function (p) { p.style.opacity = 1; p.style.strokeWidth = '1.6'; });
+      setTimeout(function () { loader.style.transition = 'opacity .18s'; loader.style.opacity = 0; releaseLoader(); unlockScroll(); setTimeout(function () { loader.hidden = true; }, 220); }, 300);
+      return;
+    }
+    // stroke stays a hair-thin 2.2px on screen whatever the signature's scale
+    var vb = sigSvg.viewBox.baseVal, scale = sigSvg.getBoundingClientRect().width / vb.width || 1;
+    var lens = paths.map(function (p) { return p.getTotalLength(); });
+    var kinds = paths.map(function (p) { return p.getAttribute('data-kind') || 'letter'; });
+    var bodyLen = 0; kinds.forEach(function (k, i) { if (k !== 'lead') bodyLen += lens[i]; });
+    // timeline (ms): a beat, the lead-in, then every stroke at one steady pen speed
+    var t = 180, plan = [];
+    paths.forEach(function (p, i) {
+      p.style.strokeWidth = (2.2 / scale).toFixed(3);
+      p.style.strokeDasharray = lens[i] + ' ' + lens[i];
+      p.style.strokeDashoffset = lens[i];
+      if (i > 0) {
+        var a = paths[i - 1].getPointAtLength(lens[i - 1]), b = p.getPointAtLength(0);
+        if (Math.hypot(a.x - b.x, a.y - b.y) > 12) t += 12;          // pen lifts and moves to the next stroke
+      }
+      var dur = kinds[i] === 'lead' ? 350 : 2100 * lens[i] / (bodyLen || 1);
+      plan.push({ p: p, t0: t, dur: dur, len: lens[i] });
+      t += dur;
+    });
+    var penOff = t, slideAt = t + 120 + 250, SLIDE = 720, start = null, revealed = false;
+    function frame(now) {
+      if (start === null) start = now;
+      var el = now - start, tip = null;
+      plan.forEach(function (s) {
+        if (el < s.t0) return;
+        var k = Math.min(1, (el - s.t0) / s.dur);
+        s.p.style.opacity = 1;
+        s.p.style.strokeDashoffset = (s.len * (1 - k)).toFixed(2);
+        if (k < 1) tip = s.p.getPointAtLength(s.len * k);
+      });
+      if (pen) {
+        if (tip && el < penOff) { pen.setAttribute('cx', tip.x.toFixed(1)); pen.setAttribute('cy', tip.y.toFixed(1)); pen.style.opacity = 1; }
+        else pen.style.opacity = 0;
+      }
+      if (el >= slideAt) {
+        var e = power3(Math.min(1, (el - slideAt) / SLIDE));
+        loader.style.transform = 'translate3d(0,' + (-100 * e).toFixed(3) + '%,0)';
+        if (!revealed && e >= 0.6) { revealed = true; releaseLoader(); }
+        if (e >= 1) { loader.hidden = true; return; }
+      }
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  })();
 
 
   /* ---------- cursor ---------- */
@@ -766,7 +859,7 @@
     afterLoader(function () {
       requestAnimationFrame(function () { root.classList.add('is-loaded');
         // the hero's small print sits below the reveal margin on short screens; show it with the headline
-        $$('.hero .reveal').forEach(function (el, i) { setTimeout(function () { el.classList.add('is-in'); }, 700 + i * 120); }); setTimeout(function () { introThread(); drawSkillmap(); drawFigures(); }, 350); setTimeout(buildThread, 2300); });
+        $$('.hero .reveal').forEach(function (el, i) { setTimeout(function () { el.classList.add('is-in'); }, 700 + i * 120); }); setTimeout(function () { introThread(); drawSkillmap(); drawFigures(); }, 350); setTimeout(unlockScroll, 2600); setTimeout(buildThread, 2300); });
     });
   }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(boot); else boot();
