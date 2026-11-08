@@ -1313,3 +1313,83 @@ body > .msg { z-index: 991; }
   #dsShadow { display: none; }
   .wcard__code { white-space: pre-wrap; word-break: break-all; }
 }
+
+/* =========================================================
+   experience: the road so far (newest stop at the top, the road keeps going)
+   ========================================================= */
+.xp--road .band__inner { padding-bottom: 0; }
+.xp--road .xp__head { display: block; position: relative; margin-bottom: 0; }
+.xp--road .kicker b { color: var(--signal); font-weight: inherit; }
+.xp--road .xp__title { font-size: clamp(3.2rem, 8.6vw, 8rem); line-height: .84; letter-spacing: -.065em; }
+.xp--road .xp__title em { font-style: normal; color: var(--signal); }
+.xp__res { position: absolute; right: 0; top: clamp(9rem, 13vw, 12.5rem); }
+.odo { position: absolute; right: 0; top: 0; width: min(330px, 30vw); background: #050505; color: #F1EEE6; border-radius: 16px; padding: 16px 18px 14px; rotate: 2deg; box-shadow: 0 7px 0 rgba(0,0,0,.22); }
+.odo__t, .odo__row { display: flex; justify-content: space-between; gap: 1rem; font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; }
+.odo__t { color: rgba(241,238,230,.6); }
+.odo__row { margin-top: 10px; } .odo__row span:last-child { color: var(--signal); }
+.odo__digits { display: flex; align-items: flex-end; gap: 4px; margin-top: 10px; }
+.odo__digits b { display: grid; place-items: center; width: 2.1rem; height: 2.8rem; background: #1b1a19; border-radius: 5px; font: 800 1.8rem/1 var(--display); letter-spacing: -.03em; }
+.odo__digits b.o { background: var(--signal); color: #050505; }
+.odo__digits i { font-style: normal; font-size: .66rem; letter-spacing: .14em; margin-left: 8px; color: rgba(241,238,230,.7); }
+.xmap { position: relative; margin: clamp(1rem, 2vw, 2rem) calc(var(--pad) * -1) 0; aspect-ratio: 1440 / 1960; }
+.xroad { position: absolute; z-index: 0; pointer-events: none; overflow: visible; }
+.xroad__edge, .xroad__asphalt, .xroad__line, .xroad__mid { fill: none; stroke-linecap: butt; }
+.xroad__edge { stroke: #111; stroke-width: 96; }
+.xroad__asphalt { stroke: #24221f; stroke-width: 92; }
+.xroad__line { stroke: rgba(241,238,230,.5); stroke-width: 1.4; stroke-dasharray: 2 8; }
+.xroad__mid { stroke: rgba(241,238,230,.22); stroke-width: 3; stroke-dasharray: 26 16; }
+.xscene { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.xs-ink { fill: none; stroke: #111; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.xs-inkf { fill: var(--bg); stroke: #111; stroke-width: 1.5; stroke-linejoin: round; }
+.xs-faint { fill: none; stroke: rgba(17,17,17,.12); stroke-width: 1.2; }
+.xs-hotf { fill: var(--signal); }
+.xs-dark { fill: #050505; }
+.xs-glow { fill: var(--signal); filter: drop-shadow(0 0 6px rgba(255,59,18,.7)); }
+.xs-speed { fill: var(--bg); stroke: var(--signal); stroke-width: 6; }
+.xs-warn { fill: var(--bg); stroke: #111; stroke-width: 2.4; stroke-linejoin: round; }
+.xs-t { font: 500 11px var(--mono); letter-spacing: .14em; fill: #111; }
+.xs-th { font: 500 11px var(--mono); letter-spacing: .14em; fill: var(--signal); }
+.xs-w { font: 800 26px var(--display); letter-spacing: -.02em; fill: #F1EEE6; }
+.xs-wm { font: 500 10px var(--mono); letter-spacing: .14em; fill: rgba(241,238,230,.7); }
+.xs-big { font: 800 18px var(--display); fill: #111; }
+.xcar { position: absolute; width: 3.1%; translate: -50% -50%; rotate: 14deg; z-index: 3; }
+.xcar svg { display: block; width: 100%; overflow: visible; }
+.xcar rect { fill: var(--signal); stroke: #111; stroke-width: 1.6; } .xcar rect.win { fill: #F1EEE6; } .xcar .lamp { fill: #FFE9A8; stroke: #111; }
+.xstk { position: absolute; z-index: 4; padding: .5em .85em; border-radius: 999px; font: 800 clamp(.72rem, 1vw, .95rem)/1 var(--display); text-transform: uppercase; letter-spacing: -.01em; white-space: nowrap; background: var(--bg); color: #050505; border: 1.5px solid #111; box-shadow: 0 4px 0 rgba(0,0,0,.28); }
+.xstk.is-hot { background: var(--signal); border-color: var(--signal); }
+.xstk.is-dark { background: #050505; color: #F1EEE6; border-color: #050505; }
+.xmap__here { rotate: -6deg; }
+.xnext { position: absolute; z-index: 3; display: flex; gap: .6rem; align-items: center; }
+.xnext__a { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; padding: .55em .9em; border: 1.4px dashed #111; border-radius: 999px; background: var(--bg); }
+.xnext__b { font: 800 clamp(.8rem, 1.05vw, 1rem)/1 var(--display); text-transform: uppercase; background: #050505; color: #F1EEE6; padding: .55em .8em; border-radius: 8px; rotate: 4deg; }
+.xsign { position: absolute; z-index: 3; width: 15.3%; background: #050505; color: #F1EEE6; border-radius: 8px; padding: 0 0 clamp(.6rem, 1vw, 1rem); }
+.xsign i { position: absolute; top: 100%; width: 1.5px; height: 4.2vw; background: #111; } .xsign i:first-of-type { left: 14%; } .xsign i:last-of-type { right: 14%; }
+.xsign__tab { display: inline-block; padding: .45em .8em; border-radius: 6px 0 6px 0; background: #F1EEE6; color: #050505; font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; }
+.xsign__tab.is-hot { background: var(--signal); }
+.xsign__name { margin: .5rem 0 0; padding: 0 1rem; font: 800 clamp(1.1rem, 2.1vw, 2rem)/1 var(--display); letter-spacing: -.03em; text-transform: uppercase; }
+.xsign__sub { margin-top: .5rem; padding: 0 1rem; font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(241,238,230,.75); }
+.xcards { list-style: none; margin: 0; padding: 0; }
+.xcard { position: absolute; z-index: 2; width: 26.4%; background: var(--bg); color: #111; border: 1.6px solid #111; border-radius: 6px; padding: clamp(.75rem, 1vw, 1rem) clamp(.8rem, 1.2vw, 1.1rem) clamp(.7rem, .9vw, .9rem); box-shadow: 6px 6px 0 -1px var(--bg), 6px 6px 0 0 #111; rotate: var(--r, 0deg); transition: rotate .35s cubic-bezier(.34,1.56,.64,1), translate .7s var(--ease), opacity .7s var(--ease), filter .7s var(--ease); }
+.xcard:hover { rotate: 0deg; }
+.xcard.is-current { background: var(--signal); }
+.xcard .xstk { top: -1.1rem; right: .8rem; rotate: -5deg; }
+.xcard:nth-child(2) .xstk, .xcard:nth-child(4) .xstk { rotate: 4deg; }
+.xcard__hd { display: flex; justify-content: space-between; font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; padding-bottom: .5rem; border-bottom: 1.4px solid currentColor; }
+.xcard__role { margin-top: .7rem; font: 800 clamp(1.15rem, 1.9vw, 1.75rem)/.95 var(--display); letter-spacing: -.045em; text-transform: uppercase; }
+.xcard__org { margin-top: .4rem; font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--signal); }
+.xcard.is-current .xcard__org { color: #050505; }
+.xcard__d { margin-top: .5rem; font: 400 clamp(.7rem, .85vw, .78rem)/1.55 var(--mono); }
+.xcard__loot { display: flex; flex-wrap: wrap; gap: .3rem; margin: .6rem 0 0; padding: 0; list-style: none; align-items: center; }
+.xcard__loot li { font-size: .58rem; letter-spacing: .08em; text-transform: uppercase; padding: .35em .6em; border: 1.2px solid currentColor; border-radius: 999px; }
+.xcard__loot li.lbl { border: 0; padding-left: 0; opacity: .6; letter-spacing: .14em; }
+.xstart { position: absolute; z-index: 3; display: flex; align-items: center; gap: .8rem; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; }
+.xstart i { width: 56px; height: 36px; border: 1.4px solid #111; background: conic-gradient(#111 25%, #F1EEE6 0 50%, #111 0 75%, #F1EEE6 0) 0 0 / 28px 24px; }
+@media (max-width: 1100px) {
+  .odo { position: relative; rotate: 1deg; width: auto; max-width: 22rem; margin-top: 1.5rem; }
+  .xp__res { position: static; display: inline-block; margin-top: 1.5rem; }
+  .xmap { aspect-ratio: auto; margin: 2.5rem 0 0; padding: 0 0 2rem 2.6rem; }
+  .xroad, .xscene, .xcar, .xmap__here, .xsign, .xstart { display: none; }
+  .xnext { position: static; margin-bottom: 2.2rem; flex-wrap: wrap; }
+  .xcards { display: grid; gap: 2.4rem; }
+  .xcard { position: relative; left: auto !important; top: auto !important; width: auto; max-width: 34rem; }
+}

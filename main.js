@@ -152,8 +152,17 @@
     return { pieces: pieces, lens: lens, xs: xs, ys: ys, total: total, gaps: gaps };
   }
 
+  // the experience road is drawn behind the thread, so it lives in the section and is laid over the map box
+  function placeRoad() {
+    var map = $('#xpMap'), road = $('.xroad');
+    if (!map || !road) return;
+    var br = road.parentElement.getBoundingClientRect(), mr = map.getBoundingClientRect();
+    road.style.left = (mr.left - br.left) + 'px'; road.style.top = (mr.top - br.top) + 'px';
+    road.style.width = mr.width + 'px'; road.style.height = mr.height + 'px';
+  }
   function buildThread() {
     if (!svg || !main) return;
+    placeRoad();
     while (svg.firstChild) svg.removeChild(svg.firstChild);
     var mRect = main.getBoundingClientRect();
     var W = main.clientWidth, H = main.scrollHeight;
@@ -803,6 +812,26 @@
       es.forEach(function (en, i) { if (en.isIntersecting) { var it = en.target; setTimeout(function () { show(it); }, 120 * (items.indexOf(it) % 6)); wio.unobserve(it); } });
     }, { rootMargin: '0px 0px -15% 0px' });
     items.forEach(function (it) { wio.observe(it); });
+  })();
+
+  /* ---------- experience odometer: years on the road since April 2024, counted up once in view ---------- */
+  (function () {
+    var odo = document.getElementById('odo');
+    if (!odo) return;
+    var yrs = (Date.now() - new Date(2024, 3, 1).getTime()) / (365.25 * 864e5);
+    var cells = $$('b', odo).filter(function (b) { return b.textContent !== '.'; });
+    var paint = function (v) {
+      var str = v.toFixed(2); if (str.length < 5) str = '0' + str;
+      var d = str.replace('.', '');
+      cells.forEach(function (c, i) { c.textContent = d[i] || '0'; });
+    };
+    if (reduceMotion || !('IntersectionObserver' in window)) { paint(yrs); return; }
+    var oio = new IntersectionObserver(function (es) {
+      if (!es[0].isIntersecting) return; oio.disconnect();
+      var t0 = performance.now();
+      (function f(now) { var k = Math.min(1, (now - t0) / 1400); paint(yrs * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(f); })(t0);
+    });
+    oio.observe(odo);
   })();
 
   /* ---------- filter pill: fade out before it slides over the next section ---------- */
