@@ -1248,7 +1248,7 @@ body > .msg { z-index: 991; }
 .project--world .project__stage.world { position: relative; display: flex; align-items: center; min-height: clamp(34rem, 52vw, 48rem); margin-top: .5rem; }
 .project--world .project__name { position: relative; z-index: 1; width: 100%; }
 .wi { position: absolute; left: var(--x); top: var(--y); width: var(--w); z-index: 2; margin: 0; }
-.ink-art { display: block; width: 100%; height: auto; overflow: visible; color: #111; }
+.ink-art { display: block; width: 100%; height: auto; overflow: visible; color: inherit; }
 .ink-art path, .ink-art rect, .ink-art circle, .ink-art ellipse { fill: none; stroke: currentColor; stroke-width: 1.3; vector-effect: non-scaling-stroke; stroke-linejoin: round; stroke-linecap: round; }
 .ink-art .fill { fill: var(--bg); }
 .ink-art .ink { fill: currentColor; stroke: none; }
@@ -1256,10 +1256,10 @@ body > .msg { z-index: 991; }
 .ink-art .hot { stroke: var(--signal); }
 .ink-art .dash { stroke-dasharray: 5 5; }
 .ink-art .beam { stroke: var(--signal); }
-.wi__cap { display: flex; justify-content: space-between; gap: 1rem; margin-top: .55rem; padding-top: .45rem; border-top: 1px solid currentColor; font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; color: #111; white-space: nowrap; }
+.wi__cap { display: flex; justify-content: space-between; gap: 1rem; margin-top: .55rem; padding-top: .45rem; border-top: 1px solid currentColor; font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; white-space: nowrap; }
 .wi__cap .hot-t { color: var(--signal); }
 /* the scan report: an open notebook */
-.report { display: grid; grid-template-columns: 1fr 1fr; background: var(--bg); border: 1.3px solid #111; border-radius: 3px; box-shadow: 5px 5px 0 -1px var(--bg), 5px 5px 0 0 #111, 10px 10px 0 -1px var(--bg), 10px 10px 0 0 #111; color: #111; }
+.report { display: grid; grid-template-columns: 1fr 1fr; background: var(--bg); border: 1.3px solid #111; border-radius: 3px; box-shadow: 5px 5px 0 -1px var(--bg), 5px 5px 0 0 currentColor, 10px 10px 0 -1px var(--bg), 10px 10px 0 0 currentColor; }
 .report__page { padding: 1rem 1.1rem .9rem; }
 .report__page + .report__page { border-left: 1.3px solid #111; position: relative; }
 .report__page + .report__page::before { content: ""; position: absolute; left: -6px; top: 18%; bottom: 18%; width: 10px; background: radial-gradient(circle, #111 1.6px, transparent 2.2px) 0 0 / 10px 22px repeat-y; }
@@ -1293,4 +1293,23 @@ body > .msg { z-index: 991; }
   .wi { position: static; width: auto; }
   .report { grid-column: 1 / -1; }
   #lmDrift, #lmTorch { display: none; }
+}
+
+/* world cards (work on light and dark bands) */
+.project--world .wi { color: var(--fg); }
+.wcard { background: var(--bg); border: 1.3px solid currentColor; border-radius: 4px; padding: .9rem 1rem; box-shadow: 6px 6px 0 -1px var(--bg), 6px 6px 0 0 currentColor; }
+.wcard__head { display: flex; justify-content: space-between; gap: 1rem; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; padding-bottom: .55rem; margin-bottom: .6rem; border-bottom: 1px solid currentColor; }
+.wcard__code { margin: 0; font-size: .68rem; line-height: 1.8; white-space: pre; overflow: hidden; }
+.wcard__foot { display: flex; justify-content: space-between; gap: 1rem; margin-top: .6rem; padding-top: .5rem; border-top: 1px dashed currentColor; font-size: .6rem; letter-spacing: .12em; text-transform: uppercase; }
+.wcard .hot-t { color: var(--signal); }
+.wlog li { display: flex; justify-content: space-between; gap: 1rem; padding: .3rem 0; font-size: .66rem; letter-spacing: .04em; border-bottom: 1px dashed color-mix(in srgb, currentColor 25%, transparent); }
+.wlog i { font-style: normal; color: var(--signal); letter-spacing: .1em; font-size: .55rem; }
+.wcard .status { font-size: .66rem; }
+.tone-ink .wcard .del { color: #FF7A55; } .tone-ink .wcard .add { color: #7BD88F; }
+.ink-art .svgt { font: 500 11px/1 var(--mono); letter-spacing: .12em; fill: currentColor; stroke: none; }
+.report { border-color: currentColor; }
+@media (max-width: 760px) {
+  #dsStill, .wcard#dsLog { grid-column: 1 / -1; }
+  #dsShadow { display: none; }
+  .wcard__code { white-space: pre-wrap; word-break: break-all; }
 }

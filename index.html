@@ -253,10 +253,109 @@
       </article>
 
       <!-- 02 CEREBRA -->
+      <article class="band project project--world tone-ink" data-cat="personal" aria-labelledby="p-distiller" data-thread="0.3,0 a:dsCode:0.7,1.15 a:dsStill:0.14,0.7 a:dsStill:0.8,0.82 a:dsLog:0.3,1.1 0.84,0.56 a:dsShadow:0.5,0.05 a:dsRouter:1.05,0.4 a:dsRouter:0.5,1.12 a:dsStatus:1.05,0.6 0.3,1">
+        <div class="band__inner">
+          <header class="project__top">
+            <p class="project__label mono"><span class="project__num">02</span> / LLM infrastructure · Personal <span class="badge">In progress</span></p>
+            <p class="project__pitch mono">Swap one URL. Your repeated LLM calls quietly move to a small model you own.</p>
+          </header>
+          <div class="project__stage world">
+            <h3 class="project__name display" id="p-distiller"><span class="fit">Distiller</span></h3>
+
+            <div class="wi wcard" id="dsCode" style="--x:1.5%;--y:5%;--w:23vw">
+              <p class="wcard__head mono"><span>config.py</span><span>1 line</span></p>
+<pre class="wcard__code mono"><span class="del">- base_url = "https://api.openai.com/v1"</span>
+<span class="add">+ base_url = "http://distiller:8000/v1"</span></pre>
+            </div>
+
+            <figure class="wi" id="dsStill" style="--x:29%;--y:-4%;--w:36vw">
+              <svg class="ink-art" viewBox="0 0 560 270" aria-hidden="true">
+                <path d="M62 250 H158 M76 250 L84 214 M144 250 L136 214 M78 214 H142"/>
+                <path class="hot" d="M110 212 C98 200 104 190 110 180 C116 190 122 200 110 212 Z"/>
+                <path class="hot" d="M110 206 C105 199 107 194 110 189 C113 194 115 199 110 206"/>
+                <circle class="fill" cx="110" cy="132" r="52"/>
+                <path d="M96 84 V44 H124 V84"/>
+                <path d="M62 142 C80 136 92 148 110 142 C128 136 140 148 158 142"/>
+                <circle cx="96" cy="160" r="3"/><circle cx="118" cy="170" r="2"/><circle cx="128" cy="154" r="2.5"/>
+                <path d="M124 52 C150 52 170 56 196 66"/>
+                <path class="fill" d="M196 54 L430 142 L420 168 L186 80 Z"/>
+                <path d="M206 72 C214 58 224 58 226 76 C228 94 238 94 246 80 C254 66 264 66 266 84 C268 102 278 102 286 88 C294 74 304 74 306 92 C308 110 318 110 326 96 C334 82 344 82 346 100 C348 118 358 118 366 104 C374 90 384 90 386 108 C388 126 398 126 406 112"/>
+                <path d="M238 66 V36 H252 M380 120 V96 H394"/>
+                <path d="M425 155 C440 160 446 168 448 182"/>
+                <path class="hot" d="M448 190 C445 195 445 199 448 201 C451 199 451 195 448 190 Z"/>
+                <path class="hot" d="M448 210 C446 213 446 216 448 217 C450 216 450 213 448 210 Z"/>
+                <path class="fill" d="M436 226 L460 226 L460 236 L486 262 H410 L436 236 Z"/>
+                <path class="hot" d="M422 252 H474"/>
+              </svg>
+              <figcaption class="wi__cap mono"><span>Big model · every call logged</span><span class="hot-t">→ small model · LoRA</span></figcaption>
+            </figure>
+
+            <div class="wi wcard" id="dsLog" style="--x:73.5%;--y:6%;--w:22vw">
+              <p class="wcard__head mono"><span>calls.log</span><span>repeats</span></p>
+              <ul class="wlog mono">
+                <li><span>classify_ticket</span><i>●●●●●●●</i></li>
+                <li><span>extract_invoice</span><i>●●●●●</i></li>
+                <li><span>summarise_rfq</span><i>●●●●</i></li>
+                <li><span>one_off_question</span><i>●</i></li>
+              </ul>
+              <p class="wcard__foot mono"><span>same task, again</span><span class="hot-t">distil it</span></p>
+            </div>
+
+            <div class="wi wcard" id="dsStatus" style="--x:2%;--y:66%;--w:21vw">
+              <p class="wcard__head mono"><span>$ distiller status</span><span>in progress</span></p>
+              <ul class="status mono">
+                <li><span class="ok">●</span><span>Gateway</span><span>working</span></li>
+                <li><span class="ok">●</span><span>Call logging</span><span>working</span></li>
+                <li><span class="wip">◐</span><span>LoRA training</span><span>building</span></li>
+                <li><span class="wip">◐</span><span>Shadow tests</span><span>building</span></li>
+                <li><span class="wip">◐</span><span>Routing</span><span>building</span></li>
+              </ul>
+            </div>
+
+            <figure class="wi" id="dsRouter" style="--x:36%;--y:65%;--w:21vw">
+              <svg class="ink-art" viewBox="0 0 300 190" aria-hidden="true">
+                <path d="M150 20 V186 M126 186 H174"/>
+                <path class="fill" d="M150 30 H262 L284 50 L262 70 H150 Z"/>
+                <path class="fill" d="M150 92 H38 L16 112 L38 132 H150 Z"/>
+                <text x="166" y="55" class="svgt">SMALL · SURE</text>
+                <text x="46" y="117" class="svgt">BIG · UNSURE</text>
+                <circle class="ink-hot" cx="272" cy="50" r="4"/>
+              </svg>
+              <figcaption class="wi__cap mono"><span>Routing</span><span class="hot-t">falls back when unsure</span></figcaption>
+            </figure>
+
+            <figure class="wi" id="dsShadow" style="--x:72%;--y:63%;--w:18vw">
+              <svg class="ink-art" viewBox="0 0 260 190" aria-hidden="true">
+                <path d="M130 30 V170 M96 170 H164 M110 170 L130 150 L150 170"/>
+                <circle class="fill" cx="130" cy="30" r="7"/>
+                <path d="M40 44 H220"/>
+                <path d="M40 44 L18 104 M40 44 L62 104 M220 44 L198 104 M220 44 L242 104"/>
+                <path class="fill" d="M10 104 H70 C70 124 10 124 10 104 Z"/>
+                <path class="fill" d="M190 104 H250 C250 124 190 124 190 104 Z"/>
+                <text x="40" y="142" class="svgt" text-anchor="middle">BIG</text>
+                <text x="220" y="142" class="svgt" text-anchor="middle">SMALL</text>
+                <path class="hot" d="M118 10 L126 18 L142 2"/>
+              </svg>
+              <figcaption class="wi__cap mono"><span>Shadow test</span><span class="hot-t">same answer?</span></figcaption>
+            </figure>
+          </div>
+          <footer class="project__foot">
+            <ul class="stack mono"><li>Python</li><li>FastAPI</li><li>LiteLLM</li><li>LoRA</li><li>Ollama</li></ul>
+            <span class="project__year mono">2026</span>
+            <a class="explore mono" data-cursor="Explore" href="/work/distiller">Explore project <span aria-hidden="true">↗</span></a>
+          </footer>
+          <details class="notes"><summary class="mono" data-cursor="Read">Case notes</summary>
+            <div class="notes__body">
+              <p>Distiller is an OpenAI-compatible gateway, so a team adopts it by changing one line. It logs the company's repeated LLM calls, fine-tunes small open models with LoRA to copy the big model on those tasks, tests them in shadow mode, then sends the requests it's confident about to the cheap model and falls back to the big one when it isn't.</p>
+              <p>Status: the gateway and CLI work. Training and routing are in development.</p>
+            </div>
+          </details>
+        </div>
+      </article>
       <article class="band project tone-ink" data-cat="company" aria-labelledby="p-cerebra">
         <div class="band__inner">
           <header class="project__top">
-            <p class="project__label mono"><span class="project__num">02</span> / Generative AI · Moglix</p>
+            <p class="project__label mono"><span class="project__num">03</span> / Generative AI · Moglix</p>
             <p class="project__pitch mono">Type what you need. Cerebra drafts the purchase request or RFQ in Credlex for you.</p>
           </header>
           <div class="project__stage">
@@ -289,42 +388,6 @@
       </article>
 
       <!-- 03 DISTILLER -->
-      <article class="band project tone-paper" data-cat="personal" aria-labelledby="p-distiller">
-        <div class="band__inner">
-          <header class="project__top">
-            <p class="project__label mono"><span class="project__num">03</span> / LLM infrastructure · Personal <span class="badge">In progress</span></p>
-            <p class="project__pitch mono">Swap one URL. Your repeated LLM calls quietly move to a small model you own.</p>
-          </header>
-          <div class="project__stage">
-            <h3 class="project__name display" id="p-distiller"><span class="fit">Distiller</span></h3><svg class="sketch" style="--x:58%;--y:-8%;--w:30vw;--r:0deg" viewBox="0 0 440 300" aria-hidden="true"><path d="M20 252 H170"/><rect class="fill" x="40" y="226" width="110" height="26" rx="3"/><path class="hot" d="M84 222 C76 210 92 204 86 192 C100 202 104 214 96 222"/><circle class="fill" cx="95" cy="150" r="58"/><path class="fill" d="M82 96 V44 H108 V96"/><rect class="fill" x="77" y="34" width="36" height="12" rx="2"/><path d="M45 168 Q95 150 145 168"/><circle cx="80" cy="182" r="3"/><circle cx="104" cy="190" r="2"/><circle cx="118" cy="176" r="2.5"/><path d="M108 54 C150 34 200 34 236 64"/><path class="fill" d="M226 54 L248 40 L382 188 L360 202 Z"/><path d="M236 64 L372 196" stroke-dasharray="3 5"/><path d="M262 64 V40 H276 M340 160 V138 H354"/><path class="fill" d="M352 214 H424 L414 286 H362 Z"/><path d="M358 258 H418"/><circle cx="376" cy="204" r="3.5" class="ink-hot"/></svg><p class="callout mono" style="--x:40%;--y:6%"><span>Big model</span><b>Every call logged</b></p><p class="callout mono" style="--x:84%;--y:76%"><span>Small model</span><b>LoRA · shadow-tested</b></p><div class="card card--code" style="--x:4%;--y:0%;--w:24vw;--r:-2deg">
-              <p class="card__head mono"><span>config.py</span><span>1 line</span></p>
-<pre class="mono"><span class="del">- base_url = "https://api.openai.com/v1"</span>
-<span class="add">+ base_url = "http://distiller:8000/v1"</span></pre>
-            </div>
-            <div class="card" style="--x:18%;--y:64%;--w:19vw;--r:1.5deg">
-              <p class="card__head mono"><span>$ distiller status</span><span></span></p>
-              <ul class="status mono">
-                <li><span class="ok">●</span><span>Gateway</span><span>working</span></li>
-                <li><span class="ok">●</span><span>Call logging</span><span>working</span></li>
-                <li><span class="wip">◐</span><span>LoRA training</span><span>building</span></li>
-                <li><span class="wip">◐</span><span>Shadow tests</span><span>building</span></li>
-                <li><span class="wip">◐</span><span>Routing</span><span>building</span></li>
-              </ul>
-            </div>
-          </div>
-          <footer class="project__foot">
-            <ul class="stack mono"><li>Python</li><li>FastAPI</li><li>LiteLLM</li><li>LoRA</li><li>Ollama</li></ul>
-            <span class="project__year mono">2026</span>
-            <a class="explore mono" data-cursor="Explore" href="/work/distiller">Explore project <span aria-hidden="true">↗</span></a>
-          </footer>
-          <details class="notes"><summary class="mono" data-cursor="Read">Case notes</summary>
-            <div class="notes__body">
-              <p>Distiller is an OpenAI-compatible gateway, so a team adopts it by changing one line. It logs the company's repeated LLM calls, fine-tunes small open models with LoRA to copy the big model on those tasks, tests them in shadow mode, then sends the requests it's confident about to the cheap model and falls back to the big one when it isn't.</p>
-              <p>Status: the gateway and CLI work. Training and routing are in development.</p>
-            </div>
-          </details>
-        </div>
-      </article>
 
       <!-- 04 BUG TOOL -->
       <article class="band project tone-ink" data-cat="personal" aria-labelledby="p-bug">
