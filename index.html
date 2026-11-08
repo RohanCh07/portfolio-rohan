@@ -140,24 +140,103 @@
       <p class="sr-only" id="filterStatus" aria-live="polite"></p>
 
       <!-- 01 LUMIDA -->
-      <article class="band project tone-paper" data-cat="personal" aria-labelledby="p-lumida">
+      <article class="band project project--world tone-paper" data-cat="personal" aria-labelledby="p-lumida" data-thread="0.3,0 a:lmDb:0.82,0.3 a:lmSchema:0.2,0.75 a:lmSchema:0.6,0.92 a:lmLens:0.35,0.88 a:lmDrift:0.3,0.95 a:lmDrift:0.9,1.15 0.8,0.55 a:lmReport:1.03,0.3 a:lmReport:0.6,1.12 a:lmTorch:0.85,0.95 0.3,1">
         <div class="band__inner">
           <header class="project__top">
             <p class="project__label mono"><span class="project__num">01</span> / Data quality · Personal</p>
             <p class="project__pitch mono">Point it at any database, read-only. It finds the relationships nobody wrote down and the problems nobody noticed.</p>
           </header>
-          <div class="project__stage">
-            <h3 class="project__name display" id="p-lumida"><span class="fit">Lumida</span></h3><svg class="sketch" style="--x:2%;--y:-4%;--w:13vw;--r:-4deg" viewBox="0 0 200 270" aria-hidden="true"><path class="fill" d="M20 30 V200 A80 20 0 0 0 180 200 V30 Z"/><ellipse class="fill" cx="100" cy="30" rx="80" ry="20"/><path d="M20 87 A80 20 0 0 0 180 87 M20 144 A80 20 0 0 0 180 144"/><path d="M42 66 H70 M42 123 H70 M42 180 H70"/><circle cx="150" cy="70" r="3" class="ink"/><circle cx="150" cy="127" r="3" class="ink"/><circle cx="150" cy="184" r="3" class="ink"/><rect class="fill" x="128" y="196" width="56" height="44" rx="5"/><path d="M140 196 V180 A16 16 0 0 1 172 180 V196"/><circle cx="156" cy="214" r="5"/><path d="M156 219 V228"/></svg><p class="callout mono" style="--x:16%;--y:6%"><span>orders_db</span><b>Read-only</b></p><svg class="sketch" style="--x:58%;--y:-6%;--w:27vw;--r:2deg" viewBox="0 0 380 250" aria-hidden="true"><rect class="fill" x="10" y="20" width="110" height="74" rx="3"/><path d="M10 38 H120"/><path d="M18 30 H70.5" stroke-width="2.4"/><path d="M18 50 H78.2"/><circle cx="108" cy="50" r="2" class="ink"/><path d="M18 64 H78.2"/><circle cx="108" cy="64" r="2" class="ink"/><path d="M18 78 H78.2"/><circle cx="108" cy="78" r="2" class="ink"/><rect class="fill" x="250" y="6" width="120" height="74" rx="3"/><path d="M250 24 H370"/><path d="M258 16 H316.0" stroke-width="2.4"/><path d="M258 36 H324.4"/><circle cx="358" cy="36" r="2" class="ink"/><path d="M258 50 H324.4"/><circle cx="358" cy="50" r="2" class="ink"/><path d="M258 64 H324.4"/><circle cx="358" cy="64" r="2" class="ink"/><rect class="fill" x="40" y="160" width="110" height="74" rx="3"/><path d="M40 178 H150"/><path d="M48 170 H100.5" stroke-width="2.4"/><path d="M48 190 H108.2"/><circle cx="138" cy="190" r="2" class="ink"/><path d="M48 204 H108.2"/><circle cx="138" cy="204" r="2" class="ink"/><path d="M48 218 H108.2"/><circle cx="138" cy="218" r="2" class="ink"/><rect class="fill" x="258" y="160" width="112" height="74" rx="3"/><path d="M258 178 H370"/><path d="M266 170 H319.6" stroke-width="2.4"/><path d="M266 190 H327.44"/><circle cx="358" cy="190" r="2" class="ink"/><path d="M266 204 H327.44"/><circle cx="358" cy="204" r="2" class="ink"/><path d="M266 218 H327.44"/><circle cx="358" cy="218" r="2" class="ink"/><path d="M120 50 C170 50 200 40 250 40"/><path d="M150 196 C200 196 210 196 258 196"/><path d="M310 80 V160"/><path class="hot" d="M95 94 C120 140 220 130 258 180" stroke-dasharray="6 6"/><circle class="fill" cx="178" cy="128" r="34"/><path class="hot" d="M168 118 L188 138 M188 118 L168 138"/><path d="M202 152 L232 182" stroke-width="7"/></svg><p class="callout mono" style="--x:84%;--y:72%"><span>customers ↔ orders</span><b>4 orphan rows</b></p><div class="card" style="--x:7%;--y:64%;--w:19vw;--r:-2deg">
-              <p class="card__head mono"><span>Benchmark</span><span>Test DB</span></p>
-              <dl class="metrics">
-                <div><dt class="mono">Hidden relationships</dt><dd>15<small>/15</small></dd></div>
-                <div><dt class="mono">Planted problems</dt><dd>13<small>/13</small></dd></div>
-                <div><dt class="mono">False alarms</dt><dd>0</dd></div>
-              </dl>
-            </div>
-            <figure class="shot" style="--x:52%;--y:60%;--w:27vw;--r:2deg">
-              <img src="assets/project-lumida.jpg" alt="Lumida's landing page: 'Light on your data.'" width="800" height="500" loading="lazy">
+          <div class="project__stage world">
+            <h3 class="project__name display" id="p-lumida"><span class="fit">Lumida</span></h3>
+
+            <figure class="wi" id="lmDb" style="--x:1.5%;--y:-2%;--w:11.5vw">
+              <svg class="ink-art" viewBox="0 0 220 250" aria-hidden="true">
+                <rect class="fill" x="30" y="10" width="140" height="210" rx="4"/>
+                <path d="M30 32 H170 M30 208 H170"/>
+                <circle cx="44" cy="21" r="2.4" class="ink"/><circle cx="54" cy="21" r="2.4" class="ink"/><path d="M118 21 H158"/>
+                <rect x="42" y="44" width="116" height="34" rx="2"/><path d="M52 61 H92 M100 54 V68 M106 54 V68 M112 54 V68"/><circle cx="144" cy="61" r="3" class="ink"/>
+                <rect x="42" y="86" width="116" height="34" rx="2"/><path d="M52 103 H92 M100 96 V110 M106 96 V110 M112 96 V110"/><circle cx="144" cy="103" r="3" class="ink"/>
+                <rect x="42" y="128" width="116" height="34" rx="2"/><path d="M52 145 H92 M100 138 V152 M106 138 V152 M112 138 V152"/><circle cx="144" cy="145" r="3" class="ink-hot"/>
+                <rect x="42" y="170" width="116" height="30" rx="2"/><path d="M52 185 H92"/>
+                <path d="M40 220 V234 M160 220 V234"/>
+                <path d="M170 98 H186 V116"/>
+                <rect class="fill" x="172" y="116" width="28" height="24" rx="3"/><path d="M178 116 V108 A8 8 0 0 1 194 108 V116"/><circle cx="186" cy="126" r="3"/><path d="M186 129 V134"/>
+              </svg>
+              <figcaption class="wi__cap mono"><span>orders_db</span><span>Read-only</span></figcaption>
             </figure>
+
+            <figure class="wi" id="lmSchema" style="--x:19%;--y:-6%;--w:31vw">
+              <svg class="ink-art" viewBox="0 0 520 250" aria-hidden="true">
+                <g><rect class="fill" x="6" y="18" width="128" height="96" rx="3"/><path d="M6 38 H134"/><path d="M16 28 H70" stroke-width="2.2"/><path d="M28 54 H96 M28 70 H88 M28 86 H100 M28 102 H82"/><circle cx="18" cy="54" r="3"/></g>
+                <g><rect class="fill" x="196" y="4" width="128" height="112" rx="3"/><path d="M196 24 H324"/><path d="M206 14 H244" stroke-width="2.2"/><path d="M218 40 H286 M218 56 H300 M218 72 H278 M218 88 H292 M218 104 H270"/><circle cx="208" cy="40" r="3"/><circle cx="208" cy="72" r="3" class="ink-hot"/></g>
+                <g><rect class="fill" x="386" y="22" width="128" height="80" rx="3"/><path d="M386 42 H514"/><path d="M396 32 H446" stroke-width="2.2"/><path d="M408 58 H478 M408 74 H470 M408 90 H486"/><circle cx="398" cy="58" r="3"/></g>
+                <g><rect class="fill" x="240" y="160" width="128" height="80" rx="3"/><path d="M240 180 H368"/><path d="M250 170 H300" stroke-width="2.2"/><path d="M262 196 H330 M262 212 H322 M262 228 H340"/><circle cx="252" cy="196" r="3"/></g>
+                <path d="M324 56 C354 56 356 74 386 74"/>
+                <path d="M300 116 C300 138 304 140 304 160"/>
+                <path class="hot dash" d="M196 72 C166 72 164 54 134 54"/>
+                <circle class="fill hot" cx="165" cy="63" r="9"/><path class="hot" d="M160.5 63 L164 66.5 L170 59.5"/>
+              </svg>
+              <figcaption class="wi__cap mono"><span>Hidden link found</span><span class="hot-t">orders.cust_ref → customers.id</span></figcaption>
+            </figure>
+
+            <figure class="wi" id="lmLens" style="--x:56%;--y:-3%;--w:16vw">
+              <svg class="ink-art" viewBox="0 0 280 230" aria-hidden="true">
+                <rect class="fill" x="6" y="10" width="200" height="170" rx="2"/>
+                <path d="M6 34 H206 M6 58 H206 M6 82 H206 M6 106 H206 M6 130 H206 M6 154 H206 M60 10 V180 M120 10 V180 M166 10 V180"/>
+                <path d="M16 22 H48 M70 22 H108 M130 22 H156 M176 22 H198" stroke-width="2.2"/>
+                <path d="M16 46 H44 M70 46 H100 M130 46 H150 M16 70 H40 M70 70 H104 M130 70 H154 M16 94 H46 M70 94 H96 M16 118 H42 M70 118 H102 M130 118 H148 M16 142 H44 M70 142 H98 M16 166 H40 M70 166 H106 M130 166 H152"/>
+                <ellipse class="hot" cx="108" cy="94" rx="108" ry="15"/><ellipse class="hot" cx="108" cy="142" rx="108" ry="15"/>
+                <circle class="fill" cx="196" cy="128" r="46"/><circle cx="196" cy="128" r="38"/><path d="M178 112 A26 26 0 0 1 204 104"/>
+                <path d="M229 161 L268 200" stroke-width="7"/>
+              </svg>
+              <figcaption class="wi__cap mono"><span>orders</span><span class="hot-t">4 orphan rows</span></figcaption>
+            </figure>
+
+            <figure class="wi" id="lmDrift" style="--x:78%;--y:4%;--w:15vw">
+              <svg class="ink-art" viewBox="0 0 260 170" aria-hidden="true">
+                <path d="M14 10 V150 H250"/>
+                <path d="M14 116 H250 M14 84 H250" class="dash"/>
+                <path d="M14 104 L40 98 L62 102 L84 94 L106 100 L128 96 L150 99 L170 92 L188 44 L206 38 L228 42 L246 40"/>
+                <circle class="hot" cx="188" cy="44" r="14"/>
+                <path d="M30 150 V156 M80 150 V156 M130 150 V156 M180 150 V156 M230 150 V156"/>
+              </svg>
+              <figcaption class="wi__cap mono"><span>orders.amount</span><span class="hot-t">Drift +38%</span></figcaption>
+            </figure>
+
+            <figure class="wi" id="lmTorch" style="--x:2%;--y:63%;--w:15vw">
+              <svg class="ink-art" viewBox="0 0 280 180" aria-hidden="true">
+                <path class="beam" d="M118 74 L272 18 M118 104 L272 166"/>
+                <path class="dash" d="M272 18 Q290 92 272 166"/>
+                <rect class="fill" x="20" y="72" width="70" height="34" rx="6" transform="rotate(0)"/>
+                <path class="fill" d="M90 66 L118 60 L118 118 L90 112 Z"/>
+                <path d="M118 60 C126 70 126 108 118 118"/>
+                <path d="M32 72 V106 M44 72 V106 M56 72 V106"/>
+                <rect x="64" y="82" width="16" height="14" rx="2"/>
+                <path d="M20 89 H6"/>
+              </svg>
+              <figcaption class="wi__cap mono"><span>Light on your data</span><span>Live</span></figcaption>
+            </figure>
+
+            <div class="wi report" id="lmReport" style="--x:31%;--y:64%;--w:35vw">
+              <div class="report__page">
+                <p class="report__head mono"><span>Scan / orders_db</span><span>Test DB</span></p>
+                <dl class="report__rows mono">
+                  <div><dt>Hidden relationships</dt><dd>15 / 15</dd></div>
+                  <div><dt>Planted problems</dt><dd>13 / 13</dd></div>
+                  <div><dt>False alarms</dt><dd>0</dd></div>
+                </dl>
+                <p class="report__total mono"><span>Benchmark</span><b>Passed</b></p>
+              </div>
+              <div class="report__page">
+                <p class="report__head mono"><span>Finding / 07</span><span>Drift</span></p>
+                <dl class="report__rows mono">
+                  <div><dt>Where</dt><dd>orders.amount</dd></div>
+                  <div><dt>Evidence</dt><dd>attached</dd></div>
+                  <div><dt>Explained by</dt><dd>LLM</dd></div>
+                </dl>
+                <p class="report__total mono"><span>Marked real</span><b class="report__ok">✓</b></p>
+              </div>
+            </div>
           </div>
           <footer class="project__foot">
             <ul class="stack mono"><li>Python</li><li>PostgreSQL</li><li>FastAPI</li><li>Docker</li><li>Gemini</li></ul>

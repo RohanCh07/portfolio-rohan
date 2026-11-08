@@ -690,7 +690,7 @@
   }
   function collectFloaters() {
     scenes = [];
-    $$('.project:not([hidden])').forEach(function (proj) {
+    $$('.project:not([hidden]):not(.project--world)').forEach(function (proj) {
       var parts = [], k = { sketch: 0, card: 0, note: 0 };
       $$('.project__stage > *', proj).forEach(function (el) {
         var part = { el: el, kind: 'card', from: [0, 110], a0: 0, a1: 1, fade: true };
@@ -785,6 +785,25 @@
   }
   // after the entrance pop-in, drop the stagger delays so hover / drag feel instant
   setTimeout(function () { stickers.forEach(function (st) { st.classList.add('is-settled'); }); }, 3200);
+
+  /* ---------- project worlds: ink drawings draw themselves in as they scroll into view ---------- */
+  (function () {
+    var items = $$('.project--world .wi');
+    if (!items.length) return;
+    items.forEach(function (it) {
+      $$('.ink-art path, .ink-art rect, .ink-art circle, .ink-art ellipse', it).forEach(function (n) {
+        if (n.classList.contains('dash') || n.classList.contains('ink') || n.classList.contains('ink-hot')) return;
+        if (reduceMotion) return;
+        n.setAttribute('pathLength', '1'); n.style.strokeDasharray = '1 1'; n.style.strokeDashoffset = '1';
+      });
+    });
+    var show = function (it) { it.classList.add('is-drawn'); $$('[pathLength]', it).forEach(function (n) { n.style.strokeDashoffset = '0'; }); };
+    if (reduceMotion || !('IntersectionObserver' in window)) { items.forEach(show); return; }
+    var wio = new IntersectionObserver(function (es) {
+      es.forEach(function (en, i) { if (en.isIntersecting) { var it = en.target; setTimeout(function () { show(it); }, 120 * (items.indexOf(it) % 6)); wio.unobserve(it); } });
+    }, { rootMargin: '0px 0px -15% 0px' });
+    items.forEach(function (it) { wio.observe(it); });
+  })();
 
   /* ---------- filter pill: fade out before it slides over the next section ---------- */
   var fbar = $('.filterbar'), projWrap = $('#projects');
