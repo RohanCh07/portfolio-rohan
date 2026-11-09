@@ -1486,3 +1486,9 @@ body > .msg { z-index: 991; }
   .postcard { left: auto; top: auto; width: auto; }
   .contact .plug__hint { left: auto; right: 0; transform: none; }
 }
+
+/* hero stickers: fixed in place, a small wiggle on hover */
+.sticker { cursor: default; }
+@media (hover: hover) and (pointer: fine) { .is-loaded .sticker:hover { --s: 1.04; animation: sticker-wobble .5s cubic-bezier(.34,1.56,.64,1); } }
+#stCode { --x: 10% !important; }
+@media (max-width: 760px) { #stCode { display: block; --x: 6% !important; --y: 67% !important; } }

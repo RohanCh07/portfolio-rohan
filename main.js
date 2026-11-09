@@ -768,7 +768,7 @@
 
   /* ---------- hero stickers: drag them around (mouse / pen); the thread re-routes on drop ---------- */
   var stickers = $$('.sticker');
-  if (stickers.length && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  if (false) {   // stickers are fixed in place now
     stickers.forEach(function (st) {
       st.setAttribute('data-cursor', 'Drag');
       var sx = 0, sy = 0, ox = 0, oy = 0, drag = false;
