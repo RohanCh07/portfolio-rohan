@@ -160,9 +160,18 @@
     road.style.left = (mr.left - br.left) + 'px'; road.style.top = (mr.top - br.top) + 'px';
     road.style.width = mr.width + 'px'; road.style.height = mr.height + 'px';
   }
+  // the plug sits exactly on the end of the coiled cable, whatever the size of the coil
+  function placePlug() {
+    var c = document.getElementById('coil'), pl = document.getElementById('plug');
+    if (!c || !pl || !c.getClientRects().length) return;
+    var p = c.querySelector('path'), q = p.getPointAtLength(p.getTotalLength());
+    var vb = c.viewBox.baseVal, r = c.getBoundingClientRect(), w = pl.parentElement.getBoundingClientRect();
+    pl.style.left = (r.left - w.left + q.x / vb.width * r.width) + 'px';
+    pl.style.top = (r.top - w.top + q.y / vb.height * r.height) + 'px';
+  }
   function buildThread() {
     if (!svg || !main) return;
-    placeRoad();
+    placeRoad(); placePlug();
     while (svg.firstChild) svg.removeChild(svg.firstChild);
     var mRect = main.getBoundingClientRect();
     var W = main.clientWidth, H = main.scrollHeight;
@@ -833,6 +842,16 @@
     });
     oio.observe(odo);
   })();
+
+  /* ---------- re-route the thread whenever the page's height changes (late images, fonts, open notes) ---------- */
+  if ('ResizeObserver' in window && main) {
+    var lastH = 0, rto = 0;
+    new ResizeObserver(function () {
+      var h = main.scrollHeight;
+      if (Math.abs(h - lastH) < 2) return; lastH = h;
+      clearTimeout(rto); rto = setTimeout(function () { if (booted) { buildThread(); } }, 180);
+    }).observe(main);
+  }
 
   /* ---------- filter pill: fade out before it slides over the next section ---------- */
   var fbar = $('.filterbar'), projWrap = $('#projects');
