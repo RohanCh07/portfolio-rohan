@@ -1492,3 +1492,9 @@ body > .msg { z-index: 991; }
 @media (hover: hover) and (pointer: fine) { .is-loaded .sticker:hover { --s: 1.04; animation: sticker-wobble .5s cubic-bezier(.34,1.56,.64,1); } }
 #stCode { --x: 10% !important; }
 @media (max-width: 760px) { #stCode { display: block; --x: 6% !important; --y: 67% !important; } }
+@media (max-width: 760px) {
+  #stRest { --x: 30% !important; }
+  #stCerebra { --x: 4% !important; --y: 58% !important; font-size: .55rem; }
+  #stBadge { --x: 70% !important; --y: 62% !important; }
+  #stCode { --y: 72% !important; }
+}
