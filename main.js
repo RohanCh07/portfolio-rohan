@@ -410,6 +410,7 @@
     if (!root.classList.contains('is-loaded')) return;          // wait for the opening signature
     threadGoal = Math.max(lengthAtScreenLine(), heroDrawn && T.heroEnd ? T.heroEnd : 0);
     if (intro || pulling) return;                                // opening glide / plug being pulled
+    if (!heroDrawn && !reduceMotion) return;                     // nothing until the opening draw starts from the RC dot
     threadNow = threadGoal;
     paintThread(threadNow);
     drawSkillmap();
