@@ -1498,3 +1498,6 @@ body > .msg { z-index: 991; }
   #stBadge { --x: 70% !important; --y: 62% !important; }
   #stCode { --y: 72% !important; }
 }
+
+/* keep the page width the same while the opening locks scrolling, so the thread never shifts */
+html { scrollbar-gutter: stable; }

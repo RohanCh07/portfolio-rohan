@@ -845,10 +845,11 @@
 
   /* ---------- re-route the thread whenever the page's height changes (late images, fonts, open notes) ---------- */
   if ('ResizeObserver' in window && main) {
-    var lastH = 0, rto = 0;
+    var lastH = 0, lastW = 0, rto = 0;
     new ResizeObserver(function () {
-      var h = main.scrollHeight;
-      if (Math.abs(h - lastH) < 2) return; lastH = h;
+      // height (late images, fonts) or width (the scrollbar appearing once scrolling unlocks)
+      var h = main.scrollHeight, w = main.clientWidth;
+      if (Math.abs(h - lastH) < 2 && Math.abs(w - lastW) < 1) return; lastH = h; lastW = w;
       clearTimeout(rto); rto = setTimeout(function () { if (booted) { buildThread(); } }, 180);
     }).observe(main);
   }
@@ -867,7 +868,7 @@
   function releaseLoader() { if (loaderDone) return; loaderDone = true; loaderWaiters.splice(0).forEach(function (f) { f(); }); }
   var scrollLocked = false;
   function lockScroll() { scrollLocked = true; root.classList.add('is-locked'); if (lenis) lenis.stop(); }
-  function unlockScroll() { if (!scrollLocked) return; scrollLocked = false; root.classList.remove('is-locked'); if (lenis) lenis.start(); }
+  function unlockScroll() { if (!scrollLocked) return; scrollLocked = false; root.classList.remove('is-locked'); if (lenis) lenis.start(); setTimeout(function () { if (T) buildThread(); }, 60); }
   (function runLoader() {
     var loader = $('#loader');
     if (!loader) { releaseLoader(); return; }
