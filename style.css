@@ -1660,3 +1660,27 @@ html { scrollbar-gutter: stable; }
 .nb__line { font-size: 15px; } .jr__sub { font-size: 15px; } .jr__cap { font-size: 12.5px; }
 .tk__hd { font-size: 11.5px; } .tk__stub p { font-size: 10.5px; }
 .pp--slot .pp__sheet { font-size: 13px; }
+/* ---------- phones: board, ticket and frame tuned for small screens ---------- */
+@media (max-width: 900px) {
+  .board { padding: 1.8rem .9rem 1.4rem; box-shadow: inset 0 0 0 6px #0e0d0c, inset 0 0 0 7px rgba(241,238,230,.16); border-radius: 12px; }
+  .board__stage { gap: 2rem; }
+  .pp__sheet { padding: 18px 18px 16px; }
+  .pp--notebook .pp__sheet { padding-left: 46px; }
+  .pp__name--xl, .pp__name--l { font-size: 46px; } .pp__name--m, .pp__name--s { font-size: 30px; }
+  .rc__brand { font-size: 38px; }
+  .pp--ticket .pp__sheet { display: block; -webkit-mask: none; mask: none; }
+  .tk__main { border-right: 0; padding: 0 18px 18px; } .tk__hd { margin: 0 -18px; padding: 11px 18px; }
+  .tk__route { font-size: 30px; }
+  .tk__stub { display: flex; flex-wrap: wrap; align-items: baseline; gap: .2rem .9rem; padding: 14px 18px 16px; border-top: 2px dashed rgba(17,17,17,.45); }
+  .tk__stub p { margin: 0; }
+  .board__tabs { width: 100%; justify-content: space-between; }
+  .btab { padding: .65rem .7rem; font-size: .6rem; }
+  .board__title { font-size: 4.2rem; }
+}
+@media (max-width: 760px) {
+  .contact .plug__hint { left: auto; right: 0; transform: none; white-space: nowrap; }
+  .contact .coil-wrap { right: 4%; }
+}
+@media (max-width: 900px) {
+  .tk__stub { display: grid; grid-template-rows: auto auto; grid-auto-flow: column; justify-content: start; column-gap: 1.4rem; row-gap: .25rem; }
+}

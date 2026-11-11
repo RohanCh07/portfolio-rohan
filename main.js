@@ -429,16 +429,20 @@
   }
   // once, after the signature: glide the hero's stretch in, then hand over to the scroll
   var heroDrawn = false;
+  // The opening draw runs on its own (3 s from the RC dot), but you can scroll at any time:
+  // the tip then follows your scroll as fast as you go, and the opening simply hands over.
   function introThread() {
-    if (!T || reduceMotion) { heroDrawn = true; unlockScroll(); return; }
-    var target = T.heroEnd || lengthAtScreenLine();
+    if (!T || reduceMotion) { heroDrawn = true; return; }
     intro = { start: performance.now(), dur: 3000 };
     (function frame(now) {
+      if (!T) { intro = null; heroDrawn = true; return; }
+      var end = T.heroEnd || lengthAtScreenLine();
       var k = Math.min(1, (now - intro.start) / intro.dur);
-      threadNow = (T.heroEnd || target) * k;
+      var byScroll = window.scrollY > 4 ? lengthAtScreenLine() : 0;
+      threadNow = Math.max(threadNow, end * k, byScroll);
       paintThread(threadNow);
-      if (k < 1) requestAnimationFrame(frame);
-      else { intro = null; heroDrawn = true; drawThread(); unlockScroll(); }
+      if (k < 1 && threadNow < end) requestAnimationFrame(frame);
+      else { intro = null; heroDrawn = true; drawThread(); }
     })(intro.start);
   }
   function paintThread(drawn) {
@@ -1037,12 +1041,12 @@
   var booted = false;
   function boot() {
     if (booted) return; booted = true;
-    if (!reduceMotion) { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; window.scrollTo(0, 0); lockScroll(); }
+    if (!reduceMotion) { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; window.scrollTo(0, 0); }
     retone(); fitNames(); buildThread(); collectFloaters(); drawParallax();
     afterLoader(function () {
       requestAnimationFrame(function () { root.classList.add('is-loaded');
         // the hero's small print sits below the reveal margin on short screens; show it with the headline
-        $$('.hero .reveal').forEach(function (el, i) { setTimeout(function () { el.classList.add('is-in'); }, 700 + i * 120); }); setTimeout(buildThread, 1500); setTimeout(function () { introThread(); drawSkillmap(); drawFigures(); }, 1100); setTimeout(unlockScroll, 5200); });
+        $$('.hero .reveal').forEach(function (el, i) { setTimeout(function () { el.classList.add('is-in'); }, 700 + i * 120); }); setTimeout(buildThread, 1500); setTimeout(function () { introThread(); drawSkillmap(); drawFigures(); }, 1100); });
     });
   }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(boot); else boot();
