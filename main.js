@@ -865,6 +865,9 @@
     // Masonry: three equal columns, each paper goes into the shortest column, so the board is evenly filled.
     var COLS = 3, PAD_X = 64, PAD_TOP = 70, PAD_BOTTOM = 80, GAP_X = 46, GAP_Y = 64;
     function layout() {
+      // narrower boards get two columns, so the text never shrinks below an easy reading size
+      COLS = board.clientWidth < 1150 ? 2 : 3; STAGE_W = COLS === 3 ? 1400 : 980;
+      stage.style.width = STAGE_W + 'px';
       var colW = (STAGE_W - PAD_X * 2 - GAP_X * (COLS - 1)) / COLS, cols = [];
       for (var c = 0; c < COLS; c++) cols.push(PAD_TOP);
       papers.slice().sort(function (a, b) { return a.dataset.order - b.dataset.order; }).forEach(function (pp) {
