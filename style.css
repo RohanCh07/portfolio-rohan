@@ -1639,3 +1639,14 @@ html { scrollbar-gutter: stable; }
   .tk__route { font-size: 28px; gap: 8px; }
 }
 .pp__yr { white-space: nowrap; }
+/* calmer board: one column width, closer type sizes */
+.pp__sheet { padding: 20px 22px 18px; }
+.pp__name--xl { font-size: 58px; } .pp__name--l { font-size: 52px; } .pp__name--m { font-size: 40px; } .pp__name--s { font-size: 34px; }
+.rc__brand { font-size: 46px; }
+.pp__d { font-size: 12.5px; }
+.pp--ticket .pp__sheet { grid-template-columns: 1fr 112px; -webkit-mask: radial-gradient(circle 13px at calc(100% - 112px) 0, #0000 98%, #000), radial-gradient(circle 13px at calc(100% - 112px) 100%, #0000 98%, #000); mask: radial-gradient(circle 13px at calc(100% - 112px) 0, #0000 98%, #000), radial-gradient(circle 13px at calc(100% - 112px) 100%, #0000 98%, #000); }
+.tk__main { padding: 0 20px 20px; } .tk__hd { margin: 0 -20px; padding: 12px 20px; }
+.tk__route { font-size: 34px; } .tk__stub { padding: 46px 14px 18px; } .tk__stub b { font-size: 18px; }
+.pp--slot .pp__sheet { padding: 56px 20px; }
+.tk__stub b { font-size: 16px; }
+.pp--slot .pp__sheet { display: grid; place-content: center; }

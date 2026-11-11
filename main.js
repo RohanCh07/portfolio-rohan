@@ -862,15 +862,40 @@
     if (!board || !stage) return;
     var papers = $$('.pp', stage), pins = $$('.bpin', stage);
     var STAGE_W = 1400, STAGE_H = 1620;
+    // Masonry: three equal columns, each paper goes into the shortest column, so the board is evenly filled.
+    var COLS = 3, PAD_X = 64, PAD_TOP = 70, PAD_BOTTOM = 80, GAP_X = 46, GAP_Y = 64;
+    function layout() {
+      var colW = (STAGE_W - PAD_X * 2 - GAP_X * (COLS - 1)) / COLS, cols = [];
+      for (var c = 0; c < COLS; c++) cols.push(PAD_TOP);
+      papers.slice().sort(function (a, b) { return a.dataset.order - b.dataset.order; }).forEach(function (pp) {
+        if (pp.classList.contains('pp--slot')) $('.pp__sheet', pp).style.minHeight = '';
+        pp.style.width = colW + 'px';
+        var c = 0; for (var j = 1; j < COLS; j++) if (cols[j] < cols[c] - 2) c = j;
+        var x = PAD_X + c * (colW + GAP_X), y = cols[c] + (pp.classList.contains('pp--tag') ? 50 : 0);
+        pp.style.left = x + 'px'; pp.style.top = y + 'px';
+        var pin = pinFor(pp.dataset.order);
+        if (pin) { pin.style.left = (x + colW / 2) + 'px'; pin.style.top = (pp.classList.contains('pp--tag') ? y - 64 : y - 4) + 'px'; }
+        cols[c] = y + pp.offsetHeight + GAP_Y;
+      });
+      var bottom = Math.max.apply(null, cols) - GAP_Y;
+      // the empty "next project" slot stretches to fill what is left of its column
+      var slot = $('.pp--slot', stage);
+      if (slot) { var sh = $('.pp__sheet', slot); sh.style.minHeight = ''; sh.style.minHeight = Math.max(sh.offsetHeight, bottom - parseFloat(slot.style.top)) + 'px'; }
+      STAGE_H = bottom + PAD_BOTTOM;
+      stage.style.height = STAGE_H + 'px';
+    }
     function fit() {
       if (window.innerWidth <= 900) { stage.style.transform = ''; board.style.height = ''; return; }
+      layout();
       var k = board.clientWidth / STAGE_W;
       stage.style.transform = 'scale(' + k + ')';
       board.style.height = (STAGE_H * k) + 'px';
+      if (typeof buildThread === 'function' && T) buildThread();
     }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    var pinFor = function (i) { return pins.filter(function (p) { return p.dataset.for === String(i); })[0]; };
     fit();
     window.addEventListener('resize', fit);
-    var pinFor = function (i) { return pins.filter(function (p) { return p.dataset.for === String(i); })[0]; };
     function drop(pp) {
       if (pp.classList.contains('is-pinned')) return;
       pp.classList.add('is-pinned');
