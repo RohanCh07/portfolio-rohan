@@ -18,7 +18,7 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/ibm-plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="style.css?v=e8f8c7d">
+  <link rel="stylesheet" href="style.css?v=board1">
   <script>
     (function () {
       var d = document.documentElement;
@@ -126,442 +126,102 @@
       </div>
     </section>
 
-    <!-- PROJECTS -->
-    <div class="projects" id="projects" aria-label="Projects">
-      <div class="filterbar">
-        <div class="filters" role="group" aria-label="Filter projects">
-          <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">All <sup data-count="all"></sup></button>
-          <button class="filter" type="button" data-filter="company" aria-pressed="false">Company <sup data-count="company"></sup></button>
-          <button class="filter" type="button" data-filter="personal" aria-pressed="false">Personal <sup data-count="personal"></sup></button>
-          <button class="filter" type="button" data-filter="research" aria-pressed="false">Research <sup data-count="research"></sup></button>
+    <!-- PROJECTS: the notice board -->
+    <section class="band board-band" id="projects" data-tone="paper" data-thread="0.5,0 a:pin-lumida:0.5,0.5 a:pin-cerebra:0.5,0.5 a:pin-distiller:0.5,0.5 a:pin-bug:0.5,0.5 a:pin-blockauth:0.5,0.5 a:pin-flight:0.5,0.5 a:pin-admin:0.5,0.5 a:pin-ecom:0.5,0.5 0.5,1" data-thread-mobile="0.06,0 0.06,1" aria-labelledby="board-title">
+      <div class="band__inner">
+        <div class="board__head">
+          <p class="kicker mono reveal">Projects · <b>pinned to the board</b></p>
+          <h2 class="board__title display reveal" id="board-title">Pinned<em>.</em></h2>
+          <div class="board__tabs mono reveal" role="group" aria-label="Filter projects">
+            <button class="btab is-on" type="button" data-cat="all" aria-pressed="true">All <sup>8</sup></button>
+            <button class="btab" type="button" data-cat="company" aria-pressed="false">Company <sup>2</sup></button>
+            <button class="btab" type="button" data-cat="personal" aria-pressed="false">Personal <sup>5</sup></button>
+            <button class="btab" type="button" data-cat="research" aria-pressed="false">Research <sup>1</sup></button>
+          </div>
+        </div>
+        <div class="board" id="board">
+          <div class="board__stage" id="boardStage">
+<article class="pp pp--torn pp--fold" data-cat="personal" data-order="0" style="left:40px;top:60px;width:560px;--r:-2.2deg"><div class="pp__sheet">
+  <p class="pp__hd"><span>01 / Data quality · Personal</span><span class="pp__hot">★ Featured</span></p>
+  <svg class="pp__sk" viewBox="0 0 520 150" aria-hidden="true"><rect x="10" y="12" width="78" height="124" rx="3"/><path d="M10 38H88M10 64H88M10 90H88M10 116H88"/><circle cx="76" cy="51" r="3" class="f"/><circle cx="76" cy="77" r="3" class="f h"/><rect x="140" y="20" width="110" height="64" rx="2"/><path d="M140 38H250M152 54H220M152 68H206"/><rect x="300" y="60" width="110" height="64" rx="2"/><path d="M300 78H410M312 94H380M312 108H366"/><path class="h" d="M250 52 C276 52 274 92 300 92" stroke-dasharray="5 5"/><circle class="h" cx="462" cy="46" r="26"/><path d="M481 65 L506 90" stroke-width="4"/><path class="h" d="M452 46 L460 54 L474 38"/></svg>
+  <h3 class="pp__name pp__name--xl">Lumida</h3>
+  <p class="pp__d">Point it at any database, read-only. It finds the relationships nobody wrote down and the problems nobody noticed.</p>
+  <p class="pp__note">Benchmark: 15/15 hidden links · 13/13 problems · 0 false alarms</p>
+  <div class="pp__ft"><ul class="pp__stack"><li>Python</li><li>PostgreSQL</li><li>FastAPI</li><li>Docker</li><li>Gemini</li></ul><span class="pp__yr">2026</span></div>
+  <a class="pp__ex" href="/work/lumida" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
+<article class="pp pp--receipt" data-cat="company" data-order="1" style="left:660px;top:40px;width:300px;--r:2.4deg"><div class="pp__sheet">
+  <p class="rc__brand">Cerebra</p><p class="rc__sub">GenAI assistant · Moglix</p>
+  <p class="rc__dash"></p>
+  <p class="rc__row"><span>PR DRAFT #0421</span><span>2026</span></p>
+  <p class="rc__q">"Need 200 safety gloves, size L, by Friday."</p>
+  <p class="rc__row"><span>Safety gloves L</span><span>×200</span></p>
+  <p class="rc__row"><span>Vendor RFQ</span><span>×3</span></p>
+  <p class="rc__row"><span>Credlex form</span><span>filled</span></p>
+  <p class="rc__dash"></p>
+  <p class="rc__row rc__tot"><span>TOTAL</span><span>Drafted ✓</span></p>
+  <p class="pp__d">Type what you need. Cerebra drafts the purchase request or RFQ for you.</p>
+  <ul class="pp__stack"><li>Python</li><li>LLMs</li><li>REST APIs</li></ul>
+  <p class="rc__bar" aria-hidden="true"></p>
+  <a class="pp__ex" href="/work/cerebra" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
+<article class="pp pp--grid" data-cat="personal" data-order="2" style="left:1010px;top:90px;width:360px;--r:-1.6deg"><div class="pp__sheet">
+  <span class="pp__stamp">WIP</span>
+  <p class="pp__hd"><span>02 / LLM infra · Personal</span><span class="pp__hot">★ Featured</span></p>
+  <svg class="pp__sk" viewBox="0 0 320 140" aria-hidden="true"><circle cx="64" cy="82" r="40"/><path d="M52 42V14H76V42M28 86C46 78 82 94 100 86"/><path d="M76 26 L246 86 L238 102 L68 42Z"/><path class="h" d="M258 98 C255 104 255 108 258 110 C261 108 261 104 258 98Z"/><path d="M240 132H280L268 118H252Z"/><path d="M40 132H90"/></svg>
+  <h3 class="pp__name pp__name--l">Distiller</h3>
+  <p class="pp__d">Swap one URL. Your repeated LLM calls quietly move to a small model you own.</p>
+  <div class="pp__ft"><ul class="pp__stack"><li>FastAPI</li><li>LiteLLM</li><li>LoRA</li><li>Ollama</li></ul></div>
+  <a class="pp__ex" href="/work/distiller" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
+<article class="pp pp--ticket" data-cat="personal" data-order="3" style="left:60px;top:780px;width:620px;--r:1.4deg"><div class="pp__sheet">
+  <div class="tk__main">
+    <p class="tk__hd"><span>Boarding pass · ML</span><span>07 · 2025</span></p>
+    <p class="tk__route"><b>DEL</b><span class="tk__plane">✈</span><b>BOM</b></p>
+    <h3 class="pp__name pp__name--m">Flight Delay Predictor</h3>
+    <p class="pp__d">Live flight and weather data in; delay forecasts for India's busiest airports out.</p>
+    <ul class="pp__stack"><li>Python</li><li>Scikit-learn</li><li>Streamlit</li><li>Pandas</li></ul>
+    <a class="pp__ex" href="/work/flight-delay-predictor" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a>
+  </div>
+  <div class="tk__stub"><p>Gate</p><b>ML</b><p>Delay</p><b class="pp__hot">+18m</b><p>Status</p><b>Predicted</b></div></div></article>
+<article class="pp pp--journal" data-cat="research" data-order="4" style="left:740px;top:700px;width:300px;--r:-2.6deg"><div class="pp__sheet">
+  <p class="jr__hd"><span>ICSDS-2025 · Research</span><span>Dec 2025</span></p>
+  <h3 class="pp__name pp__name--s">BlockAuth</h3>
+  <p class="jr__sub">Decentralised identity for IoT devices</p>
+  <div class="jr__cols" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <svg class="pp__sk jr__fig" viewBox="0 0 260 70" aria-hidden="true"><rect x="4" y="16" width="62" height="36"/><rect x="98" y="16" width="62" height="36"/><rect x="192" y="16" width="62" height="36"/><path class="h" d="M66 34H98M160 34H192"/><path d="M14 28H50M108 28H140M202 28H236"/></svg>
+  <p class="jr__cap">Fig. 1 · A chain of device identities, no central server.</p>
+  <ul class="pp__stack"><li>Blockchain</li><li>Decentralised ID</li><li>IoT</li></ul>
+  <a class="pp__ex" href="/work/blockauth" data-cursor="Explore">Read paper <span aria-hidden="true">↗</span></a></div></article>
+<article class="pp pp--notebook" data-cat="personal" data-order="5" style="left:1090px;top:660px;width:300px;--r:2.8deg"><div class="pp__sheet">
+  <p class="pp__hd"><span>04 / Dev tools</span><span>2025</span></p>
+  <h3 class="pp__name pp__name--s">Bug Detection &amp; Fix Tool</h3>
+  <p class="nb__line">✎ catches errors as you type</p>
+  <p class="nb__line">✎ Tutor mode explains them</p>
+  <p class="nb__line">✎ Debugger mode fixes them</p>
+  <p class="nb__line nb__hl">→ a VS Code extension</p>
+  <ul class="pp__stack"><li>TypeScript</li><li>FastAPI</li><li>RAG</li><li>Vector DB</li></ul>
+  <a class="pp__ex" href="/work/bug-detection" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
+<article class="pp pp--index" data-cat="company" data-order="6" style="left:180px;top:1290px;width:380px;--r:-1.8deg"><div class="pp__sheet">
+  <p class="pp__hd"><span>06 / Internal tools · Coding Jr</span><span>2025</span></p>
+  <h3 class="pp__name pp__name--s">Admin Panel</h3>
+  <p class="pp__d">The admin panel a team runs its day on. I designed the backend logic and built the core features.</p>
+  <ul class="pp__stack"><li>Python</li><li>REST APIs</li></ul>
+  <a class="pp__ex" href="/work/admin-panel" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
+<article class="pp pp--tag" data-cat="personal" data-order="7" style="left:660px;top:1250px;width:330px;--r:2.2deg"><div class="pp__sheet">
+  <span class="tg__hole" aria-hidden="true"></span>
+  <p class="tg__hd">Ship to · /api/orders</p>
+  <h3 class="pp__name pp__name--s">E-Commerce API</h3>
+  <p class="pp__d">Products, carts and orders as a REST API, with roles, validation and a properly normalised schema.</p>
+  <p class="rc__bar" aria-hidden="true"></p>
+  <ul class="pp__stack"><li>Django REST</li><li>MySQL</li></ul>
+  <a class="pp__ex" href="/work/ecommerce-api" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
+            <div class="pp pp--slot" data-order="8" style="left:1060px;top:1290px;width:290px;--r:0deg"><div class="pp__sheet">Next project →<br><small>space reserved</small></div></div>
+            <span class="bpin bpin--o" id="pin-lumida" data-for="0" style="left:320px;top:52px"></span><span class="bpin bpin--k" id="pin-cerebra" data-for="1" style="left:810px;top:32px"></span><span class="bpin bpin--tape" id="pin-distiller" data-for="2" style="left:1190px;top:82px"></span><span class="bpin bpin--o" id="pin-flight" data-for="3" style="left:370px;top:772px"></span><span class="bpin bpin--k" id="pin-blockauth" data-for="4" style="left:890px;top:692px"></span><span class="bpin bpin--o" id="pin-bug" data-for="5" style="left:1240px;top:652px"></span><span class="bpin bpin--k" id="pin-admin" data-for="6" style="left:370px;top:1282px"></span><span class="bpin bpin--o" id="pin-ecom" data-for="7" style="left:825px;top:1186px"></span>
+          </div>
         </div>
       </div>
-      <p class="sr-only" id="filterStatus" aria-live="polite"></p>
-
-      <!-- 01 LUMIDA -->
-      <article class="band project project--world tone-paper" data-cat="personal" aria-labelledby="p-lumida" data-thread="0.3,0 a:lmDb:0.82,0.3 a:lmSchema:0.2,0.75 a:lmSchema:0.6,0.92 a:lmLens:0.35,0.88 a:lmDrift:0.3,0.95 a:lmDrift:0.9,1.15 0.8,0.55 a:lmReport:1.03,0.3 a:lmReport:0.6,1.12 a:lmTorch:0.85,0.95 0.3,1">
-        <div class="band__inner">
-          <header class="project__top">
-            <p class="project__label mono"><span class="project__num">01</span> / Data quality · Personal</p>
-            <p class="project__pitch mono">Point it at any database, read-only. It finds the relationships nobody wrote down and the problems nobody noticed.</p>
-          </header>
-          <div class="project__stage world">
-            <h3 class="project__name display" id="p-lumida"><span class="fit">Lumida</span></h3>
-
-            <figure class="wi" id="lmDb" style="--x:1.5%;--y:-2%;--w:11.5vw">
-              <svg class="ink-art" viewBox="0 0 220 250" aria-hidden="true">
-                <rect class="fill" x="30" y="10" width="140" height="210" rx="4"/>
-                <path d="M30 32 H170 M30 208 H170"/>
-                <circle cx="44" cy="21" r="2.4" class="ink"/><circle cx="54" cy="21" r="2.4" class="ink"/><path d="M118 21 H158"/>
-                <rect x="42" y="44" width="116" height="34" rx="2"/><path d="M52 61 H92 M100 54 V68 M106 54 V68 M112 54 V68"/><circle cx="144" cy="61" r="3" class="ink"/>
-                <rect x="42" y="86" width="116" height="34" rx="2"/><path d="M52 103 H92 M100 96 V110 M106 96 V110 M112 96 V110"/><circle cx="144" cy="103" r="3" class="ink"/>
-                <rect x="42" y="128" width="116" height="34" rx="2"/><path d="M52 145 H92 M100 138 V152 M106 138 V152 M112 138 V152"/><circle cx="144" cy="145" r="3" class="ink-hot"/>
-                <rect x="42" y="170" width="116" height="30" rx="2"/><path d="M52 185 H92"/>
-                <path d="M40 220 V234 M160 220 V234"/>
-                <path d="M170 98 H186 V116"/>
-                <rect class="fill" x="172" y="116" width="28" height="24" rx="3"/><path d="M178 116 V108 A8 8 0 0 1 194 108 V116"/><circle cx="186" cy="126" r="3"/><path d="M186 129 V134"/>
-              </svg>
-              <figcaption class="wi__cap mono"><span>orders_db</span><span>Read-only</span></figcaption>
-            </figure>
-
-            <figure class="wi" id="lmSchema" style="--x:19%;--y:-6%;--w:31vw">
-              <svg class="ink-art" viewBox="0 0 520 250" aria-hidden="true">
-                <g><rect class="fill" x="6" y="18" width="128" height="96" rx="3"/><path d="M6 38 H134"/><path d="M16 28 H70" stroke-width="2.2"/><path d="M28 54 H96 M28 70 H88 M28 86 H100 M28 102 H82"/><circle cx="18" cy="54" r="3"/></g>
-                <g><rect class="fill" x="196" y="4" width="128" height="112" rx="3"/><path d="M196 24 H324"/><path d="M206 14 H244" stroke-width="2.2"/><path d="M218 40 H286 M218 56 H300 M218 72 H278 M218 88 H292 M218 104 H270"/><circle cx="208" cy="40" r="3"/><circle cx="208" cy="72" r="3" class="ink-hot"/></g>
-                <g><rect class="fill" x="386" y="22" width="128" height="80" rx="3"/><path d="M386 42 H514"/><path d="M396 32 H446" stroke-width="2.2"/><path d="M408 58 H478 M408 74 H470 M408 90 H486"/><circle cx="398" cy="58" r="3"/></g>
-                <g><rect class="fill" x="240" y="160" width="128" height="80" rx="3"/><path d="M240 180 H368"/><path d="M250 170 H300" stroke-width="2.2"/><path d="M262 196 H330 M262 212 H322 M262 228 H340"/><circle cx="252" cy="196" r="3"/></g>
-                <path d="M324 56 C354 56 356 74 386 74"/>
-                <path d="M300 116 C300 138 304 140 304 160"/>
-                <path class="hot dash" d="M196 72 C166 72 164 54 134 54"/>
-                <circle class="fill hot" cx="165" cy="63" r="9"/><path class="hot" d="M160.5 63 L164 66.5 L170 59.5"/>
-              </svg>
-              <figcaption class="wi__cap mono"><span>Hidden link found</span><span class="hot-t">orders.cust_ref → customers.id</span></figcaption>
-            </figure>
-
-            <figure class="wi" id="lmLens" style="--x:56%;--y:-3%;--w:16vw">
-              <svg class="ink-art" viewBox="0 0 280 230" aria-hidden="true">
-                <rect class="fill" x="6" y="10" width="200" height="170" rx="2"/>
-                <path d="M6 34 H206 M6 58 H206 M6 82 H206 M6 106 H206 M6 130 H206 M6 154 H206 M60 10 V180 M120 10 V180 M166 10 V180"/>
-                <path d="M16 22 H48 M70 22 H108 M130 22 H156 M176 22 H198" stroke-width="2.2"/>
-                <path d="M16 46 H44 M70 46 H100 M130 46 H150 M16 70 H40 M70 70 H104 M130 70 H154 M16 94 H46 M70 94 H96 M16 118 H42 M70 118 H102 M130 118 H148 M16 142 H44 M70 142 H98 M16 166 H40 M70 166 H106 M130 166 H152"/>
-                <ellipse class="hot" cx="108" cy="94" rx="108" ry="15"/><ellipse class="hot" cx="108" cy="142" rx="108" ry="15"/>
-                <circle class="fill" cx="196" cy="128" r="46"/><circle cx="196" cy="128" r="38"/><path d="M178 112 A26 26 0 0 1 204 104"/>
-                <path d="M229 161 L268 200" stroke-width="7"/>
-              </svg>
-              <figcaption class="wi__cap mono"><span>orders</span><span class="hot-t">4 orphan rows</span></figcaption>
-            </figure>
-
-            <figure class="wi" id="lmDrift" style="--x:78%;--y:4%;--w:15vw">
-              <svg class="ink-art" viewBox="0 0 260 170" aria-hidden="true">
-                <path d="M14 10 V150 H250"/>
-                <path d="M14 116 H250 M14 84 H250" class="dash"/>
-                <path d="M14 104 L40 98 L62 102 L84 94 L106 100 L128 96 L150 99 L170 92 L188 44 L206 38 L228 42 L246 40"/>
-                <circle class="hot" cx="188" cy="44" r="14"/>
-                <path d="M30 150 V156 M80 150 V156 M130 150 V156 M180 150 V156 M230 150 V156"/>
-              </svg>
-              <figcaption class="wi__cap mono"><span>orders.amount</span><span class="hot-t">Drift +38%</span></figcaption>
-            </figure>
-
-            <figure class="wi" id="lmTorch" style="--x:2%;--y:63%;--w:15vw">
-              <svg class="ink-art" viewBox="0 0 280 180" aria-hidden="true">
-                <path class="beam" d="M118 74 L272 18 M118 104 L272 166"/>
-                <path class="dash" d="M272 18 Q290 92 272 166"/>
-                <rect class="fill" x="20" y="72" width="70" height="34" rx="6" transform="rotate(0)"/>
-                <path class="fill" d="M90 66 L118 60 L118 118 L90 112 Z"/>
-                <path d="M118 60 C126 70 126 108 118 118"/>
-                <path d="M32 72 V106 M44 72 V106 M56 72 V106"/>
-                <rect x="64" y="82" width="16" height="14" rx="2"/>
-                <path d="M20 89 H6"/>
-              </svg>
-              <figcaption class="wi__cap mono"><span>Light on your data</span><span>Live</span></figcaption>
-            </figure>
-
-            <div class="wi report" id="lmReport" style="--x:31%;--y:64%;--w:35vw">
-              <div class="report__page">
-                <p class="report__head mono"><span>Scan / orders_db</span><span>Test DB</span></p>
-                <dl class="report__rows mono">
-                  <div><dt>Hidden relationships</dt><dd>15 / 15</dd></div>
-                  <div><dt>Planted problems</dt><dd>13 / 13</dd></div>
-                  <div><dt>False alarms</dt><dd>0</dd></div>
-                </dl>
-                <p class="report__total mono"><span>Benchmark</span><b>Passed</b></p>
-              </div>
-              <div class="report__page">
-                <p class="report__head mono"><span>Finding / 07</span><span>Drift</span></p>
-                <dl class="report__rows mono">
-                  <div><dt>Where</dt><dd>orders.amount</dd></div>
-                  <div><dt>Evidence</dt><dd>attached</dd></div>
-                  <div><dt>Explained by</dt><dd>LLM</dd></div>
-                </dl>
-                <p class="report__total mono"><span>Marked real</span><b class="report__ok">✓</b></p>
-              </div>
-            </div>
-          </div>
-          <footer class="project__foot">
-            <ul class="stack mono"><li>Python</li><li>PostgreSQL</li><li>FastAPI</li><li>Docker</li><li>Gemini</li></ul>
-            <span class="project__year mono">2026</span>
-            <a class="explore mono" data-cursor="Explore" href="/work/lumida">Explore project <span aria-hidden="true">↗</span></a>
-          </footer>
-          <details class="notes"><summary class="mono" data-cursor="Read">Case notes</summary>
-            <div class="notes__body">
-              <p>Lumida connects read-only to any database and maps it: the relationships nobody documented, what "normal" looks like for each table, and where the data has drifted. Every finding comes with evidence and a plain-language explanation from an LLM, and it learns each time someone marks a finding as real or not.</p>
-              <p>On a test database with planted issues it found all 15 hidden relationships and all 13 problems, with zero false alarms.</p>
-            </div>
-          </details>
-        </div>
-      </article>
-
-      <!-- 02 CEREBRA -->
-      <article class="band project project--world tone-ink" data-cat="personal" aria-labelledby="p-distiller" data-thread="0.3,0 a:dsCode:0.7,1.15 a:dsStill:0.14,0.7 a:dsStill:0.8,0.82 a:dsLog:0.3,1.1 0.84,0.56 a:dsShadow:0.5,0.05 a:dsRouter:1.05,0.4 a:dsRouter:0.5,1.12 a:dsStatus:1.05,0.6 0.3,1">
-        <div class="band__inner">
-          <header class="project__top">
-            <p class="project__label mono"><span class="project__num">02</span> / LLM infrastructure · Personal <span class="badge">In progress</span></p>
-            <p class="project__pitch mono">Swap one URL. Your repeated LLM calls quietly move to a small model you own.</p>
-          </header>
-          <div class="project__stage world">
-            <h3 class="project__name display" id="p-distiller"><span class="fit">Distiller</span></h3>
-
-            <div class="wi wcard" id="dsCode" style="--x:1.5%;--y:5%;--w:23vw">
-              <p class="wcard__head mono"><span>config.py</span><span>1 line</span></p>
-<pre class="wcard__code mono"><span class="del">- base_url = "https://api.openai.com/v1"</span>
-<span class="add">+ base_url = "http://distiller:8000/v1"</span></pre>
-            </div>
-
-            <figure class="wi" id="dsStill" style="--x:29%;--y:-4%;--w:36vw">
-              <svg class="ink-art" viewBox="0 0 560 270" aria-hidden="true">
-                <path d="M62 250 H158 M76 250 L84 214 M144 250 L136 214 M78 214 H142"/>
-                <path class="hot" d="M110 212 C98 200 104 190 110 180 C116 190 122 200 110 212 Z"/>
-                <path class="hot" d="M110 206 C105 199 107 194 110 189 C113 194 115 199 110 206"/>
-                <circle class="fill" cx="110" cy="132" r="52"/>
-                <path d="M96 84 V44 H124 V84"/>
-                <path d="M62 142 C80 136 92 148 110 142 C128 136 140 148 158 142"/>
-                <circle cx="96" cy="160" r="3"/><circle cx="118" cy="170" r="2"/><circle cx="128" cy="154" r="2.5"/>
-                <path d="M124 52 C150 52 170 56 196 66"/>
-                <path class="fill" d="M196 54 L430 142 L420 168 L186 80 Z"/>
-                <path d="M206 72 C214 58 224 58 226 76 C228 94 238 94 246 80 C254 66 264 66 266 84 C268 102 278 102 286 88 C294 74 304 74 306 92 C308 110 318 110 326 96 C334 82 344 82 346 100 C348 118 358 118 366 104 C374 90 384 90 386 108 C388 126 398 126 406 112"/>
-                <path d="M238 66 V36 H252 M380 120 V96 H394"/>
-                <path d="M425 155 C440 160 446 168 448 182"/>
-                <path class="hot" d="M448 190 C445 195 445 199 448 201 C451 199 451 195 448 190 Z"/>
-                <path class="hot" d="M448 210 C446 213 446 216 448 217 C450 216 450 213 448 210 Z"/>
-                <path class="fill" d="M436 226 L460 226 L460 236 L486 262 H410 L436 236 Z"/>
-                <path class="hot" d="M422 252 H474"/>
-              </svg>
-              <figcaption class="wi__cap mono"><span>Big model · every call logged</span><span class="hot-t">→ small model · LoRA</span></figcaption>
-            </figure>
-
-            <div class="wi wcard" id="dsLog" style="--x:73.5%;--y:6%;--w:22vw">
-              <p class="wcard__head mono"><span>calls.log</span><span>repeats</span></p>
-              <ul class="wlog mono">
-                <li><span>classify_ticket</span><i>●●●●●●●</i></li>
-                <li><span>extract_invoice</span><i>●●●●●</i></li>
-                <li><span>summarise_rfq</span><i>●●●●</i></li>
-                <li><span>one_off_question</span><i>●</i></li>
-              </ul>
-              <p class="wcard__foot mono"><span>same task, again</span><span class="hot-t">distil it</span></p>
-            </div>
-
-            <div class="wi wcard" id="dsStatus" style="--x:2%;--y:66%;--w:21vw">
-              <p class="wcard__head mono"><span>$ distiller status</span><span>in progress</span></p>
-              <ul class="status mono">
-                <li><span class="ok">●</span><span>Gateway</span><span>working</span></li>
-                <li><span class="ok">●</span><span>Call logging</span><span>working</span></li>
-                <li><span class="wip">◐</span><span>LoRA training</span><span>building</span></li>
-                <li><span class="wip">◐</span><span>Shadow tests</span><span>building</span></li>
-                <li><span class="wip">◐</span><span>Routing</span><span>building</span></li>
-              </ul>
-            </div>
-
-            <figure class="wi" id="dsRouter" style="--x:36%;--y:65%;--w:21vw">
-              <svg class="ink-art" viewBox="0 0 300 190" aria-hidden="true">
-                <path d="M150 20 V186 M126 186 H174"/>
-                <path class="fill" d="M150 30 H262 L284 50 L262 70 H150 Z"/>
-                <path class="fill" d="M150 92 H38 L16 112 L38 132 H150 Z"/>
-                <text x="166" y="55" class="svgt">SMALL · SURE</text>
-                <text x="46" y="117" class="svgt">BIG · UNSURE</text>
-                <circle class="ink-hot" cx="272" cy="50" r="4"/>
-              </svg>
-              <figcaption class="wi__cap mono"><span>Routing</span><span class="hot-t">falls back when unsure</span></figcaption>
-            </figure>
-
-            <figure class="wi" id="dsShadow" style="--x:72%;--y:63%;--w:18vw">
-              <svg class="ink-art" viewBox="0 0 260 190" aria-hidden="true">
-                <path d="M130 30 V170 M96 170 H164 M110 170 L130 150 L150 170"/>
-                <circle class="fill" cx="130" cy="30" r="7"/>
-                <path d="M40 44 H220"/>
-                <path d="M40 44 L18 104 M40 44 L62 104 M220 44 L198 104 M220 44 L242 104"/>
-                <path class="fill" d="M10 104 H70 C70 124 10 124 10 104 Z"/>
-                <path class="fill" d="M190 104 H250 C250 124 190 124 190 104 Z"/>
-                <text x="40" y="142" class="svgt" text-anchor="middle">BIG</text>
-                <text x="220" y="142" class="svgt" text-anchor="middle">SMALL</text>
-                <path class="hot" d="M118 10 L126 18 L142 2"/>
-              </svg>
-              <figcaption class="wi__cap mono"><span>Shadow test</span><span class="hot-t">same answer?</span></figcaption>
-            </figure>
-          </div>
-          <footer class="project__foot">
-            <ul class="stack mono"><li>Python</li><li>FastAPI</li><li>LiteLLM</li><li>LoRA</li><li>Ollama</li></ul>
-            <span class="project__year mono">2026</span>
-            <a class="explore mono" data-cursor="Explore" href="/work/distiller">Explore project <span aria-hidden="true">↗</span></a>
-          </footer>
-          <details class="notes"><summary class="mono" data-cursor="Read">Case notes</summary>
-            <div class="notes__body">
-              <p>Distiller is an OpenAI-compatible gateway, so a team adopts it by changing one line. It logs the company's repeated LLM calls, fine-tunes small open models with LoRA to copy the big model on those tasks, tests them in shadow mode, then sends the requests it's confident about to the cheap model and falls back to the big one when it isn't.</p>
-              <p>Status: the gateway and CLI work. Training and routing are in development.</p>
-            </div>
-          </details>
-        </div>
-      </article>
-      <article class="band project tone-ink" data-cat="company" aria-labelledby="p-cerebra">
-        <div class="band__inner">
-          <header class="project__top">
-            <p class="project__label mono"><span class="project__num">03</span> / Generative AI · Moglix</p>
-            <p class="project__pitch mono">Type what you need. Cerebra drafts the purchase request or RFQ in Credlex for you.</p>
-          </header>
-          <div class="project__stage">
-            <h3 class="project__name display" id="p-cerebra"><span class="fit">Cerebra</span></h3><svg class="sketch" style="--x:2%;--y:-4%;--w:14vw;--r:0deg" viewBox="0 0 230 250" aria-hidden="true"><path d="M18 6 V244 M212 6 V244 M18 84 H212 M18 164 H212 M18 244 H212"/><rect class="fill" x="30" y="34" width="62" height="50"/><path d="M61 34 V56"/><rect class="fill" x="98" y="48" width="48" height="36"/><path d="M122 48 V64"/><rect class="fill" x="150" y="22" width="52" height="62"/><path d="M176 22 V46"/><rect class="fill" x="30" y="118" width="80" height="46"/><path d="M70 118 V138"/><rect class="fill" x="118" y="104" width="84" height="60"/><path d="M160 104 V128"/><rect class="fill" x="30" y="196" width="50" height="48"/><rect class="fill" x="86" y="206" width="56" height="38"/><path d="M150 244 V180 H204 V244"/><path d="M150 200 H204"/></svg><p class="callout mono" style="--x:17%;--y:6%"><span>Item · safety gloves, L</span><b>200 pairs</b></p><svg class="sketch" style="--x:60%;--y:62%;--w:24vw;--r:0deg" viewBox="0 0 400 180" aria-hidden="true" data-from="-70vw,0"><path d="M0 172 H400"/><rect class="fill" x="10" y="26" width="236" height="120" rx="3"/><path d="M10 56 H246 M70 26 V146 M130 26 V146 M190 26 V146"/><path class="fill" d="M246 66 H320 L362 112 V146 H246 Z"/><path d="M260 78 H314 L344 110 H260 Z"/><path d="M290 122 H304"/><circle class="fill" cx="74" cy="148" r="22"/><circle cx="74" cy="148" r="8"/><circle class="fill" cx="310" cy="148" r="22"/><circle cx="310" cy="148" r="8"/><path d="M362 132 H372"/></svg><p class="callout mono" style="--x:44%;--y:4%"><span>RFQ</span><b>→ 3 vendors</b></p><div class="card card--chat" style="--x:64%;--y:-2%;--w:22vw;--r:2deg">
-              <p class="card__head mono"><span>Cerebra</span><span>Credlex</span></p>
-              <p class="bubble bubble--me">Raise a PR for 200 pairs of safety gloves, size L, needed by Friday.</p>
-              <p class="bubble">Drafted it. Should I also send an RFQ to approved vendors?</p>
-            </div>
-            <div class="card" style="--x:24%;--y:62%;--w:19vw;--r:-2.5deg">
-              <p class="card__head mono"><span>Purchase request</span><span>Draft</span></p>
-              <dl class="rows mono">
-                <div><dt>Item</dt><dd>Safety gloves, L</dd></div>
-                <div><dt>Qty</dt><dd>200 pairs</dd></div>
-                <div><dt>Need by</dt><dd>Friday</dd></div>
-                <div><dt>Next</dt><dd>RFQ → vendors</dd></div>
-              </dl>
-            </div>
-          </div>
-          <footer class="project__foot">
-            <ul class="stack mono"><li>Python</li><li>LLMs</li><li>REST APIs</li></ul>
-            <span class="project__year mono">2026</span>
-            <a class="explore mono" data-cursor="Explore" href="/work/cerebra">Explore project <span aria-hidden="true">↗</span></a>
-          </footer>
-          <details class="notes"><summary class="mono" data-cursor="Read">Case notes</summary>
-            <div class="notes__body">
-              <p>Built at Moglix. Raising purchase requests and RFQs in Credlex meant filling in long forms. Cerebra lets people describe what they need in plain words, drafts the request, and creates it through Credlex's APIs once they confirm.</p>
-            </div>
-          </details>
-        </div>
-      </article>
-
-      <!-- 03 DISTILLER -->
-
-      <!-- 04 BUG TOOL -->
-      <article class="band project tone-ink" data-cat="personal" aria-labelledby="p-bug">
-        <div class="band__inner">
-          <header class="project__top">
-            <p class="project__label mono"><span class="project__num">04</span> / Developer tools · Personal</p>
-            <p class="project__pitch mono">A VS Code extension that catches errors as they happen. Tutor mode explains them; Debugger mode fixes them.</p>
-          </header>
-          <div class="project__stage">
-            <h3 class="project__name display" id="p-bug"><span class="fit">Bug Detection</span><span class="fit">&amp; Fix Tool</span></h3><svg class="sketch" style="--x:3%;--y:58%;--w:23vw;--r:-2deg" viewBox="0 0 350 215" aria-hidden="true"><rect class="fill" x="50" y="8" width="250" height="168" rx="8"/><rect x="62" y="20" width="226" height="144" rx="2"/><path d="M62 36 H288"/><circle cx="72" cy="28" r="2.5"/><circle cx="82" cy="28" r="2.5"/><circle cx="92" cy="28" r="2.5"/><path d="M74 52 H150 M86 66 H200 M86 80 H170 M74 108 H140 M86 122 H230 M86 136 H190 M74 150 H120"/><path class="hot" d="M86 98 q5 -5 10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0"/><path class="fill" d="M10 182 H340 L322 210 H28 Z"/><path d="M150 196 H200"/></svg><svg class="sketch" style="--x:84%;--y:-2%;--w:9vw;--r:14deg" viewBox="0 0 170 200" aria-hidden="true" data-from="14vw,-35vh"><path d="M66 44 L50 14 M104 44 L120 14"/><path d="M44 96 H8 M42 130 H4 M48 164 L16 190 M126 96 H162 M128 130 H166 M122 164 L154 190"/><ellipse class="fill" cx="85" cy="126" rx="42" ry="62"/><circle class="fill" cx="85" cy="58" r="21"/><path d="M85 79 V186 M56 112 H72 M98 112 H114 M60 146 H72 M98 146 H110"/></svg><p class="callout mono" style="--x:72%;--y:6%"><span>Caught live</span><b>Runtime + lint</b></p><div class="card card--code" style="--x:4%;--y:-2%;--w:23vw;--r:-2deg">
-              <p class="card__head mono"><span>orders.py</span><span>Ln 42</span></p>
-<pre class="mono"><span class="ln">41</span> user = get_user(uid)
-<span class="ln">42</span> name = <span class="squiggle">user["name"]</span>
-<span class="ln">43</span> return name.title()</pre>
-              <p class="err mono">TypeError: 'NoneType' object is not subscriptable</p>
-            </div>
-            <div class="card" style="--x:66%;--y:74%;--w:21vw;--r:2deg">
-              <p class="seg mono"><span>Tutor</span><span class="on">Debugger</span></p>
-              <p class="sm">get_user returns None for an unknown id. Check it before reading the name.</p>
-              <p class="card__actions mono"><span class="pill">Apply fix</span></p>
-            </div>
-          </div>
-          <footer class="project__foot">
-            <ul class="stack mono"><li>TypeScript</li><li>FastAPI</li><li>RAG</li><li>Vector DB</li></ul>
-            <span class="project__year mono">2025</span>
-            <a class="explore mono" data-cursor="Explore" href="/work/bug-detection">Explore project <span aria-hidden="true">↗</span></a>
-          </footer>
-          <details class="notes"><summary class="mono" data-cursor="Read">Case notes</summary>
-            <div class="notes__body">
-              <p>The extension captures lint errors and runtime exceptions as they happen, then uses LLM-based retrieval (RAG over a vector database) to explain them. Tutor mode walks you through why the code broke; Debugger mode proposes a fix you can apply.</p>
-            </div>
-          </details>
-        </div>
-      </article>
-
-      <!-- 05 BLOCKAUTH -->
-      <article class="band project tone-paper" data-cat="research" aria-labelledby="p-blockauth">
-        <div class="band__inner">
-          <header class="project__top">
-            <p class="project__label mono"><span class="project__num">05</span> / Research · ICSDS-2025</p>
-            <p class="project__pitch mono">Decentralised identity on a blockchain, so IoT devices can prove who they are without a central server.</p>
-          </header>
-          <div class="project__stage">
-            <h3 class="project__name display" id="p-blockauth"><span class="fit">BlockAuth</span></h3><svg class="sketch" style="--x:54%;--y:56%;--w:30vw;--r:0deg" viewBox="0 0 430 245" aria-hidden="true"><path d="M0 238 H430"/><rect class="fill" x="16" y="170" width="120" height="44" rx="6"/><path d="M36 170 V120 M116 170 V120"/><circle cx="38" cy="192" r="3" class="ink"/><circle cx="52" cy="192" r="3"/><circle cx="66" cy="192" r="3"/><path d="M90 192 H124"/><path d="M28 214 V238 M124 214 V238"/><path d="M214 238 V150"/><path class="fill" d="M190 124 H252 V150 H190 Z"/><path class="fill" d="M252 128 L272 120 V154 L252 146 Z"/><circle cx="204" cy="137" r="5"/><path d="M330 160 V148 M350 160 V148 M370 160 V148 M330 222 V234 M350 222 V234 M370 222 V234 M308 180 H296 M308 200 H296 M392 180 H404 M392 200 H404"/><rect class="fill" x="308" y="160" width="84" height="62" rx="5"/><rect x="330" y="176" width="40" height="30" rx="2"/><path class="hot" d="M76 120 C76 70 120 60 150 40" stroke-dasharray="5 6"/><path class="hot" d="M222 118 V60" stroke-dasharray="5 6"/><path class="hot" d="M350 146 C350 90 320 60 296 40" stroke-dasharray="5 6"/><rect class="fill" x="120" y="6" width="56" height="40" rx="3"/><rect class="fill" x="194" y="6" width="56" height="40" rx="3"/><rect class="fill" x="268" y="6" width="56" height="40" rx="3"/><path d="M176 26 H194 M250 26 H268" stroke-width="3"/><path d="M130 20 H160 M204 20 H234 M278 20 H308 M130 32 H150 M204 32 H224 M278 32 H298"/></svg><p class="callout mono" style="--x:3%;--y:4%"><span>DID · sensor-07</span><b>Identity on-chain</b></p><p class="callout mono" style="--x:3%;--y:20%"><span>Access</span><b>Granted · read</b></p><div class="chain" style="--x:4%;--y:66%;--w:42vw;--r:-1deg">
-              <div class="block mono"><span>Block 0x1a</span><b>DID: sensor-07</b><small>prev 0x19</small></div>
-              <span class="link-bar"></span>
-              <div class="block mono"><span>Block 0x1b</span><b>Grant: read</b><small>prev 0x1a</small></div>
-              <span class="link-bar"></span>
-              <div class="block mono"><span>Block 0x1c</span><b>Verify ✓</b><small>prev 0x1b</small></div>
-            </div>
-            <div class="stamp mono" style="--x:76%;--y:-4%;--r:-12deg"><span>Presented</span><b>ICSDS</b><span>Dec 2025</span></div>
-          </div>
-          <footer class="project__foot">
-            <ul class="stack mono"><li>Blockchain</li><li>Decentralised ID</li><li>IoT security</li></ul>
-            <span class="project__year mono">Dec 2025</span>
-            <a class="explore mono" data-cursor="Explore" href="/work/blockauth">Explore project <span aria-hidden="true">↗</span></a>
-          </footer>
-          <details class="notes"><summary class="mono" data-cursor="Read">Case notes</summary>
-            <div class="notes__body">
-              <p>A blockchain-based decentralised identity management system for secure authentication and access control across IoT networks. Presented as a research paper at ICSDS-2025, Hooghly Engineering &amp; Technology College, in December 2025.</p>
-            </div>
-          </details>
-        </div>
-      </article>
-
-      <!-- 06 ADMIN PANEL -->
-      <article class="band project tone-ink" data-cat="company" aria-labelledby="p-admin">
-        <div class="band__inner">
-          <header class="project__top">
-            <p class="project__label mono"><span class="project__num">06</span> / Internal tools · Coding Jr</p>
-            <p class="project__pitch mono">The admin panel a team runs its day on. I designed the backend logic and built the core features.</p>
-          </header>
-          <div class="project__stage">
-            <h3 class="project__name display" id="p-admin"><span class="fit">Admin Panel</span></h3><svg class="sketch" style="--x:2%;--y:-6%;--w:23vw;--r:-2deg" viewBox="0 0 360 262" aria-hidden="true"><rect class="fill" x="8" y="8" width="344" height="214" rx="8"/><rect x="20" y="20" width="320" height="190" rx="2"/><path d="M20 40 H340 M84 40 V210"/><circle cx="32" cy="30" r="3"/><circle cx="44" cy="30" r="3"/><circle cx="56" cy="30" r="3"/><path d="M32 58 H70 M32 76 H70 M32 94 H64 M32 112 H70 M32 130 H60"/><rect x="28" y="52" width="48" height="12" rx="2" class="hot"/><rect x="98" y="54" width="70" height="40" rx="3"/><rect x="180" y="54" width="70" height="40" rx="3"/><rect x="262" y="54" width="66" height="40" rx="3"/><path d="M106 82 H130 M188 82 H220 M270 82 H300" stroke-width="3"/><path d="M100 196 V170 M120 196 V150 M140 196 V160 M160 196 V130 M180 196 V146 M200 196 V120 M220 196 V138" stroke-width="7"/><path d="M244 112 H328 M244 132 H328 M244 152 H310 M244 172 H328 M244 192 H300"/><path class="fill" d="M160 222 H200 L208 252 H152 Z"/><path d="M118 256 H242"/></svg><svg class="sketch" style="--x:42%;--y:66%;--w:9vw;--r:-10deg" viewBox="0 0 170 140" aria-hidden="true" data-from="0,-45vh"><circle class="fill" cx="40" cy="40" r="30"/><circle cx="40" cy="40" r="10"/><path class="fill" d="M66 54 L160 108 L150 124 L136 116 L128 130 L114 122 L120 108 L58 72 Z"/></svg><p class="callout mono" style="--x:44%;--y:-2%"><span>Roles</span><b>Admin · Mentor · Viewer</b></p><div class="card" style="--x:68%;--y:-2%;--w:21vw;--r:2deg">
-              <p class="card__head mono"><span>Users</span><span>3 of 48</span></p>
-              <table class="table mono">
-                <thead><tr><th>User</th><th>Role</th><th>Active</th></tr></thead>
-                <tbody>
-                  <tr><td>a.sharma</td><td>Admin</td><td><span class="toggle on"></span></td></tr>
-                  <tr><td>k.verma</td><td>Mentor</td><td><span class="toggle on"></span></td></tr>
-                  <tr><td>r.iyer</td><td>Viewer</td><td><span class="toggle"></span></td></tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="card" style="--x:64%;--y:66%;--w:18vw;--r:-2deg">
-              <p class="card__head mono"><span>Audit log</span><span>Today</span></p>
-              <ul class="log mono">
-                <li>10:42 role changed → Mentor</li>
-                <li>10:15 access revoked</li>
-                <li>09:58 batch import · 12 rows</li>
-              </ul>
-            </div>
-          </div>
-          <footer class="project__foot">
-            <ul class="stack mono"><li>Python</li><li>REST APIs</li></ul>
-            <span class="project__year mono">2025</span>
-            <a class="explore mono" data-cursor="Explore" href="/work/admin-panel">Explore project <span aria-hidden="true">↗</span></a>
-          </footer>
-          <details class="notes"><summary class="mono" data-cursor="Read">Case notes</summary>
-            <div class="notes__body">
-              <p>Built as an SDE during my AI Research internship at Coding Jr. I designed the backend logic and built the core features of the company's internal admin panel with the team.</p>
-            </div>
-          </details>
-        </div>
-      </article>
-
-      <!-- 07 FLIGHT -->
-      <article class="band project tone-paper" data-cat="personal" aria-labelledby="p-flight">
-        <div class="band__inner">
-          <header class="project__top">
-            <p class="project__label mono"><span class="project__num">07</span> / Machine learning · Personal</p>
-            <p class="project__pitch mono">Live flight and weather data in; delay forecasts for India's busiest airports out.</p>
-          </header>
-          <div class="project__stage">
-            <h3 class="project__name display" id="p-flight"><span class="fit">Flight Delay</span><span class="fit">Predictor</span></h3><svg class="sketch" style="--x:46%;--y:-6%;--w:30vw;--r:-6deg" viewBox="0 0 420 160" aria-hidden="true" data-from="-55vw,30vh"><path class="fill" d="M24 92 C24 72 62 64 124 64 H330 C372 64 404 78 414 92 C404 104 382 110 330 110 H124 C62 110 24 104 24 92 Z"/><path class="fill" d="M44 70 L22 18 H48 L92 66 Z"/><path class="fill" d="M42 94 L14 116 H36 L74 100 Z"/><path class="fill" d="M196 100 L254 156 H282 L262 100 Z"/><ellipse class="fill" cx="246" cy="124" rx="24" ry="9"/><path d="M370 76 Q392 80 400 90 H372 Z"/><circle cx="140" cy="84" r="3.5"/><circle cx="160" cy="84" r="3.5"/><circle cx="180" cy="84" r="3.5"/><circle cx="200" cy="84" r="3.5"/><circle cx="220" cy="84" r="3.5"/><circle cx="240" cy="84" r="3.5"/><circle cx="260" cy="84" r="3.5"/><circle cx="280" cy="84" r="3.5"/><circle cx="300" cy="84" r="3.5"/><circle cx="320" cy="84" r="3.5"/><circle cx="340" cy="84" r="3.5"/><path d="M330 64 V110"/></svg><svg class="sketch" style="--x:3%;--y:46%;--w:7vw;--r:0deg" viewBox="0 0 150 300" aria-hidden="true"><path d="M0 296 H150"/><path class="fill" d="M58 296 V96 H92 V296 Z"/><path d="M58 140 H92 M58 190 H92 M58 240 H92"/><path class="fill" d="M26 54 H124 L112 96 H38 Z"/><path d="M40 62 H110 M48 62 V88 M75 62 V88 M102 62 V88"/><path class="fill" d="M34 54 L44 38 H106 L116 54 Z"/><path d="M75 38 V8"/><circle cx="75" cy="8" r="3" class="ink-hot"/></svg><svg class="sketch" style="--x:4%;--y:-4%;--w:11vw;--r:0deg" viewBox="0 0 200 120" aria-hidden="true" data-from="-25vw,0"><path class="fill" d="M40 95 A28 28 0 0 1 38 40 A40 40 0 0 1 112 26 A32 32 0 0 1 166 50 A24 24 0 0 1 164 95 Z"/><path d="M60 106 L54 116 M100 106 L94 116 M140 106 L134 116"/></svg><p class="callout mono" style="--x:17%;--y:2%"><span>DEL · haze</span><b>Visibility 1.2 km</b></p><p class="callout mono" style="--x:12%;--y:90%"><span>DEL · 07:40 departure</span><b>Predicted +24m</b></p><div class="card" style="--x:68%;--y:76%;--w:22vw;--r:2deg">
-              <p class="card__head mono"><span>Departures forecast</span><span>Sample</span></p>
-              <ul class="board mono">
-                <li><b>DEL</b><span class="bar" style="--v:.62"></span><em>+24m</em></li>
-                <li><b>BOM</b><span class="bar" style="--v:.38"></span><em>+14m</em></li>
-                <li><b>BLR</b><span class="bar" style="--v:.18"></span><em>+6m</em></li>
-                <li><b>HYD</b><span class="bar" style="--v:.06"></span><em>on time</em></li>
-              </ul>
-            </div>
-          </div>
-          <footer class="project__foot">
-            <ul class="stack mono"><li>Python</li><li>Scikit-learn</li><li>Streamlit</li><li>Pandas</li></ul>
-            <span class="project__year mono">2025</span>
-            <a class="explore mono" data-cursor="Explore" href="/work/flight-delay-predictor">Explore project <span aria-hidden="true">↗</span></a>
-          </footer>
-          <details class="notes"><summary class="mono" data-cursor="Read">Case notes</summary>
-            <div class="notes__body">
-              <p>A data pipeline pulls live flight and weather data for major Indian airports from external APIs. Scikit-learn models forecast departure delays, and a Streamlit dashboard shows live flight status next to the predictions.</p>
-            </div>
-          </details>
-        </div>
-      </article>
-
-      <!-- 08 E-COMMERCE -->
-      <article class="band project tone-ink" data-cat="personal" aria-labelledby="p-ecom">
-        <div class="band__inner">
-          <header class="project__top">
-            <p class="project__label mono"><span class="project__num">08</span> / Backend · Personal</p>
-            <p class="project__pitch mono">Products, carts and orders as a REST API, with roles, validation and a properly normalised schema.</p>
-          </header>
-          <div class="project__stage">
-            <h3 class="project__name display" id="p-ecom"><span class="fit">E-Commerce</span><span class="fit">API</span></h3><svg class="sketch" style="--x:62%;--y:-6%;--w:20vw;--r:0deg" viewBox="0 0 300 214" aria-hidden="true" data-from="55vw,0"><path d="M4 22 H48 L84 166 H262"/><path class="fill" d="M60 62 H296 L270 150 H82 Z"/><path d="M100 62 L110 150 M140 62 L146 150 M180 62 L182 150 M220 62 L216 150 M258 62 L250 150 M70 106 H284"/><rect class="fill" x="120" y="14" width="76" height="54" transform="rotate(-8 158 41)"/><path d="M158 14 V34" transform="rotate(-8 158 41)"/><rect class="fill" x="196" y="30" width="54" height="40" transform="rotate(6 223 50)"/><circle class="fill" cx="108" cy="194" r="16"/><circle class="fill" cx="240" cy="194" r="16"/></svg><svg class="sketch" style="--x:86%;--y:58%;--w:7vw;--r:6deg" viewBox="0 0 150 222" aria-hidden="true" data-from="0,45vh"><path class="fill" d="M10 10 H140 V206 L127 216 L114 206 L101 216 L88 206 L75 216 L62 206 L49 216 L36 206 L23 216 L10 206 Z"/><path d="M26 34 H96 M26 60 H124 M26 78 H110 M26 96 H124 M26 114 H100 M26 148 H124"/><path d="M26 172 H70 M96 172 H124" stroke-width="3"/></svg><svg class="sketch" style="--x:4%;--y:62%;--w:7vw;--r:-6deg" viewBox="0 0 160 200" aria-hidden="true" data-from="-20vw,10vh"><path d="M52 62 V44 A28 28 0 0 1 108 44 V62"/><path class="fill" d="M22 62 H138 L148 192 H12 Z"/><circle cx="52" cy="80" r="4"/><circle cx="108" cy="80" r="4"/><path d="M50 130 H110"/></svg><p class="callout mono" style="--x:40%;--y:6%"><span>POST /api/cart</span><b>201 · created</b></p><div class="card card--code" style="--x:4%;--y:-2%;--w:22vw;--r:-2deg">
-              <p class="card__head mono"><span>GET /api/orders/1042</span><span class="tag tag--ok">200</span></p>
-<pre class="mono">{
-  "id": 1042,
-  "status": "paid",
-  "items": [{ "sku": "TS-01", "qty": 2 }],
-  "total": "1,598.00"
-}</pre>
-            </div>
-            <div class="card card--code" style="--x:58%;--y:78%;--w:22vw;--r:2deg">
-              <p class="card__head mono"><span>DELETE /api/products/7</span><span class="tag">403</span></p>
-              <pre class="mono">{ "detail": "role 'customer' can't do that" }</pre>
-            </div>
-          </div>
-          <footer class="project__foot">
-            <ul class="stack mono"><li>Django REST</li><li>MySQL</li></ul>
-            <span class="project__year mono">2024</span>
-            <a class="explore mono" data-cursor="Explore" href="/work/ecommerce-api">Explore project <span aria-hidden="true">↗</span></a>
-          </footer>
-          <details class="notes"><summary class="mono" data-cursor="Read">Case notes</summary>
-            <div class="notes__body">
-              <p>REST APIs for products, carts and orders in Django REST Framework, with role-based access control on Django's auth system, input validation, clean JSON responses and a normalised MySQL schema that handles stock updates and order totals.</p>
-            </div>
-          </details>
-        </div>
-      </article>
-    </div>
+    </section>
 
     <!-- EXPERIENCE: the road so far -->
-    <section class="band tone-paper xp xp--road" id="experience" data-thread="0.625,0 a:xpMap:0.6250,-0.1500 a:xpMap:0.6250,-0.0900 a:xpMap:0.6250,-0.0450 a:xpMap:0.6250,-0.0150 a:xpMap:0.6250,0.0000 a:xpMap:0.6214,0.0108 a:xpMap:0.6145,0.0203 a:xpMap:0.6049,0.0289 a:xpMap:0.5934,0.0367 a:xpMap:0.5807,0.0440 a:xpMap:0.5674,0.0510 a:xpMap:0.5542,0.0581 a:xpMap:0.5418,0.0654 a:xpMap:0.5309,0.0732 a:xpMap:0.5221,0.0817 a:xpMap:0.5162,0.0913 a:xpMap:0.5139,0.1020 a:xpMap:0.5203,0.1186 a:xpMap:0.5349,0.1329 a:xpMap:0.5560,0.1454 a:xpMap:0.5820,0.1567 a:xpMap:0.6114,0.1671 a:xpMap:0.6424,0.1773 a:xpMap:0.6733,0.1877 a:xpMap:0.7027,0.1988 a:xpMap:0.7287,0.2111 a:xpMap:0.7499,0.2251 a:xpMap:0.7645,0.2413 a:xpMap:0.7708,0.2602 a:xpMap:0.7631,0.2811 a:xpMap:0.7387,0.2982 a:xpMap:0.7010,0.3124 a:xpMap:0.6530,0.3245 a:xpMap:0.5983,0.3351 a:xpMap:0.5399,0.3450 a:xpMap:0.4813,0.3551 a:xpMap:0.4257,0.3660 a:xpMap:0.3763,0.3786 a:xpMap:0.3365,0.3935 a:xpMap:0.3095,0.4117 a:xpMap:0.2986,0.4337 a:xpMap:0.3064,0.4558 a:xpMap:0.3312,0.4742 a:xpMap:0.3695,0.4896 a:xpMap:0.4180,0.5028 a:xpMap:0.4733,0.5145 a:xpMap:0.5321,0.5255 a:xpMap:0.5911,0.5365 a:xpMap:0.6469,0.5482 a:xpMap:0.6961,0.5614 a:xpMap:0.7354,0.5768 a:xpMap:0.7614,0.5952 a:xpMap:0.7708,0.6173 a:xpMap:0.7617,0.6396 a:xpMap:0.7363,0.6582 a:xpMap:0.6980,0.6740 a:xpMap:0.6499,0.6876 a:xpMap:0.5953,0.6998 a:xpMap:0.5373,0.7111 a:xpMap:0.4792,0.7223 a:xpMap:0.4241,0.7341 a:xpMap:0.3753,0.7472 a:xpMap:0.3360,0.7623 a:xpMap:0.3094,0.7800 a:xpMap:0.2986,0.8010 a:xpMap:0.3015,0.8171 a:xpMap:0.3113,0.8324 a:xpMap:0.3266,0.8472 a:xpMap:0.3461,0.8617 a:xpMap:0.3684,0.8762 a:xpMap:0.3922,0.8909 a:xpMap:0.4160,0.9062 a:xpMap:0.4386,0.9223 a:xpMap:0.4586,0.9395 a:xpMap:0.4745,0.9580 a:xpMap:0.4851,0.9781 a:xpMap:0.4889,1.0000" data-thread-mobile="0.06,0 0.06,1" aria-labelledby="xp-title">
+    <section class="band tone-paper xp xp--road" id="experience" data-tone="paper" data-thread="0.625,0 a:xpMap:0.6250,-0.1500 a:xpMap:0.6250,-0.0900 a:xpMap:0.6250,-0.0450 a:xpMap:0.6250,-0.0150 a:xpMap:0.6250,0.0000 a:xpMap:0.6214,0.0108 a:xpMap:0.6145,0.0203 a:xpMap:0.6049,0.0289 a:xpMap:0.5934,0.0367 a:xpMap:0.5807,0.0440 a:xpMap:0.5674,0.0510 a:xpMap:0.5542,0.0581 a:xpMap:0.5418,0.0654 a:xpMap:0.5309,0.0732 a:xpMap:0.5221,0.0817 a:xpMap:0.5162,0.0913 a:xpMap:0.5139,0.1020 a:xpMap:0.5203,0.1186 a:xpMap:0.5349,0.1329 a:xpMap:0.5560,0.1454 a:xpMap:0.5820,0.1567 a:xpMap:0.6114,0.1671 a:xpMap:0.6424,0.1773 a:xpMap:0.6733,0.1877 a:xpMap:0.7027,0.1988 a:xpMap:0.7287,0.2111 a:xpMap:0.7499,0.2251 a:xpMap:0.7645,0.2413 a:xpMap:0.7708,0.2602 a:xpMap:0.7631,0.2811 a:xpMap:0.7387,0.2982 a:xpMap:0.7010,0.3124 a:xpMap:0.6530,0.3245 a:xpMap:0.5983,0.3351 a:xpMap:0.5399,0.3450 a:xpMap:0.4813,0.3551 a:xpMap:0.4257,0.3660 a:xpMap:0.3763,0.3786 a:xpMap:0.3365,0.3935 a:xpMap:0.3095,0.4117 a:xpMap:0.2986,0.4337 a:xpMap:0.3064,0.4558 a:xpMap:0.3312,0.4742 a:xpMap:0.3695,0.4896 a:xpMap:0.4180,0.5028 a:xpMap:0.4733,0.5145 a:xpMap:0.5321,0.5255 a:xpMap:0.5911,0.5365 a:xpMap:0.6469,0.5482 a:xpMap:0.6961,0.5614 a:xpMap:0.7354,0.5768 a:xpMap:0.7614,0.5952 a:xpMap:0.7708,0.6173 a:xpMap:0.7617,0.6396 a:xpMap:0.7363,0.6582 a:xpMap:0.6980,0.6740 a:xpMap:0.6499,0.6876 a:xpMap:0.5953,0.6998 a:xpMap:0.5373,0.7111 a:xpMap:0.4792,0.7223 a:xpMap:0.4241,0.7341 a:xpMap:0.3753,0.7472 a:xpMap:0.3360,0.7623 a:xpMap:0.3094,0.7800 a:xpMap:0.2986,0.8010 a:xpMap:0.3015,0.8171 a:xpMap:0.3113,0.8324 a:xpMap:0.3266,0.8472 a:xpMap:0.3461,0.8617 a:xpMap:0.3684,0.8762 a:xpMap:0.3922,0.8909 a:xpMap:0.4160,0.9062 a:xpMap:0.4386,0.9223 a:xpMap:0.4586,0.9395 a:xpMap:0.4745,0.9580 a:xpMap:0.4851,0.9781 a:xpMap:0.4889,1.0000" data-thread-mobile="0.06,0 0.06,1" aria-labelledby="xp-title">
       <svg class="xroad" viewBox="0 0 1440 1960" preserveAspectRatio="none" aria-hidden="true">
   <defs><linearGradient id="xfade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".09" stop-color="#fff" stop-opacity="1"/></linearGradient>
   <mask id="xroadMask" maskUnits="userSpaceOnUse" x="0" y="0" width="1440" height="1960"><rect width="1440" height="1960" fill="url(#xfade)"/></mask></defs>
@@ -660,7 +320,7 @@
     </section>
 
     <!-- ABOUT -->
-    <section class="band tone-paper about" id="about" data-thread="0.489,0 0.4895,0.025 0.494,0.055 0.52,0.09 0.6,0.125 0.72,0.155 0.84,0.19 a:engine:1.02,0.5 a:engine:0.79,0.79 g:engine a:engine:0.8,0.78 a:engine:1.02,0.98 0.95,1" data-thread-mobile="0.95,0 a:engine:1.02,0.5 a:engine:0.79,0.79 g:engine a:engine:0.8,0.78 a:engine:1.02,0.98 0.95,1" aria-labelledby="about-title">
+    <section class="band tone-paper about" data-tone="ink" id="about" data-thread="0.489,0 0.4895,0.025 0.494,0.055 0.52,0.09 0.6,0.125 0.72,0.155 0.84,0.19 a:engine:1.02,0.5 a:engine:0.79,0.79 g:engine a:engine:0.8,0.78 a:engine:1.02,0.98 0.95,1" data-thread-mobile="0.95,0 a:engine:1.02,0.5 a:engine:0.79,0.79 g:engine a:engine:0.8,0.78 a:engine:1.02,0.98 0.95,1" aria-labelledby="about-title">
       <div class="band__inner">
         <div class="about__intro">
           <div class="about__head">
@@ -707,7 +367,7 @@
     </section>
 
     <!-- CONTACT -->
-    <section class="band tone-ink contact" id="contact" data-thread="0.9,0 a:cSign:0.62,-0.1 a:cSign:0.92,0.5 a:coil:0.5,-0.04 g:coil" aria-labelledby="contact-title">
+    <section class="band tone-ink contact" data-tone="paper" id="contact" data-thread="0.9,0 a:cSign:0.62,-0.1 a:cSign:0.92,0.5 a:coil:0.5,-0.04 g:coil" aria-labelledby="contact-title">
       <div class="band__inner">
         <p class="kicker mono reveal contact__kick">Contact · <b>end of the road (for now)</b></p>
         <h2 class="contact__title display reveal" id="contact-title"><span>Have data</span><span class="indent-1">that should</span><span>be working</span><span class="accent indent-1">harder?</span></h2>
@@ -758,6 +418,6 @@
   </main>
 
   <script src="assets/lenis.min.js" defer></script>
-  <script src="main.js?v=36383b6" defer></script>
+  <script src="main.js?v=board1" defer></script>
 </body>
 </html>

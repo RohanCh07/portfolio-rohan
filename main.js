@@ -72,8 +72,9 @@
   /* ---------- light/dark alternation of visible bands ---------- */
   function retone() {
     $$('.band').filter(function (b) { return !b.hidden; }).forEach(function (b, i) {
-      b.classList.toggle('tone-ink', i % 2 === 0);
-      b.classList.toggle('tone-paper', i % 2 === 1);
+      var ink = b.dataset.tone ? b.dataset.tone === 'ink' : i % 2 === 0;
+      b.classList.toggle('tone-ink', ink);
+      b.classList.toggle('tone-paper', !ink);
     });
   }
 
@@ -854,6 +855,56 @@
       clearTimeout(rto); rto = setTimeout(function () { if (booted) { buildThread(); } }, 180);
     }).observe(main);
   }
+
+  /* ---------- projects notice board: scale the board, drop papers in, filter ---------- */
+  (function () {
+    var board = $('#board'), stage = $('#boardStage');
+    if (!board || !stage) return;
+    var papers = $$('.pp', stage), pins = $$('.bpin', stage);
+    var STAGE_W = 1400, STAGE_H = 1620;
+    function fit() {
+      if (window.innerWidth <= 900) { stage.style.transform = ''; board.style.height = ''; return; }
+      var k = board.clientWidth / STAGE_W;
+      stage.style.transform = 'scale(' + k + ')';
+      board.style.height = (STAGE_H * k) + 'px';
+    }
+    fit();
+    window.addEventListener('resize', fit);
+    var pinFor = function (i) { return pins.filter(function (p) { return p.dataset.for === String(i); })[0]; };
+    function drop(pp) {
+      if (pp.classList.contains('is-pinned')) return;
+      pp.classList.add('is-pinned');
+      var pin = pinFor(pp.dataset.order);
+      setTimeout(function () {
+        if (pin) pin.classList.add('is-in');
+        pp.classList.add('is-thunk');
+        setTimeout(function () { pp.classList.remove('is-thunk'); }, 450);
+      }, 520);
+    }
+    if (reduceMotion || !('IntersectionObserver' in window)) { papers.forEach(drop); pins.forEach(function (p) { p.classList.add('is-in'); }); return; }
+    var queue = [], busy = false;
+    function next() { if (!queue.length) { busy = false; return; } busy = true; drop(queue.shift()); setTimeout(next, 170); }
+    var bio = new IntersectionObserver(function (es) {
+      es.filter(function (e) { return e.isIntersecting; })
+        .sort(function (a, b) { return a.target.dataset.order - b.target.dataset.order; })
+        .forEach(function (e) { bio.unobserve(e.target); queue.push(e.target); });
+      if (!busy) next();
+    }, { rootMargin: '0px 0px -18% 0px', threshold: 0.15 });
+    papers.forEach(function (pp) { bio.observe(pp); });
+    // filter tabs: other papers step back, nothing moves
+    $$('.btab').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var cat = b.dataset.cat;
+        $$('.btab').forEach(function (x) { var on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', String(on)); });
+        papers.forEach(function (pp) {
+          var dim = cat !== 'all' && pp.dataset.cat && pp.dataset.cat !== cat;
+          if (pp.classList.contains('pp--slot')) dim = cat !== 'all';
+          pp.classList.toggle('is-dim', dim);
+          var pin = pinFor(pp.dataset.order); if (pin) pin.classList.toggle('is-dim', dim);
+        });
+      });
+    });
+  })();
 
   /* ---------- filter pill: fade out before it slides over the next section ---------- */
   var fbar = $('.filterbar'), projWrap = $('#projects');
