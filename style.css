@@ -1684,3 +1684,46 @@ html { scrollbar-gutter: stable; }
 @media (max-width: 900px) {
   .tk__stub { display: grid; grid-template-rows: auto auto; grid-auto-flow: column; justify-content: start; column-gap: 1.4rem; row-gap: .25rem; }
 }
+
+/* ---------- board, round 2: new paper types ---------- */
+.pp__int { display: inline-block; margin-top: 14px; padding: 4px 9px; border: 1.3px dashed #111; border-radius: 4px; font: 500 11px var(--mono); letter-spacing: .14em; text-transform: uppercase; opacity: .75; }
+/* continuous-feed printout with tractor holes (Ramanujan) */
+.pp--printout .pp__sheet { padding: 22px 46px 22px; background-color: #F6F6EE;
+  background-image: repeating-linear-gradient(transparent 0 26px, rgba(120,170,120,.18) 26px 52px); }
+.pp--printout .pp__sheet::before, .pp--printout .pp__sheet::after { content: ""; position: absolute; top: 0; bottom: 0; width: 26px; border-right: 1.5px dashed rgba(17,17,17,.35);
+  background: radial-gradient(circle 5px at 13px 13px, #1b1a17 98%, transparent) 0 0 / 26px 26px repeat-y; }
+.pp--printout .pp__sheet::before { left: 0; } .pp--printout .pp__sheet::after { right: 0; border-right: 0; border-left: 1.5px dashed rgba(17,17,17,.35); }
+.po__hd { display: flex; justify-content: space-between; font: 500 11.5px var(--mono); letter-spacing: .14em; padding-bottom: 8px; border-bottom: 1.3px solid #111; }
+.po__q { margin-top: 12px; font: 500 14px/1.4 var(--mono); }
+.po__sql { margin-top: 8px; font: 400 13px/1.6 var(--mono); color: #2f5d2f; }
+.po__sql b { color: var(--signal); font-weight: 500; }
+/* bank cheque / remittance slip (Payment advice) */
+.pp--cheque .pp__sheet { background-color: #EAF0EA; background-image: repeating-linear-gradient(135deg, rgba(60,120,90,.07) 0 2px, transparent 2px 9px); border: 1.5px solid rgba(17,17,17,.6); outline: 6px solid #EAF0EA; outline-offset: -12px; }
+.cq__hd { display: flex; justify-content: space-between; font: 800 15px var(--display); text-transform: uppercase; letter-spacing: -.01em; padding-bottom: 8px; border-bottom: 1.3px solid #111; }
+.cq__row { display: flex; justify-content: space-between; gap: 1rem; padding: 6px 0 3px; border-bottom: 1px solid rgba(17,17,17,.4); font: 400 13px var(--mono); }
+.cq__row b { font-weight: 500; }
+.cq__sign { margin: 8px 0 0 auto; width: max-content; font: italic 400 22px/1 Georgia, serif; color: #1f4e8a; rotate: -4deg; border-bottom: 1px solid #111; padding: 0 6px 2px; }
+.cq__micr { margin-top: 14px; font: 500 16px var(--mono); letter-spacing: .2em; opacity: .8; }
+/* tax invoice with a stamp (SupplierInv) */
+.pp--invoice .pp__sheet { background-color: #FFF6F3; border-top: 8px solid var(--signal); }
+.iv__hd { display: flex; justify-content: space-between; font: 800 15px var(--display); letter-spacing: .02em; padding-bottom: 8px; border-bottom: 1.3px solid #111; }
+.iv__t { width: 100%; margin-top: 10px; border-collapse: collapse; font: 400 12.5px var(--mono); }
+.iv__t td { padding: 5px 4px; border-bottom: 1px solid rgba(17,17,17,.3); } .iv__t tr:first-child td { font-weight: 500; text-transform: uppercase; font-size: 11px; letter-spacing: .1em; }
+.iv__stamp { position: absolute; right: 14px; top: 96px; padding: 7px 12px; border: 3px double var(--signal); border-radius: 8px; color: var(--signal); font: 800 19px/1 var(--display); text-transform: uppercase; letter-spacing: .04em; rotate: -14deg; opacity: .85; background: rgba(255,246,243,.6); }
+/* chat screenshot printed out (Procurement) */
+.pp--chat .pp__sheet { background-color: #EFE7DD; border-radius: 18px; }
+.ch__hd { display: flex; align-items: center; gap: 8px; margin: -20px -22px 12px; padding: 12px 22px; border-radius: 18px 18px 0 0; background: #0f5a4c; color: #F1EEE6; font: 500 11.5px var(--mono); letter-spacing: .08em; }
+.ch__dot { width: 9px; height: 9px; border-radius: 50%; background: #5ee39a; }
+.ch__b { max-width: 82%; margin-top: 8px; padding: 9px 12px; border-radius: 12px 12px 12px 3px; background: #fff; font: 400 13px/1.45 var(--mono); box-shadow: 0 1px 0 rgba(0,0,0,.12); }
+.ch__b--me { margin-left: auto; border-radius: 12px 12px 3px 12px; background: #d6f5c8; }
+/* caution label (Repo-Safety) */
+.pp--caution .pp__sheet { background-color: #FFE66B; padding-top: 0; }
+.cn__band { height: 22px; margin: 0 -22px 14px; background: repeating-linear-gradient(-45deg, #111 0 14px, #FFE66B 14px 28px); }
+.cn__verdict { display: flex; gap: 6px; margin-top: 12px; }
+.cn__verdict span { flex: 1; text-align: center; padding: 7px 4px; border: 1.5px solid #111; border-radius: 4px; font: 500 10.5px var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+.cn__verdict .is-safe { background: #111; color: #FFE66B; } .cn__verdict .is-bad { color: #b3200b; }
+.pp--caution .pp__stack li, .pp--caution .pp__ex { border-color: #111; }
+.iv__stamp { top: auto; bottom: 40px; right: 16px; font-size: 16px; }
+@media (max-width: 900px) { .pp--printout .pp__sheet { padding: 18px 38px; } .iv__stamp { bottom: 34px; } }
+.pp__name { overflow-wrap: normal; word-break: normal; hyphens: none; }
+@media (max-width: 900px) { .pp__name--s { font-size: 26px; } .pp__name--m { font-size: 28px; } }

@@ -18,7 +18,7 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/ibm-plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="style.css?v=m1">
+  <link rel="stylesheet" href="style.css?v=m2">
   <script>
     (function () {
       var d = document.documentElement;
@@ -127,21 +127,21 @@
     </section>
 
     <!-- PROJECTS: the notice board -->
-    <section class="band board-band" id="projects" data-tone="paper" data-thread="0.5,0 a:pin-lumida:0.5,0.5 a:pin-cerebra:0.5,0.5 a:pin-distiller:0.5,0.5 a:pin-flight:0.5,0.5 a:pin-bug:0.5,0.5 a:pin-blockauth:0.5,0.5 a:pin-ecom:0.5,0.5 a:pin-admin:0.5,0.5 0.5,1" data-thread-mobile="0.025,0 0.025,1" aria-labelledby="board-title">
+    <section class="band board-band" id="projects" data-tone="paper" data-thread="0.5,0 a:pin-lumida:0.5,0.5 a:pin-ramanujan:0.5,0.5 a:pin-distiller:0.5,0.5 a:pin-payment:0.5,0.5 a:pin-reposafety:0.5,0.5 a:pin-supplierinv:0.5,0.5 a:pin-procurement:0.5,0.5 a:pin-cerebra:0.5,0.5 a:pin-bug:0.5,0.5 a:pin-blockauth:0.5,0.5 0.5,1" data-thread-mobile="0.025,0 0.025,1" aria-labelledby="board-title">
       <div class="band__inner">
         <div class="board__head">
           <p class="kicker mono reveal">Projects · <b>pinned to the board</b></p>
           <h2 class="board__title display reveal" id="board-title">Pinned<em>.</em></h2>
           <div class="board__tabs mono reveal" role="group" aria-label="Filter projects">
-            <button class="btab is-on" type="button" data-cat="all" aria-pressed="true">All <sup>8</sup></button>
-            <button class="btab" type="button" data-cat="company" aria-pressed="false">Company <sup>2</sup></button>
-            <button class="btab" type="button" data-cat="personal" aria-pressed="false">Personal <sup>5</sup></button>
+            <button class="btab is-on" type="button" data-cat="all" aria-pressed="true">All <sup>10</sup></button>
+            <button class="btab" type="button" data-cat="company" aria-pressed="false">Company <sup>5</sup></button>
+            <button class="btab" type="button" data-cat="personal" aria-pressed="false">Personal <sup>4</sup></button>
             <button class="btab" type="button" data-cat="research" aria-pressed="false">Research <sup>1</sup></button>
           </div>
         </div>
         <div class="board" id="board">
           <div class="board__stage" id="boardStage">
-<article class="pp pp--torn pp--fold" data-cat="personal" data-order="0" style="left:40px;top:60px;width:560px;--r:-1.4deg"><div class="pp__sheet">
+<article class="pp pp--torn pp--fold" data-cat="personal" data-order="0" style="--r:-1.4deg"><div class="pp__sheet">
   <p class="pp__hd"><span>01 / Data quality · Personal</span><span class="pp__hot">★ Featured</span></p>
   <svg class="pp__sk" viewBox="0 0 520 150" aria-hidden="true"><rect x="10" y="12" width="78" height="124" rx="3"/><path d="M10 38H88M10 64H88M10 90H88M10 116H88"/><circle cx="76" cy="51" r="3" class="f"/><circle cx="76" cy="77" r="3" class="f h"/><rect x="140" y="20" width="110" height="64" rx="2"/><path d="M140 38H250M152 54H220M152 68H206"/><rect x="300" y="60" width="110" height="64" rx="2"/><path d="M300 78H410M312 94H380M312 108H366"/><path class="h" d="M250 52 C276 52 274 92 300 92" stroke-dasharray="5 5"/><circle class="h" cx="462" cy="46" r="26"/><path d="M481 65 L506 90" stroke-width="4"/><path class="h" d="M452 46 L460 54 L474 38"/></svg>
   <h3 class="pp__name pp__name--xl">Lumida</h3>
@@ -149,7 +149,58 @@
   <p class="pp__note">Benchmark: 15/15 hidden links · 13/13 problems · 0 false alarms</p>
   <div class="pp__ft"><ul class="pp__stack"><li>Python</li><li>PostgreSQL</li><li>FastAPI</li><li>Docker</li><li>Gemini</li></ul><span class="pp__yr">2026</span></div>
   <a class="pp__ex" href="/work/lumida" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
-<article class="pp pp--receipt" data-cat="company" data-order="1" style="left:660px;top:40px;width:300px;--r:1.2deg"><div class="pp__sheet">
+<article class="pp pp--printout" data-cat="company" data-order="1" style="--r:1.2deg"><div class="pp__sheet">
+  <p class="po__hd"><span>RAMANUJAN.EXE</span><span>ANALYTICS COPILOT</span></p>
+  <p class="po__q">&gt; what was GMV last week by region?</p>
+  <p class="po__sql">SELECT region, SUM(gmv)<br>FROM orders WHERE wk = -1<br>GROUP BY region;  <b>✓ policy ok</b></p>
+  <h3 class="pp__name pp__name--m">Ramanujan</h3>
+  <p class="pp__d">Ask questions in plain English inside Microsoft Teams and get answers from company data in seconds. No SQL, no dashboards.</p>
+  <ul class="pp__stack"><li>Gemini</li><li>Vertex AI</li><li>BigQuery</li><li>Qdrant</li><li>FastAPI</li></ul>
+  <p class="pp__int">Internal · Moglix</p></div></article>
+<article class="pp pp--grid" data-cat="personal" data-order="2" style="--r:-0.8deg"><div class="pp__sheet">
+  <span class="pp__stamp">WIP</span>
+  <p class="pp__hd"><span>02 / LLM infra · Personal</span><span class="pp__hot">★ Featured</span></p>
+  <svg class="pp__sk" viewBox="0 0 320 140" aria-hidden="true"><circle cx="64" cy="82" r="40"/><path d="M52 42V14H76V42M28 86C46 78 82 94 100 86"/><path d="M76 26 L246 86 L238 102 L68 42Z"/><path class="h" d="M258 98 C255 104 255 108 258 110 C261 108 261 104 258 98Z"/><path d="M240 132H280L268 118H252Z"/><path d="M40 132H90"/></svg>
+  <h3 class="pp__name pp__name--l">Distiller</h3>
+  <p class="pp__d">Swap one URL. Your repeated LLM calls quietly move to a small model you own.</p>
+  <div class="pp__ft"><ul class="pp__stack"><li>FastAPI</li><li>LiteLLM</li><li>LoRA</li><li>Ollama</li></ul></div>
+  <a class="pp__ex" href="/work/distiller" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
+<article class="pp pp--cheque" data-cat="company" data-order="3" style="--r:0.9deg"><div class="pp__sheet">
+  <p class="cq__hd"><span>Payment advice</span><span>No. 0014+</span></p>
+  <p class="cq__row"><span>UTR</span><b>AXIS2611·····90</b></p>
+  <p class="cq__row"><span>Invoices</span><b>INV-·· / INV-··</b></p>
+  <p class="cq__row"><span>TDS</span><b>deducted ✓</b></p>
+  <p class="cq__sign">auto-mapped</p>
+  <h3 class="pp__name pp__name--m">Payment Advice Automation</h3>
+  <p class="pp__d">Reads customer payment advices, extracts UTRs, invoices and TDS, checks them against the ERP and auto-maps payments to open invoices. 100+ page advices parsed in about 0.2 s.</p>
+  <ul class="pp__stack"><li>LayoutLMv3</li><li>Qdrant</li><li>HDBSCAN</li><li>Gemini</li><li>Kafka</li><li>Celery</li></ul>
+  <p class="cq__micr">⑆0014⑆ 2611 ⑈ 080⑈</p>
+  <p class="pp__int">Internal · Moglix</p></div></article>
+<article class="pp pp--caution" data-cat="personal" data-order="4" style="--r:-1.2deg"><div class="pp__sheet">
+  <p class="cn__band" aria-hidden="true"></p>
+  <p class="pp__hd"><span>Security · Personal</span><span>2026</span></p>
+  <p class="cn__verdict"><span class="is-safe">Safe</span><span>Suspicious</span><span class="is-bad">Dangerous</span></p>
+  <h3 class="pp__name pp__name--m">Repo-Safety</h3>
+  <p class="pp__d">Checks an untrusted repo or ZIP, like a "take-home test", for hidden auto-run malware before you open it. 11 rules, never runs code.</p>
+  <ul class="pp__stack"><li>TypeScript</li><li>Node.js</li><li>VS Code</li><li>Chrome MV3</li></ul>
+  <a class="pp__ex" href="https://github.com/RohanCh07/Repo-Safety" data-cursor="Explore" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></div></article>
+<article class="pp pp--invoice" data-cat="company" data-order="5" style="--r:1.4deg"><div class="pp__sheet">
+  <span class="iv__stamp">Reconciled</span>
+  <p class="iv__hd"><span>TAX INVOICE</span><span>GSTIN ✓</span></p>
+  <table class="iv__t"><tr><td>Item</td><td>HSN</td><td>Qty</td></tr><tr><td>Bearing 6205</td><td>8482 ✓</td><td>120</td></tr><tr><td>Gloves L</td><td>4015 ✓</td><td>200</td></tr></table>
+  <h3 class="pp__name pp__name--m">SupplierInv</h3>
+  <p class="pp__d">Turns unstructured supplier invoices into validated data with Gemini and Textract, then reconciles them with zero manual review.</p>
+  <ul class="pp__stack"><li>Gemini</li><li>AWS Textract</li><li>Kafka</li><li>BigQuery</li><li>Power BI</li></ul>
+  <p class="pp__int">Internal · Moglix</p></div></article>
+<article class="pp pp--chat" data-cat="company" data-order="6" style="--r:-0.9deg"><div class="pp__sheet">
+  <p class="ch__hd"><span class="ch__dot"></span>Procurement assistant · online</p>
+  <p class="ch__b ch__b--me">Need 50 safety helmets by Monday</p>
+  <p class="ch__b">Found 3 suppliers. Best: ₹420/unit, delivery Sat ✓</p>
+  <h3 class="pp__name pp__name--s">Conversational Procurement</h3>
+  <p class="pp__d">A WhatsApp AI agent that runs sourcing workflows through plain chat.</p>
+  <ul class="pp__stack"><li>FastAPI</li><li>WhatsApp API</li><li>Agentic AI</li></ul>
+  <p class="pp__int">Internal · Moglix</p></div></article>
+<article class="pp pp--receipt" data-cat="company" data-order="7" style="--r:1.1deg"><div class="pp__sheet">
   <p class="rc__brand">Cerebra</p><p class="rc__sub">GenAI assistant · Moglix</p>
   <p class="rc__dash"></p>
   <p class="rc__row"><span>PR DRAFT #0421</span><span>2026</span></p>
@@ -163,34 +214,7 @@
   <ul class="pp__stack"><li>Python</li><li>LLMs</li><li>REST APIs</li></ul>
   <p class="rc__bar" aria-hidden="true"></p>
   <a class="pp__ex" href="/work/cerebra" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
-<article class="pp pp--grid" data-cat="personal" data-order="2" style="left:1010px;top:90px;width:360px;--r:-0.8deg"><div class="pp__sheet">
-  <span class="pp__stamp">WIP</span>
-  <p class="pp__hd"><span>02 / LLM infra · Personal</span><span class="pp__hot">★ Featured</span></p>
-  <svg class="pp__sk" viewBox="0 0 320 140" aria-hidden="true"><circle cx="64" cy="82" r="40"/><path d="M52 42V14H76V42M28 86C46 78 82 94 100 86"/><path d="M76 26 L246 86 L238 102 L68 42Z"/><path class="h" d="M258 98 C255 104 255 108 258 110 C261 108 261 104 258 98Z"/><path d="M240 132H280L268 118H252Z"/><path d="M40 132H90"/></svg>
-  <h3 class="pp__name pp__name--l">Distiller</h3>
-  <p class="pp__d">Swap one URL. Your repeated LLM calls quietly move to a small model you own.</p>
-  <div class="pp__ft"><ul class="pp__stack"><li>FastAPI</li><li>LiteLLM</li><li>LoRA</li><li>Ollama</li></ul></div>
-  <a class="pp__ex" href="/work/distiller" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
-<article class="pp pp--ticket" data-cat="personal" data-order="3" style="left:60px;top:780px;width:620px;--r:0.9deg"><div class="pp__sheet">
-  <div class="tk__main">
-    <p class="tk__hd"><span>Boarding pass · ML</span><span>07 · 2025</span></p>
-    <p class="tk__route"><b>DEL</b><span class="tk__plane">✈</span><b>BOM</b></p>
-    <h3 class="pp__name pp__name--m">Flight Delay Predictor</h3>
-    <p class="pp__d">Live flight and weather data in; delay forecasts for India's busiest airports out.</p>
-    <ul class="pp__stack"><li>Python</li><li>Scikit-learn</li><li>Streamlit</li><li>Pandas</li></ul>
-    <a class="pp__ex" href="/work/flight-delay-predictor" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a>
-  </div>
-  <div class="tk__stub"><p>Gate</p><b>ML</b><p>Delay</p><b class="pp__hot">+18m</b><p>Status</p><b>Forecast</b></div></div></article>
-<article class="pp pp--journal" data-cat="research" data-order="4" style="left:740px;top:700px;width:300px;--r:-1.2deg"><div class="pp__sheet">
-  <p class="jr__hd"><span>ICSDS-2025 · Research</span><span>Dec 2025</span></p>
-  <h3 class="pp__name pp__name--s">BlockAuth</h3>
-  <p class="jr__sub">Decentralised identity for IoT devices</p>
-  <div class="jr__cols" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-  <svg class="pp__sk jr__fig" viewBox="0 0 260 70" aria-hidden="true"><rect x="4" y="16" width="62" height="36"/><rect x="98" y="16" width="62" height="36"/><rect x="192" y="16" width="62" height="36"/><path class="h" d="M66 34H98M160 34H192"/><path d="M14 28H50M108 28H140M202 28H236"/></svg>
-  <p class="jr__cap">Fig. 1 · A chain of device identities, no central server.</p>
-  <ul class="pp__stack"><li>Blockchain</li><li>Decentralised ID</li><li>IoT</li></ul>
-  <a class="pp__ex" href="/work/blockauth" data-cursor="Explore">Read paper <span aria-hidden="true">↗</span></a></div></article>
-<article class="pp pp--notebook" data-cat="personal" data-order="5" style="left:1090px;top:660px;width:300px;--r:1.4deg"><div class="pp__sheet">
+<article class="pp pp--notebook" data-cat="personal" data-order="8" style="--r:0.9deg"><div class="pp__sheet">
   <p class="pp__hd"><span>04 / Dev tools</span><span>2025</span></p>
   <h3 class="pp__name pp__name--s">Bug Detection &amp; Fix Tool</h3>
   <p class="nb__line">✎ catches errors as you type</p>
@@ -199,22 +223,17 @@
   <p class="nb__line nb__hl">→ a VS Code extension</p>
   <ul class="pp__stack"><li>TypeScript</li><li>FastAPI</li><li>RAG</li><li>Vector DB</li></ul>
   <a class="pp__ex" href="/work/bug-detection" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
-<article class="pp pp--index" data-cat="company" data-order="6" style="left:180px;top:1290px;width:380px;--r:-0.9deg"><div class="pp__sheet">
-  <p class="pp__hd"><span>06 / Internal tools · Coding Jr</span><span>2025</span></p>
-  <h3 class="pp__name pp__name--s">Admin Panel</h3>
-  <p class="pp__d">The admin panel a team runs its day on. I designed the backend logic and built the core features.</p>
-  <ul class="pp__stack"><li>Python</li><li>REST APIs</li></ul>
-  <a class="pp__ex" href="/work/admin-panel" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
-<article class="pp pp--tag" data-cat="personal" data-order="7" style="left:660px;top:1250px;width:330px;--r:1.1deg"><div class="pp__sheet">
-  <span class="tg__hole" aria-hidden="true"></span>
-  <p class="tg__hd">Ship to · /api/orders</p>
-  <h3 class="pp__name pp__name--s">E-Commerce API</h3>
-  <p class="pp__d">Products, carts and orders as a REST API, with roles, validation and a properly normalised schema.</p>
-  <p class="rc__bar" aria-hidden="true"></p>
-  <ul class="pp__stack"><li>Django REST</li><li>MySQL</li></ul>
-  <a class="pp__ex" href="/work/ecommerce-api" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
-            <div class="pp pp--slot" data-order="8" style="left:1060px;top:1290px;width:290px;--r:0deg"><div class="pp__sheet">Next project →<br><small>space reserved</small></div></div>
-            <span class="bpin bpin--o" id="pin-lumida" data-for="0" style="left:320px;top:52px"></span><span class="bpin bpin--k" id="pin-cerebra" data-for="1" style="left:810px;top:32px"></span><span class="bpin bpin--tape" id="pin-distiller" data-for="2" style="left:1190px;top:82px"></span><span class="bpin bpin--o" id="pin-flight" data-for="3" style="left:370px;top:772px"></span><span class="bpin bpin--k" id="pin-blockauth" data-for="4" style="left:890px;top:692px"></span><span class="bpin bpin--o" id="pin-bug" data-for="5" style="left:1240px;top:652px"></span><span class="bpin bpin--k" id="pin-admin" data-for="6" style="left:370px;top:1282px"></span><span class="bpin bpin--o" id="pin-ecom" data-for="7" style="left:825px;top:1186px"></span>
+<article class="pp pp--journal" data-cat="research" data-order="9" style="--r:-1.2deg"><div class="pp__sheet">
+  <p class="jr__hd"><span>ICSDS-2025 · Research</span><span>Dec 2025</span></p>
+  <h3 class="pp__name pp__name--s">BlockAuth</h3>
+  <p class="jr__sub">Decentralised identity for IoT devices</p>
+  <div class="jr__cols" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <svg class="pp__sk jr__fig" viewBox="0 0 260 70" aria-hidden="true"><rect x="4" y="16" width="62" height="36"/><rect x="98" y="16" width="62" height="36"/><rect x="192" y="16" width="62" height="36"/><path class="h" d="M66 34H98M160 34H192"/><path d="M14 28H50M108 28H140M202 28H236"/></svg>
+  <p class="jr__cap">Fig. 1 · A chain of device identities, no central server.</p>
+  <ul class="pp__stack"><li>Blockchain</li><li>Decentralised ID</li><li>IoT</li></ul>
+  <a class="pp__ex" href="/work/blockauth" data-cursor="Explore">Read paper <span aria-hidden="true">↗</span></a></div></article>
+            <div class="pp pp--slot" data-order="10" style="--r:0deg"><div class="pp__sheet">Next project →<br><small>space reserved</small></div></div>
+            <span class="bpin bpin--o" id="pin-lumida" data-for="0"></span><span class="bpin bpin--k" id="pin-ramanujan" data-for="1"></span><span class="bpin bpin--tape" id="pin-distiller" data-for="2"></span><span class="bpin bpin--o" id="pin-payment" data-for="3"></span><span class="bpin bpin--k" id="pin-reposafety" data-for="4"></span><span class="bpin bpin--o" id="pin-supplierinv" data-for="5"></span><span class="bpin bpin--k" id="pin-procurement" data-for="6"></span><span class="bpin bpin--k" id="pin-cerebra" data-for="7"></span><span class="bpin bpin--o" id="pin-bug" data-for="8"></span><span class="bpin bpin--k" id="pin-blockauth" data-for="9"></span>
           </div>
         </div>
       </div>
@@ -313,7 +332,7 @@
           <span class="xstk is-hot xmap__here" style="left:34.722%;top:9.490%">You are here</span>
           <div class="xnext" style="left:32.639%;top:1.531%"><span class="xnext__a mono">To be continued…</span><span class="xnext__b">Next exit → ?</span></div>
           <div class="xsign" style="left:59.722%;top:16.837%"><p class="xsign__tab mono is-hot">Exit 04</p><p class="xsign__name">Moglix</p><p class="xsign__sub mono">Now · ↗</p><i></i><i></i></div><div class="xsign" style="left:32.639%;top:37.755%"><p class="xsign__tab mono">Exit 03</p><p class="xsign__name">Moglix</p><p class="xsign__sub mono">2026 · Intern</p><i></i><i></i></div><div class="xsign" style="left:59.722%;top:55.612%"><p class="xsign__tab mono">Exit 02</p><p class="xsign__name">Coding Jr</p><p class="xsign__sub mono">2025 · Research</p><i></i><i></i></div><div class="xsign" style="left:32.639%;top:76.020%"><p class="xsign__tab mono">Exit 01</p><p class="xsign__name">Wayspire</p><p class="xsign__sub mono">2024 · First stop</p><i></i><i></i></div>
-          <ol class="xcards"><li class="xcard is-current reveal" style="left:26.389%;top:12.755%;--r:-1.6deg"><span class="xstk is-dark">Lvl up ★</span><p class="xcard__hd mono"><span>Stop 04 · now</span><span>◐ Driving</span></p><h3 class="xcard__role">Software Engineer</h3><p class="xcard__org mono">Moglix · Jul 2026 — now</p><p class="xcard__d">REST APIs and backend services for the AI &amp; Analytics team, working with VLLMs, OCR and LLM prediction models.</p><ul class="xcard__loot mono"><li class="lbl">Picked up</li><li>VLLMs</li><li>OCR</li><li>Kafka</li><li>Docker</li></ul></li><li class="xcard reveal" style="left:51.389%;top:30.102%;--r:1.3deg"><span class="xstk is-hot">★ Built Cerebra</span><p class="xcard__hd mono"><span>Stop 03</span><span>Passed ✓</span></p><h3 class="xcard__role">Python Engineering Intern</h3><p class="xcard__org mono">Moglix · Mar — Jul 2026</p><p class="xcard__d">Built data tools, automated recurring workflows and Cerebra, a GenAI assistant for purchase requests and RFQs.</p><ul class="xcard__loot mono"><li class="lbl">Picked up</li><li>PostgreSQL</li><li>MongoDB</li><li>Kafka</li></ul></li><li class="xcard reveal" style="left:29.167%;top:50.000%;--r:-1.1deg"><span class="xstk ">★ Shipped admin panel</span><p class="xcard__hd mono"><span>Stop 02</span><span>Passed ✓</span></p><h3 class="xcard__role">AI Research Intern</h3><p class="xcard__org mono">Coding Jr · Jun 2025 — Jan 2026</p><p class="xcard__d">Worked as an SDE on the internal admin panel: designed the backend logic and built its core features.</p><ul class="xcard__loot mono"><li class="lbl">Picked up</li><li>Python</li><li>REST</li><li>Git</li></ul></li><li class="xcard reveal" style="left:51.389%;top:69.898%;--r:1deg"><span class="xstk ">★ First commit</span><p class="xcard__hd mono"><span>Stop 01</span><span>Passed ✓</span></p><h3 class="xcard__role">Full-Stack Intern</h3><p class="xcard__org mono">Wayspire · Apr — Jun 2024</p><p class="xcard__d">Built and debugged full-stack modules with a team, improving performance and the UI.</p><ul class="xcard__loot mono"><li class="lbl">Picked up</li><li>Full-stack</li><li>Teamwork</li></ul></li></ol>
+          <ol class="xcards"><li class="xcard is-current reveal" style="left:26.389%;top:12.755%;--r:-1.6deg"><span class="xstk is-dark">Lvl up ★</span><p class="xcard__hd mono"><span>Stop 04 · now</span><span>◐ Driving</span></p><h3 class="xcard__role">Software Engineer</h3><p class="xcard__org mono">Moglix · Jul 2026 — now</p><p class="xcard__d">AI finance automation and LLM agents: a cash-application pipeline (LayoutLMv3, Qdrant, Gemini), a GenAI invoice pipeline (Kafka → MongoDB → BigQuery) and a WhatsApp procurement assistant.</p><ul class="xcard__loot mono"><li class="lbl">Picked up</li><li>Gemini</li><li>Kafka</li><li>Celery</li><li>BigQuery</li></ul></li><li class="xcard reveal" style="left:51.389%;top:30.102%;--r:1.3deg"><span class="xstk is-hot">★ Automated reporting</span><p class="xcard__hd mono"><span>Stop 03</span><span>Passed ✓</span></p><h3 class="xcard__role">Python Engineering Intern</h3><p class="xcard__org mono">Moglix · Mar — Jul 2026</p><p class="xcard__d">Built Python ETL pipelines across MySQL, PostgreSQL and MongoDB, plus REST APIs and Kafka consumers that automate recurring workflows like SMS notifications.</p><ul class="xcard__loot mono"><li class="lbl">Picked up</li><li>PostgreSQL</li><li>MongoDB</li><li>Kafka</li></ul></li><li class="xcard reveal" style="left:29.167%;top:50.000%;--r:-1.1deg"><span class="xstk ">★ Shipped admin panel</span><p class="xcard__hd mono"><span>Stop 02</span><span>Passed ✓</span></p><h3 class="xcard__role">AI Research Intern</h3><p class="xcard__org mono">Coding Jr · Jun 2025 — Jan 2026</p><p class="xcard__d">Built backend logic, REST APIs and core features for the internal admin panel, and prototyped NLP and LLM features to automate manual operations.</p><ul class="xcard__loot mono"><li class="lbl">Picked up</li><li>Python</li><li>REST</li><li>NLP</li></ul></li><li class="xcard reveal" style="left:51.389%;top:69.898%;--r:1deg"><span class="xstk ">★ First commit</span><p class="xcard__hd mono"><span>Stop 01</span><span>Passed ✓</span></p><h3 class="xcard__role">Full-Stack Intern</h3><p class="xcard__org mono">Wayspire · Apr — Jun 2024</p><p class="xcard__d">Built and debugged full-stack modules with a team, improving performance and the UI.</p><ul class="xcard__loot mono"><li class="lbl">Picked up</li><li>Full-stack</li><li>Teamwork</li></ul></li></ol>
           <div class="xstart mono" style="left:53.472%;top:90.306%" aria-hidden="true"><i></i>Start · Apr 2024</div>
         </div>
       </div>
@@ -418,6 +437,6 @@
   </main>
 
   <script src="assets/lenis.min.js" defer></script>
-  <script src="main.js?v=m1" defer></script>
+  <script src="main.js?v=m2" defer></script>
 </body>
 </html>
