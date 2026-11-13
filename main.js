@@ -428,21 +428,42 @@
     if (threadNow !== threadGoal) requestAnimationFrame(stepThread); else stepping = false;
   }
   // once, after the signature: glide the hero's stretch in, then hand over to the scroll
-  var heroDrawn = false;
-  // The opening draw runs on its own (3 s from the RC dot), but you can scroll at any time:
-  // the tip then follows your scroll as fast as you go, and the opening simply hands over.
+  var heroDrawn = false, introBoost = 0, introGuard = null;
+  // The opening: the page stays put while the thread draws down from the RC dot (3 s on its own).
+  // Scrolling during it doesn't move the page; it pushes the thread down faster instead.
+  // Once the thread reaches the end of the first screen, normal scrolling takes over.
+  function introInput(on) {
+    var lastY = null;
+    var wheel = function (e) { e.preventDefault(); if (e.deltaY > 0) introBoost += Math.min(400, e.deltaY) * 2.2; };
+    var tStart = function (e) { lastY = e.touches[0].clientY; };
+    var tMove = function (e) { e.preventDefault(); var y = e.touches[0].clientY; if (lastY !== null && lastY > y) introBoost += (lastY - y) * 3; lastY = y; };
+    var key = function (e) { if (['ArrowDown', 'PageDown', ' ', 'End', 'Spacebar'].indexOf(e.key) !== -1) { e.preventDefault(); introBoost += 450; } };
+    if (on) {
+      introGuard = { wheel: wheel, tStart: tStart, tMove: tMove, key: key };
+      window.addEventListener('wheel', wheel, { passive: false });
+      window.addEventListener('touchstart', tStart, { passive: true });
+      window.addEventListener('touchmove', tMove, { passive: false });
+      window.addEventListener('keydown', key);
+    } else if (introGuard) {
+      window.removeEventListener('wheel', introGuard.wheel, { passive: false });
+      window.removeEventListener('touchstart', introGuard.tStart, { passive: true });
+      window.removeEventListener('touchmove', introGuard.tMove, { passive: false });
+      window.removeEventListener('keydown', introGuard.key);
+      introGuard = null;
+    }
+  }
+  function endIntro() { intro = null; heroDrawn = true; introInput(false); unlockScroll(); drawThread(); }
   function introThread() {
-    if (!T || reduceMotion) { heroDrawn = true; return; }
+    if (!T || reduceMotion) { heroDrawn = true; introInput(false); unlockScroll(); return; }
     intro = { start: performance.now(), dur: 3000 };
     (function frame(now) {
-      if (!T) { intro = null; heroDrawn = true; return; }
+      if (!T) { endIntro(); return; }
       var end = T.heroEnd || lengthAtScreenLine();
       var k = Math.min(1, (now - intro.start) / intro.dur);
-      var byScroll = window.scrollY > 4 ? lengthAtScreenLine() : 0;
-      threadNow = Math.max(threadNow, end * k, byScroll);
+      threadNow = Math.min(end, Math.max(threadNow, end * k + introBoost));
       paintThread(threadNow);
-      if (k < 1 && threadNow < end) requestAnimationFrame(frame);
-      else { intro = null; heroDrawn = true; drawThread(); }
+      if (threadNow < end - 0.5) requestAnimationFrame(frame);
+      else endIntro();
     })(intro.start);
   }
   function paintThread(drawn) {
@@ -1041,7 +1062,7 @@
   var booted = false;
   function boot() {
     if (booted) return; booted = true;
-    if (!reduceMotion) { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; window.scrollTo(0, 0); }
+    if (!reduceMotion) { if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; window.scrollTo(0, 0); lockScroll(); introInput(true); setTimeout(function () { if (!heroDrawn) endIntro(); }, 7000); }
     retone(); fitNames(); buildThread(); collectFloaters(); drawParallax();
     afterLoader(function () {
       requestAnimationFrame(function () { root.classList.add('is-loaded');
