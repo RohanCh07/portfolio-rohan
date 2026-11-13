@@ -1727,3 +1727,7 @@ html { scrollbar-gutter: stable; }
 @media (max-width: 900px) { .pp--printout .pp__sheet { padding: 18px 38px; } .iv__stamp { bottom: 34px; } }
 .pp__name { overflow-wrap: normal; word-break: normal; hyphens: none; }
 @media (max-width: 900px) { .pp__name--s { font-size: 26px; } .pp__name--m { font-size: 28px; } }
+/* the thread runs over the board's felt but behind the papers and headings; it surfaces at the pins */
+.board-band .band__inner { z-index: auto; }
+.board__head { position: relative; z-index: 2; }
+.board__stage { position: relative; z-index: 2; }
