@@ -16,7 +16,7 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/ibm-plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=1e36fe1f">
+  <link rel="stylesheet" href="/style.css?v=8113a15f">
   <link rel="prev" href="/work/repo-safety">
   <link rel="next" href="/work/procurement">
   <script>
@@ -44,7 +44,7 @@
     <svg class="thread" id="thread" aria-hidden="true" focusable="false"></svg>
 
     <!-- 01 HERO -->
-    <section class="band tone-paper study-hero" data-thread="a:gm0:0,0.06,ln a:gm0:0,1,l">
+    <section class="band tone-paper study-hero" data-thread="a:hpin:0.5,0.004 a:hfelt:0.05,0.07 a:hlane:0,0 a:gm0:0,1,l" data-thread-mobile="a:hpin:0.5,0.004 a:hfelt:0.95,0.07 a:hlane:0,0 a:gm0:0,1,l">
       <span class="gutter-mark" id="gm0" aria-hidden="true"></span>
       <div class="band__inner">
         <div class="study-col">
@@ -54,8 +54,8 @@
           <p class="study-hero__pitch reveal">Turns unstructured supplier invoices into validated data with generative AI, then reconciles them with no manual review.</p>
         </div>
         <div class="study-hero__visual">
-          <div class="study-paper" aria-hidden="true">
-<article class="pp pp--invoice" data-cat="company" data-order="5" data-slug="supplierinv"><div class="pp__sheet">
+          <div class="study-paper" id="hfelt" aria-hidden="true"><i class="lane-at" id="hlane"></i>
+<article id="hpin" class="pp pp--invoice" data-cat="company" data-order="5" data-slug="supplierinv"><div class="pp__sheet">
   <span class="iv__stamp">Reconciled</span>
   <p class="iv__hd"><span>TAX INVOICE</span><span>GSTIN ✓</span></p>
   <table class="iv__t"><tr><td>Item</td><td>HSN</td><td>Qty</td></tr><tr><td>Bearing 6205</td><td>8482 ✓</td><td>120</td></tr><tr><td>Gloves L</td><td>4015 ✓</td><td>200</td></tr></table>
@@ -93,10 +93,10 @@
     </section>
 
     <!-- 02 OVERVIEW -->
-    <section class="band tone-ink study-chapter" id="overview" data-thread="a:gm1:0,0,ln a:gm1:0,1,l">
+    <section class="band tone-ink study-chapter" id="overview" data-thread="a:gm1:0,0,l a:k1:0,0,ln a:gm1:0,1,l">
       <span class="gutter-mark" id="gm1" aria-hidden="true"></span>
       <div class="band__inner">
-        <p class="study-label mono reveal">02 / Overview</p>
+        <p class="study-label mono reveal"><i class="lane-knot" id="k1" aria-hidden="true"></i>02 / Overview</p>
         <div class="study-two">
           <h2 class="study-h2 reveal">Messy invoices in. Clean, checked data out.</h2>
           <p class="study-text reveal">Supplier invoices arrive as scans and PDFs in every possible format. SupplierInv reads them with OCR and Gemini, turns each one into schema-validated data, streams it through Kafka into MongoDB and BigQuery, and reconciles it automatically, feeding live Power BI dashboards for procurement.</p>
@@ -113,10 +113,10 @@
     </section>
 
     <!-- 03 PROBLEM -->
-    <section class="band tone-paper study-chapter" id="problem" data-thread="a:gm2:0,0,ln a:gm2:0,1,l">
+    <section class="band tone-paper study-chapter" id="problem" data-thread="a:gm2:0,0,l a:k2:0,0,ln a:gm2:0,1,l">
       <span class="gutter-mark" id="gm2" aria-hidden="true"></span>
       <div class="band__inner">
-        <p class="study-label mono reveal">03 / The problem</p>
+        <p class="study-label mono reveal"><i class="lane-knot" id="k2" aria-hidden="true"></i>03 / The problem</p>
         <h2 class="study-h2 study-h2--big study-col reveal">Hours of reading invoices line by line.</h2>
         <div class="study-two study-two--low">
           <div></div>
@@ -131,26 +131,26 @@
     </section>
 
     <!-- 04 SYSTEM -->
-    <section class="band tone-ink study-chapter" id="system" data-thread="a:gm3:0,0,ln a:gm3:0,1,l">
+    <section class="band tone-ink study-chapter" id="system" data-thread="a:gm3:0,0,l a:k3:0,0,ln a:pl0:0,0,l a:ps0:0.5,0.5,l a:ps1:0.5,0.5,l a:ps2:0.5,0.5,l a:ps3:0.5,0.5,l a:ps4:0.5,0.5,l a:ptr:0,0,r a:pbr:0,0,r a:pl1:0,0,r a:gm3:0,1,l" data-thread-mobile="a:gm3:0,0,l a:k3:0,0,ln a:gm3:0,1,l">
       <span class="gutter-mark" id="gm3" aria-hidden="true"></span>
       <div class="band__inner">
-        <p class="study-label mono reveal">04 / How it works</p>
+        <p class="study-label mono reveal"><i class="lane-knot" id="k3" aria-hidden="true"></i>04 / How it works</p>
         <h2 class="study-h2 study-col reveal">Five steps from a scanned page to reconciled data.</h2>
-        <ol class="study-rows study-rows--split">
-          <li class="reveal"><span class="study-rows__n mono">01</span><h3>Read</h3><p>AWS Textract extracts the text and Gemini understands the structure.</p></li>
-          <li class="reveal"><span class="study-rows__n mono">02</span><h3>Structure</h3><p>Every invoice is validated against a strict Pydantic schema.</p></li>
-          <li class="reveal"><span class="study-rows__n mono">03</span><h3>Stream</h3><p>A real-time Kafka → MongoDB → BigQuery backbone moves the data.</p></li>
-          <li class="reveal"><span class="study-rows__n mono">04</span><h3>Reconcile</h3><p>Fuzzy item matching, tolerance bands, HSN validation and GSTIN checks.</p></li>
-          <li class="reveal"><span class="study-rows__n mono">05</span><h3>Report</h3><p>Results feed live Power BI dashboards for procurement analytics.</p></li>
+        <ol class="study-steps study-steps--thread" id="pipe" style="--n:5"><i class="lane-at" id="pl0"></i><i class="lane-at lane-at--below" id="pl1"></i><i class="lane-at lane-at--tr" id="ptr"></i><i class="lane-at lane-at--br" id="pbr"></i>
+          <li class="study-step reveal"><span class="study-step__node" id="ps0"></span><span class="study-step__n mono">01</span><h3>Read</h3><p>AWS Textract extracts the text and Gemini understands the structure.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" id="ps1"></span><span class="study-step__n mono">02</span><h3>Structure</h3><p>Every invoice is validated against a strict Pydantic schema.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" id="ps2"></span><span class="study-step__n mono">03</span><h3>Stream</h3><p>A real-time Kafka → MongoDB → BigQuery backbone moves the data.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" id="ps3"></span><span class="study-step__n mono">04</span><h3>Reconcile</h3><p>Fuzzy item matching, tolerance bands, HSN validation and GSTIN checks.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" id="ps4"></span><span class="study-step__n mono">05</span><h3>Report</h3><p>Results feed live Power BI dashboards for procurement analytics.</p></li>
         </ol>
       </div>
     </section>
 
     <!-- 05 DECISIONS -->
-    <section class="band tone-paper study-chapter" id="decisions" data-thread="a:gm4:0,0,ln a:gm4:0,1,l">
+    <section class="band tone-paper study-chapter" id="decisions" data-thread="a:gm4:0,0,l a:k4:0,0,ln a:gm4:0,1,l">
       <span class="gutter-mark" id="gm4" aria-hidden="true"></span>
       <div class="band__inner">
-        <p class="study-label mono reveal">05 / Key decisions</p>
+        <p class="study-label mono reveal"><i class="lane-knot" id="k4" aria-hidden="true"></i>05 / Key decisions</p>
         <h2 class="study-h2 study-h2--big study-col reveal">Where the important calls were made.</h2>
         <article class="study-decision reveal">
           <p class="study-label mono">Decision 01</p>
@@ -180,10 +180,10 @@
     </section>
 
     <!-- 06 FLOW -->
-    <section class="band tone-ink study-chapter" id="flow" data-thread="a:gm5:0,0,ln a:gm5:0,1,l">
+    <section class="band tone-ink study-chapter" id="flow" data-thread="a:gm5:0,0,l a:k5:0,0,ln a:gm5:0,1,l">
       <span class="gutter-mark" id="gm5" aria-hidden="true"></span>
       <div class="band__inner">
-        <p class="study-label mono reveal">06 / The flow</p>
+        <p class="study-label mono reveal"><i class="lane-knot" id="k5" aria-hidden="true"></i>06 / The flow</p>
         <div class="study-two">
           <h2 class="study-h2 reveal">From the first step to the result.</h2>
           <p class="study-text reveal">What it looks like from the side of the person using it — the path through SupplierInv in 4 steps.</p>
@@ -199,10 +199,10 @@
     </section>
 
     <!-- 07 OUTCOME -->
-    <section class="band tone-paper study-chapter" id="outcome" data-thread="a:gm6:0,0,ln a:gm6:0,1,l">
+    <section class="band tone-paper study-chapter" id="outcome" data-thread="a:gm6:0,0,l a:k6:0,0,ln a:gm6:0,1,l">
       <span class="gutter-mark" id="gm6" aria-hidden="true"></span>
       <div class="band__inner">
-        <p class="study-label mono reveal">07 / Outcome</p>
+        <p class="study-label mono reveal"><i class="lane-knot" id="k6" aria-hidden="true"></i>07 / Outcome</p>
         <h2 class="study-h2 study-h2--big study-col reveal">From manual review to zero-touch processing.</h2>
         <dl class="study-stats">
           <div class="reveal"><dt class="mono">Invoices reconciled without review</dt><dd>Zero-touch</dd></div>
@@ -213,14 +213,14 @@
     </section>
 
     <!-- 08 NEXT -->
-    <section class="band tone-ink study-next" data-thread="a:gm7:0,0,ln a:gm7:0,1,l">
+    <section class="band tone-ink study-next" data-thread="a:gm7:0,0,l a:k7:0,0,ln a:nlane:0,0 a:nfelt:0.14,0.035 a:npin:0.5,0.004" data-thread-mobile="a:gm7:0,0,l a:k7:0,0,ln a:gm7:0,0.5,l">
       <span class="gutter-mark" id="gm7" aria-hidden="true"></span>
       <a class="study-next__link" href="/work/procurement" data-cursor="Next">
-        <span class="study-label mono">07 / Next project</span>
-        <span class="study-next__row"><span class="study-next__name display">Procurement</span><span class="study-next__arrow" aria-hidden="true">↗</span></span>
+        <span class="study-label mono"><i class="lane-knot" id="k7" aria-hidden="true"></i>07 / Next project</span>
+        <span class="study-next__row"><span class="study-next__name display" style="--n:11">Procurement</span><span class="study-next__arrow" aria-hidden="true">↗</span></span>
         <span class="study-next__pitch">A WhatsApp AI agent that lets people run sourcing workflows through plain conversation.</span>
-        <span class="study-paper study-paper--next" aria-hidden="true">
-<article class="pp pp--chat" data-cat="company" data-order="6" data-slug="procurement"><div class="pp__sheet">
+        <span class="study-paper study-paper--next" id="nfelt" aria-hidden="true"><i class="lane-at" id="nlane"></i>
+<article id="npin" class="pp pp--chat" data-cat="company" data-order="6" data-slug="procurement"><div class="pp__sheet">
   <p class="ch__hd"><span class="ch__dot"></span>Procurement assistant · online</p>
   <p class="ch__b ch__b--me">Need 50 safety helmets by Monday</p>
   <p class="ch__b">Found 3 suppliers. Best: ₹420/unit, delivery Sat ✓</p>
@@ -240,6 +240,6 @@
   </main>
 
   <script src="/assets/lenis.min.js" defer></script>
-  <script src="/main.js?v=30c688d3" defer></script>
+  <script src="/main.js?v=43328231" defer></script>
 </body>
 </html>

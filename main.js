@@ -170,6 +170,12 @@
     pl.style.left = (r.left - w.left + q.x / vb.width * r.width) + 'px';
     pl.style.top = (r.top - w.top + q.y / vb.height * r.height) + 'px';
   }
+  // an element's box as laid out, ignoring transforms (case studies: reveal slides must not move the anchors)
+  function layoutBox(el) {
+    var x = 0, y = 0, n = el;
+    while (n) { x += n.offsetLeft; y += n.offsetTop; n = n.offsetParent; }
+    return { left: x - window.scrollX, top: y - window.scrollY, width: el.offsetWidth, height: el.offsetHeight };
+  }
   function buildThread() {
     if (!svg || !main) return;
     placeRoad(); placePlug();
@@ -205,7 +211,7 @@
           // a:elementId:fx,fy[,flag] — a point relative to an element's box
           var bits = tok.split(':'), target = document.getElementById(bits[1]);
           if (!target || !target.getClientRects().length) return;
-          var er = target.getBoundingClientRect(), q = bits[2].split(',');
+          var er = root.classList.contains('study-page') ? layoutBox(target) : target.getBoundingClientRect(), q = bits[2].split(',');
           pt = { x: er.left - mRect.left + parseFloat(q[0]) * er.width, y: er.top - mRect.top + parseFloat(q[1]) * er.height, flag: q[2] || '' };
         } else {
           var p = tok.split(',');
@@ -298,7 +304,7 @@
 
     var nodes = [];
     pts.forEach(function (p) {
-      if (!p.flag) return;
+      if (!p.flag || (isStudy && !/[ne]/.test(p.flag))) return;   // case studies: knots only where asked
       // length along the path nearest to this point
       var best = 0, bd = Infinity;
       for (var i = 0; i < xs.length; i++) {

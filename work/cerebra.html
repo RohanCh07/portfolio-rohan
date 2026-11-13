@@ -16,7 +16,7 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/ibm-plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=1e36fe1f">
+  <link rel="stylesheet" href="/style.css?v=8113a15f">
   <link rel="prev" href="/work/procurement">
   <link rel="next" href="/work/bug-detection">
   <script>
@@ -44,7 +44,7 @@
     <svg class="thread" id="thread" aria-hidden="true" focusable="false"></svg>
 
     <!-- 01 HERO -->
-    <section class="band tone-paper study-hero" data-thread="a:gm0:0,0.06,ln a:gm0:0,1,l">
+    <section class="band tone-paper study-hero" data-thread="a:hpin:0.5,0.004 a:hfelt:0.05,0.07 a:hlane:0,0 a:gm0:0,1,l" data-thread-mobile="a:hpin:0.5,0.004 a:hfelt:0.95,0.07 a:hlane:0,0 a:gm0:0,1,l">
       <span class="gutter-mark" id="gm0" aria-hidden="true"></span>
       <div class="band__inner">
         <div class="study-col">
@@ -54,8 +54,8 @@
           <p class="study-hero__pitch reveal">A GenAI assistant that turns a sentence into a purchase request or an RFQ inside Credlex.</p>
         </div>
         <div class="study-hero__visual">
-          <div class="study-paper" aria-hidden="true">
-<article class="pp pp--receipt" data-cat="company" data-order="7" data-slug="cerebra"><div class="pp__sheet">
+          <div class="study-paper" id="hfelt" aria-hidden="true"><i class="lane-at" id="hlane"></i>
+<article id="hpin" class="pp pp--receipt" data-cat="company" data-order="7" data-slug="cerebra"><div class="pp__sheet">
   <p class="rc__brand">Cerebra</p><p class="rc__sub">GenAI assistant · Moglix</p>
   <p class="rc__dash"></p>
   <p class="rc__row"><span>PR DRAFT #0421</span><span>2026</span></p>
@@ -99,10 +99,10 @@
     </section>
 
     <!-- 02 OVERVIEW -->
-    <section class="band tone-ink study-chapter" id="overview" data-thread="a:gm1:0,0,ln a:gm1:0,1,l">
+    <section class="band tone-ink study-chapter" id="overview" data-thread="a:gm1:0,0,l a:k1:0,0,ln a:gm1:0,1,l">
       <span class="gutter-mark" id="gm1" aria-hidden="true"></span>
       <div class="band__inner">
-        <p class="study-label mono reveal">02 / Overview</p>
+        <p class="study-label mono reveal"><i class="lane-knot" id="k1" aria-hidden="true"></i>02 / Overview</p>
         <div class="study-two">
           <h2 class="study-h2 reveal">Ask for what you need. Get a request that is ready to submit.</h2>
           <p class="study-text reveal">Cerebra is a chatbot used inside Moglix to create purchase requests (PRs) and requests for quotation (RFQs) in Credlex. Instead of filling a long form field by field, people describe what they need in their own words and Cerebra drafts the request for them.</p>
@@ -119,10 +119,10 @@
     </section>
 
     <!-- 03 PROBLEM -->
-    <section class="band tone-paper study-chapter" id="problem" data-thread="a:gm2:0,0,ln a:gm2:0,1,l">
+    <section class="band tone-paper study-chapter" id="problem" data-thread="a:gm2:0,0,l a:k2:0,0,ln a:gm2:0,1,l">
       <span class="gutter-mark" id="gm2" aria-hidden="true"></span>
       <div class="band__inner">
-        <p class="study-label mono reveal">03 / The problem</p>
+        <p class="study-label mono reveal"><i class="lane-knot" id="k2" aria-hidden="true"></i>03 / The problem</p>
         <h2 class="study-h2 study-h2--big study-col reveal">Raising a request meant a long form, even for something simple.</h2>
         <div class="study-two study-two--low">
           <div></div>
@@ -137,26 +137,26 @@
     </section>
 
     <!-- 04 SYSTEM -->
-    <section class="band tone-ink study-chapter" id="system" data-thread="a:gm3:0,0,ln a:gm3:0,1,l">
+    <section class="band tone-ink study-chapter" id="system" data-thread="a:gm3:0,0,l a:k3:0,0,ln a:pl0:0,0,l a:ps0:0.5,0.5,l a:ps1:0.5,0.5,l a:ps2:0.5,0.5,l a:ps3:0.5,0.5,l a:ps4:0.5,0.5,l a:ptr:0,0,r a:pbr:0,0,r a:pl1:0,0,r a:gm3:0,1,l" data-thread-mobile="a:gm3:0,0,l a:k3:0,0,ln a:gm3:0,1,l">
       <span class="gutter-mark" id="gm3" aria-hidden="true"></span>
       <div class="band__inner">
-        <p class="study-label mono reveal">04 / How it works</p>
+        <p class="study-label mono reveal"><i class="lane-knot" id="k3" aria-hidden="true"></i>04 / How it works</p>
         <h2 class="study-h2 study-col reveal">From a sentence to a structured request, through the same APIs the app uses.</h2>
-        <ol class="study-rows study-rows--split">
-          <li class="reveal"><span class="study-rows__n mono">01</span><h3>Ask</h3><p>The user describes the need in plain language.</p></li>
-          <li class="reveal"><span class="study-rows__n mono">02</span><h3>Understand</h3><p>The LLM extracts the item, quantity, dates and other fields.</p></li>
-          <li class="reveal"><span class="study-rows__n mono">03</span><h3>Draft</h3><p>Cerebra fills a PR or RFQ draft and shows it back.</p></li>
-          <li class="reveal"><span class="study-rows__n mono">04</span><h3>Confirm</h3><p>The user checks the draft before anything is created.</p></li>
-          <li class="reveal"><span class="study-rows__n mono">05</span><h3>Create</h3><p>The request is created in Credlex through its REST APIs.</p></li>
+        <ol class="study-steps study-steps--thread" id="pipe" style="--n:5"><i class="lane-at" id="pl0"></i><i class="lane-at lane-at--below" id="pl1"></i><i class="lane-at lane-at--tr" id="ptr"></i><i class="lane-at lane-at--br" id="pbr"></i>
+          <li class="study-step reveal"><span class="study-step__node" id="ps0"></span><span class="study-step__n mono">01</span><h3>Ask</h3><p>The user describes the need in plain language.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" id="ps1"></span><span class="study-step__n mono">02</span><h3>Understand</h3><p>The LLM extracts the item, quantity, dates and other fields.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" id="ps2"></span><span class="study-step__n mono">03</span><h3>Draft</h3><p>Cerebra fills a PR or RFQ draft and shows it back.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" id="ps3"></span><span class="study-step__n mono">04</span><h3>Confirm</h3><p>The user checks the draft before anything is created.</p></li>
+          <li class="study-step reveal"><span class="study-step__node" id="ps4"></span><span class="study-step__n mono">05</span><h3>Create</h3><p>The request is created in Credlex through its REST APIs.</p></li>
         </ol>
       </div>
     </section>
 
     <!-- 05 DECISIONS -->
-    <section class="band tone-paper study-chapter" id="decisions" data-thread="a:gm4:0,0,ln a:gm4:0,1,l">
+    <section class="band tone-paper study-chapter" id="decisions" data-thread="a:gm4:0,0,l a:k4:0,0,ln a:gm4:0,1,l">
       <span class="gutter-mark" id="gm4" aria-hidden="true"></span>
       <div class="band__inner">
-        <p class="study-label mono reveal">05 / Key decisions</p>
+        <p class="study-label mono reveal"><i class="lane-knot" id="k4" aria-hidden="true"></i>05 / Key decisions</p>
         <h2 class="study-h2 study-h2--big study-col reveal">Where the important calls were made.</h2>
         <article class="study-decision reveal">
           <p class="study-label mono">Decision 01</p>
@@ -178,10 +178,10 @@
     </section>
 
     <!-- 06 FLOW -->
-    <section class="band tone-ink study-chapter" id="flow" data-thread="a:gm5:0,0,ln a:gm5:0,1,l">
+    <section class="band tone-ink study-chapter" id="flow" data-thread="a:gm5:0,0,l a:k5:0,0,ln a:gm5:0,1,l">
       <span class="gutter-mark" id="gm5" aria-hidden="true"></span>
       <div class="band__inner">
-        <p class="study-label mono reveal">06 / The flow</p>
+        <p class="study-label mono reveal"><i class="lane-knot" id="k5" aria-hidden="true"></i>06 / The flow</p>
         <div class="study-two">
           <h2 class="study-h2 reveal">From the first step to the result.</h2>
           <p class="study-text reveal">What it looks like from the side of the person using it — the path through Cerebra in 4 steps.</p>
@@ -197,10 +197,10 @@
     </section>
 
     <!-- 07 OUTCOME -->
-    <section class="band tone-paper study-chapter" id="outcome" data-thread="a:gm6:0,0,ln a:gm6:0,1,l">
+    <section class="band tone-paper study-chapter" id="outcome" data-thread="a:gm6:0,0,l a:k6:0,0,ln a:gm6:0,1,l">
       <span class="gutter-mark" id="gm6" aria-hidden="true"></span>
       <div class="band__inner">
-        <p class="study-label mono reveal">07 / Outcome</p>
+        <p class="study-label mono reveal"><i class="lane-knot" id="k6" aria-hidden="true"></i>07 / Outcome</p>
         <h2 class="study-h2 study-h2--big study-col reveal">Requests start from a sentence instead of a form.</h2>
         <dl class="study-stats">
           <div class="reveal"><dt class="mono">Created from plain language</dt><dd>PRs + RFQs</dd></div>
@@ -211,14 +211,14 @@
     </section>
 
     <!-- 08 NEXT -->
-    <section class="band tone-ink study-next" data-thread="a:gm7:0,0,ln a:gm7:0,1,l">
+    <section class="band tone-ink study-next" data-thread="a:gm7:0,0,l a:k7:0,0,ln a:nlane:0,0 a:nfelt:0.14,0.035 a:npin:0.5,0.004" data-thread-mobile="a:gm7:0,0,l a:k7:0,0,ln a:gm7:0,0.5,l">
       <span class="gutter-mark" id="gm7" aria-hidden="true"></span>
       <a class="study-next__link" href="/work/bug-detection" data-cursor="Next">
-        <span class="study-label mono">09 / Next project</span>
-        <span class="study-next__row"><span class="study-next__name display">Bug Detection</span><span class="study-next__arrow" aria-hidden="true">↗</span></span>
+        <span class="study-label mono"><i class="lane-knot" id="k7" aria-hidden="true"></i>09 / Next project</span>
+        <span class="study-next__row"><span class="study-next__name display" style="--n:13">Bug Detection</span><span class="study-next__arrow" aria-hidden="true">↗</span></span>
         <span class="study-next__pitch">A VS Code extension that catches errors as they happen — and either teaches you, or fixes them.</span>
-        <span class="study-paper study-paper--next" aria-hidden="true">
-<article class="pp pp--notebook" data-cat="personal" data-order="8" data-slug="bug-detection"><div class="pp__sheet">
+        <span class="study-paper study-paper--next" id="nfelt" aria-hidden="true"><i class="lane-at" id="nlane"></i>
+<article id="npin" class="pp pp--notebook" data-cat="personal" data-order="8" data-slug="bug-detection"><div class="pp__sheet">
   <p class="pp__hd"><span>04 / Dev tools</span><span>2025</span></p>
   <h3 class="pp__name pp__name--s">Bug Detection &amp; Fix Tool</h3>
   <p class="nb__line">✎ catches errors as you type</p>
@@ -239,6 +239,6 @@
   </main>
 
   <script src="/assets/lenis.min.js" defer></script>
-  <script src="/main.js?v=30c688d3" defer></script>
+  <script src="/main.js?v=43328231" defer></script>
 </body>
 </html>
