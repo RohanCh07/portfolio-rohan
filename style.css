@@ -1731,3 +1731,26 @@ html { scrollbar-gutter: stable; }
 .board-band .band__inner { z-index: auto; }
 .board__head { position: relative; z-index: 2; }
 .board__stage { position: relative; z-index: 2; }
+
+/* ---------- case studies: the project's paper from the board, pinned on a small felt board ---------- */
+.study-paper { position: relative; display: grid; place-items: center; padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 4vw, 3.5rem); border-radius: 14px; background: #1b1a17;
+  background-image: radial-gradient(rgba(241,238,230,.06) 1.2px, transparent 1.6px); background-size: 22px 22px;
+  box-shadow: inset 0 0 0 10px #0e0d0c, inset 0 0 0 11px rgba(241,238,230,.16); }
+.study-paper .pp { position: relative !important; left: auto; top: auto; width: min(100%, 470px); opacity: 1 !important; translate: none !important; scale: 1 !important; rotate: var(--r, -1.5deg); z-index: 1; }
+.study-paper .pp::before { content: ""; position: absolute; z-index: 5; left: 50%; top: -9px; width: 22px; height: 22px; margin-left: -11px; border-radius: 50%;
+  background: radial-gradient(circle at 34% 30%, rgba(255,255,255,.75) 0 14%, transparent 20%), var(--signal); box-shadow: 3px 6px 5px rgba(0,0,0,.55); }
+.study-paper .pp--tag::before { top: -64px; width: 1.5px; height: 90px; margin-left: 0; border-radius: 0; background: #d8c9a8; box-shadow: none; }
+.study-paper--next { display: block; margin-top: 2rem; max-width: 640px; padding: 3rem 2rem; pointer-events: none; }
+.study-paper--next .pp { margin: 0 auto; width: min(100%, 420px); }
+.study-hero__visual { align-items: center; }
+@media (max-width: 900px) {
+  .study-paper { padding: 2.5rem 1rem 1.6rem; }
+  .study-paper--next { display: none; }
+}
+@media (max-width: 760px) {
+  .study-next__row { flex-wrap: wrap; }
+  .study-next__name { font-size: clamp(2.6rem, 13vw, 4rem); overflow-wrap: anywhere; }
+}
+
+/* long names never run off the screen */
+.study-hero__name[style] { font-size: min(clamp(3.2rem, 11vw, 12.5rem), calc((100vw - 2.6rem) / (var(--n) * .82))); }

@@ -18,7 +18,7 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/ibm-plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="style.css?v=m4">
+  <link rel="stylesheet" href="style.css?v=6f64450a">
   <script>
     (function () {
       var d = document.documentElement;
@@ -141,7 +141,7 @@
         </div>
         <div class="board" id="board">
           <div class="board__stage" id="boardStage">
-<article class="pp pp--torn pp--fold" data-cat="personal" data-order="0" style="--r:-1.4deg"><div class="pp__sheet">
+<article class="pp pp--torn pp--fold" data-cat="personal" data-order="0" data-slug="lumida" style="--r:-1.4deg"><div class="pp__sheet">
   <p class="pp__hd"><span>01 / Data quality · Personal</span><span class="pp__hot">★ Featured</span></p>
   <svg class="pp__sk" viewBox="0 0 520 150" aria-hidden="true"><rect x="10" y="12" width="78" height="124" rx="3"/><path d="M10 38H88M10 64H88M10 90H88M10 116H88"/><circle cx="76" cy="51" r="3" class="f"/><circle cx="76" cy="77" r="3" class="f h"/><rect x="140" y="20" width="110" height="64" rx="2"/><path d="M140 38H250M152 54H220M152 68H206"/><rect x="300" y="60" width="110" height="64" rx="2"/><path d="M300 78H410M312 94H380M312 108H366"/><path class="h" d="M250 52 C276 52 274 92 300 92" stroke-dasharray="5 5"/><circle class="h" cx="462" cy="46" r="26"/><path d="M481 65 L506 90" stroke-width="4"/><path class="h" d="M452 46 L460 54 L474 38"/></svg>
   <h3 class="pp__name pp__name--xl">Lumida</h3>
@@ -149,15 +149,15 @@
   <p class="pp__note">Benchmark: 15/15 hidden links · 13/13 problems · 0 false alarms</p>
   <div class="pp__ft"><ul class="pp__stack"><li>Python</li><li>PostgreSQL</li><li>FastAPI</li><li>Docker</li><li>Gemini</li></ul><span class="pp__yr">2026</span></div>
   <a class="pp__ex" href="/work/lumida" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
-<article class="pp pp--printout" data-cat="company" data-order="1" style="--r:1.2deg"><div class="pp__sheet">
+<article class="pp pp--printout" data-cat="company" data-order="1" data-slug="ramanujan" style="--r:1.2deg"><div class="pp__sheet">
   <p class="po__hd"><span>RAMANUJAN.EXE</span><span>ANALYTICS COPILOT</span></p>
   <p class="po__q">&gt; what was GMV last week by region?</p>
   <p class="po__sql">SELECT region, SUM(gmv)<br>FROM orders WHERE wk = -1<br>GROUP BY region;  <b>✓ policy ok</b></p>
   <h3 class="pp__name pp__name--m">Ramanujan</h3>
   <p class="pp__d">Ask questions in plain English inside Microsoft Teams and get answers from company data in seconds. No SQL, no dashboards.</p>
   <ul class="pp__stack"><li>Gemini</li><li>Vertex AI</li><li>BigQuery</li><li>Qdrant</li><li>FastAPI</li></ul>
-  <p class="pp__int">Internal · Moglix</p></div></article>
-<article class="pp pp--grid" data-cat="personal" data-order="2" style="--r:-0.8deg"><div class="pp__sheet">
+  <p class="pp__int">Internal · Moglix</p><br><a class="pp__ex" href="/work/ramanujan" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
+<article class="pp pp--grid" data-cat="personal" data-order="2" data-slug="distiller" style="--r:-0.8deg"><div class="pp__sheet">
   <span class="pp__stamp">WIP</span>
   <p class="pp__hd"><span>02 / LLM infra · Personal</span><span class="pp__hot">★ Featured</span></p>
   <svg class="pp__sk" viewBox="0 0 320 140" aria-hidden="true"><circle cx="64" cy="82" r="40"/><path d="M52 42V14H76V42M28 86C46 78 82 94 100 86"/><path d="M76 26 L246 86 L238 102 L68 42Z"/><path class="h" d="M258 98 C255 104 255 108 258 110 C261 108 261 104 258 98Z"/><path d="M240 132H280L268 118H252Z"/><path d="M40 132H90"/></svg>
@@ -165,7 +165,7 @@
   <p class="pp__d">Swap one URL. Your repeated LLM calls quietly move to a small model you own.</p>
   <div class="pp__ft"><ul class="pp__stack"><li>FastAPI</li><li>LiteLLM</li><li>LoRA</li><li>Ollama</li></ul></div>
   <a class="pp__ex" href="/work/distiller" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
-<article class="pp pp--cheque" data-cat="company" data-order="3" style="--r:0.9deg"><div class="pp__sheet">
+<article class="pp pp--cheque" data-cat="company" data-order="3" data-slug="payment-advice" style="--r:0.9deg"><div class="pp__sheet">
   <p class="cq__hd"><span>Payment advice</span><span>No. 0014+</span></p>
   <p class="cq__row"><span>UTR</span><b>AXIS2611·····90</b></p>
   <p class="cq__row"><span>Invoices</span><b>INV-·· / INV-··</b></p>
@@ -175,32 +175,32 @@
   <p class="pp__d">Reads customer payment advices, extracts UTRs, invoices and TDS, checks them against the ERP and auto-maps payments to open invoices. 100+ page advices parsed in about 0.2 s.</p>
   <ul class="pp__stack"><li>LayoutLMv3</li><li>Qdrant</li><li>HDBSCAN</li><li>Gemini</li><li>Kafka</li><li>Celery</li></ul>
   <p class="cq__micr">⑆0014⑆ 2611 ⑈ 080⑈</p>
-  <p class="pp__int">Internal · Moglix</p></div></article>
-<article class="pp pp--caution" data-cat="personal" data-order="4" style="--r:-1.2deg"><div class="pp__sheet">
+  <p class="pp__int">Internal · Moglix</p><br><a class="pp__ex" href="/work/payment-advice" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
+<article class="pp pp--caution" data-cat="personal" data-order="4" data-slug="repo-safety" style="--r:-1.2deg"><div class="pp__sheet">
   <p class="cn__band" aria-hidden="true"></p>
   <p class="pp__hd"><span>Security · Personal</span><span>2026</span></p>
   <p class="cn__verdict"><span class="is-safe">Safe</span><span>Suspicious</span><span class="is-bad">Dangerous</span></p>
   <h3 class="pp__name pp__name--m">Repo-Safety</h3>
   <p class="pp__d">Checks an untrusted repo or ZIP, like a "take-home test", for hidden auto-run malware before you open it. 11 rules, never runs code.</p>
   <ul class="pp__stack"><li>TypeScript</li><li>Node.js</li><li>VS Code</li><li>Chrome MV3</li></ul>
-  <a class="pp__ex" href="https://github.com/RohanCh07/Repo-Safety" data-cursor="Explore" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></div></article>
-<article class="pp pp--invoice" data-cat="company" data-order="5" style="--r:1.4deg"><div class="pp__sheet">
+  <a class="pp__ex" href="/work/repo-safety" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
+<article class="pp pp--invoice" data-cat="company" data-order="5" data-slug="supplierinv" style="--r:1.4deg"><div class="pp__sheet">
   <span class="iv__stamp">Reconciled</span>
   <p class="iv__hd"><span>TAX INVOICE</span><span>GSTIN ✓</span></p>
   <table class="iv__t"><tr><td>Item</td><td>HSN</td><td>Qty</td></tr><tr><td>Bearing 6205</td><td>8482 ✓</td><td>120</td></tr><tr><td>Gloves L</td><td>4015 ✓</td><td>200</td></tr></table>
   <h3 class="pp__name pp__name--m">SupplierInv</h3>
   <p class="pp__d">Turns unstructured supplier invoices into validated data with Gemini and Textract, then reconciles them with zero manual review.</p>
   <ul class="pp__stack"><li>Gemini</li><li>AWS Textract</li><li>Kafka</li><li>BigQuery</li><li>Power BI</li></ul>
-  <p class="pp__int">Internal · Moglix</p></div></article>
-<article class="pp pp--chat" data-cat="company" data-order="6" style="--r:-0.9deg"><div class="pp__sheet">
+  <p class="pp__int">Internal · Moglix</p><br><a class="pp__ex" href="/work/supplierinv" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
+<article class="pp pp--chat" data-cat="company" data-order="6" data-slug="procurement" style="--r:-0.9deg"><div class="pp__sheet">
   <p class="ch__hd"><span class="ch__dot"></span>Procurement assistant · online</p>
   <p class="ch__b ch__b--me">Need 50 safety helmets by Monday</p>
   <p class="ch__b">Found 3 suppliers. Best: ₹420/unit, delivery Sat ✓</p>
   <h3 class="pp__name pp__name--s">Conversational Procurement</h3>
   <p class="pp__d">A WhatsApp AI agent that runs sourcing workflows through plain chat.</p>
   <ul class="pp__stack"><li>FastAPI</li><li>WhatsApp API</li><li>Agentic AI</li></ul>
-  <p class="pp__int">Internal · Moglix</p></div></article>
-<article class="pp pp--receipt" data-cat="company" data-order="7" style="--r:1.1deg"><div class="pp__sheet">
+  <p class="pp__int">Internal · Moglix</p><br><a class="pp__ex" href="/work/procurement" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
+<article class="pp pp--receipt" data-cat="company" data-order="7" data-slug="cerebra" style="--r:1.1deg"><div class="pp__sheet">
   <p class="rc__brand">Cerebra</p><p class="rc__sub">GenAI assistant · Moglix</p>
   <p class="rc__dash"></p>
   <p class="rc__row"><span>PR DRAFT #0421</span><span>2026</span></p>
@@ -214,7 +214,7 @@
   <ul class="pp__stack"><li>Python</li><li>LLMs</li><li>REST APIs</li></ul>
   <p class="rc__bar" aria-hidden="true"></p>
   <a class="pp__ex" href="/work/cerebra" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
-<article class="pp pp--notebook" data-cat="personal" data-order="8" style="--r:0.9deg"><div class="pp__sheet">
+<article class="pp pp--notebook" data-cat="personal" data-order="8" data-slug="bug-detection" style="--r:0.9deg"><div class="pp__sheet">
   <p class="pp__hd"><span>04 / Dev tools</span><span>2025</span></p>
   <h3 class="pp__name pp__name--s">Bug Detection &amp; Fix Tool</h3>
   <p class="nb__line">✎ catches errors as you type</p>
@@ -223,7 +223,7 @@
   <p class="nb__line nb__hl">→ a VS Code extension</p>
   <ul class="pp__stack"><li>TypeScript</li><li>FastAPI</li><li>RAG</li><li>Vector DB</li></ul>
   <a class="pp__ex" href="/work/bug-detection" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
-<article class="pp pp--journal" data-cat="research" data-order="9" style="--r:-1.2deg"><div class="pp__sheet">
+<article class="pp pp--journal" data-cat="research" data-order="9" data-slug="blockauth" style="--r:-1.2deg"><div class="pp__sheet">
   <p class="jr__hd"><span>ICSDS-2025 · Research</span><span>Dec 2025</span></p>
   <h3 class="pp__name pp__name--s">BlockAuth</h3>
   <p class="jr__sub">Decentralised identity for IoT devices</p>
@@ -231,7 +231,7 @@
   <svg class="pp__sk jr__fig" viewBox="0 0 260 70" aria-hidden="true"><rect x="4" y="16" width="62" height="36"/><rect x="98" y="16" width="62" height="36"/><rect x="192" y="16" width="62" height="36"/><path class="h" d="M66 34H98M160 34H192"/><path d="M14 28H50M108 28H140M202 28H236"/></svg>
   <p class="jr__cap">Fig. 1 · A chain of device identities, no central server.</p>
   <ul class="pp__stack"><li>Blockchain</li><li>Decentralised ID</li><li>IoT</li></ul>
-  <a class="pp__ex" href="/work/blockauth" data-cursor="Explore">Read paper <span aria-hidden="true">↗</span></a></div></article>
+  <a class="pp__ex" href="/work/blockauth" data-cursor="Explore">Explore project <span aria-hidden="true">↗</span></a></div></article>
             <div class="pp pp--slot" data-order="10" style="--r:0deg"><div class="pp__sheet">Next project →<br><small>space reserved</small></div></div>
             <span class="bpin bpin--o" id="pin-lumida" data-for="0"></span><span class="bpin bpin--k" id="pin-ramanujan" data-for="1"></span><span class="bpin bpin--tape" id="pin-distiller" data-for="2"></span><span class="bpin bpin--o" id="pin-payment" data-for="3"></span><span class="bpin bpin--k" id="pin-reposafety" data-for="4"></span><span class="bpin bpin--o" id="pin-supplierinv" data-for="5"></span><span class="bpin bpin--k" id="pin-procurement" data-for="6"></span><span class="bpin bpin--k" id="pin-cerebra" data-for="7"></span><span class="bpin bpin--o" id="pin-bug" data-for="8"></span><span class="bpin bpin--k" id="pin-blockauth" data-for="9"></span>
           </div>
@@ -437,6 +437,6 @@
   </main>
 
   <script src="assets/lenis.min.js" defer></script>
-  <script src="main.js?v=m4" defer></script>
+  <script src="main.js?v=f50c5d7b" defer></script>
 </body>
 </html>

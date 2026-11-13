@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Payment Advice Automation — Rohan Chauhan</title>
+  <meta name="description" content="Reads customer payment advices and auto-maps every payment to the right open invoices for the finance team.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Payment Advice Automation — Rohan Chauhan">
+  <meta property="og:description" content="Reads customer payment advices and auto-maps every payment to the right open invoices for the finance team.">
+  <meta property="og:image" content="/assets/og-image.jpg">
+  <meta name="theme-color" content="#050505">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/ibm-plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/style.css?v=1e36fe1f">
+  <link rel="prev" href="/work/distiller">
+  <link rel="next" href="/work/repo-safety">
+  <script>
+    (function () { var d = document.documentElement; d.classList.add('js', 'study-page'); try { localStorage.removeItem('theme'); } catch (e) {} })();
+  </script>
+</head>
+<body>
+  <a class="skip" href="#overview">Skip to the case study</a>
+
+  <header class="site-header" id="header">
+    <a class="wordmark" href="/" aria-label="Rohan Chauhan, home">RC</a>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="/#capabilities">Capabilities</a>
+      <a href="/#projects">Projects</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#about">About</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+  </header>
+
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+
+  <main id="top" class="study">
+    <svg class="thread" id="thread" aria-hidden="true" focusable="false"></svg>
+
+    <!-- 01 HERO -->
+    <section class="band tone-paper study-hero" data-thread="a:gm0:0,0.06,ln a:gm0:0,1,l">
+      <span class="gutter-mark" id="gm0" aria-hidden="true"></span>
+      <div class="band__inner">
+        <div class="study-col">
+          <p class="study-label mono reveal"><span>04</span> / Finance automation · Moglix</p>
+          <h1 class="study-hero__name display" style="--n:14">Payment Advice</h1>
+          <div class="study-hero__rule"><span class="mono">Project study</span></div>
+          <p class="study-hero__pitch reveal">Reads customer payment advices and auto-maps every payment to the right open invoices for the finance team.</p>
+        </div>
+        <div class="study-hero__visual">
+          <div class="study-paper" aria-hidden="true">
+<article class="pp pp--cheque" data-cat="company" data-order="3" data-slug="payment-advice"><div class="pp__sheet">
+  <p class="cq__hd"><span>Payment advice</span><span>No. 0014+</span></p>
+  <p class="cq__row"><span>UTR</span><b>AXIS2611·····90</b></p>
+  <p class="cq__row"><span>Invoices</span><b>INV-·· / INV-··</b></p>
+  <p class="cq__row"><span>TDS</span><b>deducted ✓</b></p>
+  <p class="cq__sign">auto-mapped</p>
+  <h3 class="pp__name pp__name--m">Payment Advice Automation</h3>
+  <p class="pp__d">Reads customer payment advices, extracts UTRs, invoices and TDS, checks them against the ERP and auto-maps payments to open invoices. 100+ page advices parsed in about 0.2 s.</p>
+  <ul class="pp__stack"><li>LayoutLMv3</li><li>Qdrant</li><li>HDBSCAN</li><li>Gemini</li><li>Kafka</li><li>Celery</li></ul>
+  <p class="cq__micr">⑆0014⑆ 2611 ⑈ 080⑈</p>
+  <p class="pp__int">Internal · Moglix</p></div></article>
+          </div>
+          <aside class="study-card reveal">
+            <p class="study-card__label mono">Company · 2026</p>
+            <p class="study-card__line">Parsers first.<br>Gemini as fallback.</p>
+            <p class="study-card__tags mono">Python / Django / Celery / Kafka</p>
+          </aside>
+        </div>
+        <p class="study-caption mono">Payment Advice Automation / Finance automation · Moglix / 2026</p>
+        <dl class="study-meta">
+          <div><dt class="mono">Role</dt><dd>Backend &amp; ML · AI &amp; Analytics team</dd></div>
+          <div><dt class="mono">Status</dt><dd>In production</dd></div>
+          <div><dt class="mono">Year</dt><dd>2026</dd></div>
+          <div class="study-meta__wide"><dt class="mono">Stack</dt><dd>Python / Django / Celery / Kafka / Redis / MongoDB / MySQL / Qdrant / LayoutLMv3 / HDBSCAN / Gemini / HTMX / Docker</dd></div>
+
+        </dl>
+        <nav class="study-index mono" aria-label="In this study">
+          <span>In this study</span>
+          <ol>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#problem">Problem</a></li>
+            <li><a href="#system">How it works</a></li>
+            <li><a href="#decisions">Decisions</a></li>
+            <li><a href="#flow">Flow</a></li>
+            <li><a href="#outcome">Outcome</a></li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <!-- 02 OVERVIEW -->
+    <section class="band tone-ink study-chapter" id="overview" data-thread="a:gm1:0,0,ln a:gm1:0,1,l">
+      <span class="gutter-mark" id="gm1" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">02 / Overview</p>
+        <div class="study-two">
+          <h2 class="study-h2 reveal">A payment arrives with a PDF. The invoices close themselves.</h2>
+          <p class="study-text reveal">When a customer pays, they send a payment advice: a document listing which invoices the money covers, the UTR and any tax deducted. This pipeline reads those advices from support tickets, extracts every line, checks it against the ERP and the bank, and maps the payment to open invoices for the accounts-receivable team.</p>
+        </div>
+        <ol class="study-modules reveal" style="--n:6">
+          <li>Collect</li>
+          <li>Classify</li>
+          <li>Extract</li>
+          <li>Validate</li>
+          <li>Map</li>
+          <li>Learn</li>
+        </ol>
+        <p class="study-caption mono">Payment Advice Automation / how the parts connect</p>
+      </div>
+    </section>
+
+    <!-- 03 PROBLEM -->
+    <section class="band tone-paper study-chapter" id="problem" data-thread="a:gm2:0,0,ln a:gm2:0,1,l">
+      <span class="gutter-mark" id="gm2" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">03 / The problem</p>
+        <h2 class="study-h2 study-h2--big study-col reveal">Every customer sends the same information in a different shape.</h2>
+        <div class="study-two study-two--low">
+          <div></div>
+          <p class="study-text reveal">Advices arrive as PDFs, spreadsheets and emails, each customer with its own layout, and some run to hundreds of pages. Matching them to invoices by hand is slow, and a small mistake means a payment sits unapplied or an invoice stays open.</p>
+        </div>
+        <ol class="study-rows">
+          <li class="reveal"><span class="study-rows__n mono">01</span><h3>A different layout for every customer</h3></li>
+          <li class="reveal"><span class="study-rows__n mono">02</span><h3>Long advices with hundreds of invoice lines</h3></li>
+          <li class="reveal"><span class="study-rows__n mono">03</span><h3>Manual matching against the ERP and bank entries</h3></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 04 SYSTEM -->
+    <section class="band tone-ink study-chapter" id="system" data-thread="a:gm3:0,0,ln a:gm3:0,1,l">
+      <span class="gutter-mark" id="gm3" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">04 / How it works</p>
+        <h2 class="study-h2 study-col reveal">From a ticket to a mapped payment, in six steps.</h2>
+        <ol class="study-rows study-rows--split">
+          <li class="reveal"><span class="study-rows__n mono">01</span><h3>Collect</h3><p>Tickets flow in from the helpdesk through Kafka and Celery workers.</p></li>
+          <li class="reveal"><span class="study-rows__n mono">02</span><h3>Classify</h3><p>LayoutLMv3 and Qdrant layout matching route each advice to the right parser.</p></li>
+          <li class="reveal"><span class="study-rows__n mono">03</span><h3>Extract</h3><p>14+ customer-specific parsers pull UTRs, invoices and TDS, with Gemini as fallback.</p></li>
+          <li class="reveal"><span class="study-rows__n mono">04</span><h3>Validate</h3><p>Extracted payments are checked against the ERP and matched to bank entries.</p></li>
+          <li class="reveal"><span class="study-rows__n mono">05</span><h3>Map</h3><p>Payments are auto-mapped to open invoices behind open-balance and deduction guards.</p></li>
+          <li class="reveal"><span class="study-rows__n mono">06</span><h3>Learn</h3><p>HDBSCAN clusters unseen layouts and Gemini writes a parser config for each one.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 05 DECISIONS -->
+    <section class="band tone-paper study-chapter" id="decisions" data-thread="a:gm4:0,0,ln a:gm4:0,1,l">
+      <span class="gutter-mark" id="gm4" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">05 / Key decisions</p>
+        <h2 class="study-h2 study-h2--big study-col reveal">Where the important calls were made.</h2>
+        <article class="study-decision reveal">
+          <p class="study-label mono">Decision 01</p>
+          <div class="study-two"><h3 class="study-h3">Parsers or an LLM for every document?</h3><div></div></div>
+          <ol class="study-rows study-rows--split">
+            <li><span class="study-rows__n mono">→</span><h3>The choice</h3><p>Fast deterministic parsers first, Gemini only as the fallback.</p></li>
+            <li><span class="study-rows__n mono">→</span><h3>What it gave</h3><p>Most advices are parsed in a fraction of a second, cheaply and predictably.</p></li>
+          </ol>
+        </article>
+        <article class="study-decision reveal">
+          <p class="study-label mono">Decision 02</p>
+          <div class="study-two"><h3 class="study-h3">How do new customer layouts get supported?</h3><div></div></div>
+          <ol class="study-rows study-rows--split">
+            <li><span class="study-rows__n mono">→</span><h3>The choice</h3><p>A self-learning loop: cluster unseen layouts, generate a config, activate it only above 80% held-out accuracy.</p></li>
+            <li><span class="study-rows__n mono">→</span><h3>What it gave</h3><p>New formats come online without hand-writing every parser.</p></li>
+          </ol>
+        </article>
+        <article class="study-decision reveal">
+          <p class="study-label mono">Decision 03</p>
+          <div class="study-two"><h3 class="study-h3">How do you change the model safely?</h3><div></div></div>
+          <ol class="study-rows study-rows--split">
+            <li><span class="study-rows__n mono">→</span><h3>The choice</h3><p>An A/B harness compares models on real advices before switching.</p></li>
+            <li><span class="study-rows__n mono">→</span><h3>What it gave</h3><p>The model migration made extraction about 3× faster and cheaper.</p></li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <!-- 06 FLOW -->
+    <section class="band tone-ink study-chapter" id="flow" data-thread="a:gm5:0,0,ln a:gm5:0,1,l">
+      <span class="gutter-mark" id="gm5" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">06 / The flow</p>
+        <div class="study-two">
+          <h2 class="study-h2 reveal">From the first step to the result.</h2>
+          <p class="study-text reveal">What it looks like from the side of the person using it — the path through Payment Advice in 4 steps.</p>
+        </div>
+        <ol class="study-journey">
+          <li class="reveal"><span class="mono">01</span>An advice arrives in a ticket</li>
+          <li class="reveal"><span class="mono">02</span>It is classified and parsed</li>
+          <li class="reveal"><span class="mono">03</span>Payments are validated and mapped</li>
+          <li class="reveal"><span class="mono">04</span>Finance reviews it in the dashboard</li>
+        </ol>
+        <p class="study-caption mono">Payment Advice Automation / user flow</p>
+      </div>
+    </section>
+
+    <!-- 07 OUTCOME -->
+    <section class="band tone-paper study-chapter" id="outcome" data-thread="a:gm6:0,0,ln a:gm6:0,1,l">
+      <span class="gutter-mark" id="gm6" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">07 / Outcome</p>
+        <h2 class="study-h2 study-h2--big study-col reveal">Cash application that runs itself, with a person still in control.</h2>
+        <dl class="study-stats">
+          <div class="reveal"><dt class="mono">Customer-specific parsers</dt><dd>14+</dd></div>
+          <div class="reveal"><dt class="mono">To parse a 100+ page advice</dt><dd>~0.2 s</dd></div>
+          <div class="reveal"><dt class="mono">Faster, cheaper extraction</dt><dd>~3×</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- 08 NEXT -->
+    <section class="band tone-ink study-next" data-thread="a:gm7:0,0,ln a:gm7:0,1,l">
+      <span class="gutter-mark" id="gm7" aria-hidden="true"></span>
+      <a class="study-next__link" href="/work/repo-safety" data-cursor="Next">
+        <span class="study-label mono">05 / Next project</span>
+        <span class="study-next__row"><span class="study-next__name display">Repo-Safety</span><span class="study-next__arrow" aria-hidden="true">↗</span></span>
+        <span class="study-next__pitch">A static scanner that checks an untrusted repo or ZIP, like a “take-home test”, for hidden auto-run malware before you open it.</span>
+        <span class="study-paper study-paper--next" aria-hidden="true">
+<article class="pp pp--caution" data-cat="personal" data-order="4" data-slug="repo-safety"><div class="pp__sheet">
+  <p class="cn__band" aria-hidden="true"></p>
+  <p class="pp__hd"><span>Security · Personal</span><span>2026</span></p>
+  <p class="cn__verdict"><span class="is-safe">Safe</span><span>Suspicious</span><span class="is-bad">Dangerous</span></p>
+  <h3 class="pp__name pp__name--m">Repo-Safety</h3>
+  <p class="pp__d">Checks an untrusted repo or ZIP, like a "take-home test", for hidden auto-run malware before you open it. 11 rules, never runs code.</p>
+  <ul class="pp__stack"><li>TypeScript</li><li>Node.js</li><li>VS Code</li><li>Chrome MV3</li></ul>
+  </div></article>
+        </span>
+      </a>
+      <div class="study-next__foot mono">
+        <a href="/work/distiller">← Distiller</a>
+        <a href="/#projects">All projects</a>
+        <a href="/#contact">Contact</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/assets/lenis.min.js" defer></script>
+  <script src="/main.js?v=30c688d3" defer></script>
+</body>
+</html>

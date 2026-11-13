@@ -16,8 +16,8 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/ibm-plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=m4">
-  <link rel="prev" href="/work/distiller">
+  <link rel="stylesheet" href="/style.css?v=1e36fe1f">
+  <link rel="prev" href="/work/cerebra">
   <link rel="next" href="/work/blockauth">
   <script>
     (function () { var d = document.documentElement; d.classList.add('js', 'study-page'); try { localStorage.removeItem('theme'); } catch (e) {} })();
@@ -48,27 +48,22 @@
       <span class="gutter-mark" id="gm0" aria-hidden="true"></span>
       <div class="band__inner">
         <div class="study-col">
-          <p class="study-label mono reveal"><span>04</span> / Developer tools</p>
-          <h1 class="study-hero__name display">Bug Detection</h1>
+          <p class="study-label mono reveal"><span>09</span> / Developer tools</p>
+          <h1 class="study-hero__name display" style="--n:13">Bug Detection</h1>
           <div class="study-hero__rule"><span class="mono">Project study</span></div>
           <p class="study-hero__pitch reveal">A VS Code extension that catches errors as they happen — and either teaches you, or fixes them.</p>
         </div>
         <div class="study-hero__visual">
-          <div class="study-hero__stage project__stage" aria-hidden="true">
-
-            <svg class="sketch" style="--x:3%;--y:58%;--w:23vw;--r:-2deg" viewBox="0 0 350 215" aria-hidden="true"><rect class="fill" x="50" y="8" width="250" height="168" rx="8"/><rect x="62" y="20" width="226" height="144" rx="2"/><path d="M62 36 H288"/><circle cx="72" cy="28" r="2.5"/><circle cx="82" cy="28" r="2.5"/><circle cx="92" cy="28" r="2.5"/><path d="M74 52 H150 M86 66 H200 M86 80 H170 M74 108 H140 M86 122 H230 M86 136 H190 M74 150 H120"/><path class="hot" d="M86 98 q5 -5 10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0"/><path class="fill" d="M10 182 H340 L322 210 H28 Z"/><path d="M150 196 H200"/></svg><svg class="sketch" style="--x:84%;--y:-2%;--w:9vw;--r:14deg" viewBox="0 0 170 200" aria-hidden="true" data-from="14vw,-35vh"><path d="M66 44 L50 14 M104 44 L120 14"/><path d="M44 96 H8 M42 130 H4 M48 164 L16 190 M126 96 H162 M128 130 H166 M122 164 L154 190"/><ellipse class="fill" cx="85" cy="126" rx="42" ry="62"/><circle class="fill" cx="85" cy="58" r="21"/><path d="M85 79 V186 M56 112 H72 M98 112 H114 M60 146 H72 M98 146 H110"/></svg><p class="callout mono" style="--x:72%;--y:6%"><span>Caught live</span><b>Runtime + lint</b></p><div class="card card--code" style="--x:4%;--y:-2%;--w:23vw;--r:-2deg">
-              <p class="card__head mono"><span>orders.py</span><span>Ln 42</span></p>
-<pre class="mono"><span class="ln">41</span> user = get_user(uid)
-<span class="ln">42</span> name = <span class="squiggle">user["name"]</span>
-<span class="ln">43</span> return name.title()</pre>
-              <p class="err mono">TypeError: 'NoneType' object is not subscriptable</p>
-            </div>
-            <div class="card" style="--x:66%;--y:74%;--w:21vw;--r:2deg">
-              <p class="seg mono"><span>Tutor</span><span class="on">Debugger</span></p>
-              <p class="sm">get_user returns None for an unknown id. Check it before reading the name.</p>
-              <p class="card__actions mono"><span class="pill">Apply fix</span></p>
-            </div>
-          
+          <div class="study-paper" aria-hidden="true">
+<article class="pp pp--notebook" data-cat="personal" data-order="8" data-slug="bug-detection"><div class="pp__sheet">
+  <p class="pp__hd"><span>04 / Dev tools</span><span>2025</span></p>
+  <h3 class="pp__name pp__name--s">Bug Detection &amp; Fix Tool</h3>
+  <p class="nb__line">✎ catches errors as you type</p>
+  <p class="nb__line">✎ Tutor mode explains them</p>
+  <p class="nb__line">✎ Debugger mode fixes them</p>
+  <p class="nb__line nb__hl">→ a VS Code extension</p>
+  <ul class="pp__stack"><li>TypeScript</li><li>FastAPI</li><li>RAG</li><li>Vector DB</li></ul>
+  </div></article>
           </div>
           <aside class="study-card reveal">
             <p class="study-card__label mono">Personal · 2025</p>
@@ -212,23 +207,23 @@
     <section class="band tone-ink study-next" data-thread="a:gm7:0,0,ln a:gm7:0,1,l">
       <span class="gutter-mark" id="gm7" aria-hidden="true"></span>
       <a class="study-next__link" href="/work/blockauth" data-cursor="Next">
-        <span class="study-label mono">05 / Next project</span>
+        <span class="study-label mono">10 / Next project</span>
         <span class="study-next__row"><span class="study-next__name display">BlockAuth</span><span class="study-next__arrow" aria-hidden="true">↗</span></span>
         <span class="study-next__pitch">Decentralised identity on a blockchain, so IoT devices can prove who they are without a central server.</span>
-        <span class="study-next__stage project__stage" aria-hidden="true">
-
-            <svg class="sketch" style="--x:54%;--y:56%;--w:30vw;--r:0deg" viewBox="0 0 430 245" aria-hidden="true"><path d="M0 238 H430"/><rect class="fill" x="16" y="170" width="120" height="44" rx="6"/><path d="M36 170 V120 M116 170 V120"/><circle cx="38" cy="192" r="3" class="ink"/><circle cx="52" cy="192" r="3"/><circle cx="66" cy="192" r="3"/><path d="M90 192 H124"/><path d="M28 214 V238 M124 214 V238"/><path d="M214 238 V150"/><path class="fill" d="M190 124 H252 V150 H190 Z"/><path class="fill" d="M252 128 L272 120 V154 L252 146 Z"/><circle cx="204" cy="137" r="5"/><path d="M330 160 V148 M350 160 V148 M370 160 V148 M330 222 V234 M350 222 V234 M370 222 V234 M308 180 H296 M308 200 H296 M392 180 H404 M392 200 H404"/><rect class="fill" x="308" y="160" width="84" height="62" rx="5"/><rect x="330" y="176" width="40" height="30" rx="2"/><path class="hot" d="M76 120 C76 70 120 60 150 40" stroke-dasharray="5 6"/><path class="hot" d="M222 118 V60" stroke-dasharray="5 6"/><path class="hot" d="M350 146 C350 90 320 60 296 40" stroke-dasharray="5 6"/><rect class="fill" x="120" y="6" width="56" height="40" rx="3"/><rect class="fill" x="194" y="6" width="56" height="40" rx="3"/><rect class="fill" x="268" y="6" width="56" height="40" rx="3"/><path d="M176 26 H194 M250 26 H268" stroke-width="3"/><path d="M130 20 H160 M204 20 H234 M278 20 H308 M130 32 H150 M204 32 H224 M278 32 H298"/></svg><p class="callout mono" style="--x:3%;--y:4%"><span>DID · sensor-07</span><b>Identity on-chain</b></p><p class="callout mono" style="--x:3%;--y:20%"><span>Access</span><b>Granted · read</b></p><div class="chain" style="--x:4%;--y:66%;--w:42vw;--r:-1deg">
-              <div class="block mono"><span>Block 0x1a</span><b>DID: sensor-07</b><small>prev 0x19</small></div>
-              <span class="link-bar"></span>
-              <div class="block mono"><span>Block 0x1b</span><b>Grant: read</b><small>prev 0x1a</small></div>
-              <span class="link-bar"></span>
-              <div class="block mono"><span>Block 0x1c</span><b>Verify ✓</b><small>prev 0x1b</small></div>
-            </div>
-            <div class="stamp mono" style="--x:76%;--y:-4%;--r:-12deg"><span>Presented</span><b>ICSDS</b><span>Dec 2025</span></div>
-          
+        <span class="study-paper study-paper--next" aria-hidden="true">
+<article class="pp pp--journal" data-cat="research" data-order="9" data-slug="blockauth"><div class="pp__sheet">
+  <p class="jr__hd"><span>ICSDS-2025 · Research</span><span>Dec 2025</span></p>
+  <h3 class="pp__name pp__name--s">BlockAuth</h3>
+  <p class="jr__sub">Decentralised identity for IoT devices</p>
+  <div class="jr__cols" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+  <svg class="pp__sk jr__fig" viewBox="0 0 260 70" aria-hidden="true"><rect x="4" y="16" width="62" height="36"/><rect x="98" y="16" width="62" height="36"/><rect x="192" y="16" width="62" height="36"/><path class="h" d="M66 34H98M160 34H192"/><path d="M14 28H50M108 28H140M202 28H236"/></svg>
+  <p class="jr__cap">Fig. 1 · A chain of device identities, no central server.</p>
+  <ul class="pp__stack"><li>Blockchain</li><li>Decentralised ID</li><li>IoT</li></ul>
+  </div></article>
         </span>
       </a>
       <div class="study-next__foot mono">
+        <a href="/work/cerebra">← Cerebra</a>
         <a href="/#projects">All projects</a>
         <a href="/#contact">Contact</a>
         <a href="#top">Back to top ↑</a>
@@ -237,6 +232,6 @@
   </main>
 
   <script src="/assets/lenis.min.js" defer></script>
-  <script src="/main.js?v=m4" defer></script>
+  <script src="/main.js?v=30c688d3" defer></script>
 </body>
 </html>

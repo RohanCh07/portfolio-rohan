@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Repo-Safety — Rohan Chauhan</title>
+  <meta name="description" content="A static scanner that checks an untrusted repo or ZIP, like a “take-home test”, for hidden auto-run malware before you open it.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Repo-Safety — Rohan Chauhan">
+  <meta property="og:description" content="A static scanner that checks an untrusted repo or ZIP, like a “take-home test”, for hidden auto-run malware before you open it.">
+  <meta property="og:image" content="/assets/og-image.jpg">
+  <meta name="theme-color" content="#050505">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/ibm-plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/style.css?v=1e36fe1f">
+  <link rel="prev" href="/work/payment-advice">
+  <link rel="next" href="/work/supplierinv">
+  <script>
+    (function () { var d = document.documentElement; d.classList.add('js', 'study-page'); try { localStorage.removeItem('theme'); } catch (e) {} })();
+  </script>
+</head>
+<body>
+  <a class="skip" href="#overview">Skip to the case study</a>
+
+  <header class="site-header" id="header">
+    <a class="wordmark" href="/" aria-label="Rohan Chauhan, home">RC</a>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="/#capabilities">Capabilities</a>
+      <a href="/#projects">Projects</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#about">About</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+  </header>
+
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+
+  <main id="top" class="study">
+    <svg class="thread" id="thread" aria-hidden="true" focusable="false"></svg>
+
+    <!-- 01 HERO -->
+    <section class="band tone-paper study-hero" data-thread="a:gm0:0,0.06,ln a:gm0:0,1,l">
+      <span class="gutter-mark" id="gm0" aria-hidden="true"></span>
+      <div class="band__inner">
+        <div class="study-col">
+          <p class="study-label mono reveal"><span>05</span> / Security</p>
+          <h1 class="study-hero__name display" style="--n:11">Repo-Safety</h1>
+          <div class="study-hero__rule"><span class="mono">Project study</span></div>
+          <p class="study-hero__pitch reveal">A static scanner that checks an untrusted repo or ZIP, like a “take-home test”, for hidden auto-run malware before you open it.</p>
+        </div>
+        <div class="study-hero__visual">
+          <div class="study-paper" aria-hidden="true">
+<article class="pp pp--caution" data-cat="personal" data-order="4" data-slug="repo-safety"><div class="pp__sheet">
+  <p class="cn__band" aria-hidden="true"></p>
+  <p class="pp__hd"><span>Security · Personal</span><span>2026</span></p>
+  <p class="cn__verdict"><span class="is-safe">Safe</span><span>Suspicious</span><span class="is-bad">Dangerous</span></p>
+  <h3 class="pp__name pp__name--m">Repo-Safety</h3>
+  <p class="pp__d">Checks an untrusted repo or ZIP, like a "take-home test", for hidden auto-run malware before you open it. 11 rules, never runs code.</p>
+  <ul class="pp__stack"><li>TypeScript</li><li>Node.js</li><li>VS Code</li><li>Chrome MV3</li></ul>
+  </div></article>
+          </div>
+          <aside class="study-card reveal">
+            <p class="study-card__label mono">Personal · 2026</p>
+            <p class="study-card__line">Never runs code.<br>Explains every flag.</p>
+            <p class="study-card__tags mono">TypeScript / Node.js / Fastify / BullMQ</p>
+          </aside>
+        </div>
+        <p class="study-caption mono">Repo-Safety / Security / 2026</p>
+        <dl class="study-meta">
+          <div><dt class="mono">Role</dt><dd>Solo — design, engine, extensions</dd></div>
+          <div><dt class="mono">Status</dt><dd>In development</dd></div>
+          <div><dt class="mono">Year</dt><dd>2026</dd></div>
+          <div class="study-meta__wide"><dt class="mono">Stack</dt><dd>TypeScript / Node.js / Fastify / BullMQ / Redis / PostgreSQL / Docker / VS Code Extension API / Chrome MV3 / Vitest</dd></div>
+          <div class="study-meta__wide"><dt class="mono">Links</dt><dd><a class="explore mono" data-cursor="Open" href="https://github.com/RohanCh07/Repo-Safety" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a></dd></div>
+        </dl>
+        <nav class="study-index mono" aria-label="In this study">
+          <span>In this study</span>
+          <ol>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#problem">Problem</a></li>
+            <li><a href="#system">How it works</a></li>
+            <li><a href="#decisions">Decisions</a></li>
+            <li><a href="#flow">Flow</a></li>
+            <li><a href="#outcome">Outcome</a></li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <!-- 02 OVERVIEW -->
+    <section class="band tone-ink study-chapter" id="overview" data-thread="a:gm1:0,0,ln a:gm1:0,1,l">
+      <span class="gutter-mark" id="gm1" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">02 / Overview</p>
+        <div class="study-two">
+          <h2 class="study-h2 reveal">Know what a repo will do before you open it.</h2>
+          <p class="study-text reveal">Repo-Safety reads a folder, ZIP or GitHub link without ever running it, and looks for the tricks that make code execute the moment you open, install or build it. Each finding comes with the file, the line and a plain-English reason, and everything rolls up into a Safe, Suspicious or Dangerous verdict with a 0–100 risk score.</p>
+        </div>
+        <ol class="study-modules reveal" style="--n:5">
+          <li>Ingest</li>
+          <li>Scan</li>
+          <li>Score</li>
+          <li>Explain</li>
+          <li>Surface</li>
+        </ol>
+        <p class="study-caption mono">Repo-Safety / how the parts connect</p>
+      </div>
+    </section>
+
+    <!-- 03 PROBLEM -->
+    <section class="band tone-paper study-chapter" id="problem" data-thread="a:gm2:0,0,ln a:gm2:0,1,l">
+      <span class="gutter-mark" id="gm2" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">03 / The problem</p>
+        <h2 class="study-h2 study-h2--big study-col reveal">Opening a folder should not be enough to get you hacked.</h2>
+        <div class="study-two study-two--low">
+          <div></div>
+          <p class="study-text reveal">Fake recruiters send developers “take-home tests” that hide malware in places that run automatically: editor tasks that fire when a folder opens, install hooks, git hooks and download-and-run scripts. Most people never look in those places before they trust a project.</p>
+        </div>
+        <ol class="study-rows">
+          <li class="reveal"><span class="study-rows__n mono">01</span><h3>Code that runs the moment a folder is opened</h3></li>
+          <li class="reveal"><span class="study-rows__n mono">02</span><h3>Install and git hooks that hide in plain sight</h3></li>
+          <li class="reveal"><span class="study-rows__n mono">03</span><h3>No quick way to check before you click “Trust”</h3></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 04 SYSTEM -->
+    <section class="band tone-ink study-chapter" id="system" data-thread="a:gm3:0,0,ln a:gm3:0,1,l">
+      <span class="gutter-mark" id="gm3" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">04 / How it works</p>
+        <h2 class="study-h2 study-col reveal">Read safely, scan, score, explain.</h2>
+        <ol class="study-rows study-rows--split">
+          <li class="reveal"><span class="study-rows__n mono">01</span><h3>Ingest</h3><p>Reads a folder or ZIP into memory with size, file and depth limits, and rejects zip bombs and zip-slip.</p></li>
+          <li class="reveal"><span class="study-rows__n mono">02</span><h3>Scan</h3><p>11 rules look for folder-open tasks, install hooks, hidden git hooks, download-and-run scripts, obfuscation and typosquats.</p></li>
+          <li class="reveal"><span class="study-rows__n mono">03</span><h3>Score</h3><p>Findings roll up into a Safe / Suspicious / Dangerous verdict and a 0–100 risk score.</p></li>
+          <li class="reveal"><span class="study-rows__n mono">04</span><h3>Explain</h3><p>Every finding points to a file and line with a plain-English reason.</p></li>
+          <li class="reveal"><span class="study-rows__n mono">05</span><h3>Surface</h3><p>One engine behind a CLI, a VS Code extension, a web app and a Chrome extension.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 05 DECISIONS -->
+    <section class="band tone-paper study-chapter" id="decisions" data-thread="a:gm4:0,0,ln a:gm4:0,1,l">
+      <span class="gutter-mark" id="gm4" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">05 / Key decisions</p>
+        <h2 class="study-h2 study-h2--big study-col reveal">Where the important calls were made.</h2>
+        <article class="study-decision reveal">
+          <p class="study-label mono">Decision 01</p>
+          <div class="study-two"><h3 class="study-h3">Should it run the code to see what it does?</h3><div></div></div>
+          <ol class="study-rows study-rows--split">
+            <li><span class="study-rows__n mono">→</span><h3>The choice</h3><p>Never. Static analysis only, and no git clone: repos are fetched as archives.</p></li>
+            <li><span class="study-rows__n mono">→</span><h3>What it gave</h3><p>It is safe to point at hostile input, which is the whole point.</p></li>
+          </ol>
+        </article>
+        <article class="study-decision reveal">
+          <p class="study-label mono">Decision 02</p>
+          <div class="study-two"><h3 class="study-h3">How do you avoid crying wolf?</h3><div></div></div>
+          <ol class="study-rows study-rows--split">
+            <li><span class="study-rows__n mono">→</span><h3>The choice</h3><p>Suspicious-only repos are capped below the Dangerous range, and every rule is tested against popular projects.</p></li>
+            <li><span class="study-rows__n mono">→</span><h3>What it gave</h3><p>Normal install scripts never look like a real trap.</p></li>
+          </ol>
+        </article>
+        <article class="study-decision reveal">
+          <p class="study-label mono">Decision 03</p>
+          <div class="study-two"><h3 class="study-h3">One tool or four?</h3><div></div></div>
+          <ol class="study-rows study-rows--split">
+            <li><span class="study-rows__n mono">→</span><h3>The choice</h3><p>One scanning engine shared by the CLI, VS Code, the web app and the browser extension.</p></li>
+            <li><span class="study-rows__n mono">→</span><h3>What it gave</h3><p>The same verdict wherever a developer meets the repo.</p></li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <!-- 06 FLOW -->
+    <section class="band tone-ink study-chapter" id="flow" data-thread="a:gm5:0,0,ln a:gm5:0,1,l">
+      <span class="gutter-mark" id="gm5" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">06 / The flow</p>
+        <div class="study-two">
+          <h2 class="study-h2 reveal">From the first step to the result.</h2>
+          <p class="study-text reveal">What it looks like from the side of the person using it — the path through Repo-Safety in 4 steps.</p>
+        </div>
+        <ol class="study-journey">
+          <li class="reveal"><span class="mono">01</span>Drop in a repo, ZIP or link</li>
+          <li class="reveal"><span class="mono">02</span>Read the verdict and score</li>
+          <li class="reveal"><span class="mono">03</span>Open the flagged lines</li>
+          <li class="reveal"><span class="mono">04</span>Decide whether to trust it</li>
+        </ol>
+        <p class="study-caption mono">Repo-Safety / user flow</p>
+      </div>
+    </section>
+
+    <!-- 07 OUTCOME -->
+    <section class="band tone-paper study-chapter" id="outcome" data-thread="a:gm6:0,0,ln a:gm6:0,1,l">
+      <span class="gutter-mark" id="gm6" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">07 / Outcome</p>
+        <h2 class="study-h2 study-h2--big study-col reveal">Fast on huge repos, quiet on healthy ones.</h2>
+        <dl class="study-stats">
+          <div class="reveal"><dt class="mono">Detection rules</dt><dd>11</dd></div>
+          <div class="reveal"><dt class="mono">To scan a 68k-file repo</dt><dd>12 s</dd></div>
+          <div class="reveal"><dt class="mono">Popular repos flagged Dangerous</dt><dd>0 / 21</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- 08 NEXT -->
+    <section class="band tone-ink study-next" data-thread="a:gm7:0,0,ln a:gm7:0,1,l">
+      <span class="gutter-mark" id="gm7" aria-hidden="true"></span>
+      <a class="study-next__link" href="/work/supplierinv" data-cursor="Next">
+        <span class="study-label mono">06 / Next project</span>
+        <span class="study-next__row"><span class="study-next__name display">SupplierInv</span><span class="study-next__arrow" aria-hidden="true">↗</span></span>
+        <span class="study-next__pitch">Turns unstructured supplier invoices into validated data with generative AI, then reconciles them with no manual review.</span>
+        <span class="study-paper study-paper--next" aria-hidden="true">
+<article class="pp pp--invoice" data-cat="company" data-order="5" data-slug="supplierinv"><div class="pp__sheet">
+  <span class="iv__stamp">Reconciled</span>
+  <p class="iv__hd"><span>TAX INVOICE</span><span>GSTIN ✓</span></p>
+  <table class="iv__t"><tr><td>Item</td><td>HSN</td><td>Qty</td></tr><tr><td>Bearing 6205</td><td>8482 ✓</td><td>120</td></tr><tr><td>Gloves L</td><td>4015 ✓</td><td>200</td></tr></table>
+  <h3 class="pp__name pp__name--m">SupplierInv</h3>
+  <p class="pp__d">Turns unstructured supplier invoices into validated data with Gemini and Textract, then reconciles them with zero manual review.</p>
+  <ul class="pp__stack"><li>Gemini</li><li>AWS Textract</li><li>Kafka</li><li>BigQuery</li><li>Power BI</li></ul>
+  <p class="pp__int">Internal · Moglix</p></div></article>
+        </span>
+      </a>
+      <div class="study-next__foot mono">
+        <a href="/work/payment-advice">← Payment Advice</a>
+        <a href="/#projects">All projects</a>
+        <a href="/#contact">Contact</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/assets/lenis.min.js" defer></script>
+  <script src="/main.js?v=30c688d3" defer></script>
+</body>
+</html>

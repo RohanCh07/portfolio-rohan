@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://chauhanrohan.vercel.app/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://chauhanrohan.vercel.app/work/ramanujan</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://chauhanrohan.vercel.app/work/payment-advice</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://chauhanrohan.vercel.app/work/repo-safety</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://chauhanrohan.vercel.app/work/supplierinv</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://chauhanrohan.vercel.app/work/procurement</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://chauhanrohan.vercel.app/work/lumida</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://chauhanrohan.vercel.app/work/cerebra</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
   <url><loc>https://chauhanrohan.vercel.app/work/distiller</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>

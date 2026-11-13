@@ -16,9 +16,9 @@
   <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
   <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/ibm-plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/style.css?v=m4">
-  <link rel="prev" href="/work/cerebra">
-  <link rel="next" href="/work/bug-detection">
+  <link rel="stylesheet" href="/style.css?v=1e36fe1f">
+  <link rel="prev" href="/work/ramanujan">
+  <link rel="next" href="/work/payment-advice">
   <script>
     (function () { var d = document.documentElement; d.classList.add('js', 'study-page'); try { localStorage.removeItem('theme'); } catch (e) {} })();
   </script>
@@ -49,29 +49,20 @@
       <div class="band__inner">
         <div class="study-col">
           <p class="study-label mono reveal"><span>03</span> / LLM infrastructure</p>
-          <h1 class="study-hero__name display">Distiller</h1>
+          <h1 class="study-hero__name display" style="--n:9">Distiller</h1>
           <div class="study-hero__rule"><span class="mono">Project study</span></div>
           <p class="study-hero__pitch reveal">Change one line, and repeated LLM calls slowly move to a small model you own.</p>
         </div>
         <div class="study-hero__visual">
-          <div class="study-hero__stage project__stage" aria-hidden="true">
-
-            <svg class="sketch" style="--x:58%;--y:-8%;--w:30vw;--r:0deg" viewBox="0 0 440 300" aria-hidden="true"><path d="M20 252 H170"/><rect class="fill" x="40" y="226" width="110" height="26" rx="3"/><path class="hot" d="M84 222 C76 210 92 204 86 192 C100 202 104 214 96 222"/><circle class="fill" cx="95" cy="150" r="58"/><path class="fill" d="M82 96 V44 H108 V96"/><rect class="fill" x="77" y="34" width="36" height="12" rx="2"/><path d="M45 168 Q95 150 145 168"/><circle cx="80" cy="182" r="3"/><circle cx="104" cy="190" r="2"/><circle cx="118" cy="176" r="2.5"/><path d="M108 54 C150 34 200 34 236 64"/><path class="fill" d="M226 54 L248 40 L382 188 L360 202 Z"/><path d="M236 64 L372 196" stroke-dasharray="3 5"/><path d="M262 64 V40 H276 M340 160 V138 H354"/><path class="fill" d="M352 214 H424 L414 286 H362 Z"/><path d="M358 258 H418"/><circle cx="376" cy="204" r="3.5" class="ink-hot"/></svg><p class="callout mono" style="--x:40%;--y:6%"><span>Big model</span><b>Every call logged</b></p><p class="callout mono" style="--x:84%;--y:76%"><span>Small model</span><b>LoRA · shadow-tested</b></p><div class="card card--code" style="--x:4%;--y:0%;--w:24vw;--r:-2deg">
-              <p class="card__head mono"><span>config.py</span><span>1 line</span></p>
-<pre class="mono"><span class="del">- base_url = "https://api.openai.com/v1"</span>
-<span class="add">+ base_url = "http://distiller:8000/v1"</span></pre>
-            </div>
-            <div class="card" style="--x:18%;--y:64%;--w:19vw;--r:1.5deg">
-              <p class="card__head mono"><span>$ distiller status</span><span></span></p>
-              <ul class="status mono">
-                <li><span class="ok">●</span><span>Gateway</span><span>working</span></li>
-                <li><span class="ok">●</span><span>Call logging</span><span>working</span></li>
-                <li><span class="wip">◐</span><span>LoRA training</span><span>building</span></li>
-                <li><span class="wip">◐</span><span>Shadow tests</span><span>building</span></li>
-                <li><span class="wip">◐</span><span>Routing</span><span>building</span></li>
-              </ul>
-            </div>
-          
+          <div class="study-paper" aria-hidden="true">
+<article class="pp pp--grid" data-cat="personal" data-order="2" data-slug="distiller"><div class="pp__sheet">
+  <span class="pp__stamp">WIP</span>
+  <p class="pp__hd"><span>02 / LLM infra · Personal</span><span class="pp__hot">★ Featured</span></p>
+  <svg class="pp__sk" viewBox="0 0 320 140" aria-hidden="true"><circle cx="64" cy="82" r="40"/><path d="M52 42V14H76V42M28 86C46 78 82 94 100 86"/><path d="M76 26 L246 86 L238 102 L68 42Z"/><path class="h" d="M258 98 C255 104 255 108 258 110 C261 108 261 104 258 98Z"/><path d="M240 132H280L268 118H252Z"/><path d="M40 132H90"/></svg>
+  <h3 class="pp__name pp__name--l">Distiller</h3>
+  <p class="pp__d">Swap one URL. Your repeated LLM calls quietly move to a small model you own.</p>
+  <div class="pp__ft"><ul class="pp__stack"><li>FastAPI</li><li>LiteLLM</li><li>LoRA</li><li>Ollama</li></ul></div>
+  </div></article>
           </div>
           <aside class="study-card reveal">
             <p class="study-card__label mono">Personal · 2026</p>
@@ -224,28 +215,26 @@
     <!-- 08 NEXT -->
     <section class="band tone-ink study-next" data-thread="a:gm7:0,0,ln a:gm7:0,1,l">
       <span class="gutter-mark" id="gm7" aria-hidden="true"></span>
-      <a class="study-next__link" href="/work/bug-detection" data-cursor="Next">
+      <a class="study-next__link" href="/work/payment-advice" data-cursor="Next">
         <span class="study-label mono">04 / Next project</span>
-        <span class="study-next__row"><span class="study-next__name display">Bug Detection</span><span class="study-next__arrow" aria-hidden="true">↗</span></span>
-        <span class="study-next__pitch">A VS Code extension that catches errors as they happen — and either teaches you, or fixes them.</span>
-        <span class="study-next__stage project__stage" aria-hidden="true">
-
-            <svg class="sketch" style="--x:3%;--y:58%;--w:23vw;--r:-2deg" viewBox="0 0 350 215" aria-hidden="true"><rect class="fill" x="50" y="8" width="250" height="168" rx="8"/><rect x="62" y="20" width="226" height="144" rx="2"/><path d="M62 36 H288"/><circle cx="72" cy="28" r="2.5"/><circle cx="82" cy="28" r="2.5"/><circle cx="92" cy="28" r="2.5"/><path d="M74 52 H150 M86 66 H200 M86 80 H170 M74 108 H140 M86 122 H230 M86 136 H190 M74 150 H120"/><path class="hot" d="M86 98 q5 -5 10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0 t10 0"/><path class="fill" d="M10 182 H340 L322 210 H28 Z"/><path d="M150 196 H200"/></svg><svg class="sketch" style="--x:84%;--y:-2%;--w:9vw;--r:14deg" viewBox="0 0 170 200" aria-hidden="true" data-from="14vw,-35vh"><path d="M66 44 L50 14 M104 44 L120 14"/><path d="M44 96 H8 M42 130 H4 M48 164 L16 190 M126 96 H162 M128 130 H166 M122 164 L154 190"/><ellipse class="fill" cx="85" cy="126" rx="42" ry="62"/><circle class="fill" cx="85" cy="58" r="21"/><path d="M85 79 V186 M56 112 H72 M98 112 H114 M60 146 H72 M98 146 H110"/></svg><p class="callout mono" style="--x:72%;--y:6%"><span>Caught live</span><b>Runtime + lint</b></p><div class="card card--code" style="--x:4%;--y:-2%;--w:23vw;--r:-2deg">
-              <p class="card__head mono"><span>orders.py</span><span>Ln 42</span></p>
-<pre class="mono"><span class="ln">41</span> user = get_user(uid)
-<span class="ln">42</span> name = <span class="squiggle">user["name"]</span>
-<span class="ln">43</span> return name.title()</pre>
-              <p class="err mono">TypeError: 'NoneType' object is not subscriptable</p>
-            </div>
-            <div class="card" style="--x:66%;--y:74%;--w:21vw;--r:2deg">
-              <p class="seg mono"><span>Tutor</span><span class="on">Debugger</span></p>
-              <p class="sm">get_user returns None for an unknown id. Check it before reading the name.</p>
-              <p class="card__actions mono"><span class="pill">Apply fix</span></p>
-            </div>
-          
+        <span class="study-next__row"><span class="study-next__name display">Payment Advice</span><span class="study-next__arrow" aria-hidden="true">↗</span></span>
+        <span class="study-next__pitch">Reads customer payment advices and auto-maps every payment to the right open invoices for the finance team.</span>
+        <span class="study-paper study-paper--next" aria-hidden="true">
+<article class="pp pp--cheque" data-cat="company" data-order="3" data-slug="payment-advice"><div class="pp__sheet">
+  <p class="cq__hd"><span>Payment advice</span><span>No. 0014+</span></p>
+  <p class="cq__row"><span>UTR</span><b>AXIS2611·····90</b></p>
+  <p class="cq__row"><span>Invoices</span><b>INV-·· / INV-··</b></p>
+  <p class="cq__row"><span>TDS</span><b>deducted ✓</b></p>
+  <p class="cq__sign">auto-mapped</p>
+  <h3 class="pp__name pp__name--m">Payment Advice Automation</h3>
+  <p class="pp__d">Reads customer payment advices, extracts UTRs, invoices and TDS, checks them against the ERP and auto-maps payments to open invoices. 100+ page advices parsed in about 0.2 s.</p>
+  <ul class="pp__stack"><li>LayoutLMv3</li><li>Qdrant</li><li>HDBSCAN</li><li>Gemini</li><li>Kafka</li><li>Celery</li></ul>
+  <p class="cq__micr">⑆0014⑆ 2611 ⑈ 080⑈</p>
+  <p class="pp__int">Internal · Moglix</p></div></article>
         </span>
       </a>
       <div class="study-next__foot mono">
+        <a href="/work/ramanujan">← Ramanujan</a>
         <a href="/#projects">All projects</a>
         <a href="/#contact">Contact</a>
         <a href="#top">Back to top ↑</a>
@@ -254,6 +243,6 @@
   </main>
 
   <script src="/assets/lenis.min.js" defer></script>
-  <script src="/main.js?v=m4" defer></script>
+  <script src="/main.js?v=30c688d3" defer></script>
 </body>
 </html>

@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>SupplierInv — Rohan Chauhan</title>
+  <meta name="description" content="Turns unstructured supplier invoices into validated data with generative AI, then reconciles them with no manual review.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="SupplierInv — Rohan Chauhan">
+  <meta property="og:description" content="Turns unstructured supplier invoices into validated data with generative AI, then reconciles them with no manual review.">
+  <meta property="og:image" content="/assets/og-image.jpg">
+  <meta name="theme-color" content="#050505">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/ibm-plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/style.css?v=1e36fe1f">
+  <link rel="prev" href="/work/repo-safety">
+  <link rel="next" href="/work/procurement">
+  <script>
+    (function () { var d = document.documentElement; d.classList.add('js', 'study-page'); try { localStorage.removeItem('theme'); } catch (e) {} })();
+  </script>
+</head>
+<body>
+  <a class="skip" href="#overview">Skip to the case study</a>
+
+  <header class="site-header" id="header">
+    <a class="wordmark" href="/" aria-label="Rohan Chauhan, home">RC</a>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="/#capabilities">Capabilities</a>
+      <a href="/#projects">Projects</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#about">About</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+  </header>
+
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+
+  <main id="top" class="study">
+    <svg class="thread" id="thread" aria-hidden="true" focusable="false"></svg>
+
+    <!-- 01 HERO -->
+    <section class="band tone-paper study-hero" data-thread="a:gm0:0,0.06,ln a:gm0:0,1,l">
+      <span class="gutter-mark" id="gm0" aria-hidden="true"></span>
+      <div class="band__inner">
+        <div class="study-col">
+          <p class="study-label mono reveal"><span>06</span> / Invoice intelligence · Moglix</p>
+          <h1 class="study-hero__name display" style="--n:11">SupplierInv</h1>
+          <div class="study-hero__rule"><span class="mono">Project study</span></div>
+          <p class="study-hero__pitch reveal">Turns unstructured supplier invoices into validated data with generative AI, then reconciles them with no manual review.</p>
+        </div>
+        <div class="study-hero__visual">
+          <div class="study-paper" aria-hidden="true">
+<article class="pp pp--invoice" data-cat="company" data-order="5" data-slug="supplierinv"><div class="pp__sheet">
+  <span class="iv__stamp">Reconciled</span>
+  <p class="iv__hd"><span>TAX INVOICE</span><span>GSTIN ✓</span></p>
+  <table class="iv__t"><tr><td>Item</td><td>HSN</td><td>Qty</td></tr><tr><td>Bearing 6205</td><td>8482 ✓</td><td>120</td></tr><tr><td>Gloves L</td><td>4015 ✓</td><td>200</td></tr></table>
+  <h3 class="pp__name pp__name--m">SupplierInv</h3>
+  <p class="pp__d">Turns unstructured supplier invoices into validated data with Gemini and Textract, then reconciles them with zero manual review.</p>
+  <ul class="pp__stack"><li>Gemini</li><li>AWS Textract</li><li>Kafka</li><li>BigQuery</li><li>Power BI</li></ul>
+  <p class="pp__int">Internal · Moglix</p></div></article>
+          </div>
+          <aside class="study-card reveal">
+            <p class="study-card__label mono">Company · 2026</p>
+            <p class="study-card__line">Strict schema.<br>Zero-touch review.</p>
+            <p class="study-card__tags mono">Python / Gemini / AWS Textract / Pydantic</p>
+          </aside>
+        </div>
+        <p class="study-caption mono">SupplierInv / Invoice intelligence · Moglix / 2026</p>
+        <dl class="study-meta">
+          <div><dt class="mono">Role</dt><dd>Backend &amp; GenAI · AI &amp; Analytics team</dd></div>
+          <div><dt class="mono">Status</dt><dd>In production</dd></div>
+          <div><dt class="mono">Year</dt><dd>2026</dd></div>
+          <div class="study-meta__wide"><dt class="mono">Stack</dt><dd>Python / Gemini / AWS Textract / Pydantic / Kafka / MongoDB / BigQuery / Power BI</dd></div>
+
+        </dl>
+        <nav class="study-index mono" aria-label="In this study">
+          <span>In this study</span>
+          <ol>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#problem">Problem</a></li>
+            <li><a href="#system">How it works</a></li>
+            <li><a href="#decisions">Decisions</a></li>
+            <li><a href="#flow">Flow</a></li>
+            <li><a href="#outcome">Outcome</a></li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <!-- 02 OVERVIEW -->
+    <section class="band tone-ink study-chapter" id="overview" data-thread="a:gm1:0,0,ln a:gm1:0,1,l">
+      <span class="gutter-mark" id="gm1" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">02 / Overview</p>
+        <div class="study-two">
+          <h2 class="study-h2 reveal">Messy invoices in. Clean, checked data out.</h2>
+          <p class="study-text reveal">Supplier invoices arrive as scans and PDFs in every possible format. SupplierInv reads them with OCR and Gemini, turns each one into schema-validated data, streams it through Kafka into MongoDB and BigQuery, and reconciles it automatically, feeding live Power BI dashboards for procurement.</p>
+        </div>
+        <ol class="study-modules reveal" style="--n:5">
+          <li>Read</li>
+          <li>Structure</li>
+          <li>Stream</li>
+          <li>Reconcile</li>
+          <li>Report</li>
+        </ol>
+        <p class="study-caption mono">SupplierInv / how the parts connect</p>
+      </div>
+    </section>
+
+    <!-- 03 PROBLEM -->
+    <section class="band tone-paper study-chapter" id="problem" data-thread="a:gm2:0,0,ln a:gm2:0,1,l">
+      <span class="gutter-mark" id="gm2" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">03 / The problem</p>
+        <h2 class="study-h2 study-h2--big study-col reveal">Hours of reading invoices line by line.</h2>
+        <div class="study-two study-two--low">
+          <div></div>
+          <p class="study-text reveal">Every invoice had to be read, typed in and checked against the order: item by item, quantities, tax codes and the supplier’s GST number. The work was slow, repetitive and easy to get wrong at scale.</p>
+        </div>
+        <ol class="study-rows">
+          <li class="reveal"><span class="study-rows__n mono">01</span><h3>Invoices in every format and layout</h3></li>
+          <li class="reveal"><span class="study-rows__n mono">02</span><h3>Line-by-line checks against the order</h3></li>
+          <li class="reveal"><span class="study-rows__n mono">03</span><h3>Tax and compliance rules on every line</h3></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 04 SYSTEM -->
+    <section class="band tone-ink study-chapter" id="system" data-thread="a:gm3:0,0,ln a:gm3:0,1,l">
+      <span class="gutter-mark" id="gm3" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">04 / How it works</p>
+        <h2 class="study-h2 study-col reveal">Five steps from a scanned page to reconciled data.</h2>
+        <ol class="study-rows study-rows--split">
+          <li class="reveal"><span class="study-rows__n mono">01</span><h3>Read</h3><p>AWS Textract extracts the text and Gemini understands the structure.</p></li>
+          <li class="reveal"><span class="study-rows__n mono">02</span><h3>Structure</h3><p>Every invoice is validated against a strict Pydantic schema.</p></li>
+          <li class="reveal"><span class="study-rows__n mono">03</span><h3>Stream</h3><p>A real-time Kafka → MongoDB → BigQuery backbone moves the data.</p></li>
+          <li class="reveal"><span class="study-rows__n mono">04</span><h3>Reconcile</h3><p>Fuzzy item matching, tolerance bands, HSN validation and GSTIN checks.</p></li>
+          <li class="reveal"><span class="study-rows__n mono">05</span><h3>Report</h3><p>Results feed live Power BI dashboards for procurement analytics.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 05 DECISIONS -->
+    <section class="band tone-paper study-chapter" id="decisions" data-thread="a:gm4:0,0,ln a:gm4:0,1,l">
+      <span class="gutter-mark" id="gm4" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">05 / Key decisions</p>
+        <h2 class="study-h2 study-h2--big study-col reveal">Where the important calls were made.</h2>
+        <article class="study-decision reveal">
+          <p class="study-label mono">Decision 01</p>
+          <div class="study-two"><h3 class="study-h3">OCR or an LLM?</h3><div></div></div>
+          <ol class="study-rows study-rows--split">
+            <li><span class="study-rows__n mono">→</span><h3>The choice</h3><p>Both: Textract for reliable text, Gemini for structure and meaning.</p></li>
+            <li><span class="study-rows__n mono">→</span><h3>What it gave</h3><p>Accurate text with an understanding of what each field is.</p></li>
+          </ol>
+        </article>
+        <article class="study-decision reveal">
+          <p class="study-label mono">Decision 02</p>
+          <div class="study-two"><h3 class="study-h3">What stops bad data getting in?</h3><div></div></div>
+          <ol class="study-rows study-rows--split">
+            <li><span class="study-rows__n mono">→</span><h3>The choice</h3><p>A strict schema at the door, before anything is stored.</p></li>
+            <li><span class="study-rows__n mono">→</span><h3>What it gave</h3><p>Downstream reports only ever see clean, typed data.</p></li>
+          </ol>
+        </article>
+        <article class="study-decision reveal">
+          <p class="study-label mono">Decision 03</p>
+          <div class="study-two"><h3 class="study-h3">How strict should matching be?</h3><div></div></div>
+          <ol class="study-rows study-rows--split">
+            <li><span class="study-rows__n mono">→</span><h3>The choice</h3><p>Fuzzy matching with tolerance bands instead of exact equality.</p></li>
+            <li><span class="study-rows__n mono">→</span><h3>What it gave</h3><p>Real-world differences pass; real errors do not.</p></li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <!-- 06 FLOW -->
+    <section class="band tone-ink study-chapter" id="flow" data-thread="a:gm5:0,0,ln a:gm5:0,1,l">
+      <span class="gutter-mark" id="gm5" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">06 / The flow</p>
+        <div class="study-two">
+          <h2 class="study-h2 reveal">From the first step to the result.</h2>
+          <p class="study-text reveal">What it looks like from the side of the person using it — the path through SupplierInv in 4 steps.</p>
+        </div>
+        <ol class="study-journey">
+          <li class="reveal"><span class="mono">01</span>An invoice arrives</li>
+          <li class="reveal"><span class="mono">02</span>It is read and structured</li>
+          <li class="reveal"><span class="mono">03</span>It is checked and reconciled</li>
+          <li class="reveal"><span class="mono">04</span>Results appear in the dashboard</li>
+        </ol>
+        <p class="study-caption mono">SupplierInv / user flow</p>
+      </div>
+    </section>
+
+    <!-- 07 OUTCOME -->
+    <section class="band tone-paper study-chapter" id="outcome" data-thread="a:gm6:0,0,ln a:gm6:0,1,l">
+      <span class="gutter-mark" id="gm6" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">07 / Outcome</p>
+        <h2 class="study-h2 study-h2--big study-col reveal">From manual review to zero-touch processing.</h2>
+        <dl class="study-stats">
+          <div class="reveal"><dt class="mono">Invoices reconciled without review</dt><dd>Zero-touch</dd></div>
+          <div class="reveal"><dt class="mono">Kafka → MongoDB → BigQuery</dt><dd>Real-time</dd></div>
+          <div class="reveal"><dt class="mono">Items, tolerance, HSN, GSTIN</dt><dd>4 checks</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- 08 NEXT -->
+    <section class="band tone-ink study-next" data-thread="a:gm7:0,0,ln a:gm7:0,1,l">
+      <span class="gutter-mark" id="gm7" aria-hidden="true"></span>
+      <a class="study-next__link" href="/work/procurement" data-cursor="Next">
+        <span class="study-label mono">07 / Next project</span>
+        <span class="study-next__row"><span class="study-next__name display">Procurement</span><span class="study-next__arrow" aria-hidden="true">↗</span></span>
+        <span class="study-next__pitch">A WhatsApp AI agent that lets people run sourcing workflows through plain conversation.</span>
+        <span class="study-paper study-paper--next" aria-hidden="true">
+<article class="pp pp--chat" data-cat="company" data-order="6" data-slug="procurement"><div class="pp__sheet">
+  <p class="ch__hd"><span class="ch__dot"></span>Procurement assistant · online</p>
+  <p class="ch__b ch__b--me">Need 50 safety helmets by Monday</p>
+  <p class="ch__b">Found 3 suppliers. Best: ₹420/unit, delivery Sat ✓</p>
+  <h3 class="pp__name pp__name--s">Conversational Procurement</h3>
+  <p class="pp__d">A WhatsApp AI agent that runs sourcing workflows through plain chat.</p>
+  <ul class="pp__stack"><li>FastAPI</li><li>WhatsApp API</li><li>Agentic AI</li></ul>
+  <p class="pp__int">Internal · Moglix</p></div></article>
+        </span>
+      </a>
+      <div class="study-next__foot mono">
+        <a href="/work/repo-safety">← Repo-Safety</a>
+        <a href="/#projects">All projects</a>
+        <a href="/#contact">Contact</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/assets/lenis.min.js" defer></script>
+  <script src="/main.js?v=30c688d3" defer></script>
+</body>
+</html>

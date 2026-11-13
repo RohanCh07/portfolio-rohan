@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Conversational Procurement — Rohan Chauhan</title>
+  <meta name="description" content="A WhatsApp AI agent that lets people run sourcing workflows through plain conversation.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Conversational Procurement — Rohan Chauhan">
+  <meta property="og:description" content="A WhatsApp AI agent that lets people run sourcing workflows through plain conversation.">
+  <meta property="og:image" content="/assets/og-image.jpg">
+  <meta name="theme-color" content="#050505">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/ibm-plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/style.css?v=1e36fe1f">
+  <link rel="prev" href="/work/supplierinv">
+  <link rel="next" href="/work/cerebra">
+  <script>
+    (function () { var d = document.documentElement; d.classList.add('js', 'study-page'); try { localStorage.removeItem('theme'); } catch (e) {} })();
+  </script>
+</head>
+<body>
+  <a class="skip" href="#overview">Skip to the case study</a>
+
+  <header class="site-header" id="header">
+    <a class="wordmark" href="/" aria-label="Rohan Chauhan, home">RC</a>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="/#capabilities">Capabilities</a>
+      <a href="/#projects">Projects</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#about">About</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+  </header>
+
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+
+  <main id="top" class="study">
+    <svg class="thread" id="thread" aria-hidden="true" focusable="false"></svg>
+
+    <!-- 01 HERO -->
+    <section class="band tone-paper study-hero" data-thread="a:gm0:0,0.06,ln a:gm0:0,1,l">
+      <span class="gutter-mark" id="gm0" aria-hidden="true"></span>
+      <div class="band__inner">
+        <div class="study-col">
+          <p class="study-label mono reveal"><span>07</span> / Agentic AI · Moglix</p>
+          <h1 class="study-hero__name display" style="--n:11">Procurement</h1>
+          <div class="study-hero__rule"><span class="mono">Project study</span></div>
+          <p class="study-hero__pitch reveal">A WhatsApp AI agent that lets people run sourcing workflows through plain conversation.</p>
+        </div>
+        <div class="study-hero__visual">
+          <div class="study-paper" aria-hidden="true">
+<article class="pp pp--chat" data-cat="company" data-order="6" data-slug="procurement"><div class="pp__sheet">
+  <p class="ch__hd"><span class="ch__dot"></span>Procurement assistant · online</p>
+  <p class="ch__b ch__b--me">Need 50 safety helmets by Monday</p>
+  <p class="ch__b">Found 3 suppliers. Best: ₹420/unit, delivery Sat ✓</p>
+  <h3 class="pp__name pp__name--s">Conversational Procurement</h3>
+  <p class="pp__d">A WhatsApp AI agent that runs sourcing workflows through plain chat.</p>
+  <ul class="pp__stack"><li>FastAPI</li><li>WhatsApp API</li><li>Agentic AI</li></ul>
+  <p class="pp__int">Internal · Moglix</p></div></article>
+          </div>
+          <aside class="study-card reveal">
+            <p class="study-card__label mono">Company · 2026</p>
+            <p class="study-card__line">Just a chat.<br>Real workflows.</p>
+            <p class="study-card__tags mono">Python / FastAPI / WhatsApp Business API / Agentic AI</p>
+          </aside>
+        </div>
+        <p class="study-caption mono">Conversational Procurement / Agentic AI · Moglix / 2026</p>
+        <dl class="study-meta">
+          <div><dt class="mono">Role</dt><dd>Backend &amp; agents · AI &amp; Analytics team</dd></div>
+          <div><dt class="mono">Status</dt><dd>Internal tool</dd></div>
+          <div><dt class="mono">Year</dt><dd>2026</dd></div>
+          <div class="study-meta__wide"><dt class="mono">Stack</dt><dd>Python / FastAPI / WhatsApp Business API / Agentic AI / REST APIs</dd></div>
+
+        </dl>
+        <nav class="study-index mono" aria-label="In this study">
+          <span>In this study</span>
+          <ol>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#problem">Problem</a></li>
+            <li><a href="#system">How it works</a></li>
+            <li><a href="#decisions">Decisions</a></li>
+            <li><a href="#flow">Flow</a></li>
+            <li><a href="#outcome">Outcome</a></li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <!-- 02 OVERVIEW -->
+    <section class="band tone-ink study-chapter" id="overview" data-thread="a:gm1:0,0,ln a:gm1:0,1,l">
+      <span class="gutter-mark" id="gm1" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">02 / Overview</p>
+        <div class="study-two">
+          <h2 class="study-h2 reveal">Sourcing, in the chat app everyone already has.</h2>
+          <p class="study-text reveal">The procurement assistant is an AI agent reachable on WhatsApp. People describe what they need in their own words, and the agent works out the request, runs the right sourcing workflow through backend services and replies in the same conversation.</p>
+        </div>
+        <ol class="study-modules reveal" style="--n:4">
+          <li>Message</li>
+          <li>Understand</li>
+          <li>Act</li>
+          <li>Reply</li>
+        </ol>
+        <p class="study-caption mono">Conversational Procurement / how the parts connect</p>
+      </div>
+    </section>
+
+    <!-- 03 PROBLEM -->
+    <section class="band tone-paper study-chapter" id="problem" data-thread="a:gm2:0,0,ln a:gm2:0,1,l">
+      <span class="gutter-mark" id="gm2" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">03 / The problem</p>
+        <h2 class="study-h2 study-h2--big study-col reveal">Sourcing meant forms, portals and follow-up calls.</h2>
+        <div class="study-two study-two--low">
+          <div></div>
+          <p class="study-text reveal">Starting a sourcing request usually meant logging in to a portal, filling a form and chasing updates. Many of the people who needed it were on the move and already lived in WhatsApp.</p>
+        </div>
+        <ol class="study-rows">
+          <li class="reveal"><span class="study-rows__n mono">01</span><h3>A portal to log in to for every request</h3></li>
+          <li class="reveal"><span class="study-rows__n mono">02</span><h3>Forms that do not fit how people ask</h3></li>
+          <li class="reveal"><span class="study-rows__n mono">03</span><h3>Updates scattered across calls and emails</h3></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 04 SYSTEM -->
+    <section class="band tone-ink study-chapter" id="system" data-thread="a:gm3:0,0,ln a:gm3:0,1,l">
+      <span class="gutter-mark" id="gm3" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">04 / How it works</p>
+        <h2 class="study-h2 study-col reveal">Four steps from a message to a sourcing action.</h2>
+        <ol class="study-rows study-rows--split">
+          <li class="reveal"><span class="study-rows__n mono">01</span><h3>Message</h3><p>A user writes to the assistant on WhatsApp.</p></li>
+          <li class="reveal"><span class="study-rows__n mono">02</span><h3>Understand</h3><p>The agent works out what is being asked and what is missing.</p></li>
+          <li class="reveal"><span class="study-rows__n mono">03</span><h3>Act</h3><p>Agent orchestration calls the sourcing workflows through backend REST APIs.</p></li>
+          <li class="reveal"><span class="study-rows__n mono">04</span><h3>Reply</h3><p>A contextual answer comes back in the same conversation.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 05 DECISIONS -->
+    <section class="band tone-paper study-chapter" id="decisions" data-thread="a:gm4:0,0,ln a:gm4:0,1,l">
+      <span class="gutter-mark" id="gm4" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">05 / Key decisions</p>
+        <h2 class="study-h2 study-h2--big study-col reveal">Where the important calls were made.</h2>
+        <article class="study-decision reveal">
+          <p class="study-label mono">Decision 01</p>
+          <div class="study-two"><h3 class="study-h3">Why WhatsApp?</h3><div></div></div>
+          <ol class="study-rows study-rows--split">
+            <li><span class="study-rows__n mono">→</span><h3>The choice</h3><p>Meet people in the app they already use every day.</p></li>
+            <li><span class="study-rows__n mono">→</span><h3>What it gave</h3><p>No new tool to learn and no portal to log in to.</p></li>
+          </ol>
+        </article>
+        <article class="study-decision reveal">
+          <p class="study-label mono">Decision 02</p>
+          <div class="study-two"><h3 class="study-h3">A fixed menu or an agent?</h3><div></div></div>
+          <ol class="study-rows study-rows--split">
+            <li><span class="study-rows__n mono">→</span><h3>The choice</h3><p>An agent that understands free text and asks for what is missing.</p></li>
+            <li><span class="study-rows__n mono">→</span><h3>What it gave</h3><p>People can ask the way they would ask a colleague.</p></li>
+          </ol>
+        </article>
+        <article class="study-decision reveal">
+          <p class="study-label mono">Decision 03</p>
+          <div class="study-two"><h3 class="study-h3">Where does the logic live?</h3><div></div></div>
+          <ol class="study-rows study-rows--split">
+            <li><span class="study-rows__n mono">→</span><h3>The choice</h3><p>Backend services the agent orchestrates, not the chat itself.</p></li>
+            <li><span class="study-rows__n mono">→</span><h3>What it gave</h3><p>Workflows stay consistent whichever channel starts them.</p></li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <!-- 06 FLOW -->
+    <section class="band tone-ink study-chapter" id="flow" data-thread="a:gm5:0,0,ln a:gm5:0,1,l">
+      <span class="gutter-mark" id="gm5" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">06 / The flow</p>
+        <div class="study-two">
+          <h2 class="study-h2 reveal">From the first step to the result.</h2>
+          <p class="study-text reveal">What it looks like from the side of the person using it — the path through Procurement in 4 steps.</p>
+        </div>
+        <ol class="study-journey">
+          <li class="reveal"><span class="mono">01</span>Send a message on WhatsApp</li>
+          <li class="reveal"><span class="mono">02</span>The agent asks for anything missing</li>
+          <li class="reveal"><span class="mono">03</span>The sourcing workflow runs</li>
+          <li class="reveal"><span class="mono">04</span>Get the answer in the chat</li>
+        </ol>
+        <p class="study-caption mono">Conversational Procurement / user flow</p>
+      </div>
+    </section>
+
+    <!-- 07 OUTCOME -->
+    <section class="band tone-paper study-chapter" id="outcome" data-thread="a:gm6:0,0,ln a:gm6:0,1,l">
+      <span class="gutter-mark" id="gm6" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">07 / Outcome</p>
+        <h2 class="study-h2 study-h2--big study-col reveal">Procurement as a conversation instead of a form.</h2>
+        <dl class="study-stats">
+          <div class="reveal"><dt class="mono">No new app to learn</dt><dd>WhatsApp</dd></div>
+          <div class="reveal"><dt class="mono">Instead of forms</dt><dd>Plain language</dd></div>
+          <div class="reveal"><dt class="mono">From message to sourcing action</dt><dd>End-to-end</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- 08 NEXT -->
+    <section class="band tone-ink study-next" data-thread="a:gm7:0,0,ln a:gm7:0,1,l">
+      <span class="gutter-mark" id="gm7" aria-hidden="true"></span>
+      <a class="study-next__link" href="/work/cerebra" data-cursor="Next">
+        <span class="study-label mono">08 / Next project</span>
+        <span class="study-next__row"><span class="study-next__name display">Cerebra</span><span class="study-next__arrow" aria-hidden="true">↗</span></span>
+        <span class="study-next__pitch">A GenAI assistant that turns a sentence into a purchase request or an RFQ inside Credlex.</span>
+        <span class="study-paper study-paper--next" aria-hidden="true">
+<article class="pp pp--receipt" data-cat="company" data-order="7" data-slug="cerebra"><div class="pp__sheet">
+  <p class="rc__brand">Cerebra</p><p class="rc__sub">GenAI assistant · Moglix</p>
+  <p class="rc__dash"></p>
+  <p class="rc__row"><span>PR DRAFT #0421</span><span>2026</span></p>
+  <p class="rc__q">"Need 200 safety gloves, size L, by Friday."</p>
+  <p class="rc__row"><span>Safety gloves L</span><span>×200</span></p>
+  <p class="rc__row"><span>Vendor RFQ</span><span>×3</span></p>
+  <p class="rc__row"><span>Credlex form</span><span>filled</span></p>
+  <p class="rc__dash"></p>
+  <p class="rc__row rc__tot"><span>TOTAL</span><span>Drafted ✓</span></p>
+  <p class="pp__d">Type what you need. Cerebra drafts the purchase request or RFQ for you.</p>
+  <ul class="pp__stack"><li>Python</li><li>LLMs</li><li>REST APIs</li></ul>
+  <p class="rc__bar" aria-hidden="true"></p>
+  </div></article>
+        </span>
+      </a>
+      <div class="study-next__foot mono">
+        <a href="/work/supplierinv">← SupplierInv</a>
+        <a href="/#projects">All projects</a>
+        <a href="/#contact">Contact</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/assets/lenis.min.js" defer></script>
+  <script src="/main.js?v=30c688d3" defer></script>
+</body>
+</html>

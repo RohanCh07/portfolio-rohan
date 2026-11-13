@@ -4,9 +4,8 @@
  *
  *   node scripts/build-work.js
  *
- * Content for every project lives in PROJECTS below. Each page reuses that project's
- * line drawing from index.html (the .project__stage of its homepage panel), so the
- * homepage and the case study always show the same artwork.
+ * Content for every project lives in ALL_PROJECTS below; ORDER sets which ones are built
+ * and in what order. Each page shows that project's paper from the homepage notice board.
  * Pages chain together: the last section of each links to the next project, in the
  * same order as the homepage, looping back to the first.
  */
@@ -18,7 +17,187 @@ const crypto = require('crypto');
 const ROOT = path.join(__dirname, '..');
 const OUT = path.join(ROOT, 'work');
 
-const PROJECTS = [
+const ALL_PROJECTS = [
+  {
+    slug: 'ramanujan', name: 'Ramanujan', kind: 'Company', area: 'Analytics copilot · Moglix', year: '2026',
+    pitch: 'Ask business questions in plain English inside Microsoft Teams and get answers from company data in seconds.',
+    role: 'Backend & GenAI · AI & Analytics team', status: 'Internal tool',
+    stack: ['Python', 'FastAPI', 'Gemini', 'Vertex AI', 'BigQuery', 'Qdrant', 'Sentence-Transformers', 'Microsoft Graph API', 'Docker'],
+    links: [],
+    overview: {
+      title: 'A question in Teams. An answer from the warehouse.',
+      text: 'Ramanujan is an analytics copilot that lives where business teams already talk: Microsoft Teams. Someone asks a question in plain English, and a Gemini agent turns it into governed BigQuery SQL, runs it and replies with the answer, without the person writing SQL or opening a dashboard.',
+    },
+    problem: {
+      title: 'Every simple question waited on someone who could write the query.',
+      text: 'Business teams had questions about their numbers every day, but the answers sat in a data warehouse behind SQL and dashboards. Each question became a request to the data team, and the same metric could be calculated differently depending on who wrote the query.',
+      points: ['Answers locked behind SQL and dashboards', 'Metrics defined differently by different people', 'Data access that has to respect who is asking'],
+    },
+    system: {
+      title: 'Five steps from a sentence to a governed answer.',
+      steps: [
+        ['Ask', 'A question arrives from Microsoft Teams through the Microsoft Graph API.'],
+        ['Ground', 'RAG over a KPI glossary in Qdrant finds the business definition of each metric.'],
+        ['Generate', 'A Gemini ReAct agent writes BigQuery SQL that follows those definitions.'],
+        ['Guard', 'A SQL policy engine checks the query and applies row-level access control.'],
+        ['Answer', 'The result comes back to Teams, grounded in the data, not guessed.'],
+      ],
+    },
+    decisions: [
+      ['Should the model be free to query anything?', 'Every query passes a SQL policy engine with row-level access control.', 'People only ever see the data they are allowed to see.'],
+      ['How do answers match what the business means by a metric?', 'RAG over a KPI glossary with sentence-transformer embeddings.', 'GMV, margin or fill rate mean the same thing in every answer.'],
+      ['How should the service be structured?', 'A FastAPI service on Vertex AI built with hexagonal architecture.', 'Models, data sources and chat channels can be swapped without touching the core.'],
+    ],
+    flow: ['Ask a question in Teams', 'The agent writes a governed query', 'Guardrails check the query and access', 'Read the answer in the chat'],
+    outcome: {
+      title: 'Data questions answered where the conversation already happens.',
+      stats: [['Seconds', 'From question to answer'], ['0 SQL', 'Needed from the person asking'], ['Row-level', 'Access control on every query']],
+    },
+  },
+  {
+    slug: 'payment-advice', name: 'Payment Advice Automation', short: 'Payment Advice', kind: 'Company', area: 'Finance automation · Moglix', year: '2026',
+    pitch: 'Reads customer payment advices and auto-maps every payment to the right open invoices for the finance team.',
+    role: 'Backend & ML · AI & Analytics team', status: 'In production',
+    stack: ['Python', 'Django', 'Celery', 'Kafka', 'Redis', 'MongoDB', 'MySQL', 'Qdrant', 'LayoutLMv3', 'HDBSCAN', 'Gemini', 'HTMX', 'Docker'],
+    links: [],
+    overview: {
+      title: 'A payment arrives with a PDF. The invoices close themselves.',
+      text: 'When a customer pays, they send a payment advice: a document listing which invoices the money covers, the UTR and any tax deducted. This pipeline reads those advices from support tickets, extracts every line, checks it against the ERP and the bank, and maps the payment to open invoices for the accounts-receivable team.',
+    },
+    problem: {
+      title: 'Every customer sends the same information in a different shape.',
+      text: 'Advices arrive as PDFs, spreadsheets and emails, each customer with its own layout, and some run to hundreds of pages. Matching them to invoices by hand is slow, and a small mistake means a payment sits unapplied or an invoice stays open.',
+      points: ['A different layout for every customer', 'Long advices with hundreds of invoice lines', 'Manual matching against the ERP and bank entries'],
+    },
+    system: {
+      title: 'From a ticket to a mapped payment, in six steps.',
+      steps: [
+        ['Collect', 'Tickets flow in from the helpdesk through Kafka and Celery workers.'],
+        ['Classify', 'LayoutLMv3 and Qdrant layout matching route each advice to the right parser.'],
+        ['Extract', '14+ customer-specific parsers pull UTRs, invoices and TDS, with Gemini as fallback.'],
+        ['Validate', 'Extracted payments are checked against the ERP and matched to bank entries.'],
+        ['Map', 'Payments are auto-mapped to open invoices behind open-balance and deduction guards.'],
+        ['Learn', 'HDBSCAN clusters unseen layouts and Gemini writes a parser config for each one.'],
+      ],
+    },
+    decisions: [
+      ['Parsers or an LLM for every document?', 'Fast deterministic parsers first, Gemini only as the fallback.', 'Most advices are parsed in a fraction of a second, cheaply and predictably.'],
+      ['How do new customer layouts get supported?', 'A self-learning loop: cluster unseen layouts, generate a config, activate it only above 80% held-out accuracy.', 'New formats come online without hand-writing every parser.'],
+      ['How do you change the model safely?', 'An A/B harness compares models on real advices before switching.', 'The model migration made extraction about 3× faster and cheaper.'],
+    ],
+    flow: ['An advice arrives in a ticket', 'It is classified and parsed', 'Payments are validated and mapped', 'Finance reviews it in the dashboard'],
+    outcome: {
+      title: 'Cash application that runs itself, with a person still in control.',
+      stats: [['14+', 'Customer-specific parsers'], ['~0.2 s', 'To parse a 100+ page advice'], ['~3×', 'Faster, cheaper extraction']],
+    },
+  },
+  {
+    slug: 'repo-safety', name: 'Repo-Safety', kind: 'Personal', area: 'Security', year: '2026',
+    pitch: 'A static scanner that checks an untrusted repo or ZIP, like a “take-home test”, for hidden auto-run malware before you open it.',
+    role: 'Solo — design, engine, extensions', status: 'In development',
+    stack: ['TypeScript', 'Node.js', 'Fastify', 'BullMQ', 'Redis', 'PostgreSQL', 'Docker', 'VS Code Extension API', 'Chrome MV3', 'Vitest'],
+    links: [{ label: 'GitHub', href: 'https://github.com/RohanCh07/Repo-Safety' }],
+    overview: {
+      title: 'Know what a repo will do before you open it.',
+      text: 'Repo-Safety reads a folder, ZIP or GitHub link without ever running it, and looks for the tricks that make code execute the moment you open, install or build it. Each finding comes with the file, the line and a plain-English reason, and everything rolls up into a Safe, Suspicious or Dangerous verdict with a 0–100 risk score.',
+    },
+    problem: {
+      title: 'Opening a folder should not be enough to get you hacked.',
+      text: 'Fake recruiters send developers “take-home tests” that hide malware in places that run automatically: editor tasks that fire when a folder opens, install hooks, git hooks and download-and-run scripts. Most people never look in those places before they trust a project.',
+      points: ['Code that runs the moment a folder is opened', 'Install and git hooks that hide in plain sight', 'No quick way to check before you click “Trust”'],
+    },
+    system: {
+      title: 'Read safely, scan, score, explain.',
+      steps: [
+        ['Ingest', 'Reads a folder or ZIP into memory with size, file and depth limits, and rejects zip bombs and zip-slip.'],
+        ['Scan', '11 rules look for folder-open tasks, install hooks, hidden git hooks, download-and-run scripts, obfuscation and typosquats.'],
+        ['Score', 'Findings roll up into a Safe / Suspicious / Dangerous verdict and a 0–100 risk score.'],
+        ['Explain', 'Every finding points to a file and line with a plain-English reason.'],
+        ['Surface', 'One engine behind a CLI, a VS Code extension, a web app and a Chrome extension.'],
+      ],
+    },
+    decisions: [
+      ['Should it run the code to see what it does?', 'Never. Static analysis only, and no git clone: repos are fetched as archives.', 'It is safe to point at hostile input, which is the whole point.'],
+      ['How do you avoid crying wolf?', 'Suspicious-only repos are capped below the Dangerous range, and every rule is tested against popular projects.', 'Normal install scripts never look like a real trap.'],
+      ['One tool or four?', 'One scanning engine shared by the CLI, VS Code, the web app and the browser extension.', 'The same verdict wherever a developer meets the repo.'],
+    ],
+    flow: ['Drop in a repo, ZIP or link', 'Read the verdict and score', 'Open the flagged lines', 'Decide whether to trust it'],
+    outcome: {
+      title: 'Fast on huge repos, quiet on healthy ones.',
+      stats: [['11', 'Detection rules'], ['12 s', 'To scan a 68k-file repo'], ['0 / 21', 'Popular repos flagged Dangerous']],
+    },
+  },
+  {
+    slug: 'supplierinv', name: 'SupplierInv', kind: 'Company', area: 'Invoice intelligence · Moglix', year: '2026',
+    pitch: 'Turns unstructured supplier invoices into validated data with generative AI, then reconciles them with no manual review.',
+    role: 'Backend & GenAI · AI & Analytics team', status: 'In production',
+    stack: ['Python', 'Gemini', 'AWS Textract', 'Pydantic', 'Kafka', 'MongoDB', 'BigQuery', 'Power BI'],
+    links: [],
+    overview: {
+      title: 'Messy invoices in. Clean, checked data out.',
+      text: 'Supplier invoices arrive as scans and PDFs in every possible format. SupplierInv reads them with OCR and Gemini, turns each one into schema-validated data, streams it through Kafka into MongoDB and BigQuery, and reconciles it automatically, feeding live Power BI dashboards for procurement.',
+    },
+    problem: {
+      title: 'Hours of reading invoices line by line.',
+      text: 'Every invoice had to be read, typed in and checked against the order: item by item, quantities, tax codes and the supplier’s GST number. The work was slow, repetitive and easy to get wrong at scale.',
+      points: ['Invoices in every format and layout', 'Line-by-line checks against the order', 'Tax and compliance rules on every line'],
+    },
+    system: {
+      title: 'Five steps from a scanned page to reconciled data.',
+      steps: [
+        ['Read', 'AWS Textract extracts the text and Gemini understands the structure.'],
+        ['Structure', 'Every invoice is validated against a strict Pydantic schema.'],
+        ['Stream', 'A real-time Kafka → MongoDB → BigQuery backbone moves the data.'],
+        ['Reconcile', 'Fuzzy item matching, tolerance bands, HSN validation and GSTIN checks.'],
+        ['Report', 'Results feed live Power BI dashboards for procurement analytics.'],
+      ],
+    },
+    decisions: [
+      ['OCR or an LLM?', 'Both: Textract for reliable text, Gemini for structure and meaning.', 'Accurate text with an understanding of what each field is.'],
+      ['What stops bad data getting in?', 'A strict schema at the door, before anything is stored.', 'Downstream reports only ever see clean, typed data.'],
+      ['How strict should matching be?', 'Fuzzy matching with tolerance bands instead of exact equality.', 'Real-world differences pass; real errors do not.'],
+    ],
+    flow: ['An invoice arrives', 'It is read and structured', 'It is checked and reconciled', 'Results appear in the dashboard'],
+    outcome: {
+      title: 'From manual review to zero-touch processing.',
+      stats: [['Zero-touch', 'Invoices reconciled without review'], ['Real-time', 'Kafka → MongoDB → BigQuery'], ['4 checks', 'Items, tolerance, HSN, GSTIN']],
+    },
+  },
+  {
+    slug: 'procurement', name: 'Conversational Procurement', short: 'Procurement', kind: 'Company', area: 'Agentic AI · Moglix', year: '2026',
+    pitch: 'A WhatsApp AI agent that lets people run sourcing workflows through plain conversation.',
+    role: 'Backend & agents · AI & Analytics team', status: 'Internal tool',
+    stack: ['Python', 'FastAPI', 'WhatsApp Business API', 'Agentic AI', 'REST APIs'],
+    links: [],
+    overview: {
+      title: 'Sourcing, in the chat app everyone already has.',
+      text: 'The procurement assistant is an AI agent reachable on WhatsApp. People describe what they need in their own words, and the agent works out the request, runs the right sourcing workflow through backend services and replies in the same conversation.',
+    },
+    problem: {
+      title: 'Sourcing meant forms, portals and follow-up calls.',
+      text: 'Starting a sourcing request usually meant logging in to a portal, filling a form and chasing updates. Many of the people who needed it were on the move and already lived in WhatsApp.',
+      points: ['A portal to log in to for every request', 'Forms that do not fit how people ask', 'Updates scattered across calls and emails'],
+    },
+    system: {
+      title: 'Four steps from a message to a sourcing action.',
+      steps: [
+        ['Message', 'A user writes to the assistant on WhatsApp.'],
+        ['Understand', 'The agent works out what is being asked and what is missing.'],
+        ['Act', 'Agent orchestration calls the sourcing workflows through backend REST APIs.'],
+        ['Reply', 'A contextual answer comes back in the same conversation.'],
+      ],
+    },
+    decisions: [
+      ['Why WhatsApp?', 'Meet people in the app they already use every day.', 'No new tool to learn and no portal to log in to.'],
+      ['A fixed menu or an agent?', 'An agent that understands free text and asks for what is missing.', 'People can ask the way they would ask a colleague.'],
+      ['Where does the logic live?', 'Backend services the agent orchestrates, not the chat itself.', 'Workflows stay consistent whichever channel starts them.'],
+    ],
+    flow: ['Send a message on WhatsApp', 'The agent asks for anything missing', 'The sourcing workflow runs', 'Get the answer in the chat'],
+    outcome: {
+      title: 'Procurement as a conversation instead of a form.',
+      stats: [['WhatsApp', 'No new app to learn'], ['Plain language', 'Instead of forms'], ['End-to-end', 'From message to sourcing action']],
+    },
+  },
   {
     slug: 'lumida', anchor: 'p-lumida', name: 'Lumida', kind: 'Personal', area: 'Data quality', year: '2026',
     pitch: 'A self-hosted engine that reads your database, finds what is quietly broken, and explains why.',
@@ -298,22 +477,34 @@ const PROJECTS = [
   },
 ];
 
+// The case studies chain in the same order as the papers on the homepage board, looping back.
+// Older projects that are no longer on the board keep their existing pages but leave the chain.
+const ORDER = ['lumida', 'ramanujan', 'distiller', 'payment-advice', 'repo-safety', 'supplierinv', 'procurement', 'cerebra', 'bug-detection', 'blockauth'];
+const PROJECTS = ORDER.map(slug => {
+  const p = ALL_PROJECTS.find(x => x.slug === slug);
+  if (!p) throw new Error('no content for ' + slug);
+  return p;
+});
+
 // ---------------------------------------------------------------- helpers
 const esc = s => String(s).replace(/&(?!(amp|lt|gt|quot|#\d+);)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const pad = n => String(n).padStart(2, '0');
 const hash = f => crypto.createHash('sha1').update(fs.readFileSync(path.join(ROOT, f))).digest('hex').slice(0, 8);
 
-// Pull each project's drawing (its homepage stage) out of index.html, minus the giant name.
+// Each case study shows that project's paper from the homepage notice board, so the board and
+// the study always share the same artwork. Links inside the paper are removed (the paper itself
+// sits inside the "next project" link).
 const home = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-function stageFor(anchor) {
-  const at = home.indexOf(`id="${anchor}"`);
-  if (at < 0) throw new Error('missing ' + anchor);
-  const start = home.lastIndexOf('<div class="project__stage">', at);
-  const footer = home.indexOf('<footer class="project__foot">', at);
-  let inner = home.slice(start + '<div class="project__stage">'.length, footer);
-  inner = inner.slice(0, inner.lastIndexOf('</div>'));
-  inner = inner.replace(/<h3 class="project__name[\s\S]*?<\/h3>/, '');
-  return inner.replace(/src="assets\//g, 'src="/assets/');
+function paperFor(slug) {
+  const at = home.indexOf(`data-slug="${slug}"`);
+  if (at < 0) throw new Error('no board paper for ' + slug);
+  const start = home.lastIndexOf('<article', at);
+  const end = home.indexOf('</article>', at) + '</article>'.length;
+  return home.slice(start, end)
+    .replace(/<a\b[^>]*>[\s\S]*?<\/a>/g, '')
+    .replace(/<br>\s*(?=<\/div>)/g, '')
+    .replace(/ style="[^"]*"/, '')
+    .replace(/src="assets\//g, 'src="/assets/');
 }
 
 const v = { css: hash('style.css'), js: hash('main.js') };
@@ -321,6 +512,11 @@ const v = { css: hash('style.css'), js: hash('main.js') };
 // short statements for each project's side card (hero)
 const LINES = {
   'lumida': ['Read-only.', 'Evidence first.'],
+  'ramanujan': ['Ask in Teams.', 'Governed answers.'],
+  'payment-advice': ['Parsers first.', 'Gemini as fallback.'],
+  'repo-safety': ['Never runs code.', 'Explains every flag.'],
+  'supplierinv': ['Strict schema.', 'Zero-touch review.'],
+  'procurement': ['Just a chat.', 'Real workflows.'],
   'cerebra': ['One sentence.', 'One request.'],
   'distiller': ['One line to adopt.', 'A fallback at every step.'],
   'bug-detection': ['Caught live.', 'Explained or fixed.'],
@@ -396,13 +592,13 @@ function page(p, i) {
       <div class="band__inner">
         <div class="study-col">
           <p class="study-label mono reveal"><span>${num}</span> / ${esc(p.area)}</p>
-          <h1 class="study-hero__name display">${esc(p.short || p.name)}</h1>
+          <h1 class="study-hero__name display" style="--n:${(p.short || p.name).length}">${esc(p.short || p.name)}</h1>
           <div class="study-hero__rule"><span class="mono">Project study</span></div>
           <p class="study-hero__pitch reveal">${esc(p.pitch)}</p>
         </div>
         <div class="study-hero__visual">
-          <div class="study-hero__stage project__stage" aria-hidden="true">
-${stageFor(p.anchor)}
+          <div class="study-paper" aria-hidden="true">
+${paperFor(p.slug)}
           </div>
           <aside class="study-card reveal">
             <p class="study-card__label mono">${esc(p.kind)} · ${esc(p.year)}</p>
@@ -523,11 +719,12 @@ ${p.outcome.stats.map(([n, l]) => `          <div class="reveal"><dt class="mono
         <span class="study-label mono">${pad((i + 1) % PROJECTS.length + 1)} / Next project</span>
         <span class="study-next__row"><span class="study-next__name display">${esc(next.short || next.name)}</span><span class="study-next__arrow" aria-hidden="true">↗</span></span>
         <span class="study-next__pitch">${esc(next.pitch)}</span>
-        <span class="study-next__stage project__stage" aria-hidden="true">
-${stageFor(next.anchor)}
+        <span class="study-paper study-paper--next" aria-hidden="true">
+${paperFor(next.slug)}
         </span>
       </a>
       <div class="study-next__foot mono">
+        <a href="/work/${PROJECTS[(i - 1 + PROJECTS.length) % PROJECTS.length].slug}">← ${esc(PROJECTS[(i - 1 + PROJECTS.length) % PROJECTS.length].short || PROJECTS[(i - 1 + PROJECTS.length) % PROJECTS.length].name)}</a>
         <a href="/#projects">All projects</a>
         <a href="/#contact">Contact</a>
         <a href="#top">Back to top ↑</a>
@@ -548,26 +745,12 @@ PROJECTS.forEach((p, i) => {
   console.log('work/' + p.slug + '.html');
 });
 
-// homepage "Explore project" links → case studies (kept in sync with PROJECTS)
-let idx = home;
-PROJECTS.forEach(p => {
-  const at = idx.indexOf(`id="${p.anchor}"`);
-  const footStart = idx.indexOf('<footer class="project__foot">', at);
-  const footEnd = idx.indexOf('</footer>', footStart);
-  let foot = idx.slice(footStart, footEnd);
-  const link = `<a class="explore mono" data-cursor="Explore" href="/work/${p.slug}">Explore project <span aria-hidden="true">↗</span></a>`;
-  foot = foot.replace(/<span class="explore explore--muted mono">[^<]*<\/span>/, link)
-             .replace(/<a class="explore mono"[^>]*href="(https:\/\/lumida\.netlify\.app\/|\/work\/[a-z-]+)"[^>]*>[\s\S]*?<\/a>/, link);
-  idx = idx.slice(0, footStart) + foot + idx.slice(footEnd);
-});
-fs.writeFileSync(path.join(ROOT, 'index.html'), idx);
-
 // sitemap
 const base = 'https://chauhanrohan.vercel.app';
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>${base}/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-${PROJECTS.map(p => `  <url><loc>${base}/work/${p.slug}</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>`).join('\n')}
+${ALL_PROJECTS.map(p => `  <url><loc>${base}/work/${p.slug}</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>`).join('\n')}
 </urlset>
 `);
-console.log('index.html explore links + sitemap.xml updated');
+console.log('sitemap.xml updated');

@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Ramanujan — Rohan Chauhan</title>
+  <meta name="description" content="Ask business questions in plain English inside Microsoft Teams and get answers from company data in seconds.">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Ramanujan — Rohan Chauhan">
+  <meta property="og:description" content="Ask business questions in plain English inside Microsoft Teams and get answers from company data in seconds.">
+  <meta property="og:image" content="/assets/og-image.jpg">
+  <meta name="theme-color" content="#050505">
+  <meta name="color-scheme" content="light">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon-32.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+  <link rel="preload" href="/assets/fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/ibm-plex-mono-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/style.css?v=1e36fe1f">
+  <link rel="prev" href="/work/lumida">
+  <link rel="next" href="/work/distiller">
+  <script>
+    (function () { var d = document.documentElement; d.classList.add('js', 'study-page'); try { localStorage.removeItem('theme'); } catch (e) {} })();
+  </script>
+</head>
+<body>
+  <a class="skip" href="#overview">Skip to the case study</a>
+
+  <header class="site-header" id="header">
+    <a class="wordmark" href="/" aria-label="Rohan Chauhan, home">RC</a>
+    <nav class="nav" id="nav" aria-label="Sections">
+      <a href="/#capabilities">Capabilities</a>
+      <a href="/#projects">Projects</a>
+      <a href="/#experience">Experience</a>
+      <a href="/#about">About</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <button class="menu-button" id="menuButton" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+  </header>
+
+  <div class="cursor" id="cursor" aria-hidden="true"></div>
+
+  <main id="top" class="study">
+    <svg class="thread" id="thread" aria-hidden="true" focusable="false"></svg>
+
+    <!-- 01 HERO -->
+    <section class="band tone-paper study-hero" data-thread="a:gm0:0,0.06,ln a:gm0:0,1,l">
+      <span class="gutter-mark" id="gm0" aria-hidden="true"></span>
+      <div class="band__inner">
+        <div class="study-col">
+          <p class="study-label mono reveal"><span>02</span> / Analytics copilot · Moglix</p>
+          <h1 class="study-hero__name display" style="--n:9">Ramanujan</h1>
+          <div class="study-hero__rule"><span class="mono">Project study</span></div>
+          <p class="study-hero__pitch reveal">Ask business questions in plain English inside Microsoft Teams and get answers from company data in seconds.</p>
+        </div>
+        <div class="study-hero__visual">
+          <div class="study-paper" aria-hidden="true">
+<article class="pp pp--printout" data-cat="company" data-order="1" data-slug="ramanujan"><div class="pp__sheet">
+  <p class="po__hd"><span>RAMANUJAN.EXE</span><span>ANALYTICS COPILOT</span></p>
+  <p class="po__q">&gt; what was GMV last week by region?</p>
+  <p class="po__sql">SELECT region, SUM(gmv)<br>FROM orders WHERE wk = -1<br>GROUP BY region;  <b>✓ policy ok</b></p>
+  <h3 class="pp__name pp__name--m">Ramanujan</h3>
+  <p class="pp__d">Ask questions in plain English inside Microsoft Teams and get answers from company data in seconds. No SQL, no dashboards.</p>
+  <ul class="pp__stack"><li>Gemini</li><li>Vertex AI</li><li>BigQuery</li><li>Qdrant</li><li>FastAPI</li></ul>
+  <p class="pp__int">Internal · Moglix</p></div></article>
+          </div>
+          <aside class="study-card reveal">
+            <p class="study-card__label mono">Company · 2026</p>
+            <p class="study-card__line">Ask in Teams.<br>Governed answers.</p>
+            <p class="study-card__tags mono">Python / FastAPI / Gemini / Vertex AI</p>
+          </aside>
+        </div>
+        <p class="study-caption mono">Ramanujan / Analytics copilot · Moglix / 2026</p>
+        <dl class="study-meta">
+          <div><dt class="mono">Role</dt><dd>Backend &amp; GenAI · AI &amp; Analytics team</dd></div>
+          <div><dt class="mono">Status</dt><dd>Internal tool</dd></div>
+          <div><dt class="mono">Year</dt><dd>2026</dd></div>
+          <div class="study-meta__wide"><dt class="mono">Stack</dt><dd>Python / FastAPI / Gemini / Vertex AI / BigQuery / Qdrant / Sentence-Transformers / Microsoft Graph API / Docker</dd></div>
+
+        </dl>
+        <nav class="study-index mono" aria-label="In this study">
+          <span>In this study</span>
+          <ol>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#problem">Problem</a></li>
+            <li><a href="#system">How it works</a></li>
+            <li><a href="#decisions">Decisions</a></li>
+            <li><a href="#flow">Flow</a></li>
+            <li><a href="#outcome">Outcome</a></li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <!-- 02 OVERVIEW -->
+    <section class="band tone-ink study-chapter" id="overview" data-thread="a:gm1:0,0,ln a:gm1:0,1,l">
+      <span class="gutter-mark" id="gm1" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">02 / Overview</p>
+        <div class="study-two">
+          <h2 class="study-h2 reveal">A question in Teams. An answer from the warehouse.</h2>
+          <p class="study-text reveal">Ramanujan is an analytics copilot that lives where business teams already talk: Microsoft Teams. Someone asks a question in plain English, and a Gemini agent turns it into governed BigQuery SQL, runs it and replies with the answer, without the person writing SQL or opening a dashboard.</p>
+        </div>
+        <ol class="study-modules reveal" style="--n:5">
+          <li>Ask</li>
+          <li>Ground</li>
+          <li>Generate</li>
+          <li>Guard</li>
+          <li>Answer</li>
+        </ol>
+        <p class="study-caption mono">Ramanujan / how the parts connect</p>
+      </div>
+    </section>
+
+    <!-- 03 PROBLEM -->
+    <section class="band tone-paper study-chapter" id="problem" data-thread="a:gm2:0,0,ln a:gm2:0,1,l">
+      <span class="gutter-mark" id="gm2" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">03 / The problem</p>
+        <h2 class="study-h2 study-h2--big study-col reveal">Every simple question waited on someone who could write the query.</h2>
+        <div class="study-two study-two--low">
+          <div></div>
+          <p class="study-text reveal">Business teams had questions about their numbers every day, but the answers sat in a data warehouse behind SQL and dashboards. Each question became a request to the data team, and the same metric could be calculated differently depending on who wrote the query.</p>
+        </div>
+        <ol class="study-rows">
+          <li class="reveal"><span class="study-rows__n mono">01</span><h3>Answers locked behind SQL and dashboards</h3></li>
+          <li class="reveal"><span class="study-rows__n mono">02</span><h3>Metrics defined differently by different people</h3></li>
+          <li class="reveal"><span class="study-rows__n mono">03</span><h3>Data access that has to respect who is asking</h3></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 04 SYSTEM -->
+    <section class="band tone-ink study-chapter" id="system" data-thread="a:gm3:0,0,ln a:gm3:0,1,l">
+      <span class="gutter-mark" id="gm3" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">04 / How it works</p>
+        <h2 class="study-h2 study-col reveal">Five steps from a sentence to a governed answer.</h2>
+        <ol class="study-rows study-rows--split">
+          <li class="reveal"><span class="study-rows__n mono">01</span><h3>Ask</h3><p>A question arrives from Microsoft Teams through the Microsoft Graph API.</p></li>
+          <li class="reveal"><span class="study-rows__n mono">02</span><h3>Ground</h3><p>RAG over a KPI glossary in Qdrant finds the business definition of each metric.</p></li>
+          <li class="reveal"><span class="study-rows__n mono">03</span><h3>Generate</h3><p>A Gemini ReAct agent writes BigQuery SQL that follows those definitions.</p></li>
+          <li class="reveal"><span class="study-rows__n mono">04</span><h3>Guard</h3><p>A SQL policy engine checks the query and applies row-level access control.</p></li>
+          <li class="reveal"><span class="study-rows__n mono">05</span><h3>Answer</h3><p>The result comes back to Teams, grounded in the data, not guessed.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 05 DECISIONS -->
+    <section class="band tone-paper study-chapter" id="decisions" data-thread="a:gm4:0,0,ln a:gm4:0,1,l">
+      <span class="gutter-mark" id="gm4" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">05 / Key decisions</p>
+        <h2 class="study-h2 study-h2--big study-col reveal">Where the important calls were made.</h2>
+        <article class="study-decision reveal">
+          <p class="study-label mono">Decision 01</p>
+          <div class="study-two"><h3 class="study-h3">Should the model be free to query anything?</h3><div></div></div>
+          <ol class="study-rows study-rows--split">
+            <li><span class="study-rows__n mono">→</span><h3>The choice</h3><p>Every query passes a SQL policy engine with row-level access control.</p></li>
+            <li><span class="study-rows__n mono">→</span><h3>What it gave</h3><p>People only ever see the data they are allowed to see.</p></li>
+          </ol>
+        </article>
+        <article class="study-decision reveal">
+          <p class="study-label mono">Decision 02</p>
+          <div class="study-two"><h3 class="study-h3">How do answers match what the business means by a metric?</h3><div></div></div>
+          <ol class="study-rows study-rows--split">
+            <li><span class="study-rows__n mono">→</span><h3>The choice</h3><p>RAG over a KPI glossary with sentence-transformer embeddings.</p></li>
+            <li><span class="study-rows__n mono">→</span><h3>What it gave</h3><p>GMV, margin or fill rate mean the same thing in every answer.</p></li>
+          </ol>
+        </article>
+        <article class="study-decision reveal">
+          <p class="study-label mono">Decision 03</p>
+          <div class="study-two"><h3 class="study-h3">How should the service be structured?</h3><div></div></div>
+          <ol class="study-rows study-rows--split">
+            <li><span class="study-rows__n mono">→</span><h3>The choice</h3><p>A FastAPI service on Vertex AI built with hexagonal architecture.</p></li>
+            <li><span class="study-rows__n mono">→</span><h3>What it gave</h3><p>Models, data sources and chat channels can be swapped without touching the core.</p></li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <!-- 06 FLOW -->
+    <section class="band tone-ink study-chapter" id="flow" data-thread="a:gm5:0,0,ln a:gm5:0,1,l">
+      <span class="gutter-mark" id="gm5" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">06 / The flow</p>
+        <div class="study-two">
+          <h2 class="study-h2 reveal">From the first step to the result.</h2>
+          <p class="study-text reveal">What it looks like from the side of the person using it — the path through Ramanujan in 4 steps.</p>
+        </div>
+        <ol class="study-journey">
+          <li class="reveal"><span class="mono">01</span>Ask a question in Teams</li>
+          <li class="reveal"><span class="mono">02</span>The agent writes a governed query</li>
+          <li class="reveal"><span class="mono">03</span>Guardrails check the query and access</li>
+          <li class="reveal"><span class="mono">04</span>Read the answer in the chat</li>
+        </ol>
+        <p class="study-caption mono">Ramanujan / user flow</p>
+      </div>
+    </section>
+
+    <!-- 07 OUTCOME -->
+    <section class="band tone-paper study-chapter" id="outcome" data-thread="a:gm6:0,0,ln a:gm6:0,1,l">
+      <span class="gutter-mark" id="gm6" aria-hidden="true"></span>
+      <div class="band__inner">
+        <p class="study-label mono reveal">07 / Outcome</p>
+        <h2 class="study-h2 study-h2--big study-col reveal">Data questions answered where the conversation already happens.</h2>
+        <dl class="study-stats">
+          <div class="reveal"><dt class="mono">From question to answer</dt><dd>Seconds</dd></div>
+          <div class="reveal"><dt class="mono">Needed from the person asking</dt><dd>0 SQL</dd></div>
+          <div class="reveal"><dt class="mono">Access control on every query</dt><dd>Row-level</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- 08 NEXT -->
+    <section class="band tone-ink study-next" data-thread="a:gm7:0,0,ln a:gm7:0,1,l">
+      <span class="gutter-mark" id="gm7" aria-hidden="true"></span>
+      <a class="study-next__link" href="/work/distiller" data-cursor="Next">
+        <span class="study-label mono">03 / Next project</span>
+        <span class="study-next__row"><span class="study-next__name display">Distiller</span><span class="study-next__arrow" aria-hidden="true">↗</span></span>
+        <span class="study-next__pitch">Change one line, and repeated LLM calls slowly move to a small model you own.</span>
+        <span class="study-paper study-paper--next" aria-hidden="true">
+<article class="pp pp--grid" data-cat="personal" data-order="2" data-slug="distiller"><div class="pp__sheet">
+  <span class="pp__stamp">WIP</span>
+  <p class="pp__hd"><span>02 / LLM infra · Personal</span><span class="pp__hot">★ Featured</span></p>
+  <svg class="pp__sk" viewBox="0 0 320 140" aria-hidden="true"><circle cx="64" cy="82" r="40"/><path d="M52 42V14H76V42M28 86C46 78 82 94 100 86"/><path d="M76 26 L246 86 L238 102 L68 42Z"/><path class="h" d="M258 98 C255 104 255 108 258 110 C261 108 261 104 258 98Z"/><path d="M240 132H280L268 118H252Z"/><path d="M40 132H90"/></svg>
+  <h3 class="pp__name pp__name--l">Distiller</h3>
+  <p class="pp__d">Swap one URL. Your repeated LLM calls quietly move to a small model you own.</p>
+  <div class="pp__ft"><ul class="pp__stack"><li>FastAPI</li><li>LiteLLM</li><li>LoRA</li><li>Ollama</li></ul></div>
+  </div></article>
+        </span>
+      </a>
+      <div class="study-next__foot mono">
+        <a href="/work/lumida">← Lumida</a>
+        <a href="/#projects">All projects</a>
+        <a href="/#contact">Contact</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="/assets/lenis.min.js" defer></script>
+  <script src="/main.js?v=30c688d3" defer></script>
+</body>
+</html>
